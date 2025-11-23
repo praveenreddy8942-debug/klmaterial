@@ -370,41 +370,75 @@ footer {
 }
 
 /* ===== Materials Page Styling ===== */
+/* ===== Premium Floating Navbar ===== */
 header {
-  background: rgba(0, 0, 40, 0.8);
-  padding: 15px 0;
-  text-align: center;
-  position: sticky;
-  top: 0;
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: fit-content;
+  min-width: 320px;
+  max-width: 95%;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50px;
+  padding: 8px 20px;
   z-index: 1000;
-  backdrop-filter: blur(8px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+header:hover {
+  background: rgba(30, 41, 59, 0.8);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  transform: translateX(-50%) translateY(-2px);
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
 }
 
 nav h2 {
-  color: #66b3ff;
-  margin-bottom: 10px;
+  color: #00d4ff;
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  white-space: nowrap;
+  text-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
 }
 
 nav ul {
   list-style: none;
   padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
 }
 
 nav ul li {
   display: inline-block;
-  margin: 0 15px;
+  margin: 0 5px;
 }
 
 nav ul li a {
-  color: #fff;
+  color: #cce7ff;
   text-decoration: none;
   font-weight: 500;
   transition: color 0.3s;
+  font-size: 0.95rem;
 }
 
 nav ul li a:hover,
 nav ul li a.active {
   color: #fff;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
 }
 
 /* Nav Link Hover Effect - Sliding Marker */
@@ -1087,6 +1121,77 @@ nav a::after {
     backface-visibility: hidden;
     -webkit-perspective: 1000;
     perspective: 1000;
+  }
+}
+
+/* ===== Mobile Nav Scroll (iPhone) ===== */
+@media (max-width: 600px) {
+  header {
+    top: 15px;
+    width: 90%;
+    max-width: 90%;
+    padding: 10px 15px;
+    border-radius: 25px;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  nav {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+
+  header nav {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .nav-track {
+    display: flex;
+    gap: 5px;
+    overflow-x: auto;
+    white-space: nowrap;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    padding: 4px;
+    max-width: 100%;
+    scrollbar-width: none;
+    /* Firefox */
+  }
+
+  .nav-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  nav a {
+    margin: 0 2px;
+    font-size: 14px;
+    flex-shrink: 0;
+    padding: 6px 14px;
+  }
+
+  /* Materials page Study Hub title */
+  header nav h2 {
+    font-size: 16px;
+    margin: 0 0 5px 0;
+    white-space: nowrap;
+  }
+
+  /* Nav scroll indicator - only visible on mobile */
+  .nav-indicator {
+    display: none;
+    /* Removed as it might conflict with floating design */
+  }
+}
+
+/* Hide nav indicator on desktop */
+@media (min-width: 601px) {
+  .nav-indicator {
+    display: none;
   }
 }
 
