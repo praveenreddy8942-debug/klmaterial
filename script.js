@@ -1,7 +1,5 @@
-
 // script.js
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-analytics.js";
 import { getStorage, ref, listAll, getDownloadURL } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-storage.js";
 
 // Firebase configuration (provided)
@@ -17,39 +15,157 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 const storage = getStorage(app);
 
-// Reference materials container
+// DOM Elements
 const materialsList = document.getElementById("materials-list");
+const searchBar = document.getElementById("search-bar");
+const clearBtn = document.getElementById("clear-search");
+const filterButtons = document.querySelectorAll(".filter-btn");
 const storageRef = ref(storage);
 
-// Fetch and display files
-listAll(storageRef)
-  .then((res) => {
-    materialsList.innerHTML = "";
-    if (res.items.length === 0) {
-      materialsList.innerHTML = "<p>No materials uploaded yet.</p>";
-    } else {
-      res.items.forEach((itemRef) => {
-        getDownloadURL(itemRef).then((url) => {
-          const fileName = itemRef.name.replace(/_/g, " ");
-          const div = document.createElement("div");
-          div.className = "material-box";
-          div.innerHTML = `
-            <h3>${fileName}</h3>
-            <a href="${url}" class="download-btn" target="_blank">Download</a>
-          `;
-          materialsList.appendChild(div);
-        });
-      });
-    }
-  })
-  .catch((error) => {
-    console.error("Error loading files:", error);
-    materialsList.innerHTML = `
-      <p style="color: #ff7777;">
-        ⚠️ Error loading materials. Please check your Firebase setup.
-      </p>`;
-  });
+// Subject mapping (file name keywords → subject titles)
+const subjects = {
+  "BEEC": "Basic Electrical & Electronic Circuits (BEEC)",
+  "DM": "Discrete Mathematics (DM)",
+  "PSC": "Problem Solving Through C",
+  "DSD": "Digital System Design (DSD)"
+};
 
+let allMaterials = {}; // Store all materials for search
+let activeCategory = "all"; // Track active filter
+
+// Filter button functionality
+if (filterButtons.length > 0) {
+  filterButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      // Update active button
+      filterButtons.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      // Get category and filter
+      activeCategory = btn.dataset.category;
+      if (searchBar) searchBar.value = "";
+      if (clearBtn) clearBtn.style.display = "none";
+
+      if (activeCategory === "all") {
+        displayMaterials(allMaterials);
+      } else {
+        const filtered = {};
+        for (const subject in allMaterials) {
+          if (subject.includes(activeCategory)) {
+            filtered[subject] = allMaterials[subject];
+          }
+        }
+        displayMaterials(filtered);
+      }
+    });
+  });
+}
+
+// Search functionality
+if (searchBar) {
+  searchBar.addEventListener("input", (e) => {
+    const query = e.target.value.toLowerCase().trim();
+    if (clearBtn) clearBtn.style.display = query ? "block" : "none";
+
+    // Reset category filter when searching
+    if (query && filterButtons.length > 0) {
+      filterButtons.forEach(b => b.classList.remove("active"));
+      filterButtons[0].classList.add("active");
+      activeCategory = "all";
+    }
+
+    filterMaterials(query);
+  });
+}
+
+if (clearBtn) {
+  clearBtn.addEventListener("click", () => {
+    searchBar.value = "";
+    clearBtn.style.display = "none";
+    filterMaterials("");
+  });
+}
+
+function filterMaterials(query) {
+  if (!query) {
+    // Show materials based on active category
+    if (activeCategory === "all") {
+      displayMaterials(allMaterials);
+    } else {
+      const filtered = {};
+      for (const subject in allMaterials) {
+        if (subject.includes(activeCategory)) {
+          filtered[subject] = allMaterials[subject];
+        }
+      }
+      displayMaterials(filtered);
+    }
+    return;
+  }
+
+  const filtered = {};
+  for (const subject in allMaterials) {
+    const matchingItems = allMaterials[subject].filter(item => {
+      const fileName = item.name.replace(/_/g, " ").toLowerCase();
+      const subjectName = subject.toLowerCase();
+      return fileName.includes(query) || subjectName.includes(query);
+    });
+
+    if (matchingItems.length > 0) {
+      filtered[subject] = matchingItems;
+    }
+  }
+
+  if (Object.keys(filtered).length === 0) {
+    materialsList.innerHTML = `<p class="no-results">🔍 No materials found for "${query}"</p>`;
+  } else {
+    displayMaterials(filtered);
+  }
+}
+
+function displayMaterials(grouped) {
+  if (!materialsList) return;
+  materialsList.innerHTML = "";
+  for (const subject in grouped) {
+    const section = document.createElement("section");
+    section.className = "material-box";
+    section.innerHTML = `<h2>${subject}</h2>`;
+    grouped[subject].forEach((itemRef) => {
+      getDownloadURL(itemRef).then((url) => {
+        const name = itemRef.name.replace(/_/g, " ");
+        const link = document.createElement("a");
+        link.href = url;
+        link.textContent = "📄 " + name;
+        link.target = "_blank";
+        link.className = "download-btn";
+        section.appendChild(link);
+      });
+    });
+    materialsList.appendChild(section);
+  }
+}
+
+// Fetch and display files
+if (materialsList) {
+  listAll(storageRef)
+    .then((res) => {
+      const grouped = {};
+
+      res.items.forEach((itemRef) => {
+        const name = itemRef.name;
+        const matchKey = Object.keys(subjects).find(key => name.toUpperCase().includes(key));
+        const subject = matchKey ? subjects[matchKey] : "Other Materials";
+        if (!grouped[subject]) grouped[subject] = [];
+        grouped[subject].push(itemRef);
+      });
+
+      allMaterials = grouped; // Store for search
+      displayMaterials(grouped);
+    })
+    .catch((error) => {
+      console.error(error);
+      materialsList.innerHTML = `<p class="no-results">⚠️ Error loading materials. Check Firebase config or rules.</p>`;
+    });
+}

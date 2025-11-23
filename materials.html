@@ -1,90 +1,49 @@
 <!DOCTYPE html>
-<html lang="en" style="background: #000814;">
+<html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <!-- Critical CSS - Load First -->
-  <style>
-    html {
-      background: #000814 !important;
-    }
-    body {
-      background: transparent !important;
-      min-height: 100vh !important;
-      min-height: -webkit-fill-available !important;
-      margin: 0 !important;
-    }
-  </style>
-  
+
   <title>Study Materials | Praveen Reddy</title>
-  <meta name="description" content="Access CSE study materials including BEEC, DM, PSC, DSD notes, question papers, and learning resources." />
-  <meta name="keywords" content="CSE materials, BEEC notes, Discrete Mathematics, Problem Solving C, DSD, engineering study materials" />
-  
+  <meta name="description"
+    content="Access CSE study materials including BEEC, DM, PSC, DSD notes, question papers, and learning resources." />
+  <meta name="keywords"
+    content="CSE materials, BEEC notes, Discrete Mathematics, Problem Solving C, DSD, engineering study materials" />
+
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://praveenreddy8942-debug.github.io/klmaterial/materials.html" />
   <meta property="og:title" content="Study Materials | CSE Resources" />
-  <meta property="og:description" content="Download CSE study materials, notes, and question papers for BEEC, DM, PSC, and DSD." />
+  <meta property="og:description"
+    content="Download CSE study materials, notes, and question papers for BEEC, DM, PSC, and DSD." />
   <meta property="og:image" content="https://praveenreddy8942-debug.github.io/klmaterial/profile.jpg" />
-  
+
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image" />
   <meta property="twitter:url" content="https://praveenreddy8942-debug.github.io/klmaterial/materials.html" />
   <meta property="twitter:title" content="Study Materials | CSE Resources" />
-  <meta property="twitter:description" content="Download CSE study materials, notes, and question papers for BEEC, DM, PSC, and DSD." />
+  <meta property="twitter:description"
+    content="Download CSE study materials, notes, and question papers for BEEC, DM, PSC, and DSD." />
   <meta property="twitter:image" content="https://praveenreddy8942-debug.github.io/klmaterial/profile.jpg" />
-  
+
   <!-- Cache Control for iOS -->
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
-  
-  <link rel="stylesheet" href="style.css?v=2.1" />
+
+  <link rel="stylesheet" href="style.css?v=2.2" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZ0SERPS7L"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
 
     gtag('config', 'G-NZ0SERPS7L');
   </script>
-
-  <style>
-    /* 💫 Chatbase Bubble Animation */
-    #chatbase-bubble, .chatbase-bubble, .chatbase-launcher {
-      animation: pulseGlow 2s infinite ease-in-out;
-      box-shadow: 0 0 15px #00d4ff;
-      border-radius: 50%;
-    }
-
-    @keyframes pulseGlow {
-      0%, 100% {
-        box-shadow: 0 0 15px #00d4ff;
-        transform: scale(1);
-      }
-      50% {
-        box-shadow: 0 0 30px #00ffff;
-        transform: scale(1.08);
-      }
-    }
-
-    /* 📱 Mobile Chatbox Size Control */
-    @media (max-width: 768px) {
-      iframe[title="Chatbase Chatbot"] {
-        position: fixed !important;
-        bottom: 70px !important;
-        right: 10px !important;
-        width: 90% !important;
-        height: 70vh !important;
-        border-radius: 16px !important;
-        box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
-        z-index: 99999 !important;
-      }
-    }
-  </style>
 </head>
 
 <body>
@@ -103,7 +62,7 @@
 
   <main class="materials-container">
     <h1>📚 CSE Study Materials</h1>
-    
+
     <!-- Category Filter Buttons -->
     <div class="filter-buttons">
       <button class="filter-btn active" data-category="all">All Subjects</button>
@@ -112,19 +71,14 @@
       <button class="filter-btn" data-category="PSC">PSC</button>
       <button class="filter-btn" data-category="DSD">DSD</button>
     </div>
-    
+
     <!-- Search Bar -->
     <div class="search-container">
-      <input 
-        type="text" 
-        id="search-bar" 
-        class="search-input" 
-        placeholder="🔍 Search materials by name or subject..."
-        autocomplete="off"
-      />
+      <input type="text" id="search-bar" class="search-input" placeholder="🔍 Search materials by name or subject..."
+        autocomplete="off" />
       <button id="clear-search" class="clear-btn" style="display: none;">✕</button>
     </div>
-    
+
     <div id="materials-list">
       <!-- Loading Animation -->
       <div class="loader-container">
@@ -138,216 +92,13 @@
     <p>© 2025 Praveen Reddy | All rights reserved.</p>
   </footer>
 
-  <!-- 🔥 Firebase Script -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-    import { getStorage, ref, listAll, getDownloadURL } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-storage.js";
-
-    // Your Firebase configuration (klmaterials)
-    const firebaseConfig = {
-      apiKey: "AIzaSyDUcVpkiBMd_53FHD4j77pN-MuNuPAv6aU",
-      authDomain: "klmaterials.firebaseapp.com",
-      projectId: "klmaterials",
-      storageBucket: "klmaterials.firebasestorage.app",
-      messagingSenderId: "772530551582",
-      appId: "1:772530551582:web:ba87999d6602b49787a70f",
-      measurementId: "G-JFPKCY2715"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const storage = getStorage(app);
-    const materialsList = document.getElementById("materials-list");
-    const searchBar = document.getElementById("search-bar");
-    const clearBtn = document.getElementById("clear-search");
-    const filterButtons = document.querySelectorAll(".filter-btn");
-    const storageRef = ref(storage);
-
-    // Subject mapping (file name keywords → subject titles)
-    const subjects = {
-      "BEEC": "Basic Electrical & Electronic Circuits (BEEC)",
-      "DM": "Discrete Mathematics (DM)",
-      "PSC": "Problem Solving Through C",
-      "DSD": "Digital System Design (DSD)"
-    };
-
-    let allMaterials = {}; // Store all materials for search
-    let activeCategory = "all"; // Track active filter
-
-    // Filter button functionality
-    filterButtons.forEach(btn => {
-      btn.addEventListener("click", () => {
-        // Update active button
-        filterButtons.forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-        
-        // Get category and filter
-        activeCategory = btn.dataset.category;
-        searchBar.value = "";
-        clearBtn.style.display = "none";
-        
-        if (activeCategory === "all") {
-          displayMaterials(allMaterials);
-        } else {
-          const filtered = {};
-          for (const subject in allMaterials) {
-            if (subject.includes(activeCategory)) {
-              filtered[subject] = allMaterials[subject];
-            }
-          }
-          displayMaterials(filtered);
-        }
-      });
-    });
-
-    // Search functionality
-    searchBar.addEventListener("input", (e) => {
-      const query = e.target.value.toLowerCase().trim();
-      clearBtn.style.display = query ? "block" : "none";
-      
-      // Reset category filter when searching
-      if (query) {
-        filterButtons.forEach(b => b.classList.remove("active"));
-        filterButtons[0].classList.add("active");
-        activeCategory = "all";
-      }
-      
-      filterMaterials(query);
-    });
-
-    clearBtn.addEventListener("click", () => {
-      searchBar.value = "";
-      clearBtn.style.display = "none";
-      filterMaterials("");
-    });
-
-    function filterMaterials(query) {
-      if (!query) {
-        // Show materials based on active category
-        if (activeCategory === "all") {
-          displayMaterials(allMaterials);
-        } else {
-          const filtered = {};
-          for (const subject in allMaterials) {
-            if (subject.includes(activeCategory)) {
-              filtered[subject] = allMaterials[subject];
-            }
-          }
-          displayMaterials(filtered);
-        }
-        return;
-      }
-
-      const filtered = {};
-      for (const subject in allMaterials) {
-        const matchingItems = allMaterials[subject].filter(item => {
-          const fileName = item.name.replace(/_/g, " ").toLowerCase();
-          const subjectName = subject.toLowerCase();
-          return fileName.includes(query) || subjectName.includes(query);
-        });
-        
-        if (matchingItems.length > 0) {
-          filtered[subject] = matchingItems;
-        }
-      }
-
-      if (Object.keys(filtered).length === 0) {
-        materialsList.innerHTML = `<p class="no-results">🔍 No materials found for "${query}"</p>`;
-      } else {
-        displayMaterials(filtered);
-      }
-    }
-
-    function displayMaterials(grouped) {
-      materialsList.innerHTML = "";
-      for (const subject in grouped) {
-        const section = document.createElement("section");
-        section.className = "material-box";
-        section.innerHTML = `<h2>${subject}</h2>`;
-        grouped[subject].forEach((itemRef) => {
-          getDownloadURL(itemRef).then((url) => {
-            const name = itemRef.name.replace(/_/g, " ");
-            const link = document.createElement("a");
-            link.href = url;
-            link.textContent = "📄 " + name;
-            link.target = "_blank";
-            link.className = "download-btn";
-            section.appendChild(link);
-          });
-        });
-        materialsList.appendChild(section);
-      }
-    }
-
-    // Fetch and display files
-    listAll(storageRef)
-      .then((res) => {
-        const grouped = {};
-
-        res.items.forEach((itemRef) => {
-          const name = itemRef.name;
-          const matchKey = Object.keys(subjects).find(key => name.toUpperCase().includes(key));
-          const subject = matchKey ? subjects[matchKey] : "Other Materials";
-          if (!grouped[subject]) grouped[subject] = [];
-          grouped[subject].push(itemRef);
-        });
-
-        allMaterials = grouped; // Store for search
-        displayMaterials(grouped);
-      })
-      .catch((error) => {
-        console.error(error);
-        materialsList.innerHTML = `<p class="no-results">⚠️ Error loading materials. Check Firebase config or rules.</p>`;
-      });
-  </script>
-
-  <!-- 💬 Chatbase Chatbot -->
-  <script>
-    (function() {
-      if (!window.chatbase || window.chatbase("getState") !== "initialized") {
-        window.chatbase = (...args) => {
-          if (!window.chatbase.q) { window.chatbase.q = [] }
-          window.chatbase.q.push(args)
-        };
-        window.chatbase = new Proxy(window.chatbase, {
-          get(target, prop) {
-            if (prop === "q") return target.q;
-            return (...a) => target(prop, ...a);
-          }
-        });
-      }
-      const onLoad = function() {
-        const script = document.createElement("script");
-        script.src = "https://www.chatbase.co/embed.min.js";
-        script.id = "ZpkVlMr94rMHgyLpuyj8c"; // your Chatbase chatbot ID
-        script.domain = "www.chatbase.co";
-        document.body.appendChild(script);
-      };
-      if (document.readyState === "complete") onLoad();
-      else window.addEventListener("load", onLoad);
-    })();
-  </script>
+  <!-- Scripts -->
+  <script type="module" src="script.js"></script>
+  <script src="chatbot.js"></script>
+  <script src="ui.js"></script>
 
   <!-- Back to Top Button -->
   <button id="backToTop" title="Back to top">↑</button>
-
-  <script>
-    // Back to Top functionality
-    const backToTopBtn = document.getElementById('backToTop');
-    
-    window.addEventListener('scroll', () => {
-      if (window.pageYOffset > 300) {
-        backToTopBtn.classList.add('show');
-      } else {
-        backToTopBtn.classList.remove('show');
-      }
-    });
-    
-    backToTopBtn.addEventListener('click', () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    });
-  </script>
 </body>
+
 </html>

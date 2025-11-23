@@ -1,470 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>KLMaterial | Study Hub</title>
-  <meta name="description" content="Portfolio & Study Hub by Praveen Reddy — Explore CSE materials, projects, and learning resources." />
-  <meta name="keywords" content="CSE materials, study hub, engineering notes, B.Tech resources, Praveen Reddy, computer science, programming" />
+  <meta name="description"
+    content="Portfolio & Study Hub by Praveen Reddy — Explore CSE materials, projects, and learning resources." />
+  <meta name="keywords"
+    content="CSE materials, study hub, engineering notes, B.Tech resources, Praveen Reddy, computer science, programming" />
   <meta name="author" content="Praveen Reddy" />
-  
+
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://praveenreddy8942-debug.github.io/klmaterial/" />
   <meta property="og:title" content="KLMaterial | Study Hub" />
-  <meta property="og:description" content="Explore CSE materials, projects, and learning resources for B.Tech students." />
+  <meta property="og:description"
+    content="Explore CSE materials, projects, and learning resources for B.Tech students." />
   <meta property="og:image" content="https://praveenreddy8942-debug.github.io/klmaterial/profile.jpg" />
-  
+
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image" />
   <meta property="twitter:url" content="https://praveenreddy8942-debug.github.io/klmaterial/" />
   <meta property="twitter:title" content="KLMaterial | Study Hub" />
-  <meta property="twitter:description" content="Explore CSE materials, projects, and learning resources for B.Tech students." />
+  <meta property="twitter:description"
+    content="Explore CSE materials, projects, and learning resources for B.Tech students." />
   <meta property="twitter:image" content="https://praveenreddy8942-debug.github.io/klmaterial/profile.jpg" />
-  
+
   <!-- Cache Control for iOS -->
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
-  
+
   <link rel="icon" href="profile.jpg" type="image/jpeg" />
+  <link rel="stylesheet" href="style.css?v=2.2" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZ0SERPS7L"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
 
     gtag('config', 'G-NZ0SERPS7L');
   </script>
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Poppins', sans-serif;
-      color: #fff;
-      background: linear-gradient(135deg, #001f3f, #007bff);
-      overflow-x: hidden;
-      position: relative;
-    }
-
-    /* Seasonal Animation Container */
-    #seasonalAnimation {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 1;
-      overflow: hidden;
-    }
-
-    /* Snowflake Styles for Winter */
-    .snowflake {
-      position: absolute;
-      top: -10px;
-      color: #fff;
-      font-size: 1em;
-      font-family: Arial, sans-serif;
-      text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
-      animation: fall linear infinite;
-      opacity: 0.8;
-    }
-
-    @keyframes fall {
-      0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 0.8;
-      }
-      100% {
-        transform: translateY(100vh) rotate(360deg);
-        opacity: 0.3;
-      }
-    }
-
-    /* Autumn Leaves */
-    .leaf {
-      position: absolute;
-      top: -10px;
-      font-size: 1.5em;
-      animation: fallLeaf linear infinite;
-      opacity: 0.9;
-    }
-
-    @keyframes fallLeaf {
-      0% {
-        transform: translateY(0) rotate(0deg) translateX(0);
-        opacity: 0.9;
-      }
-      50% {
-        transform: translateY(50vh) rotate(180deg) translateX(20px);
-      }
-      100% {
-        transform: translateY(100vh) rotate(360deg) translateX(0);
-        opacity: 0.3;
-      }
-    }
-
-    /* Spring Petals */
-    .petal {
-      position: absolute;
-      top: -10px;
-      font-size: 1.2em;
-      animation: fallPetal ease-in-out infinite;
-      opacity: 0.85;
-    }
-
-    @keyframes fallPetal {
-      0% {
-        transform: translateY(0) rotate(0deg) translateX(0);
-        opacity: 0.85;
-      }
-      25% {
-        transform: translateY(25vh) rotate(90deg) translateX(-15px);
-      }
-      75% {
-        transform: translateY(75vh) rotate(270deg) translateX(15px);
-      }
-      100% {
-        transform: translateY(100vh) rotate(360deg) translateX(0);
-        opacity: 0.2;
-      }
-    }
-
-    /* Summer Fireflies */
-    .firefly {
-      position: absolute;
-      width: 3px;
-      height: 3px;
-      background: #ffeb3b;
-      border-radius: 50%;
-      box-shadow: 0 0 10px #ffeb3b, 0 0 20px #ffc107;
-      animation: float 3s ease-in-out infinite;
-      opacity: 0;
-    }
-
-    @keyframes float {
-      0%, 100% {
-        transform: translateY(0) translateX(0);
-        opacity: 0;
-      }
-      10% {
-        opacity: 1;
-      }
-      50% {
-        transform: translateY(-30px) translateX(20px);
-        opacity: 1;
-      }
-      90% {
-        opacity: 1;
-      }
-    }
-
-    /* Header */
-    header {
-      background: rgba(0, 0, 0, 0.3);
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      padding: 15px 0;
-      backdrop-filter: blur(10px);
-    }
-
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 25px;
-    }
-
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s;
-    }
-
-    nav a:hover {
-      color: #00d4ff;
-    }
-
-    /* Hero Section */
-    .hero {
-      text-align: center;
-      padding: 80px 20px;
-    }
-
-    .hero img {
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      border: 4px solid #00d4ff;
-      box-shadow: 
-        0 0 20px rgba(0, 212, 255, 0.6),
-        0 0 40px rgba(0, 212, 255, 0.4),
-        0 0 60px rgba(0, 191, 255, 0.3),
-        0 0 80px rgba(0, 150, 255, 0.2);
-      margin-bottom: 20px;
-      animation: profileGlow 3s ease-in-out infinite;
-      transition: all 0.3s ease;
-    }
-
-    .hero img:hover {
-      transform: scale(1.05);
-      box-shadow: 
-        0 0 30px rgba(0, 212, 255, 0.8),
-        0 0 60px rgba(0, 212, 255, 0.6),
-        0 0 90px rgba(0, 191, 255, 0.4),
-        0 0 120px rgba(0, 150, 255, 0.3);
-    }
-
-    @keyframes profileGlow {
-      0%, 100% {
-        box-shadow: 
-          0 0 20px rgba(0, 212, 255, 0.6),
-          0 0 40px rgba(0, 212, 255, 0.4),
-          0 0 60px rgba(0, 191, 255, 0.3),
-          0 0 80px rgba(0, 150, 255, 0.2);
-      }
-      50% {
-        box-shadow: 
-          0 0 30px rgba(0, 212, 255, 0.8),
-          0 0 50px rgba(0, 212, 255, 0.6),
-          0 0 70px rgba(0, 191, 255, 0.5),
-          0 0 100px rgba(0, 150, 255, 0.3);
-      }
-    }
-
-    .hero h1 {
-      font-size: 2.2rem;
-      margin-bottom: 10px;
-    }
-
-    .hero p {
-      color: #cce7ff;
-      font-size: 1rem;
-      margin-bottom: 25px;
-    }
-
-    .btn {
-      background: #00d4ff;
-      color: #001f3f;
-      padding: 12px 25px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: 0.3s;
-    }
-
-    .btn:hover {
-      background: #fff;
-      color: #007bff;
-    }
-
-    /* Section Styling */
-    section {
-      padding: 60px 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
-
-    h2 {
-      text-align: center;
-      font-size: 1.8rem;
-      margin-bottom: 25px;
-      color: #00d4ff;
-    }
-
-    /* Cards Layout */
-    .skills, .projects, .study {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
-    }
-
-    .card {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 20px;
-      border-radius: 12px;
-      text-align: center;
-      transition: transform 0.3s, background 0.3s;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      background: rgba(255, 255, 255, 0.15);
-    }
-
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 25px 0;
-      border-top: 1px solid rgba(255, 255, 255, 0.2);
-      color: #b0e0ff;
-      font-size: 0.9rem;
-      margin-top: 60px;
-    }
-
-    /* Responsive */
-    @media (max-width: 600px) {
-      .hero h1 {
-        font-size: 1.8rem;
-      }
-
-      .hero img {
-        width: 140px;
-        height: 140px;
-        box-shadow: 
-          0 0 15px rgba(0, 212, 255, 0.7),
-          0 0 30px rgba(0, 212, 255, 0.5),
-          0 0 45px rgba(0, 191, 255, 0.3);
-      }
-
-      @keyframes profileGlow {
-        0%, 100% {
-          box-shadow: 
-            0 0 15px rgba(0, 212, 255, 0.7),
-            0 0 30px rgba(0, 212, 255, 0.5),
-            0 0 45px rgba(0, 191, 255, 0.3);
-        }
-        50% {
-          box-shadow: 
-            0 0 20px rgba(0, 212, 255, 0.9),
-            0 0 40px rgba(0, 212, 255, 0.7),
-            0 0 60px rgba(0, 191, 255, 0.5);
-        }
-      }
-
-      .hero {
-        padding: 60px 15px;
-      }
-
-      nav {
-        flex-wrap: wrap;
-        gap: 15px;
-        padding: 0 10px;
-      }
-
-      nav a {
-        font-size: 0.9rem;
-        padding: 8px 12px;
-      }
-
-      .cards {
-        gap: 15px;
-      }
-
-      .card {
-        padding: 15px;
-      }
-
-      section {
-        padding: 40px 15px;
-      }
-
-      h2 {
-        font-size: 1.6rem;
-      }
-
-      .btn {
-        padding: 10px 20px;
-        font-size: 0.9rem;
-      }
-
-      /* Reduce seasonal animation count for mobile */
-      .snowflake:nth-child(n+30),
-      .leaf:nth-child(n+20),
-      .petal:nth-child(n+15),
-      .firefly:nth-child(n+10) {
-        display: none;
-      }
-    }
-
-    /* Tablet optimization */
-    @media (min-width: 601px) and (max-width: 1024px) {
-      .hero img {
-        width: 160px;
-        height: 160px;
-      }
-
-      .hero h1 {
-        font-size: 2rem;
-      }
-
-      .cards {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      section {
-        padding: 50px 20px;
-      }
-    }
-
-    /* Desktop optimization */
-    @media (min-width: 1025px) {
-      .hero {
-        padding: 100px 20px;
-      }
-
-      .hero img {
-        width: 200px;
-        height: 200px;
-      }
-
-      .hero h1 {
-        font-size: 2.5rem;
-      }
-
-      .cards {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 30px;
-      }
-
-      section {
-        max-width: 1200px;
-        padding: 60px 40px;
-      }
-
-      nav a {
-        font-size: 1.1rem;
-        padding: 10px 15px;
-      }
-
-      .btn {
-        padding: 14px 30px;
-        font-size: 1.05rem;
-      }
-    }
-
-    /* ✅ Chatbase mobile size fix */
-    @media (max-width: 768px) {
-      iframe[title="Chatbase Chatbot"] {
-        position: fixed !important;
-        bottom: 80px !important;
-        right: 20px !important;
-        width: 90% !important;
-        height: 70vh !important;
-        max-height: 500px !important;
-        border-radius: 16px !important;
-        box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
-        z-index: 99999 !important;
-        transition: all 0.3s ease-in-out;
-      }
-    }
-  </style>
 </head>
 
 <body>
   <!-- Seasonal Animation Container -->
   <div id="seasonalAnimation"></div>
-  
+
   <header>
     <nav>
       <div class="nav-track">
@@ -478,7 +64,7 @@
   </header>
 
   <section class="hero">
-    <img src="profile.jpg" alt="Praveen Reddy" />
+    <img src="profile.jpg" alt="Praveen Reddy" class="profile-pic" />
     <h1>Praveen Reddy</h1>
     <p>B.Tech CSE | Web Developer | Data Enthusiast</p>
     <a href="materials.html" class="btn">Explore Study Materials</a>
@@ -487,15 +73,15 @@
   <section id="about">
     <h2>About Me</h2>
     <p style="text-align:center; max-width:700px; margin:auto; color:#cce7ff;">
-      I’m a CSE student passionate about data, design, and development. 
-      This Study Hub is my personal project — built to help students explore 
+      I’m a CSE student passionate about data, design, and development.
+      This Study Hub is my personal project — built to help students explore
       notes, roadmaps, and tech resources easily.
     </p>
   </section>
 
   <section id="skills">
     <h2>Skills</h2>
-    <div class="skills">
+    <div class="cards">
       <div class="card">💻 Web Development</div>
       <div class="card">📊 Data Analysis</div>
       <div class="card">⚙️ Problem Solving (C, Python)</div>
@@ -505,7 +91,7 @@
 
   <section id="projects">
     <h2>Projects</h2>
-    <div class="projects">
+    <div class="cards">
       <div class="card">📚 Study Hub Website</div>
       <div class="card">🧠 Data Visualization Dashboard</div>
       <div class="card">📱 Responsive Portfolio Design</div>
@@ -514,7 +100,7 @@
 
   <section id="study">
     <h2>Study Materials</h2>
-    <div class="study">
+    <div class="cards">
       <div class="card"><a href="materials.html" class="btn">View Materials</a></div>
       <div class="card"><a href="roadmap.html" class="btn">View B.Tech Roadmap</a></div>
     </div>
@@ -524,159 +110,13 @@
     © 2025 Praveen Reddy | Designed with ❤️ for learners.
   </footer>
 
-  <!-- ✅ Chatbase Chatbot Script -->
-  <script>
-    (function(){
-      if(!window.chatbase || window.chatbase("getState") !== "initialized"){
-        window.chatbase = (...args) => {
-          if(!window.chatbase.q){ window.chatbase.q = [] }
-          window.chatbase.q.push(args)
-        };
-        window.chatbase = new Proxy(window.chatbase, {
-          get(target, prop){
-            if(prop === "q"){ return target.q }
-            return (...a) => target(prop, ...a)
-          }
-        })
-      }
-      const onLoad = function(){
-        const script = document.createElement("script");
-        script.src = "https://www.chatbase.co/embed.min.js";
-        script.id = "ZpkVlMr94rMHgyLpuyj8c";  // Your Chatbase bot ID
-        script.domain = "www.chatbase.co";
-        document.body.appendChild(script);
-      };
-      if(document.readyState === "complete"){ onLoad(); }
-      else { window.addEventListener("load", onLoad); }
-    })();
-  </script>
+  <!-- Scripts -->
+  <script src="chatbot.js"></script>
+  <script src="animations.js"></script>
+  <script src="ui.js"></script>
 
   <!-- Back to Top Button -->
   <button id="backToTop" title="Back to top">↑</button>
-
-  <script>
-    // Back to Top functionality
-    const backToTopBtn = document.getElementById('backToTop');
-    
-    window.addEventListener('scroll', () => {
-      if (window.pageYOffset > 300) {
-        backToTopBtn.classList.add('show');
-      } else {
-        backToTopBtn.classList.remove('show');
-      }
-    });
-    
-    backToTopBtn.addEventListener('click', () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    });
-
-    // Seasonal Animation System
-    function getSeason() {
-      const month = new Date().getMonth() + 1; // 1-12
-      
-      // Winter: December (12), January (1), February (2)
-      if (month === 12 || month === 1 || month === 2) return 'winter';
-      
-      // Spring: March (3), April (4), May (5)
-      if (month >= 3 && month <= 5) return 'spring';
-      
-      // Summer: June (6), July (7), August (8)
-      if (month >= 6 && month <= 8) return 'summer';
-      
-      // Autumn: September (9), October (10), November (11)
-      return 'autumn';
-    }
-
-    function createSeasonalAnimation() {
-      const container = document.getElementById('seasonalAnimation');
-      const season = getSeason();
-      
-      // Clear any existing animations
-      container.innerHTML = '';
-      
-      switch(season) {
-        case 'winter':
-          createSnowfall(container);
-          break;
-        case 'spring':
-          createPetals(container);
-          break;
-        case 'summer':
-          createFireflies(container);
-          break;
-        case 'autumn':
-          createLeaves(container);
-          break;
-      }
-    }
-
-    function createSnowfall(container) {
-      const snowflakes = ['❄', '❅', '❆'];
-      const count = 50;
-      
-      for (let i = 0; i < count; i++) {
-        const snowflake = document.createElement('div');
-        snowflake.className = 'snowflake';
-        snowflake.textContent = snowflakes[Math.floor(Math.random() * snowflakes.length)];
-        snowflake.style.left = Math.random() * 100 + '%';
-        snowflake.style.animationDuration = (Math.random() * 3 + 5) + 's';
-        snowflake.style.animationDelay = Math.random() * 5 + 's';
-        snowflake.style.fontSize = (Math.random() * 0.7 + 0.5) + 'em';
-        container.appendChild(snowflake);
-      }
-    }
-
-    function createPetals(container) {
-      const petals = ['🌸', '🌺', '🌼', '🌻'];
-      const count = 30;
-      
-      for (let i = 0; i < count; i++) {
-        const petal = document.createElement('div');
-        petal.className = 'petal';
-        petal.textContent = petals[Math.floor(Math.random() * petals.length)];
-        petal.style.left = Math.random() * 100 + '%';
-        petal.style.animationDuration = (Math.random() * 4 + 6) + 's';
-        petal.style.animationDelay = Math.random() * 5 + 's';
-        petal.style.fontSize = (Math.random() * 0.8 + 0.8) + 'em';
-        container.appendChild(petal);
-      }
-    }
-
-    function createFireflies(container) {
-      const count = 20;
-      
-      for (let i = 0; i < count; i++) {
-        const firefly = document.createElement('div');
-        firefly.className = 'firefly';
-        firefly.style.left = Math.random() * 100 + '%';
-        firefly.style.top = (Math.random() * 80 + 10) + '%';
-        firefly.style.animationDuration = (Math.random() * 2 + 2) + 's';
-        firefly.style.animationDelay = Math.random() * 3 + 's';
-        container.appendChild(firefly);
-      }
-    }
-
-    function createLeaves(container) {
-      const leaves = ['🍂', '🍁', '🍃'];
-      const count = 35;
-      
-      for (let i = 0; i < count; i++) {
-        const leaf = document.createElement('div');
-        leaf.className = 'leaf';
-        leaf.textContent = leaves[Math.floor(Math.random() * leaves.length)];
-        leaf.style.left = Math.random() * 100 + '%';
-        leaf.style.animationDuration = (Math.random() * 4 + 5) + 's';
-        leaf.style.animationDelay = Math.random() * 5 + 's';
-        leaf.style.fontSize = (Math.random() * 0.9 + 0.8) + 'em';
-        container.appendChild(leaf);
-      }
-    }
-
-    // Initialize seasonal animation on page load
-    window.addEventListener('load', createSeasonalAnimation);
-  </script>
 </body>
+
 </html>

@@ -1,57 +1,48 @@
 <!DOCTYPE html>
-<html lang="en" style="background: #000814;">
+<html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <!-- Critical CSS - Load First -->
-  <style>
-    html {
-      background: #000814 !important;
-    }
-    body {
-      background: transparent !important;
-      min-height: 100vh !important;
-      min-height: -webkit-fill-available !important;
-      margin: 0 !important;
-    }
-  </style>
-  
+
   <title>About | Praveen Reddy</title>
   <meta name="description" content="Learn about Praveen Reddy and the mission behind KLMaterial Study Hub." />
   <meta name="keywords" content="Praveen Reddy, about, CSE student, study hub creator" />
-  
+
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="profile" />
   <meta property="og:url" content="https://praveenreddy8942-debug.github.io/klmaterial/about.html" />
   <meta property="og:title" content="About Praveen Reddy | Study Hub Creator" />
   <meta property="og:description" content="Learn about Praveen Reddy and the mission behind KLMaterial Study Hub." />
   <meta property="og:image" content="https://praveenreddy8942-debug.github.io/klmaterial/profile.jpg" />
-  
+
   <!-- Twitter -->
   <meta property="twitter:card" content="summary" />
   <meta property="twitter:url" content="https://praveenreddy8942-debug.github.io/klmaterial/about.html" />
   <meta property="twitter:title" content="About Praveen Reddy | Study Hub Creator" />
-  <meta property="twitter:description" content="Learn about Praveen Reddy and the mission behind KLMaterial Study Hub." />
+  <meta property="twitter:description"
+    content="Learn about Praveen Reddy and the mission behind KLMaterial Study Hub." />
   <meta property="twitter:image" content="https://praveenreddy8942-debug.github.io/klmaterial/profile.jpg" />
-  
+
   <!-- Cache Control for iOS -->
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
-  
-  <link rel="stylesheet" href="style.css?v=2.1" />
-  
+
+  <link rel="stylesheet" href="style.css?v=2.2" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZ0SERPS7L"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
 
     gtag('config', 'G-NZ0SERPS7L');
   </script>
 </head>
+
 <body>
   <header>
     <nav>
@@ -62,14 +53,14 @@
         <a href="about.html" class="active">About</a>
         <a href="contact.html">Contact</a>
       </div>
-     </nav>
-   </header>
+    </nav>
+  </header>
   <main class="page-content">
     <h1>👋 About Me</h1>
     <div class="about-card">
       <p>
         Hello, I’m <strong>Praveen Reddy</strong> — a passionate student who built this
-        study hub to organize and share academic materials easily.  
+        study hub to organize and share academic materials easily.
         <br><br>
         This website includes my subject notes, question papers, and learning resources
         to help both me and my friends prepare for exams effectively.
@@ -87,24 +78,7 @@
   <!-- Back to Top Button -->
   <button id="backToTop" title="Back to top">↑</button>
 
-  <script>
-    // Back to Top functionality
-    const backToTopBtn = document.getElementById('backToTop');
-    
-    window.addEventListener('scroll', () => {
-      if (window.pageYOffset > 300) {
-        backToTopBtn.classList.add('show');
-      } else {
-        backToTopBtn.classList.remove('show');
-      }
-    });
-    
-    backToTopBtn.addEventListener('click', () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    });
-  </script>
+  <script src="ui.js"></script>
 </body>
+
 </html>

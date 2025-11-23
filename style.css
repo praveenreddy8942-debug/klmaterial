@@ -213,6 +213,18 @@ body::after {
   border: 3px solid #00bfff;
   box-shadow: 0 0 25px rgba(0, 191, 255, 0.6);
   margin-bottom: 20px;
+  animation: floatGlow 4s ease-in-out infinite;
+}
+
+@keyframes floatGlow {
+  0%, 100% {
+    transform: translateY(0);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
+  }
+  50% {
+    transform: translateY(-12px);
+    box-shadow: 0 0 35px rgba(0, 212, 255, 0.9);
+  }
 }
 
 .hero h1 {
@@ -235,10 +247,33 @@ body::after {
   text-decoration: none;
   font-weight: 500;
   transition: 0.3s;
-    /* Fade-in animation */
+  /* Fade-in animation */
   opacity: 0;
   transform: translateY(20px);
   animation: fadeIn 1.5s ease forwards;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255,0.4);
+  transform: skewX(-25deg);
+  transition: left 0.7s;
+}
+
+.btn:hover::before {
+  left: 200%;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #00bfff;
 }
 
 @keyframes fadeIn {
@@ -257,18 +292,13 @@ body::after {
 .fade-delay-2 { animation-delay: 1s; }
 .fade-delay-3 { animation-delay: 1.5s; }
 
-
-.btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 15px #00bfff;
-}
-
 /* Footer */
 footer {
   text-align: center;
   padding: 20px 0;
   color: #aaa;
   font-size: 0.9em;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Responsive */
@@ -318,15 +348,8 @@ footer {
     padding: 15px;
   }
 }
-/* ===== Materials Page Styling ===== */
-body {
-  background: radial-gradient(circle at top, #001a33, #000814);
-  color: #fff;
-  font-family: 'Poppins', sans-serif;
-  margin: 0;
-  padding: 0;
-}
 
+/* ===== Materials Page Styling ===== */
 header {
   background: rgba(0, 0, 40, 0.8);
   padding: 15px 0;
@@ -362,6 +385,25 @@ nav ul li a {
 nav ul li a:hover,
 nav ul li a.active {
   color: #66b3ff;
+}
+
+/* Nav Link Hover Effect */
+nav a {
+  position: relative;
+}
+nav a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -5px;
+  left: 50%;
+  background-color: #00d4ff;
+  transition: all 0.3s ease;
+}
+nav a:hover::after {
+  width: 100%;
+  left: 0;
 }
 
 .materials-container {
@@ -523,13 +565,6 @@ nav ul li a.active {
   box-shadow: 0 4px 15px rgba(0, 212, 255, 0.5);
 }
 
-footer {
-  text-align: center;
-  padding: 20px 0;
-  font-size: 0.9rem;
-  color: #aaa;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
 /* ===== Page Styles for About & Contact ===== */
 .page-content {
   max-width: 900px;
@@ -580,99 +615,6 @@ footer {
   text-decoration: underline;
 }
 
-
-
-
-
-.profile-pic {
-  width: 180px;
-  height: 230px;
-  border-radius: 50%;
-  border: 4px solid #00d4ff;
-  object-fit: cover;
-  animation: floatGlow 4s ease-in-out infinite;
-}
-
-@keyframes floatGlow {
-  0%, 100% {
-    transform: translateY(0);
-    box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
-  }
-  50% {
-    transform: translateY(-12px);
-    box-shadow: 0 0 35px rgba(0, 212, 255, 0.9);
-  }
-}
-body {
-  animation: fadeIn 1.2s ease-in;
-}
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.btn {
-  position: relative;
-  overflow: hidden;
-}
-.btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: rgba(255,255,255,0.4);
-  transform: skewX(-25deg);
-  transition: left 0.7s;
-}
-.btn:hover::before {
-  left: 200%;
-}
-.btn:hover {
-  transform: scale(1.05);
-}
-nav a {
-  position: relative;
-}
-nav a::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: -5px;
-  left: 50%;
-  background-color: #00d4ff;
-  transition: all 0.3s ease;
-}
-nav a:hover::after {
-  width: 100%;
-  left: 0;
-}
-#chatToggle {
-  animation: pulse 1.8s infinite;
-}
-@keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(0, 212, 255, 0.5); }
-  70% { box-shadow: 0 0 0 20px rgba(0, 212, 255, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(0, 212, 255, 0); }
-}
-
-
-
-
-/* 🌌 Animated Background */
-body {
-  background: linear-gradient(270deg, #001d3d, #003566, #000814);
-  background-size: 600% 600%;
-  animation: bgFlow 15s ease infinite;
-}
-
-@keyframes bgFlow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
 /* ⌨️ Typing Animation for Hero Text */
 .typing {
   border-right: 3px solid #00bfff;
@@ -707,20 +649,8 @@ body {
 @keyframes pulseGlow {
   0%, 100% { box-shadow: 0 0 15px #00d4ff; transform: scale(1); }
   50% { box-shadow: 0 0 30px #00ffff; transform: scale(1.05); }
+}
 
-}
-.typing-text {
-  font-size: 2rem;
-  color: #00d4ff;
-  border-right: 3px solid #00d4ff;
-  display: inline-block;
-  white-space: nowrap;
-  overflow: hidden;
-  animation: blink 0.8s step-end infinite;
-}
-@keyframes blink {
-  50% { border-color: transparent; }
-}
 /* 🌟 Fade-In + Scroll Reveal Animation */
 .fade-in {
   opacity: 0;
@@ -739,189 +669,6 @@ body {
   }
 }
 
-/* For scroll-activated fading */
-.scroll-fade {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.8s ease-out;
-}
-.scroll-fade.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-/* ===== Global Styling ===== */
-body {
-  margin: 0;
-  font-family: "Poppins", sans-serif;
-  background: radial-gradient(circle at top, #021B79, #0575E6);
-  color: #fff;
-  line-height: 1.6;
-  min-height: 100vh;
-}
-
-/* ===== Header ===== */
-header {
-  text-align: center;
-  background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(10px);
-  padding: 25px 10px;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-header h1 {
-  font-size: 1.8rem;
-  color: #00d4ff;
-  margin-bottom: 10px;
-  text-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
-}
-
-nav {
-  margin-top: 10px;
-}
-
-nav a {
-  color: #fff;
-  text-decoration: none;
-  margin: 0 15px;
-  font-weight: 500;
-  transition: color 0.3s, transform 0.2s;
-}
-
-nav a:hover {
-  color: #00d4ff;
-  transform: scale(1.05);
-}
-
-/* ===== Mobile Nav Scroll (iPhone) ===== */
-@media (max-width: 600px) {
-  header nav {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 8px;
-    overflow-x: auto;
-  }
-  .nav-track {
-    display: flex;
-    gap: 14px;
-    overflow-x: auto;
-    white-space: nowrap;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    padding: 6px 10px;
-    max-width: 100%;
-  }
-  .nav-track::-webkit-scrollbar { display: none; }
-  
-  nav a {
-    margin: 0 8px;
-    font-size: 15px;
-    flex-shrink: 0;
-  }
-  
-  /* Materials page Study Hub title */
-  header nav h2 {
-    font-size: 16px;
-    margin: 0 10px 0 0;
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-  
-  /* Nav scroll indicator - only visible on mobile */
-  .nav-indicator {
-    position: absolute;
-    right: 8px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #00d4ff;
-    font-size: 20px;
-    pointer-events: none;
-    opacity: 0.7;
-    text-shadow: 0 0 8px rgba(0, 212, 255, 0.5);
-    animation: pulseIndicator 2s ease-in-out infinite;
-  }
-  
-  @keyframes pulseIndicator {
-    0%, 100% { opacity: 0.5; }
-    50% { opacity: 0.9; }
-  }
-}
-
-/* Hide nav indicator on desktop */
-@media (min-width: 601px) {
-  .nav-indicator {
-    display: none;
-  }
-}
-
-/* ===== Main Section ===== */
-main {
-  padding: 40px 20px;
-  max-width: 900px;
-  margin: auto;
-  background: rgba(0, 0, 0, 0.25);
-  border-radius: 15px;
-  box-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
-}
-
-section h2 {
-  color: #00d4ff;
-  border-left: 4px solid #00d4ff;
-  padding-left: 10px;
-  margin-top: 40px;
-  text-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
-}
-
-section p {
-  color: #cce7ff;
-  margin-bottom: 15px;
-}
-
-ul {
-  list-style-type: none;
-  padding-left: 0;
-}
-
-ul li {
-  background: rgba(255, 255, 255, 0.05);
-  margin: 8px 0;
-  padding: 10px 15px;
-  border-radius: 8px;
-  transition: background 0.3s, transform 0.2s;
-}
-
-ul li:hover {
-  background: rgba(0, 212, 255, 0.1);
-  transform: translateX(5px);
-}
-
-/* ===== Footer ===== */
-footer {
-  text-align: center;
-  padding: 25px 10px;
-  margin-top: 50px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  color: #b0e0ff;
-  font-size: 0.9rem;
-}
-
-/* ===== Responsive ===== */
-@media (max-width: 768px) {
-  header h1 {
-    font-size: 1.4rem;
-  }
-  nav a {
-    display: inline-block;
-    margin: 8px;
-  }
-  main {
-    padding: 20px 15px;
-  }
-}
 /* ===== 🎯 Roadmap Page Styling ===== */
 .roadmap-section {
   max-width: 900px;
@@ -969,18 +716,6 @@ footer {
 /* Highlighted Focus Paragraphs */
 .roadmap-section strong {
   color: #00d4ff;
-}
-
-/* Fade-in Animation */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 /* Responsive for mobile */
@@ -1052,7 +787,7 @@ footer {
   }
   
   .page-content h1 {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
   }
   
   .about-card, .contact-card {
@@ -1067,30 +802,6 @@ footer {
 }
 
 /* ===== Portfolio Homepage Layout (Study Hub) ===== */
-.hero {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 90vh;
-  padding: 40px 20px;
-  text-align: center;
-}
-
-.hero h1 {
-  font-size: 2.5rem;
-  color: #00d4ff;
-  margin-bottom: 15px;
-  text-shadow: 0 0 25px rgba(0, 212, 255, 0.5);
-}
-
-.hero p {
-  max-width: 600px;
-  color: #cce7ff;
-  line-height: 1.6;
-  font-size: 1.1rem;
-}
-
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -1121,9 +832,6 @@ footer {
 }
 
 @media (max-width: 600px) {
-  .hero h1 { font-size: 1.8rem; }
-  .hero p { font-size: 0.95rem; }
-  
   /* Extra small devices */
   .center-nav li {
     margin: 5px 8px;
@@ -1327,10 +1035,138 @@ footer {
   }
 }
 
+/* ===== Seasonal Animations ===== */
+/* Seasonal Animation Container */
+#seasonalAnimation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
 
+/* Snowflake Styles for Winter */
+.snowflake {
+  position: absolute;
+  top: -10px;
+  color: #fff;
+  font-size: 1em;
+  font-family: Arial, sans-serif;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+  animation: fall linear infinite;
+  opacity: 0.8;
+}
 
+@keyframes fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0.3;
+  }
+}
 
+/* Autumn Leaves */
+.leaf {
+  position: absolute;
+  top: -10px;
+  font-size: 1.5em;
+  animation: fallLeaf linear infinite;
+  opacity: 0.9;
+}
 
+@keyframes fallLeaf {
+  0% {
+    transform: translateY(0) rotate(0deg) translateX(0);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translateY(50vh) rotate(180deg) translateX(20px);
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg) translateX(0);
+    opacity: 0.3;
+  }
+}
 
+/* Spring Petals */
+.petal {
+  position: absolute;
+  top: -10px;
+  font-size: 1.2em;
+  animation: fallPetal ease-in-out infinite;
+  opacity: 0.85;
+}
 
+@keyframes fallPetal {
+  0% {
+    transform: translateY(0) rotate(0deg) translateX(0);
+    opacity: 0.85;
+  }
+  25% {
+    transform: translateY(25vh) rotate(90deg) translateX(-15px);
+  }
+  75% {
+    transform: translateY(75vh) rotate(270deg) translateX(15px);
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg) translateX(0);
+    opacity: 0.2;
+  }
+}
 
+/* Summer Fireflies */
+.firefly {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: #ffeb3b;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #ffeb3b, 0 0 20px #ffc107;
+  animation: float 3s ease-in-out infinite;
+  opacity: 0;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-30px) translateX(20px);
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+}
+
+/* ===== Chatbase Styles ===== */
+/* 💫 Chatbase Bubble Animation */
+#chatbase-bubble, .chatbase-bubble, .chatbase-launcher {
+  animation: pulseGlow 2s infinite ease-in-out;
+  box-shadow: 0 0 15px #00d4ff;
+  border-radius: 50%;
+}
+
+/* 📱 Mobile Chatbox Size Control */
+@media (max-width: 768px) {
+  iframe[title="Chatbase Chatbot"] {
+    position: fixed !important;
+    bottom: 70px !important;
+    right: 10px !important;
+    width: 90% !important;
+    height: 70vh !important;
+    border-radius: 16px !important;
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+    z-index: 99999 !important;
+  }
+}

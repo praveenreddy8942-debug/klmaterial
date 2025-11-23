@@ -1,75 +1,72 @@
 <!DOCTYPE html>
-<html lang="en" style="background: #000814;">
+<html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <!-- Critical CSS - Load First -->
-  <style>
-    html {
-      background: #000814 !important;
-    }
-    body {
-      background: transparent !important;
-      min-height: 100vh !important;
-      min-height: -webkit-fill-available !important;
-      margin: 0 !important;
-    }
-  </style>
-  
+
   <title>Contact | Praveen Reddy</title>
-  <meta name="description" content="Get in touch with Praveen Reddy through email, GitHub, LinkedIn, Facebook, or WhatsApp." />
+  <meta name="description"
+    content="Get in touch with Praveen Reddy through email, GitHub, LinkedIn, Facebook, or WhatsApp." />
   <meta name="keywords" content="contact, Praveen Reddy, email, GitHub, LinkedIn, social media" />
-  
+
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://praveenreddy8942-debug.github.io/klmaterial/contact.html" />
   <meta property="og:title" content="Contact Praveen Reddy" />
-  <meta property="og:description" content="Connect with me through email, GitHub, LinkedIn, Facebook, or join our WhatsApp study group." />
+  <meta property="og:description"
+    content="Connect with me through email, GitHub, LinkedIn, Facebook, or join our WhatsApp study group." />
   <meta property="og:image" content="https://praveenreddy8942-debug.github.io/klmaterial/profile.jpg" />
-  
+
   <!-- Twitter -->
   <meta property="twitter:card" content="summary" />
   <meta property="twitter:url" content="https://praveenreddy8942-debug.github.io/klmaterial/contact.html" />
   <meta property="twitter:title" content="Contact Praveen Reddy" />
-  <meta property="twitter:description" content="Connect with me through email, GitHub, LinkedIn, Facebook, or join our WhatsApp study group." />
+  <meta property="twitter:description"
+    content="Connect with me through email, GitHub, LinkedIn, Facebook, or join our WhatsApp study group." />
   <meta property="twitter:image" content="https://praveenreddy8942-debug.github.io/klmaterial/profile.jpg" />
-  
+
   <!-- Cache Control for iOS -->
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
-  
-  <link rel="stylesheet" href="style.css?v=2.1" />
+
+  <link rel="stylesheet" href="style.css?v=2.2" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZ0SERPS7L"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
 
     gtag('config', 'G-NZ0SERPS7L');
   </script>
-  
+
   <style>
-    .contact-info li {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      padding: 15px;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 12px;
-      margin: 15px 0;
-      transition: all 0.3s ease;
+    /* Brand Colors - kept here as they are specific to this page's icons and small enough */
+    .email-icon {
+      background: linear-gradient(135deg, #EA4335, #D32F2F);
     }
-    
-    .contact-info li:hover {
-      background: rgba(255, 255, 255, 0.1);
-      transform: translateX(5px);
+
+    .github-icon {
+      background: linear-gradient(135deg, #333, #000);
     }
-    
+
+    .linkedin-icon {
+      background: linear-gradient(135deg, #0077B5, #005582);
+    }
+
+    .facebook-icon {
+      background: linear-gradient(135deg, #1877F2, #0C5FB3);
+    }
+
+    .whatsapp-icon {
+      background: linear-gradient(135deg, #25D366, #1DA851);
+    }
+
     .contact-icon {
       width: 40px;
       height: 40px;
@@ -80,66 +77,11 @@
       font-size: 1.3rem;
       flex-shrink: 0;
       transition: transform 0.3s ease;
-    }
-    
-    .contact-info li:hover .contact-icon {
-      transform: scale(1.1);
-    }
-    
-    /* Brand Colors */
-    .email-icon { background: linear-gradient(135deg, #EA4335, #D32F2F); }
-    .github-icon { background: linear-gradient(135deg, #333, #000); }
-    .linkedin-icon { background: linear-gradient(135deg, #0077B5, #005582); }
-    .facebook-icon { background: linear-gradient(135deg, #1877F2, #0C5FB3); }
-    .whatsapp-icon { background: linear-gradient(135deg, #25D366, #1DA851); }
-    
-    .contact-info a {
-      color: #00d4ff;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-    
-    .contact-info a:hover {
-      color: #fff;
-    }
-    
-    .contact-info strong {
-      min-width: 100px;
-      color: #fff;
-    }
-    
-    /* Mobile responsive styles */
-    @media (max-width: 600px) {
-      .contact-info li {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-        padding: 12px;
-      }
-      
-      .contact-icon {
-        width: 35px;
-        height: 35px;
-        font-size: 1.1rem;
-      }
-      
-      .contact-info strong {
-        min-width: auto;
-        font-size: 14px;
-      }
-      
-      .contact-info a {
-        word-break: break-word;
-        font-size: 14px;
-        line-height: 1.4;
-      }
-      
-      .contact-info li:hover {
-        transform: translateX(0);
-      }
+      color: white;
     }
   </style>
 </head>
+
 <body>
   <header>
     <nav>
@@ -157,15 +99,15 @@
     <h1>📩 Contact Me</h1>
 
     <div class="contact-card">
-      <p>Feel free to reach out through any of the platforms below!  
-         Whether it’s for materials, discussions, or feedback — I’d love to connect with you. 🚀</p>
+      <p>Feel free to reach out through any of the platforms below!
+        Whether it’s for materials, discussions, or feedback — I’d love to connect with you. 🚀</p>
 
       <ul class="contact-info">
         <li>
           <div class="contact-icon email-icon">
             <i class="fas fa-envelope"></i>
           </div>
-          <strong>Email:</strong> 
+          <strong>Email:</strong>
           <a href="mailto:praveenreddy8942@gmail.com">praveenreddy8942@gmail.com</a>
         </li>
 
@@ -173,7 +115,7 @@
           <div class="contact-icon github-icon">
             <i class="fab fa-github"></i>
           </div>
-          <strong>GitHub:</strong> 
+          <strong>GitHub:</strong>
           <a href="https://github.com/praveenreddy8942-debug" target="_blank">github.com/praveenreddy8942</a>
         </li>
 
@@ -181,8 +123,9 @@
           <div class="contact-icon linkedin-icon">
             <i class="fab fa-linkedin-in"></i>
           </div>
-          <strong>LinkedIn:</strong> 
-          <a href="https://www.linkedin.com/in/praveen-reddy-37b0a6365?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank">
+          <strong>LinkedIn:</strong>
+          <a href="https://www.linkedin.com/in/praveen-reddy-37b0a6365?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
+            target="_blank">
             linkedin.com/in/praveenreddy
           </a>
         </li>
@@ -191,7 +134,7 @@
           <div class="contact-icon facebook-icon">
             <i class="fab fa-facebook-f"></i>
           </div>
-          <strong>Facebook:</strong> 
+          <strong>Facebook:</strong>
           <a href="https://facebook.com/share/1FbC72ZtwF/?mibextid=wwXIfr" target="_blank">
             facebook.com/share/1FbC72ZtwF
           </a>
@@ -201,7 +144,7 @@
           <div class="contact-icon whatsapp-icon">
             <i class="fab fa-whatsapp"></i>
           </div>
-          <strong>WhatsApp Group:</strong> 
+          <strong>WhatsApp Group:</strong>
           <a href="https://chat.whatsapp.com/LWNBaMmNNuSH08ztjFg39B?mode=wwt" target="_blank">
             Join Our Study Group
           </a>
@@ -217,35 +160,7 @@
   <!-- Back to Top Button -->
   <button id="backToTop" title="Back to top">↑</button>
 
-  <script>
-    // Mobile nav chevron scroll
-    (function(){
-      const track = document.querySelector('header nav .nav-track');
-      const next = document.querySelector('header nav .nav-next');
-      if (track && next) {
-        next.addEventListener('click', () => {
-          track.scrollBy({ left: 160, behavior: 'smooth' });
-        });
-      }
-    })();
-
-    // Back to Top functionality
-    const backToTopBtn = document.getElementById('backToTop');
-    
-    window.addEventListener('scroll', () => {
-      if (window.pageYOffset > 300) {
-        backToTopBtn.classList.add('show');
-      } else {
-        backToTopBtn.classList.remove('show');
-      }
-    });
-    
-    backToTopBtn.addEventListener('click', () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    });
-  </script>
+  <script src="ui.js"></script>
 </body>
+
 </html>
