@@ -1490,9 +1490,12 @@ footer {
 @media (max-width: 600px) {
 
   header {
-    top: 5px;
-    /* Move closer to top (was 15px) */
+    position: fixed;
+    /* Ensure fixed positioning */
+    top: 15px;
+    /* Explicitly set top */
     bottom: auto;
+    /* Reset bottom */
     width: 90%;
     max-width: 90%;
     padding: 8px 15px;
