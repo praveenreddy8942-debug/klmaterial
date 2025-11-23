@@ -1130,37 +1130,44 @@ nav a::after {
     top: 15px;
     width: 90%;
     max-width: 90%;
-    padding: 10px 15px;
-    border-radius: 25px;
-    flex-direction: column;
+    padding: 8px 15px;
+    border-radius: 30px;
+    flex-direction: row;
+    /* Changed to row */
+    justify-content: space-between;
     gap: 10px;
   }
 
   nav {
-    flex-direction: column;
+    flex-direction: row;
+    /* Changed to row */
     width: 100%;
-    gap: 10px;
+    gap: 0;
+    justify-content: flex-start;
+    overflow: hidden;
+    /* Ensure track handles scrolling */
   }
 
   header nav {
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: center;
     width: 100%;
+    justify-content: flex-start;
   }
 
   .nav-track {
     display: flex;
-    gap: 5px;
+    gap: 0;
     overflow-x: auto;
     white-space: nowrap;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
-    padding: 4px;
+    padding: 2px 0;
     max-width: 100%;
     scrollbar-width: none;
     /* Firefox */
+    align-items: center;
   }
 
   .nav-track::-webkit-scrollbar {
@@ -1168,17 +1175,19 @@ nav a::after {
   }
 
   nav a {
-    margin: 0 2px;
-    font-size: 14px;
+    margin: 0 4px;
+    font-size: 13px;
     flex-shrink: 0;
-    padding: 6px 14px;
+    padding: 6px 12px;
   }
 
-  /* Materials page Study Hub title */
+  /* Materials page Study Hub title - Hide on mobile if needed or make small */
   header nav h2 {
-    font-size: 16px;
-    margin: 0 0 5px 0;
+    font-size: 14px;
+    margin: 0 10px 0 0;
     white-space: nowrap;
+    display: none;
+    /* Hide title on mobile to save space for links */
   }
 
   /* Nav scroll indicator - only visible on mobile */
