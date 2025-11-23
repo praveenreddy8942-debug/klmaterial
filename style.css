@@ -39,7 +39,9 @@ body {
 }
 
 /* Improve touch targets for mobile */
-a, button, .download-btn {
+a,
+button,
+.download-btn {
   -webkit-tap-highlight-color: rgba(0, 212, 255, 0.3);
   min-height: 44px;
   display: inline-flex;
@@ -56,7 +58,7 @@ body::before {
   width: 100%;
   height: 100%;
   min-height: 100vh;
-  background: 
+  background:
     radial-gradient(circle at 20% 20%, #001d3d, #000814),
     radial-gradient(circle at 10% 20%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
     radial-gradient(circle at 90% 80%, rgba(0, 191, 255, 0.08) 0%, transparent 50%),
@@ -78,7 +80,7 @@ body::after {
   width: 100%;
   height: 100%;
   min-height: 100vh;
-  background-image: 
+  background-image:
     linear-gradient(45deg, rgba(0, 212, 255, 0.03) 25%, transparent 25%),
     linear-gradient(-45deg, rgba(0, 212, 255, 0.03) 25%, transparent 25%),
     linear-gradient(45deg, transparent 75%, rgba(0, 212, 255, 0.03) 75%),
@@ -96,10 +98,13 @@ body::after {
 }
 
 @keyframes backgroundPulse {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
     transform: scale(1);
   }
+
   50% {
     opacity: 0.8;
     transform: scale(1.1);
@@ -110,6 +115,7 @@ body::after {
   0% {
     background-position: 0 0, 0 30px, 30px -30px, -30px 0px;
   }
+
   100% {
     background-position: 60px 60px, 60px 90px, 90px 30px, 30px 60px;
   }
@@ -121,43 +127,44 @@ body::after {
     font-size: 1.15em;
     margin: 0 25px;
   }
-  
+
   .hero h1 {
     font-size: 3em;
   }
-  
+
   .skills-grid,
   .projects-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
   }
-  
+
   .materials-container {
     max-width: 1100px;
   }
-  
+
   .material-box {
     padding: 30px;
   }
-  
+
   .roadmap-section {
     max-width: 1000px;
     padding: 40px 50px;
   }
-  
+
   .page-content {
     max-width: 1000px;
   }
 }
 
 @media (min-width: 769px) and (max-width: 1199px) {
+
   /* Tablet Styles */
   .skills-grid,
   .projects-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 25px;
   }
-  
+
   .materials-container {
     max-width: 950px;
   }
@@ -217,10 +224,13 @@ body::after {
 }
 
 @keyframes floatGlow {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
     box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
   }
+
   50% {
     transform: translateY(-12px);
     box-shadow: 0 0 35px rgba(0, 212, 255, 0.9);
@@ -262,7 +272,7 @@ body::after {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: rgba(255,255,255,0.4);
+  background: rgba(255, 255, 255, 0.4);
   transform: skewX(-25deg);
   transition: left 0.7s;
 }
@@ -281,6 +291,7 @@ body::after {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -288,9 +299,17 @@ body::after {
 }
 
 /* Optional delays for sequence */
-.fade-delay-1 { animation-delay: 0.5s; }
-.fade-delay-2 { animation-delay: 1s; }
-.fade-delay-3 { animation-delay: 1.5s; }
+.fade-delay-1 {
+  animation-delay: 0.5s;
+}
+
+.fade-delay-2 {
+  animation-delay: 1s;
+}
+
+.fade-delay-3 {
+  animation-delay: 1.5s;
+}
 
 /* Footer */
 footer {
@@ -307,43 +326,44 @@ footer {
     width: 140px;
     height: 140px;
   }
+
   .hero h1 {
     font-size: 1.6em;
   }
-  
+
   /* Mobile Navigation */
   .center-nav {
     padding: 10px 0;
   }
-  
+
   .center-nav li {
     margin: 5px 10px;
     display: inline-block;
   }
-  
+
   .center-nav a {
     font-size: 0.95em;
     padding: 8px 12px;
     display: inline-block;
   }
-  
+
   /* Mobile Content Adjustments */
   .hero {
     padding-top: 100px;
   }
-  
+
   section {
     padding: 15px;
     margin: 15px auto;
   }
-  
+
   .skills-grid,
   .projects-grid {
     grid-template-columns: 1fr;
     gap: 15px;
     padding: 0 10px;
   }
-  
+
   .card {
     padding: 15px;
   }
@@ -384,26 +404,40 @@ nav ul li a {
 
 nav ul li a:hover,
 nav ul li a.active {
-  color: #66b3ff;
+  color: #fff;
 }
 
-/* Nav Link Hover Effect */
+/* Nav Link Hover Effect - Sliding Marker */
+.nav-track {
+  position: relative;
+  z-index: 1;
+}
+
 nav a {
   position: relative;
+  z-index: 2;
+  padding: 8px 16px;
+  border-radius: 20px;
+  transition: color 0.3s ease;
 }
+
+/* Remove old underline effect */
 nav a::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: -5px;
-  left: 50%;
-  background-color: #00d4ff;
-  transition: all 0.3s ease;
+  display: none;
 }
-nav a:hover::after {
-  width: 100%;
+
+.nav-marker {
+  position: absolute;
+  height: 100%;
+  top: 0;
   left: 0;
+  background: linear-gradient(90deg, #00d4ff, #007bff);
+  border-radius: 20px;
+  z-index: 1;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  pointer-events: none;
+  box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
 }
 
 .materials-container {
@@ -462,7 +496,7 @@ nav a:hover::after {
     gap: 8px;
     margin-bottom: 20px;
   }
-  
+
   .filter-btn {
     padding: 8px 18px;
     font-size: 0.85rem;
@@ -579,7 +613,8 @@ nav a:hover::after {
   color: #66b3ff;
 }
 
-.about-card, .contact-card {
+.about-card,
+.contact-card {
   background: rgba(255, 255, 255, 0.05);
   border-radius: 15px;
   padding: 30px;
@@ -623,12 +658,21 @@ nav a:hover::after {
   width: 0;
   animation: typing 4s steps(30, end) forwards, blink 0.8s infinite;
 }
+
 @keyframes typing {
-  from { width: 0; }
-  to { width: 100%; }
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 100%;
+  }
 }
+
 @keyframes blink {
-  50% { border-color: transparent; }
+  50% {
+    border-color: transparent;
+  }
 }
 
 /* 💫 Smooth Scroll Fade Animation */
@@ -637,6 +681,7 @@ nav a:hover::after {
   transform: translateY(40px);
   transition: all 0.8s ease-out;
 }
+
 .scroll-fade.visible {
   opacity: 1;
   transform: translateY(0);
@@ -646,9 +691,19 @@ nav a:hover::after {
 #chatToggle {
   animation: pulseGlow 2s infinite;
 }
+
 @keyframes pulseGlow {
-  0%, 100% { box-shadow: 0 0 15px #00d4ff; transform: scale(1); }
-  50% { box-shadow: 0 0 30px #00ffff; transform: scale(1.05); }
+
+  0%,
+  100% {
+    box-shadow: 0 0 15px #00d4ff;
+    transform: scale(1);
+  }
+
+  50% {
+    box-shadow: 0 0 30px #00ffff;
+    transform: scale(1.05);
+  }
 }
 
 /* 🌟 Fade-In + Scroll Reveal Animation */
@@ -663,6 +718,7 @@ nav a:hover::after {
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -723,10 +779,11 @@ nav a:hover::after {
   .roadmap-section {
     padding: 20px;
   }
+
   .roadmap-section h2 {
     font-size: 1.4rem;
   }
-  
+
   /* Search bar mobile adjustments */
   .search-container {
     margin: 0 15px 20px;
@@ -734,7 +791,7 @@ nav a:hover::after {
     width: calc(100% - 30px);
     padding: 0;
   }
-  
+
   .search-input {
     padding: 12px 45px 12px 15px;
     font-size: 14px;
@@ -742,36 +799,36 @@ nav a:hover::after {
     width: 100%;
     box-sizing: border-box;
   }
-  
+
   .clear-btn {
     right: 12px;
     width: 26px;
     height: 26px;
     font-size: 0.9rem;
   }
-  
+
   .search-input::placeholder {
     font-size: 13px;
   }
-  
+
   .materials-container {
     padding: 20px 10px;
   }
-  
+
   .materials-container h1 {
     font-size: 1.6rem;
     margin-bottom: 20px;
   }
-  
+
   .material-box {
     padding: 20px 15px;
     margin-bottom: 20px;
   }
-  
+
   .material-box h2 {
     font-size: 1.3rem;
   }
-  
+
   .download-btn {
     display: block;
     margin: 10px 0;
@@ -779,21 +836,22 @@ nav a:hover::after {
     font-size: 0.9rem;
     text-align: left;
   }
-  
+
   /* About & Contact Pages Mobile */
   .page-content {
     margin: 40px 15px;
     padding: 0 10px;
   }
-  
+
   .page-content h1 {
     font-size: 1.4rem;
   }
-  
-  .about-card, .contact-card {
+
+  .about-card,
+  .contact-card {
     padding: 20px 15px;
   }
-  
+
   /* Footer Mobile */
   footer {
     padding: 15px 10px;
@@ -832,33 +890,34 @@ nav a:hover::after {
 }
 
 @media (max-width: 600px) {
+
   /* Extra small devices */
   .center-nav li {
     margin: 5px 8px;
   }
-  
+
   .center-nav a {
     font-size: 0.85em;
     padding: 6px 10px;
   }
-  
+
   .search-input {
     font-size: 0.85rem;
     padding: 10px 40px 10px 12px;
   }
-  
+
   .materials-container h1 {
     font-size: 1.4rem;
   }
-  
+
   .material-box h2 {
     font-size: 1.1rem;
   }
-  
+
   .page-content h1 {
     font-size: 1.4rem;
   }
-  
+
   nav h2 {
     font-size: 1.2rem;
   }
@@ -869,11 +928,11 @@ nav a:hover::after {
   .hero {
     padding-top: 80px;
   }
-  
+
   .center-nav {
     padding: 8px 0;
   }
-  
+
   .profile-pic {
     width: 120px;
     height: 120px;
@@ -942,8 +1001,13 @@ nav a:hover::after {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .loader-text {
@@ -954,8 +1018,15 @@ nav a:hover::after {
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 0.6; }
-  50% { opacity: 1; }
+
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+
+  50% {
+    opacity: 1;
+  }
 }
 
 /* Skeleton Loading Cards */
@@ -985,9 +1056,12 @@ nav a:hover::after {
 }
 
 @keyframes skeleton-loading {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 0.4;
   }
+
   50% {
     opacity: 0.7;
   }
@@ -995,15 +1069,16 @@ nav a:hover::after {
 
 /* ===== iOS Safari Specific Fixes ===== */
 @supports (-webkit-touch-callout: none) {
+
   /* iOS Safari viewport fix */
   body {
     min-height: -webkit-fill-available;
   }
-  
+
   html {
     height: -webkit-fill-available;
   }
-  
+
   /* Ensure background animations work on iOS */
   body::before,
   body::after {
@@ -1020,11 +1095,11 @@ nav a:hover::after {
   html {
     background: #000814;
   }
-  
+
   body {
     background: transparent;
   }
-  
+
   body::before,
   body::after {
     position: fixed;
@@ -1065,6 +1140,7 @@ nav a:hover::after {
     transform: translateY(0) rotate(0deg);
     opacity: 0.8;
   }
+
   100% {
     transform: translateY(100vh) rotate(360deg);
     opacity: 0.3;
@@ -1085,9 +1161,11 @@ nav a:hover::after {
     transform: translateY(0) rotate(0deg) translateX(0);
     opacity: 0.9;
   }
+
   50% {
     transform: translateY(50vh) rotate(180deg) translateX(20px);
   }
+
   100% {
     transform: translateY(100vh) rotate(360deg) translateX(0);
     opacity: 0.3;
@@ -1108,12 +1186,15 @@ nav a:hover::after {
     transform: translateY(0) rotate(0deg) translateX(0);
     opacity: 0.85;
   }
+
   25% {
     transform: translateY(25vh) rotate(90deg) translateX(-15px);
   }
+
   75% {
     transform: translateY(75vh) rotate(270deg) translateX(15px);
   }
+
   100% {
     transform: translateY(100vh) rotate(360deg) translateX(0);
     opacity: 0.2;
@@ -1133,17 +1214,22 @@ nav a:hover::after {
 }
 
 @keyframes float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0) translateX(0);
     opacity: 0;
   }
+
   10% {
     opacity: 1;
   }
+
   50% {
     transform: translateY(-30px) translateX(20px);
     opacity: 1;
   }
+
   90% {
     opacity: 1;
   }
@@ -1151,7 +1237,9 @@ nav a:hover::after {
 
 /* ===== Chatbase Styles ===== */
 /* 💫 Chatbase Bubble Animation */
-#chatbase-bubble, .chatbase-bubble, .chatbase-launcher {
+#chatbase-bubble,
+.chatbase-bubble,
+.chatbase-launcher {
   animation: pulseGlow 2s infinite ease-in-out;
   box-shadow: 0 0 15px #00d4ff;
   border-radius: 50%;
