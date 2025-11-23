@@ -1126,16 +1126,27 @@ nav a::after {
 
 /* ===== Mobile Nav Scroll (iPhone) ===== */
 @media (max-width: 600px) {
+
+  /* Add padding to body so content isn't hidden behind bottom nav */
+  body {
+    padding-bottom: 80px;
+  }
+
   header {
-    top: 15px;
+    top: auto;
+    /* Reset top */
+    bottom: 20px;
+    /* Move to bottom */
     width: 90%;
     max-width: 90%;
     padding: 8px 15px;
     border-radius: 30px;
     flex-direction: row;
-    /* Changed to row */
     justify-content: space-between;
     gap: 10px;
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.3),
+      0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+    /* Adjusted shadow for bottom */
   }
 
   nav {
