@@ -185,9 +185,6 @@ function displayMaterials(grouped) {
             <span class="download-icon">⬇</span>
             <span>Download</span>
           </a>
-          <a href="${downloadUrl}" target="_blank" class="view-link">
-            <span>👁 View</span>
-          </a>
         </div>
       `;
       grid.appendChild(card);
