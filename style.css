@@ -4287,14 +4287,14 @@ main.materials-container {
 @media (max-width: 768px) {
   /* Slow down animations for better mobile experience */
   *, *::before, *::after {
-    animation-duration: 0.8s !important;
-    transition-duration: 0.5s !important;
+    animation-duration: 1.2s !important;
+    transition-duration: 0.6s !important;
   }
 
   /* Smooth fade-in animations */
   .fade-in,
   .fadeInUp {
-    animation-duration: 1s !important;
+    animation-duration: 1.5s !important;
   }
 
   /* Optimize images and backgrounds */
@@ -4322,7 +4322,7 @@ main.materials-container {
   .material-card,
   .subject-card,
   .about-section {
-    animation-duration: 1.2s !important;
+    animation-duration: 1.5s !important;
   }
 }
 
@@ -4383,46 +4383,46 @@ main.materials-container {
     width: 120px;
     height: 120px;
     margin-bottom: 15px;
-    animation-duration: 6s !important; /* Slower float animation */
+    animation-duration: 8s !important; /* Much slower, smoother float animation */
   }
 
   /* Slower typing animation on mobile */
   .typing {
-    animation-duration: 4s !important;
+    animation-duration: 6s !important;
   }
 
   /* Reduce motion for fade animations */
   .fade-in {
-    animation-duration: 1.5s !important;
+    animation-duration: 2s !important;
   }
 
   /* Slower animations for about and roadmap sections on mobile */
   .about-section {
-    animation-duration: 1.2s !important;
+    animation-duration: 1.5s !important;
   }
 
   .roadmap-section {
-    animation-duration: 1.5s !important;
+    animation-duration: 2s !important;
   }
 
   /* Slower transitions for contact cards on mobile */
   .contact-card-modern {
-    transition-duration: 0.5s !important;
+    transition-duration: 0.6s !important;
   }
 
   /* Slower transitions for material and subject cards on mobile */
   .material-card,
   .subject-card {
-    transition-duration: 0.6s !important;
+    transition-duration: 0.8s !important;
   }
 
   .material-card::before {
-    transition-duration: 0.6s !important;
+    transition-duration: 0.8s !important;
   }
 
   /* Slower transitions for generic cards on mobile */
   .card {
-    transition: transform 0.5s ease, box-shadow 0.5s ease !important;
+    transition: transform 0.6s ease, box-shadow 0.6s ease !important;
   }
 
   .materials-hero {
