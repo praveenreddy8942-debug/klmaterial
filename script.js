@@ -265,26 +265,48 @@ if (materialsList) {
       
       if (error.code === 'storage/unauthorized') {
         errorDetails = `
-          <p><strong>Firebase Storage Rules Issue:</strong></p>
-          <p>Your Firebase Storage security rules are blocking access.</p>
-          <ol style="text-align: left; max-width: 600px; margin: 20px auto;">
-            <li>Go to <a href="https://console.firebase.google.com/project/klmaterials/storage" target="_blank" style="color: var(--accent-primary);">Firebase Console → Storage</a></li>
-            <li>Click on "Rules" tab</li>
-            <li>Replace with:<br>
-              <code style="display: block; background: rgba(0,0,0,0.3); padding: 10px; margin: 10px 0; border-radius: 5px; text-align: left;">
+          <p><strong>⏰ Firebase Storage Rules Expired</strong></p>
+          <p style="color: #ff6b6b; font-weight: 600;">This happens automatically after 30 days if you're using test mode rules.</p>
+          
+          <div style="background: rgba(255, 107, 107, 0.1); border: 2px solid #ff6b6b; border-radius: 10px; padding: 20px; margin: 20px 0;">
+            <h4 style="color: #ff6b6b; margin-top: 0;">🔧 Quick Fix (2 minutes):</h4>
+            <ol style="text-align: left; max-width: 700px; margin: 15px auto; line-height: 1.8;">
+              <li><strong>Open Firebase Console:</strong><br>
+                <a href="https://console.firebase.google.com/project/klmaterials/storage/klmaterials.firebasestorage.app/rules" 
+                   target="_blank" 
+                   style="color: var(--accent-primary); font-size: 1.1em; text-decoration: underline;">
+                   👉 Click here to go directly to Storage Rules
+                </a>
+              </li>
+              <li><strong>Click the "Rules" tab</strong> (if not already there)</li>
+              <li><strong>Replace ALL the rules</strong> with this permanent solution:<br>
+                <code style="display: block; background: #1a1a2e; color: #00ff88; padding: 15px; margin: 10px 0; border-radius: 8px; text-align: left; font-size: 0.9em; line-height: 1.6; overflow-x: auto;">
 rules_version = '2';<br>
 service firebase.storage {<br>
 &nbsp;&nbsp;match /b/{bucket}/o {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;match /{allPaths=**} {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #ffd700;">// Allow anyone to read (download) files</span><br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow read: if true;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #ffd700;">// Only authenticated users can upload</span><br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow write: if request.auth != null;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br>
 &nbsp;&nbsp;}<br>
 }
-              </code>
-            </li>
-            <li>Click "Publish"</li>
-          </ol>
+                </code>
+              </li>
+              <li><strong>Click "Publish"</strong> button at the top</li>
+              <li><strong>Refresh this page</strong> - your materials will appear! ✅</li>
+            </ol>
+          </div>
+          
+          <p style="margin-top: 20px; font-size: 0.95em; color: var(--text-secondary);">
+            💡 <strong>Why this happens:</strong> Firebase test mode rules expire after 30 days for security. 
+            The rules above allow permanent public read access (which you need for your study materials website).
+          </p>
+          
+          <p style="margin-top: 15px; font-size: 0.9em; color: var(--text-secondary);">
+            📧 Your materials are safe in storage - they just can't be accessed until you update the rules.
+          </p>
         `;
       } else if (error.code === 'storage/object-not-found') {
         errorDetails = "<p>The storage bucket exists but no files were found. Please upload some materials.</p>";
