@@ -335,6 +335,36 @@ footer {
 
 /* Responsive */
 @media (max-width: 768px) {
+  /* Mobile header/nav fixes to prevent overlap */
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000; /* keep header above content */
+    backdrop-filter: blur(8px);
+  }
+
+  body {
+    padding-top: 70px; /* reserve space for fixed header */
+  }
+
+  nav {
+    display: flex;
+    flex-wrap: wrap; /* allow wrapping to next line */
+    gap: 8px;
+    overflow-x: auto; /* allow horizontal scroll if many links */
+    -webkit-overflow-scrolling: touch;
+  }
+
+  nav a {
+    min-height: 44px; /* touch target */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 12px;
+    flex: 1 1 auto; /* let items wrap nicely */
+  }
   body {
     padding-top: 80px;
   }
@@ -4181,22 +4211,26 @@ main.materials-container {
 
 @media (max-width: 480px) {
   body {
-    padding-top: 70px;
+    padding-top: 80px; /* slightly more for smaller screens */
   }
 
   header {
-    top: 8px;
+    top: 0;
     min-width: 260px;
-    padding: 5px 10px;
+    padding: 8px 12px;
+    z-index: 1000;
   }
 
   nav {
-    gap: 4px;
+    gap: 6px;
+    flex-wrap: wrap;
+    overflow-x: auto;
   }
 
   nav a {
-    padding: 5px 10px;
-    font-size: 0.8rem;
+    padding: 8px 10px;
+    font-size: 0.9rem;
+    min-height: 44px;
   }
 
   .materials-hero {
