@@ -225,31 +225,7 @@ body::after {
   padding-top: 140px;
 }
 
-/* Hero with background banner */
-.hero.hero-banner {
-  position: relative;
-  background-image: url('assets/images/dragon-blue.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.hero.hero-banner::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 24, 48, 0.6),
-    rgba(0, 24, 48, 0.6)
-  );
-  pointer-events: none;
-}
-
-.hero.hero-banner > * {
-  position: relative;
-  z-index: 1;
-}
+/* hero-banner styles removed pending image placement choice */
 
 .profile-pic {
   width: 180px;
