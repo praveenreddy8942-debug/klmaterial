@@ -394,6 +394,34 @@ footer {
 
 /* Responsive */
 @media (max-width: 768px) {
+  /* Mobile-first full, non-overlapping navbar layout */
+  .nav-track {
+    display: flex;
+    flex-wrap: wrap;              /* allow links to wrap to next line */
+    gap: 8px;                     /* breathing space between links */
+    justify-content: center;      /* center the wrapped rows */
+    align-items: stretch;
+    width: 100%;
+  }
+
+  /* Make each nav link behave like a responsive pill and avoid overlaps */
+  nav a {
+    flex: 1 1 100%;               /* single column, full width links */
+    max-width: none;              /* allow full width */
+    min-width: 0;                 /* remove forced min width */
+    padding: 8px 10px;            /* slightly smaller for compact feel */
+    font-size: 0.85rem;           /* reduced font size */
+    line-height: 1.2;
+    white-space: nowrap;          /* keep labels on one line inside pill */
+  }
+
+  /* If there are too many links, allow horizontal scroll without visual scrollbar */
+  nav {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  nav::-webkit-scrollbar { display: none; }
+
   /* Ensure floating desktop header becomes full-width bar on mobile */
   header {
     position: sticky;
@@ -437,7 +465,6 @@ footer {
     display: flex;
     flex-wrap: wrap; /* allow wrapping to next line */
     gap: 8px;
-    overflow-x: auto; /* allow horizontal scroll if many links */
     -webkit-overflow-scrolling: touch;
   }
 
@@ -447,7 +474,6 @@ footer {
     align-items: center;
     justify-content: center;
     padding: 8px 12px;
-    flex: 1 1 auto; /* let items wrap nicely */
   }
   body { padding-top: 0; }
 
@@ -456,7 +482,7 @@ footer {
     min-width: 0;
     max-width: none;
     width: 100%;
-    padding: 8px 12px;
+    padding: 6px 10px;            /* compact header padding */
   }
 
   nav {
