@@ -28,17 +28,6 @@
   --card-bg: rgba(255, 255, 255, 0.03);
   --border-color: rgba(0, 212, 255, 0.1);
 }
-/* Light Theme Overrides */
-:root[data-theme="light"] {
-  --bg-primary: #f5f9ff;
-  --bg-secondary: #e6f0fa;
-  --text-primary: #0f172a;
-  --text-secondary: #334155;
-  --accent-primary: #0077ff;
-  --accent-secondary: #00b4ff;
-  --card-bg: rgba(0, 0, 0, 0.05);
-  --border-color: rgba(0, 119, 255, 0.2);
-}
 
 /* General */
 html {
@@ -414,42 +403,6 @@ footer {
     align-items: stretch;
     width: 100%;
   }
-  /* Collapsed by default when hamburger present */
-  header.nav-collapsed .nav-track { display: none; }
-  header.nav-open .nav-track { display: flex; }
-
-  .hamburger-btn {
-      position: absolute;
-    top: 20px;
-    left: 20px;
-    width: 46px;
-    height: 46px;
-    background: var(--card-bg);
-    border: 2px solid var(--border-color);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-radius: 12px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-    cursor: pointer;
-    z-index: 10002;
-    transition: all 0.3s ease;
-  }
-  .hamburger-btn span {
-    display: block;
-    width: 22px;
-    height: 3px;
-    background: var(--accent-primary);
-    border-radius: 2px;
-    transition: all 0.3s ease;
-  }
-  header.nav-open .hamburger-btn span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
-  header.nav-open .hamburger-btn span:nth-child(2) { opacity: 0; }
-  header.nav-open .hamburger-btn span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
-  .hamburger-btn:focus-visible { outline: 2px solid var(--accent-primary); outline-offset: 3px; }
 
   /* Make each nav link behave like a responsive pill and avoid overlaps */
   nav a {
@@ -681,11 +634,6 @@ nav a {
   color: var(--text-secondary);
   text-decoration: none;
   font-weight: 500;
-}
-nav a:focus-visible {
-  outline: 2px solid var(--accent-primary);
-  outline-offset: 3px;
-  box-shadow: 0 0 6px rgba(0, 212, 255, 0.6);
 }
 
 nav a:hover {

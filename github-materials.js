@@ -214,48 +214,17 @@ function getFileIcon(ext) {
 // Load materials from GitHub
 async function loadMaterials() {
   if (!materialsList) return;
-
-  const CACHE_KEY = 'materialsCache';
-  const CACHE_TTL_MS = 30 * 60 * 1000; // 30 minutes
-
-  function getCached() {
-    try {
-      const raw = localStorage.getItem(CACHE_KEY);
-      if (!raw) return null;
-      const parsed = JSON.parse(raw);
-      if (!parsed.timestamp || !parsed.grouped) return null;
-      if (Date.now() - parsed.timestamp > CACHE_TTL_MS) return null;
-      return parsed.grouped;
-    } catch { return null; }
-  }
-  function setCached(grouped) {
-    try { localStorage.setItem(CACHE_KEY, JSON.stringify({ timestamp: Date.now(), grouped })); } catch {}
-  }
-
-  const cached = getCached();
-  if (cached) {
-    allMaterials = cached;
-    displayMaterials(cached);
-    // Show subtle cached notice
-    const notice = document.createElement('div');
-    notice.style.fontSize = '0.7rem';
-    notice.style.opacity = '0.6';
-    notice.style.margin = '6px 0 14px';
-    notice.textContent = 'Loaded from cache · refreshing…';
-    materialsList.prepend(notice);
-  } else {
-    materialsList.innerHTML = `
-      <div class="advanced-loader-container">
-        <div class="advanced-loader">
-          <div class="loader-ring"></div>
-          <div class="loader-ring"></div>
-          <div class="loader-ring"></div>
-          <span class="loader-emoji">📚</span>
-        </div>
-        <p class="loader-text">Loading materials from GitHub...</p>
+  materialsList.innerHTML = `
+    <div class="advanced-loader-container">
+      <div class="advanced-loader">
+        <div class="loader-ring"></div>
+        <div class="loader-ring"></div>
+        <div class="loader-ring"></div>
+        <span class="loader-emoji">📚</span>
       </div>
-    `;
-  }
+      <p class="loader-text">Loading materials from GitHub...</p>
+    </div>
+  `;
 
   try {
     const grouped = {};
@@ -270,22 +239,13 @@ async function loadMaterials() {
           if (response.status === 403) {
             const errorData = await response.json();
             if (errorData.message && errorData.message.includes('rate limit')) {
-              if (cached) {
-                // Keep cached display and append warning
-                const warn = document.createElement('div');
-                warn.className = 'no-results';
-                warn.style.fontSize = '0.8rem';
-                warn.innerHTML = '<strong>⏱️ Rate limit hit.</strong> Showing cached materials. Try again later.';
-                materialsList.appendChild(warn);
-              } else {
-                materialsList.innerHTML = `
-                  <div class="no-results">
-                    <h3>⏱️ GitHub API Rate Limit Reached</h3>
-                    <p>Please wait 10-15 minutes and refresh the page.</p>
-                    <p style="font-size: 0.9rem; opacity: 0.8;">The GitHub API has a limit on requests. Your materials are safe and will load after the limit resets.</p>
-                  </div>
-                `;
-              }
+              materialsList.innerHTML = `
+                <div class="no-results">
+                  <h3>⏱️ GitHub API Rate Limit Reached</h3>
+                  <p>Please wait 10-15 minutes and refresh the page.</p>
+                  <p style="font-size: 0.9rem; opacity: 0.8;">The GitHub API has a limit on requests. Your materials are safe and will load after the limit resets.</p>
+                </div>
+              `;
               return;
             }
           }
@@ -311,9 +271,6 @@ async function loadMaterials() {
     }
 
     allMaterials = grouped;
-    if (Object.keys(grouped).length > 0) {
-      setCached(grouped);
-    }
 
     if (Object.keys(grouped).length === 0) {
       materialsList.innerHTML = `

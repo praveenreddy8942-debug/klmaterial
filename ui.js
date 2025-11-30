@@ -88,46 +88,4 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Theme Toggle + Hamburger Logic
-document.addEventListener('DOMContentLoaded', () => {
-    // Theme setup
-    const root = document.documentElement;
-    const toggleBtn = document.getElementById('themeToggle');
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-        root.setAttribute('data-theme', savedTheme);
-        if (toggleBtn) toggleBtn.setAttribute('aria-pressed', savedTheme === 'light');
-    } else {
-        root.setAttribute('data-theme', 'dark');
-    }
-
-    if (toggleBtn) {
-        toggleBtn.addEventListener('click', () => {
-            const current = root.getAttribute('data-theme') || 'dark';
-            const next = current === 'dark' ? 'light' : 'dark';
-            root.setAttribute('data-theme', next);
-            localStorage.setItem('theme', next);
-            toggleBtn.setAttribute('aria-pressed', next === 'light');
-        });
-    }
-
-    // Hamburger menu
-    const hamburger = document.querySelector('.hamburger-btn');
-    const header = document.querySelector('header');
-    if (hamburger && header) {
-        // Ensure collapsed initial state
-        if (!header.classList.contains('nav-collapsed') && !header.classList.contains('nav-open')) {
-            header.classList.add('nav-collapsed');
-        }
-        hamburger.addEventListener('click', () => {
-            const expanded = hamburger.getAttribute('aria-expanded') === 'true';
-            if (expanded) {
-                header.classList.remove('nav-open');
-                header.classList.add('nav-collapsed');
-            } else {
-                header.classList.add('nav-open');
-                header.classList.remove('nav-collapsed');
-            }
-            hamburger.setAttribute('aria-expanded', (!expanded).toString());
-        });
-    }
-});
+// (Removed theme toggle & hamburger logic per revert request)
