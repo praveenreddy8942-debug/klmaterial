@@ -4145,9 +4145,11 @@ main.materials-container {
 
   .download-link {
     width: 100%;
-    padding: 14px 20px;
-    font-size: 1rem;
-    display: block;
+    padding: 12px 18px;
+    font-size: 0.95rem;
+    display: block; /* ensure full-width block button */
+    min-height: 44px; /* minimum touch target height */
+    box-sizing: border-box; /* include padding in width */
   }
 
   .view-link {
@@ -4164,6 +4166,16 @@ main.materials-container {
 
   .subject-icon {
     font-size: 1.8rem;
+  }
+  /* Keep long filenames from pushing footer off-screen on mobile */
+  .material-name {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2; /* standard property for compatibility */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
   }
 }
 
