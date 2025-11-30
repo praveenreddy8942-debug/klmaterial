@@ -2,6 +2,7 @@ Place images used by the site in this folder.
 
 Expected files referenced by CSS/HTML:
 
-- dragon-blue.jpg — homepage hero banner background (added 2025-11-30)
+- home-profile.jpg — homepage profile image (preferred)
+- dragon-blue.jpg — optional homepage hero banner background (not currently used)
 
-You can replace `dragon-blue.jpg` with your preferred image; keep the same filename to avoid changing code.
+Tip: keep the same filenames to avoid changing code. For the homepage profile, simply drop your image here as `home-profile.jpg`.
