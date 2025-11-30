@@ -362,7 +362,7 @@ footer {
   nav ul::-webkit-scrollbar { display: none; } /* WebKit */
   /* Mobile header/nav fixes to prevent overlap */
   header {
-    position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
     right: 0;
@@ -370,9 +370,10 @@ footer {
     backdrop-filter: blur(8px);
   }
 
-  body {
-    padding-top: 70px; /* reserve space for fixed header */
-  }
+  /* prevent header movement on tap */
+  header:hover { transform: none; }
+
+  body { padding-top: 0; }
 
   nav {
     display: flex;
@@ -390,15 +391,14 @@ footer {
     padding: 8px 12px;
     flex: 1 1 auto; /* let items wrap nicely */
   }
-  body {
-    padding-top: 80px;
-  }
+  body { padding-top: 0; }
 
   header {
-    top: 10px;
-    min-width: 280px;
-    max-width: calc(100% - 80px); /* Leave space for theme toggle */
-    padding: 6px 12px;
+    top: 0;
+    min-width: 0;
+    max-width: none;
+    width: 100%;
+    padding: 8px 12px;
   }
 
   nav {
@@ -407,8 +407,8 @@ footer {
   }
 
   nav a {
-    padding: 6px 10px;
-    font-size: 0.8rem;
+    padding: 8px 12px;
+    font-size: 0.9rem;
   }
 
   .profile-pic {
@@ -4235,15 +4235,17 @@ main.materials-container {
 }
 
 @media (max-width: 480px) {
-  body {
-    padding-top: 80px; /* slightly more for smaller screens */
-  }
+  body { padding-top: 0; }
 
   header {
     top: 0;
-    min-width: 260px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    min-width: 0;
     padding: 8px 12px;
     z-index: 1000;
+    transform: none;
   }
 
   nav {
