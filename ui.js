@@ -123,32 +123,92 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Hamburger Menu Logic
+// Hamburger Menu Logic (improved accessibility & behavior)
 document.addEventListener('DOMContentLoaded', () => {
     const hamburger = document.querySelector('.hamburger');
     const body = document.body;
-    const navLinks = document.querySelectorAll('.nav-track a');
+    const nav = document.getElementById('mobile-nav');
+    const navLinks = nav ? Array.from(nav.querySelectorAll('a[role="menuitem"]')) : [];
+
+    function openMenu() {
+        body.classList.add('nav-active');
+        hamburger.setAttribute('aria-expanded', 'true');
+        if (nav) nav.setAttribute('aria-hidden', 'false');
+        navLinks.forEach(link => link.setAttribute('tabindex', '0'));
+        if (navLinks.length) navLinks[0].focus();
+        // prevent body scroll
+        document.documentElement.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+        body.classList.remove('nav-active');
+        hamburger.setAttribute('aria-expanded', 'false');
+        if (nav) nav.setAttribute('aria-hidden', 'true');
+        navLinks.forEach(link => link.setAttribute('tabindex', '-1'));
+        hamburger.focus();
+        document.documentElement.style.overflow = '';
+    }
 
     if (hamburger) {
+        // ensure initial state
+        hamburger.setAttribute('aria-expanded', 'false');
+        if (nav) nav.setAttribute('aria-hidden', 'true');
+        navLinks.forEach(link => link.setAttribute('tabindex', '-1'));
+
         hamburger.addEventListener('click', (e) => {
             e.stopPropagation();
-            body.classList.toggle('nav-active');
+            if (body.classList.contains('nav-active')) closeMenu();
+            else openMenu();
         });
 
         // Close menu when clicking outside
         document.addEventListener('click', (e) => {
-            if (body.classList.contains('nav-active') && 
-                !e.target.closest('.nav-track') && 
+            if (body.classList.contains('nav-active') &&
+                !e.target.closest('#mobile-nav') &&
                 !e.target.closest('.hamburger')) {
-                body.classList.remove('nav-active');
+                closeMenu();
             }
         });
 
         // Close menu when clicking a link
         navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                body.classList.remove('nav-active');
-            });
+            link.addEventListener('click', () => closeMenu());
+        });
+
+        // Keyboard controls: Escape to close, trap focus inside the menu
+        document.addEventListener('keydown', (e) => {
+            if (!body.classList.contains('nav-active')) return;
+            if (e.key === 'Escape') {
+                e.preventDefault();
+                closeMenu();
+                return;
+            }
+
+            if (e.key === 'Tab') {
+                // very small focus trap: cycle focus among nav links and hamburger
+                const focusable = [hamburger].concat(navLinks);
+                const current = document.activeElement;
+                const idx = focusable.indexOf(current);
+                if (e.shiftKey) {
+                    // shift+tab
+                    if (idx === 0 || idx === -1) {
+                        e.preventDefault();
+                        focusable[focusable.length - 1].focus();
+                    } else {
+                        focusable[idx - 1].focus();
+                        e.preventDefault();
+                    }
+                } else {
+                    if (idx === focusable.length - 1) {
+                        e.preventDefault();
+                        focusable[0].focus();
+                    } else if (idx === -1) {
+                        // if focus not in list, focus first link
+                        e.preventDefault();
+                        focusable[1] ? focusable[1].focus() : focusable[0].focus();
+                    }
+                }
+            }
         });
     }
 });

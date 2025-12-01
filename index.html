@@ -53,18 +53,18 @@
 
   <header>
     <nav aria-label="Primary" role="navigation" class="nav-advanced">
-      <button class="hamburger" aria-label="Toggle Menu">
+      <button class="hamburger" aria-label="Toggle Menu" aria-expanded="false" aria-controls="mobile-nav">
         <span></span>
         <span></span>
         <span></span>
       </button>
       <div class="mobile-brand">KL Material</div>
-      <div class="nav-track" tabindex="0">
-        <a href="index.html" class="active">🏠 Home</a>
-        <a href="materials.html">📚 Materials</a>
-        <a href="roadmap.html">🗺️ Roadmap</a>
-        <a href="about.html">👨‍💻 About</a>
-        <a href="contact.html">📞 Contact</a>
+      <div id="mobile-nav" class="nav-track" role="menu" aria-hidden="true">
+        <a href="index.html" role="menuitem" tabindex="-1" class="active">🏠 Home</a>
+        <a href="materials.html" role="menuitem" tabindex="-1">📚 Materials</a>
+        <a href="roadmap.html" role="menuitem" tabindex="-1">🗺️ Roadmap</a>
+        <a href="about.html" role="menuitem" tabindex="-1">👨‍💻 About</a>
+        <a href="contact.html" role="menuitem" tabindex="-1">📞 Contact</a>
       </div>
     </nav>
   </header>
