@@ -52,8 +52,8 @@ function createSnowfall(container) {
     snowflake.className = 'snowflake';
     snowflake.textContent = snowflakes[Math.floor(Math.random() * snowflakes.length)];
     snowflake.style.left = Math.random() * 100 + '%';
-    // Faster winter animation: Mobile 8-12s, PC 3-5s
-    snowflake.style.animationDuration = isMobile ? (Math.random() * 4 + 8) + 's' : (Math.random() * 2 + 3) + 's';
+    // Slower winter animation: Mobile 15-25s, PC 8-12s
+    snowflake.style.animationDuration = isMobile ? (Math.random() * 10 + 15) + 's' : (Math.random() * 4 + 8) + 's';
     snowflake.style.animationDelay = Math.random() * 5 + 's';
     snowflake.style.fontSize = (Math.random() * 0.7 + 0.5) + 'em';
     container.appendChild(snowflake);
