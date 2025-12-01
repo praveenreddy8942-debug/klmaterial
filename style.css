@@ -5023,6 +5023,26 @@ main.materials-container {
     animation: fadeIn 0.3s ease;
   }
 
+  /* Ensure aria-hidden controls visibility and that links are always readable */
+  #mobile-nav[aria-hidden="true"] {
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  #mobile-nav[aria-hidden="false"] {
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  /* Defensive: force nav link text to be visible (override gradient/text-clip elsewhere)
+     and ensure emoji + label show up on all browsers */
+  .nav-track a,
+  .nav-track a * {
+    color: #b0e0ff !important;
+    -webkit-text-fill-color: unset !important;
+    text-shadow: none !important;
+  }
+
   /* Navigation Links: Large Touch Targets */
   nav a {
     display: flex;
