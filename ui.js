@@ -195,6 +195,39 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
+        // Ensure nav link text is visible across browsers (fallback for text-clip/gradient issues)
+        function ensureNavTextVisible() {
+            if (!nav) return;
+            const links = Array.from(nav.querySelectorAll('a'));
+            let anyHidden = false;
+
+            links.forEach(link => {
+                const cs = window.getComputedStyle(link);
+                const color = cs.color || '';
+                const webkitFill = cs.getPropertyValue('-webkit-text-fill-color') || '';
+
+                // If color is transparent or text-fill is transparent, force readable styles
+                const isTransparent = /^(rgba\(0,\s*0,\s*0,\s*0\)|transparent)$/.test(color.trim())
+                    || webkitFill.trim() === 'transparent' || webkitFill.trim() === '-webkit-text-fill-color';
+
+                if (isTransparent) anyHidden = true;
+
+                // Force inline styles that override problematic rules (safe defaults)
+                link.style.color = '#b0e0ff';
+                link.style.webkitTextFillColor = 'initial';
+                link.style.backgroundClip = 'initial';
+                link.style.webkitBackgroundClip = 'initial';
+                link.style.textShadow = 'none';
+            });
+
+            if (anyHidden) {
+                // Helpful debug message for the developer / QA
+                console.info('[ui.js] Forced mobile nav link colors because computed styles looked transparent.\n' +
+                    'If labels are still not visible, please tell me: which page (index/materials/etc.),\n' +
+                    'the device and browser (e.g. iPhone Safari, Chrome Android), and whether emojis show but text does not.');
+            }
+        }
+
     // run initially
     updateAriaCurrent();
     // update when history changes (back/forward)
@@ -268,6 +301,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         openMenu = function () {
             _origOpen();
+            // Make sure labels are visible across browsers (fallback)
+            try { ensureNavTextVisible(); } catch (e) { /* ignore */ }
             activateFocusTrap();
         };
 
