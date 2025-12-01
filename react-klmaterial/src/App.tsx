@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { AppProvider } from './context/AppContext';
 import Navigation from './components/Navigation';
 import Home from './pages/Home';
 import Materials from './pages/Materials';
@@ -11,22 +12,24 @@ import './App.css';
 
 function App() {
   return (
-    <Router basename="/klmaterial">
-      <div className="app">
-        <SeasonalAnimation />
-        <Navigation />
-        <main className="main-content">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/materials" element={<Materials />} />
-            <Route path="/roadmap" element={<Roadmap />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-          </Routes>
-        </main>
-        <BackToTop />
-      </div>
-    </Router>
+    <AppProvider>
+      <Router basename="/klmaterial">
+        <div className="app">
+          <SeasonalAnimation />
+          <Navigation />
+          <main className="main-content">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/materials" element={<Materials />} />
+              <Route path="/roadmap" element={<Roadmap />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+            </Routes>
+          </main>
+          <BackToTop />
+        </div>
+      </Router>
+    </AppProvider>
   );
 }
 

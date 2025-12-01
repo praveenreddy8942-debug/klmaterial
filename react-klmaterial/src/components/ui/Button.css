@@ -1,0 +1,210 @@
+/* ===== Button Component ===== */
+
+.ui-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: inherit;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.ui-button:focus-visible {
+  outline: 3px solid rgba(0, 212, 255, 0.5);
+  outline-offset: 2px;
+}
+
+/* Sizes */
+.ui-button--sm {
+  padding: 8px 16px;
+  font-size: 0.875rem;
+  border-radius: 8px;
+}
+
+.ui-button--md {
+  padding: 12px 24px;
+  font-size: 1rem;
+}
+
+.ui-button--lg {
+  padding: 16px 32px;
+  font-size: 1.125rem;
+  border-radius: 14px;
+}
+
+/* Variants */
+.ui-button--primary {
+  background: linear-gradient(135deg, #00d4ff 0%, #7a5fff 100%);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+}
+
+.ui-button--primary:hover:not(.ui-button--disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 212, 255, 0.4);
+}
+
+.ui-button--primary:active:not(.ui-button--disabled) {
+  transform: translateY(0);
+}
+
+.ui-button--secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.ui-button--secondary:hover:not(.ui-button--disabled) {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.ui-button--outline {
+  background: transparent;
+  color: #00d4ff;
+  border-color: #00d4ff;
+}
+
+.ui-button--outline:hover:not(.ui-button--disabled) {
+  background: rgba(0, 212, 255, 0.1);
+  border-color: #7a5fff;
+  color: #7a5fff;
+  transform: translateY(-2px);
+}
+
+.ui-button--ghost {
+  background: transparent;
+  color: #00d4ff;
+  border-color: transparent;
+}
+
+.ui-button--ghost:hover:not(.ui-button--disabled) {
+  background: rgba(0, 212, 255, 0.1);
+}
+
+.ui-button--danger {
+  background: linear-gradient(135deg, #ff3b3b 0%, #ff6b6b 100%);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 4px 15px rgba(255, 59, 59, 0.3);
+}
+
+.ui-button--danger:hover:not(.ui-button--disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 59, 59, 0.4);
+}
+
+/* States */
+.ui-button--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.ui-button--loading {
+  cursor: wait;
+  pointer-events: none;
+}
+
+.ui-button--full-width {
+  width: 100%;
+}
+
+/* Icon */
+.ui-button__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ui-button__icon--left {
+  margin-left: -4px;
+}
+
+.ui-button__icon--right {
+  margin-right: -4px;
+}
+
+/* Spinner */
+.ui-button__spinner {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ui-button__spinner-icon {
+  width: 20px;
+  height: 20px;
+  animation: spin 0.8s linear infinite;
+}
+
+.ui-button__spinner-circle {
+  stroke: currentColor;
+  stroke-dasharray: 60;
+  stroke-dashoffset: 0;
+  stroke-linecap: round;
+  animation: spinner-dash 1.5s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spinner-dash {
+  0% {
+    stroke-dashoffset: 60;
+  }
+  50% {
+    stroke-dashoffset: 15;
+  }
+  100% {
+    stroke-dashoffset: 60;
+  }
+}
+
+.ui-button--loading .ui-button__content,
+.ui-button--loading .ui-button__icon {
+  opacity: 0;
+}
+
+/* Ripple Effect */
+.ui-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.ui-button:active:not(.ui-button--disabled)::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* Content */
+.ui-button__content {
+  position: relative;
+  z-index: 1;
+}

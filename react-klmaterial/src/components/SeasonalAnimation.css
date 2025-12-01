@@ -14,68 +14,210 @@
 /* ===== WINTER - SNOWFALL ===== */
 .snowflake {
   position: absolute;
-  top: -10px;
+  top: -20px;
   color: #fff;
   font-size: 1em;
-  text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
-  animation: fall linear infinite, sway ease-in-out infinite;
-  will-change: transform;
+  animation: 
+    fall linear infinite,
+    sway ease-in-out infinite,
+    rotate linear infinite;
+  will-change: transform, opacity;
+  user-select: none;
+  pointer-events: none;
 }
 
+/* Layer-specific styles for depth */
+.snowflake-far {
+  opacity: 0.4;
+  filter: blur(2px);
+}
+
+.snowflake-mid {
+  opacity: 0.6;
+  filter: blur(1px);
+}
+
+.snowflake-near {
+  opacity: 0.85;
+  z-index: 2;
+}
+
+/* Multiple drift patterns for natural movement */
 .snowflake[data-drift="0"] {
-  animation: fall linear infinite, swayLeft ease-in-out infinite;
+  animation-name: fall, swayGentle, rotateSlow;
 }
 
 .snowflake[data-drift="1"] {
-  animation: fall linear infinite, swayRight ease-in-out infinite;
+  animation-name: fall, swayLeft, rotateFast;
 }
 
 .snowflake[data-drift="2"] {
-  animation: fall linear infinite, swayBoth ease-in-out infinite;
+  animation-name: fall, swayRight, rotateReverse;
 }
 
+.snowflake[data-drift="3"] {
+  animation-name: fall, swayWide, rotateSlow;
+}
+
+.snowflake[data-drift="4"] {
+  animation-name: fall, swayErratic, rotateFast;
+}
+
+/* Falling animation with wind curve */
 @keyframes fall {
   0% {
-    transform: translateY(0) rotate(0deg);
+    transform: translateY(-20px) translateZ(0);
   }
   100% {
-    transform: translateY(100vh) rotate(180deg);
+    transform: translateY(calc(100vh + 20px)) translateZ(0);
   }
 }
 
+/* Gentle sway */
+@keyframes swayGentle {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(15px);
+  }
+}
+
+/* Sway left pattern */
 @keyframes swayLeft {
   0%, 100% {
     transform: translateX(0);
   }
   25% {
-    transform: translateX(-25px);
+    transform: translateX(-30px);
+  }
+  50% {
+    transform: translateX(-40px);
   }
   75% {
-    transform: translateX(-15px);
+    transform: translateX(-20px);
   }
 }
 
+/* Sway right pattern */
 @keyframes swayRight {
   0%, 100% {
     transform: translateX(0);
   }
   25% {
-    transform: translateX(15px);
+    transform: translateX(20px);
+  }
+  50% {
+    transform: translateX(40px);
   }
   75% {
-    transform: translateX(25px);
+    transform: translateX(30px);
   }
 }
 
-@keyframes swayBoth {
+/* Wide sway for wind gusts */
+@keyframes swayWide {
   0%, 100% {
     transform: translateX(0);
   }
-  33% {
+  20% {
+    transform: translateX(-50px);
+  }
+  40% {
+    transform: translateX(30px);
+  }
+  60% {
     transform: translateX(-20px);
   }
-  66% {
+  80% {
+    transform: translateX(40px);
+  }
+}
+
+/* Erratic movement for turbulence */
+@keyframes swayErratic {
+  0% {
+    transform: translateX(0);
+  }
+  15% {
+    transform: translateX(-25px);
+  }
+  30% {
+    transform: translateX(35px);
+  }
+  45% {
+    transform: translateX(-15px);
+  }
+  60% {
+    transform: translateX(45px);
+  }
+  75% {
+    transform: translateX(-30px);
+  }
+  90% {
     transform: translateX(20px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Rotation animations for tumbling effect */
+@keyframes rotateSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotateFast {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(720deg);
+  }
+}
+
+@keyframes rotateReverse {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+/* Ambient snow particles for depth */
+.snow-particle {
+  position: absolute;
+  top: -5px;
+  width: 2px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  animation: fallParticle linear infinite;
+  box-shadow: 
+    0 0 3px rgba(255, 255, 255, 0.8),
+    0 0 6px rgba(200, 230, 255, 0.4);
+}
+
+@keyframes fallParticle {
+  0% {
+    transform: translateY(-10px) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(100vh) translateX(30px);
+    opacity: 0;
   }
 }
 

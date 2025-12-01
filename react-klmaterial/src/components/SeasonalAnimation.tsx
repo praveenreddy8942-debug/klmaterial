@@ -39,31 +39,82 @@ const SeasonalAnimation = () => {
   }, [season]);
 
   const createSnowfall = (container: HTMLElement, isMobile: boolean) => {
-    const snowflakes = ['❄', '❅', '❆'];
-    const count = 60;
+    const snowflakes = ['❄', '❅', '❆', '•', '∘'];
+    const count = isMobile ? 50 : 100; // More snowflakes for realism
     
-    for (let i = 0; i < count; i++) {
-      const snowflake = document.createElement('div');
-      snowflake.className = 'snowflake';
-      snowflake.textContent = snowflakes[Math.floor(Math.random() * snowflakes.length)];
-      
-      snowflake.style.left = Math.random() * 100 + '%';
-      
-      const speed = Math.random();
-      const duration = isMobile 
-        ? (speed < 0.3 ? Math.random() * 5 + 20 : speed < 0.7 ? Math.random() * 8 + 12 : Math.random() * 5 + 8) 
-        : (speed < 0.3 ? Math.random() * 3 + 12 : speed < 0.7 ? Math.random() * 4 + 7 : Math.random() * 3 + 4);
-      
-      snowflake.style.animationDuration = duration + 's, ' + (Math.random() * 2 + 2) + 's';
-      snowflake.style.animationDelay = Math.random() * 8 + 's, ' + Math.random() * 2 + 's';
-      
-      const size = Math.random();
-      snowflake.style.fontSize = (size * 1.2 + 0.3) + 'em';
-      snowflake.style.opacity = (size * 0.6 + 0.4).toString();
-      
-      snowflake.setAttribute('data-drift', Math.floor(Math.random() * 3).toString());
-      
-      container.appendChild(snowflake);
+    // Create depth layers for 3D effect
+    const layers = [
+      { depth: 'far', count: Math.floor(count * 0.3), speed: [25, 35], size: [0.3, 0.6], opacity: [0.3, 0.5], blur: 2 },
+      { depth: 'mid', count: Math.floor(count * 0.4), speed: [15, 25], size: [0.6, 1.0], opacity: [0.5, 0.7], blur: 1 },
+      { depth: 'near', count: Math.floor(count * 0.3), speed: [8, 15], size: [1.0, 1.8], opacity: [0.7, 0.9], blur: 0 }
+    ];
+    
+    layers.forEach((layer) => {
+      for (let i = 0; i < layer.count; i++) {
+        const snowflake = document.createElement('div');
+        snowflake.className = `snowflake snowflake-${layer.depth}`;
+        snowflake.textContent = snowflakes[Math.floor(Math.random() * snowflakes.length)];
+        
+        // Random horizontal position
+        snowflake.style.left = Math.random() * 100 + '%';
+        
+        // Varied fall duration based on layer depth
+        const duration = Math.random() * (layer.speed[1] - layer.speed[0]) + layer.speed[0];
+        
+        // Wind sway duration (slower than fall)
+        const swayDuration = Math.random() * 2 + 3;
+        
+        // Rotation duration for tumbling effect
+        const rotateDuration = Math.random() * 3 + 2;
+        
+        snowflake.style.animationDuration = `${duration}s, ${swayDuration}s, ${rotateDuration}s`;
+        
+        // Stagger start times for natural distribution
+        const fallDelay = Math.random() * duration;
+        const swayDelay = Math.random() * 2;
+        const rotateDelay = Math.random() * 2;
+        
+        snowflake.style.animationDelay = `${fallDelay}s, ${swayDelay}s, ${rotateDelay}s`;
+        
+        // Size based on layer depth
+        const size = Math.random() * (layer.size[1] - layer.size[0]) + layer.size[0];
+        snowflake.style.fontSize = size + 'em';
+        
+        // Opacity based on layer depth
+        const opacity = Math.random() * (layer.opacity[1] - layer.opacity[0]) + layer.opacity[0];
+        snowflake.style.opacity = opacity.toString();
+        
+        // Add blur for depth perception
+        if (layer.blur > 0) {
+          snowflake.style.filter = `blur(${layer.blur}px)`;
+        }
+        
+        // Different drift patterns for varied movement
+        const driftPattern = Math.floor(Math.random() * 5);
+        snowflake.setAttribute('data-drift', driftPattern.toString());
+        
+        // Add shadow for depth
+        const shadowIntensity = opacity * 0.8;
+        snowflake.style.textShadow = `
+          0 0 ${size * 3}px rgba(255, 255, 255, ${shadowIntensity}),
+          0 0 ${size * 6}px rgba(200, 230, 255, ${shadowIntensity * 0.5})
+        `;
+        
+        container.appendChild(snowflake);
+      }
+    });
+    
+    // Add ambient snow particles in background
+    if (!isMobile) {
+      for (let i = 0; i < 30; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'snow-particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDuration = (Math.random() * 20 + 30) + 's';
+        particle.style.animationDelay = Math.random() * 10 + 's';
+        particle.style.opacity = (Math.random() * 0.2 + 0.1).toString();
+        container.appendChild(particle);
+      }
     }
   };
 
