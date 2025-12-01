@@ -444,6 +444,8 @@ footer {
   gap: 20px;
 }
 
+/* ===== Desktop Navigation Styles ===== */
+@media (min-width: 769px) {
 nav {
   display: flex;
   align-items: center;
@@ -537,6 +539,7 @@ nav a::after {
   pointer-events: none;
   box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
 }
+} /* End desktop navigation media query */
 
 .materials-container {
   max-width: 900px;
@@ -1410,6 +1413,8 @@ nav a::after {
 }
 
 /* ===== Premium Floating Navbar ===== */
+/* ===== Desktop Navigation Styles ===== */
+@media (min-width: 769px) {
 header {
   position: fixed;
   top: 10px;
@@ -1437,7 +1442,10 @@ header:hover {
     0 0 0 1px rgba(255, 255, 255, 0.1) inset;
   transform: translateX(-50%) translateY(-2px);
 }
+}
 
+/* ===== Desktop Navigation Styles (Additional) ===== */
+@media (min-width: 769px) {
 nav {
   display: flex;
   align-items: center;
@@ -1513,6 +1521,7 @@ nav a::after {
   pointer-events: none;
   box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
 }
+} /* End desktop navigation media query */
 
 .materials-container {
   max-width: 900px;
@@ -4921,9 +4930,11 @@ main.materials-container {
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
     z-index: 2000; /* Topmost layer */
     border-radius: 0;
+    box-sizing: border-box; /* Prevent padding from expanding width */
   }
 
-  nav.nav-advanced {
+  nav.nav-advanced,
+  nav.nav-liquid {
     width: 100%;
     height: 100%;
     display: flex;
@@ -5216,15 +5227,36 @@ main.materials-container {
   mix-blend-mode: overlay;
 }
 
-/* Responsive adjustments: make it slightly taller on mobile */
+/* MOBILE: Reset liquid glass styles to prevent conflicts with mobile nav */
 @media (max-width: 768px) {
   .nav-liquid {
-    padding: 12px 14px;
+    /* Reset all liquid glass desktop styles */
+    padding: 0;
     border-radius: 0;
     width: 100%;
+    background: none;
+    border: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+    gap: 0;
+    /* Let mobile header styles take over */
+  }
+
+  .nav-liquid::after {
+    display: none; /* Remove glossy overlay on mobile */
   }
 
   .nav-liquid ul {
-    gap: 6px;
+    display: none; /* Desktop nav list hidden on mobile */
+  }
+  
+  .nav-liquid .nav-left,
+  .nav-liquid .nav-right {
+    display: none; /* Desktop nav sections hidden */
+  }
+  
+  .nav-liquid .brand {
+    display: none; /* Desktop brand hidden (mobile-brand takes over) */
   }
 }
