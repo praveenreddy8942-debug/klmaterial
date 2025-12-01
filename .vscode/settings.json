@@ -1,0 +1,10 @@
+{
+  // Workspace settings to make GitHub Copilot provide inline suggestions consistently
+  "github.copilot.enable": true,
+  "github.copilot.inlineSuggest.enable": true,
+  "editor.inlineSuggest.enabled": true,
+  "editor.acceptSuggestionOnEnter": "on",
+  "editor.suggestSelection": "first",
+  // Optional: reduce noise from other suggestion sources
+  "editor.quickSuggestionsDelay": 50
+}
