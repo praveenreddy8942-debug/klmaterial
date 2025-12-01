@@ -195,8 +195,10 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // run initially
-        updateAriaCurrent();
+    // run initially
+    updateAriaCurrent();
+    // update when history changes (back/forward)
+    window.addEventListener('popstate', updateAriaCurrent);
 
         // Keyboard controls: Escape to close. We'll add a robust focus trap on open.
         let _previouslyFocused = null;
@@ -205,10 +207,18 @@ document.addEventListener('DOMContentLoaded', () => {
         function activateFocusTrap() {
             _previouslyFocused = document.activeElement;
             const focusableSelector = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex]:not([tabindex="-1"])';
-            const container = nav || document.body;
 
+            // Return visible elements inside the nav plus the hamburger button so Tab stays within the control set
             function getFocusable() {
-                return Array.from(container.querySelectorAll(focusableSelector)).filter(el => el.offsetParent !== null);
+                const candidates = Array.from(document.querySelectorAll(focusableSelector));
+                return candidates.filter(el => {
+                    // visible check: element has layout or client rects
+                    const visible = (el.offsetWidth > 0 || el.offsetHeight > 0) || el.getClientRects().length > 0;
+                    // include if inside nav OR the hamburger itself
+                    const insideNav = nav && nav.contains(el);
+                    const isHamburger = el === hamburger;
+                    return visible && (insideNav || isHamburger);
+                });
             }
 
             _trapListener = function (e) {
@@ -223,12 +233,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (focusable.length === 0) return;
                     const first = focusable[0];
                     const last = focusable[focusable.length - 1];
+
+                    // When Shift+Tab on first, go to last
                     if (e.shiftKey) {
-                        if (document.activeElement === first || document.activeElement === hamburger) {
+                        if (document.activeElement === first) {
                             e.preventDefault();
                             last.focus();
                         }
                     } else {
+                        // When Tab on last, cycle to first
                         if (document.activeElement === last) {
                             e.preventDefault();
                             first.focus();
@@ -261,6 +274,8 @@ document.addEventListener('DOMContentLoaded', () => {
         closeMenu = function () {
             _origClose();
             deactivateFocusTrap();
+            // keep aria-current in sync after closing
+            try { updateAriaCurrent(); } catch (e) { /* ignore */ }
         };
     }
 });
