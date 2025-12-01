@@ -3,10 +3,52 @@
 // Mobile nav chevron scroll
 (function () {
     const track = document.querySelector('header nav .nav-track');
-    const next = document.querySelector('header nav .nav-next'); // Note: This element might not exist in all HTMLs yet, but logic is safe
-    if (track && next) {
-        next.addEventListener('click', () => {
-            track.scrollBy({ left: 160, behavior: 'smooth' });
+    const prevBtn = document.querySelector('header nav .nav-btn.prev');
+    const nextBtn = document.querySelector('header nav .nav-btn.next');
+
+    function updateArrowState() {
+        if (!track || !prevBtn || !nextBtn) return;
+        const maxScroll = track.scrollWidth - track.clientWidth;
+        prevBtn.disabled = track.scrollLeft <= 2;
+        nextBtn.disabled = track.scrollLeft >= maxScroll - 2;
+    }
+
+    function scrollAmount(dir) {
+        // Scroll by width of ~2 pills or 60% of viewport
+        const pill = track.querySelector('a');
+        const base = pill ? (pill.offsetWidth + 12) * 2 : track.clientWidth * 0.6;
+        track.scrollBy({ left: dir * base, behavior: 'smooth' });
+    }
+
+    if (track && prevBtn && nextBtn) {
+        prevBtn.addEventListener('click', () => scrollAmount(-1));
+        nextBtn.addEventListener('click', () => scrollAmount(1));
+        track.addEventListener('scroll', updateArrowState, { passive: true });
+        window.addEventListener('resize', updateArrowState);
+        setTimeout(updateArrowState, 150);
+    }
+
+    // Center active link on load for better visibility
+    function centerActive() {
+        if (!track) return;
+        const active = track.querySelector('a.active');
+        if (!active) return;
+        const offset = active.offsetLeft - (track.clientWidth - active.offsetWidth) / 2;
+        track.scrollTo({ left: Math.max(offset, 0), behavior: 'instant' });
+        updateArrowState();
+    }
+    setTimeout(centerActive, 200);
+
+    // Keyboard navigation (arrow keys) when track focused
+    if (track) {
+        track.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') {
+                e.preventDefault();
+                scrollAmount(1);
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                scrollAmount(-1);
+            }
         });
     }
 
@@ -26,23 +68,17 @@
                 return;
             }
 
-            // Calculate relative position within the track
-            const trackRect = track.getBoundingClientRect();
-            const elemRect = element.getBoundingClientRect();
+            // Use offsetLeft which is relative to the scrollable parent (track)
+            const left = element.offsetLeft;
+            const width = element.offsetWidth;
 
-            // Account for track scroll position if any
-            const left = elemRect.left - trackRect.left + track.scrollLeft;
-
-            marker.style.width = `${elemRect.width}px`;
+            marker.style.width = `${width}px`;
             marker.style.transform = `translateX(${left}px)`;
             marker.style.opacity = '1';
         }
 
-        // Initialize position
-        if (activeLink) {
-            // Small delay to ensure layout is settled
-            setTimeout(() => moveMarker(activeLink), 100);
-        }
+        // Initialize position (after potential centering)
+        if (activeLink) setTimeout(() => moveMarker(activeLink), 250);
 
         // Event listeners
         links.forEach(link => {

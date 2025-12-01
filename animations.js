@@ -52,8 +52,8 @@ function createSnowfall(container) {
     snowflake.className = 'snowflake';
     snowflake.textContent = snowflakes[Math.floor(Math.random() * snowflakes.length)];
     snowflake.style.left = Math.random() * 100 + '%';
-    // Much slower on mobile: 15-25s, PC: 5-8s
-    snowflake.style.animationDuration = isMobile ? (Math.random() * 10 + 15) + 's' : (Math.random() * 3 + 5) + 's';
+    // Faster winter animation: Mobile 8-12s, PC 3-5s
+    snowflake.style.animationDuration = isMobile ? (Math.random() * 4 + 8) + 's' : (Math.random() * 2 + 3) + 's';
     snowflake.style.animationDelay = Math.random() * 5 + 's';
     snowflake.style.fontSize = (Math.random() * 0.7 + 0.5) + 'em';
     container.appendChild(snowflake);
@@ -72,8 +72,8 @@ function createPetals(container) {
     petal.className = 'petal';
     petal.textContent = petals[Math.floor(Math.random() * petals.length)];
     petal.style.left = Math.random() * 100 + '%';
-    // Much slower on mobile: 18-30s, PC: 6-10s
-    petal.style.animationDuration = isMobile ? (Math.random() * 12 + 18) + 's' : (Math.random() * 4 + 6) + 's';
+    // Faster spring animation: Mobile 10-15s, PC 4-7s
+    petal.style.animationDuration = isMobile ? (Math.random() * 5 + 10) + 's' : (Math.random() * 3 + 4) + 's';
     petal.style.animationDelay = Math.random() * 5 + 's';
     petal.style.fontSize = (Math.random() * 0.8 + 0.8) + 'em';
     container.appendChild(petal);
@@ -91,8 +91,8 @@ function createFireflies(container) {
     firefly.className = 'firefly';
     firefly.style.left = Math.random() * 100 + '%';
     firefly.style.top = (Math.random() * 80 + 10) + '%';
-    // Slower on mobile: 6-10s, PC: 2-4s
-    firefly.style.animationDuration = isMobile ? (Math.random() * 4 + 6) + 's' : (Math.random() * 2 + 2) + 's';
+    // Faster summer animation: Mobile 4-7s, PC 1.5-3s
+    firefly.style.animationDuration = isMobile ? (Math.random() * 3 + 4) + 's' : (Math.random() * 1.5 + 1.5) + 's';
     firefly.style.animationDelay = Math.random() * 3 + 's';
     container.appendChild(firefly);
   }
@@ -110,8 +110,8 @@ function createLeaves(container) {
     leaf.className = 'leaf';
     leaf.textContent = leaves[Math.floor(Math.random() * leaves.length)];
     leaf.style.left = Math.random() * 100 + '%';
-    // Much slower on mobile: 15-25s, PC: 5-9s
-    leaf.style.animationDuration = isMobile ? (Math.random() * 10 + 15) + 's' : (Math.random() * 4 + 5) + 's';
+    // Faster autumn animation: Mobile 8-14s, PC 3-6s
+    leaf.style.animationDuration = isMobile ? (Math.random() * 6 + 8) + 's' : (Math.random() * 3 + 3) + 's';
     leaf.style.animationDelay = Math.random() * 5 + 's';
     leaf.style.fontSize = (Math.random() * 0.9 + 0.8) + 'em';
     container.appendChild(leaf);
