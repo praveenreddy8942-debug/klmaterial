@@ -244,12 +244,16 @@ async function loadMaterials() {
           headers['Authorization'] = `token ${GITHUB_TOKEN}`;
         }
         
+        console.log(`Fetching ${config.folder}...`);
         const response = await fetch(getGitHubAPIUrl(config.folder), { headers });
         
         if (!response.ok) {
+          console.error(`API Error for ${config.folder}: ${response.status} ${response.statusText}`);
+          
           // Check for rate limiting
           if (response.status === 403) {
             const errorData = await response.json();
+            console.error('403 Error details:', errorData);
             if (errorData.message && errorData.message.includes('rate limit')) {
               materialsList.innerHTML = `
                 <div class="no-results">
@@ -268,6 +272,7 @@ async function loadMaterials() {
         }
 
         const files = await response.json();
+        console.log(`Found ${files.length} items in ${config.folder}`);
         
         // Filter only files (not directories)
         const materialFiles = files.filter(file => file.type === 'file');
@@ -285,8 +290,11 @@ async function loadMaterials() {
     }
 
     allMaterials = grouped;
+    console.log('Total materials grouped:', Object.keys(grouped).length, 'subjects');
+    console.log('Materials by subject:', Object.entries(grouped).map(([k, v]) => `${k}: ${v.length} files`));
 
     if (Object.keys(grouped).length === 0) {
+      console.warn('No materials found!');
       materialsList.innerHTML = `
         <div class="no-results">
           <h3>📭 No Materials Found</h3>
@@ -297,6 +305,7 @@ async function loadMaterials() {
         </div>
       `;
     } else {
+      console.log('Displaying materials...');
       displayMaterials(grouped);
     }
   } catch (error) {
@@ -306,6 +315,7 @@ async function loadMaterials() {
         <h3>⚠️ Error Loading Materials</h3>
         <p>Could not load files from GitHub.</p>
         <p style="margin-top: 10px; font-size: 0.9rem;">Error: ${error.message}</p>
+        <p style="margin-top: 10px; font-size: 0.85rem; opacity: 0.7;">Check browser console for details.</p>
       </div>
     `;
   }
