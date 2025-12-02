@@ -75,8 +75,8 @@ export const usePWA = () => {
 export const registerServiceWorker = async () => {
   if ('serviceWorker' in navigator) {
     try {
-      const registration = await navigator.serviceWorker.register('/klmaterial/sw.js', {
-        scope: '/klmaterial/',
+      const registration = await navigator.serviceWorker.register('./sw.js', {
+        scope: './',
       });
 
       console.log('Service Worker registered:', registration);

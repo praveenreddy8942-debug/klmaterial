@@ -29,7 +29,7 @@ const SEO: React.FC<SEOProps> = ({
     'Career Roadmap',
     'Study Hub'
   ],
-  image = '/klmaterial/og-image.png',
+  image = './og-image.png',
   url = 'https://praveenreddy8942-debug.github.io/klmaterial/',
   type = 'website',
   author = 'Praveen Reddy',
@@ -160,7 +160,7 @@ const SEO: React.FC<SEOProps> = ({
       <link rel="dns-prefetch" href="https://www.google-analytics.com" />
       
       {/* Manifest */}
-      <link rel="manifest" href="/klmaterial/manifest.json" />
+      <link rel="manifest" href="./manifest.json" />
     </Helmet>
   );
 };
