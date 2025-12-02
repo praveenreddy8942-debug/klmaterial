@@ -1,0 +1,405 @@
+/**
+ * materials-page.css
+ * Styles for the Materials page that displays study materials
+ */
+
+/* Base Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  background: linear-gradient(135deg, #001d3d 0%, #003566 50%, #000814 100%);
+  min-height: 100vh;
+  color: #fff;
+  line-height: 1.6;
+}
+
+/* Navigation */
+.materials-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: rgba(0, 29, 61, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #00d4ff;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.nav-brand:hover {
+  transform: scale(1.05);
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links a {
+  color: #b0e0ff;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: #00d4ff;
+  background: rgba(0, 212, 255, 0.1);
+}
+
+/* Main Container */
+.materials-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Header */
+.materials-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 2rem;
+}
+
+.materials-header h1 {
+  font-size: 2.5rem;
+  color: #00d4ff;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.materials-header p {
+  color: #b0e0ff;
+  font-size: 1.1rem;
+}
+
+/* Subject Filter */
+.subject-filter {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
+  padding: 1rem;
+  background: rgba(0, 53, 102, 0.3);
+  border-radius: 12px;
+  border: 1px solid rgba(0, 212, 255, 0.1);
+}
+
+.filter-btn {
+  padding: 0.75rem 1.5rem;
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  border-radius: 8px;
+  background: rgba(0, 29, 61, 0.6);
+  color: #b0e0ff;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.filter-btn:hover {
+  background: rgba(0, 212, 255, 0.15);
+  border-color: #00d4ff;
+  color: #00d4ff;
+  transform: translateY(-2px);
+}
+
+.filter-btn.active {
+  background: linear-gradient(135deg, #00d4ff, #0099cc);
+  border-color: transparent;
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+}
+
+/* Materials Grid */
+.materials-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+/* Subject Section */
+.subject-section {
+  background: rgba(0, 53, 102, 0.2);
+  border-radius: 16px;
+  padding: 1.5rem;
+  border: 1px solid rgba(0, 212, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.subject-section.hidden {
+  display: none;
+}
+
+.subject-title {
+  font-size: 1.4rem;
+  color: #00d4ff;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid rgba(0, 212, 255, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.subject-title i {
+  font-size: 1.2rem;
+}
+
+/* Materials List */
+.materials-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1rem;
+}
+
+/* Material Card */
+.material-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: rgba(0, 29, 61, 0.6);
+  border: 1px solid rgba(0, 212, 255, 0.15);
+  border-radius: 12px;
+  text-decoration: none;
+  color: #fff;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.material-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), transparent);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.material-card:hover {
+  border-color: #00d4ff;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 212, 255, 0.2);
+}
+
+.material-card:hover::before {
+  opacity: 1;
+}
+
+.material-icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 212, 255, 0.15);
+  border-radius: 10px;
+  font-size: 1.5rem;
+  color: #00d4ff;
+  position: relative;
+  z-index: 1;
+}
+
+.material-card:hover .material-icon {
+  background: rgba(0, 212, 255, 0.25);
+}
+
+.material-info {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.material-info h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 0.25rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.material-info p {
+  font-size: 0.85rem;
+  color: #b0e0ff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.material-type {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.2rem 0.6rem;
+  background: rgba(0, 212, 255, 0.2);
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #00d4ff;
+  text-transform: uppercase;
+}
+
+.download-icon {
+  flex-shrink: 0;
+  font-size: 1.2rem;
+  color: #b0e0ff;
+  opacity: 0.5;
+  transition: all 0.2s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.material-card:hover .download-icon {
+  color: #00d4ff;
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+/* Word document icon color */
+.fa-file-word {
+  color: #2b579a !important;
+}
+
+/* Footer */
+.materials-footer {
+  text-align: center;
+  padding: 2rem;
+  margin-top: 3rem;
+  border-top: 1px solid rgba(0, 212, 255, 0.1);
+  color: #b0e0ff;
+  font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .materials-nav {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .nav-links {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .materials-container {
+    padding: 1rem;
+  }
+
+  .materials-header h1 {
+    font-size: 1.75rem;
+  }
+
+  .subject-filter {
+    padding: 0.75rem;
+  }
+
+  .filter-btn {
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .materials-list {
+    grid-template-columns: 1fr;
+  }
+
+  .material-card {
+    padding: 1rem;
+  }
+
+  .material-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.25rem;
+  }
+
+  .material-info h3 {
+    font-size: 0.9rem;
+  }
+
+  .material-info p {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .filter-btn {
+    flex: 1 1 calc(50% - 0.5rem);
+    justify-content: center;
+    text-align: center;
+  }
+
+  .filter-btn i {
+    display: none;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.subject-section {
+  animation: fadeIn 0.4s ease forwards;
+}
+
+.subject-section:nth-child(2) { animation-delay: 0.1s; }
+.subject-section:nth-child(3) { animation-delay: 0.2s; }
+.subject-section:nth-child(4) { animation-delay: 0.3s; }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .material-card,
+  .filter-btn,
+  .nav-brand,
+  .subject-section {
+    transition: none;
+    animation: none;
+  }
+}

@@ -1,0 +1,51 @@
+/**
+ * site-base.css
+ * Minimal baseline rules to prevent black/blank screen issues on GitHub Pages.
+ * Includes conservative large-screen overrides for debugging.
+ */
+
+/* Baseline visibility rules */
+html, body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background: #001d3d; /* Fallback dark background matching theme */
+}
+
+/* Ensure #root is always visible */
+#root {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  min-height: 100vh;
+}
+
+/* Large-screen overrides for debugging */
+@media (min-width: 1200px) {
+  /* Force root visible on large screens where issues have been reported */
+  #root {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
+    z-index: 1 !important;
+  }
+  
+  /* Hide common overlay/backdrop elements that might block content */
+  .modal-backdrop,
+  .overlay,
+  .loading-overlay,
+  .backdrop {
+    display: none !important;
+    visibility: hidden !important;
+  }
+}
+
+/* Prevent content from being hidden by potential animations */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

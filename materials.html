@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./icon.svg" />
+    <link rel="apple-touch-icon" href="./icon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#00d4ff" />
+    <meta name="msapplication-TileColor" content="#00d4ff" />
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="./manifest.json" />
+    
+    <!-- Cache Control -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    
+    <meta name="description" content="KL Material - Study Materials for CSE students - BEEC, DM, PSC, DSD" />
+    <meta name="keywords" content="KL University, CSE, Study Materials, BEEC, DM, PSC, DSD, Notes, PDF" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="KL Material - Study Materials" />
+    <meta property="og:description" content="Access comprehensive CSE study materials - BEEC, DM, PSC, DSD" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="KL Material - Study Materials" />
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+    <!-- Site base CSS -->
+    <link rel="stylesheet" href="./assets/site-base.css" />
+    
+    <!-- Materials page styles -->
+    <link rel="stylesheet" href="./assets/materials-page.css" />
+    
+    <!-- AI Lighting effect styles -->
+    <link rel="stylesheet" href="./assets/ai-lighting.css" />
+    
+    <!-- AIME Widget styles -->
+    <link rel="stylesheet" href="./assets/aime-widget.css" />
+    
+    <title>Study Materials - KL Material</title>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="materials-nav">
+      <a href="./index.html" class="nav-brand">
+        <i class="fas fa-graduation-cap"></i>
+        KL Material
+      </a>
+      <div class="nav-links">
+        <a href="./index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="./materials.html" class="active"><i class="fas fa-book"></i> Materials</a>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="materials-container">
+      <header class="materials-header">
+        <h1><i class="fas fa-book-open"></i> Study Materials</h1>
+        <p>Access comprehensive study materials for your CSE courses</p>
+      </header>
+
+      <!-- Subject Filter -->
+      <div class="subject-filter">
+        <button class="filter-btn active" data-subject="all">
+          <i class="fas fa-th-large"></i> All Subjects
+        </button>
+        <button class="filter-btn" data-subject="BEEC">
+          <i class="fas fa-bolt"></i> BEEC
+        </button>
+        <button class="filter-btn" data-subject="DM">
+          <i class="fas fa-calculator"></i> DM
+        </button>
+        <button class="filter-btn" data-subject="DSD">
+          <i class="fas fa-microchip"></i> DSD
+        </button>
+        <button class="filter-btn" data-subject="PSC">
+          <i class="fas fa-code"></i> PSC
+        </button>
+      </div>
+
+      <!-- Materials Grid -->
+      <div class="materials-grid" id="materials-grid">
+        <!-- BEEC Section -->
+        <section class="subject-section" data-subject="BEEC">
+          <h2 class="subject-title">
+            <i class="fas fa-bolt"></i>
+            Basic Electrical & Electronics Circuits (BEEC)
+          </h2>
+          <div class="materials-list">
+            <a href="./materials/BEEC/BEEC Updated CO1 & CO2 Notes_unlocked.pdf" class="material-card" target="_blank">
+              <div class="material-icon"><i class="fas fa-file-pdf"></i></div>
+              <div class="material-info">
+                <h3>CO1 & CO2 Notes</h3>
+                <p>Updated comprehensive notes for Course Outcomes 1 & 2</p>
+                <span class="material-type">PDF</span>
+              </div>
+              <i class="fas fa-download download-icon"></i>
+            </a>
+            <a href="./materials/BEEC/BEEC Updated CO3 & CO4 Notes_unlocked.pdf" class="material-card" target="_blank">
+              <div class="material-icon"><i class="fas fa-file-pdf"></i></div>
+              <div class="material-info">
+                <h3>CO3 & CO4 Notes</h3>
+                <p>Updated comprehensive notes for Course Outcomes 3 & 4</p>
+                <span class="material-type">PDF</span>
+              </div>
+              <i class="fas fa-download download-icon"></i>
+            </a>
+          </div>
+        </section>
+
+        <!-- DM Section -->
+        <section class="subject-section" data-subject="DM">
+          <h2 class="subject-title">
+            <i class="fas fa-calculator"></i>
+            Discrete Mathematics (DM)
+          </h2>
+          <div class="materials-list">
+            <a href="./materials/DM/DM CO-1 Material_efecb4d79b6e84268fcdc4dc92ae43f9.pdf" class="material-card" target="_blank">
+              <div class="material-icon"><i class="fas fa-file-pdf"></i></div>
+              <div class="material-info">
+                <h3>CO-1 Material</h3>
+                <p>Course Outcome 1 study material</p>
+                <span class="material-type">PDF</span>
+              </div>
+              <i class="fas fa-download download-icon"></i>
+            </a>
+            <a href="./materials/DM/DM CO-2 Material_df4a0e9c5868f21e1ff8422bc06a9e58.pdf" class="material-card" target="_blank">
+              <div class="material-icon"><i class="fas fa-file-pdf"></i></div>
+              <div class="material-info">
+                <h3>CO-2 Material</h3>
+                <p>Course Outcome 2 study material</p>
+                <span class="material-type">PDF</span>
+              </div>
+              <i class="fas fa-download download-icon"></i>
+            </a>
+            <a href="./materials/DM/DM CO-3 Material_884f340d5afd6fb948de6395d7297e02.pdf" class="material-card" target="_blank">
+              <div class="material-icon"><i class="fas fa-file-pdf"></i></div>
+              <div class="material-info">
+                <h3>CO-3 Material</h3>
+                <p>Course Outcome 3 study material</p>
+                <span class="material-type">PDF</span>
+              </div>
+              <i class="fas fa-download download-icon"></i>
+            </a>
+            <a href="./materials/DM/CO_4_Material_1bbf75bb8a3be89c7e1b47d157fd6b2f.pdf" class="material-card" target="_blank">
+              <div class="material-icon"><i class="fas fa-file-pdf"></i></div>
+              <div class="material-info">
+                <h3>CO-4 Material</h3>
+                <p>Course Outcome 4 study material</p>
+                <span class="material-type">PDF</span>
+              </div>
+              <i class="fas fa-download download-icon"></i>
+            </a>
+          </div>
+        </section>
+
+        <!-- DSD Section -->
+        <section class="subject-section" data-subject="DSD">
+          <h2 class="subject-title">
+            <i class="fas fa-microchip"></i>
+            Digital System Design (DSD)
+          </h2>
+          <div class="materials-list">
+            <a href="./materials/DSD/DSD CO-1 terminal questions and answers.pdf" class="material-card" target="_blank">
+              <div class="material-icon"><i class="fas fa-file-pdf"></i></div>
+              <div class="material-info">
+                <h3>CO-1 Terminal Questions</h3>
+                <p>Terminal questions and answers for CO-1</p>
+                <span class="material-type">PDF</span>
+              </div>
+              <i class="fas fa-download download-icon"></i>
+            </a>
+            <a href="./materials/DSD/DSD CO-2 Terminal Questions.pdf" class="material-card" target="_blank">
+              <div class="material-icon"><i class="fas fa-file-pdf"></i></div>
+              <div class="material-info">
+                <h3>CO-2 Terminal Questions</h3>
+                <p>Terminal questions for CO-2</p>
+                <span class="material-type">PDF</span>
+              </div>
+              <i class="fas fa-download download-icon"></i>
+            </a>
+            <a href="./materials/DSD/DSD CO3 Notes.pdf" class="material-card" target="_blank">
+              <div class="material-icon"><i class="fas fa-file-pdf"></i></div>
+              <div class="material-info">
+                <h3>CO-3 Notes</h3>
+                <p>Comprehensive notes for CO-3</p>
+                <span class="material-type">PDF</span>
+              </div>
+              <i class="fas fa-download download-icon"></i>
+            </a>
+            <a href="./materials/DSD/DSD CO4 Notes.pdf" class="material-card" target="_blank">
+              <div class="material-icon"><i class="fas fa-file-pdf"></i></div>
+              <div class="material-info">
+                <h3>CO-4 Notes</h3>
+                <p>Comprehensive notes for CO-4</p>
+                <span class="material-type">PDF</span>
+              </div>
+              <i class="fas fa-download download-icon"></i>
+            </a>
+            <a href="./materials/DSD/DSD CO-4 last topics.pdf" class="material-card" target="_blank">
+              <div class="material-icon"><i class="fas fa-file-pdf"></i></div>
+              <div class="material-info">
+                <h3>CO-4 Last Topics</h3>
+                <p>Final topics coverage for CO-4</p>
+                <span class="material-type">PDF</span>
+              </div>
+              <i class="fas fa-download download-icon"></i>
+            </a>
+          </div>
+        </section>
+
+        <!-- PSC Section -->
+        <section class="subject-section" data-subject="PSC">
+          <h2 class="subject-title">
+            <i class="fas fa-code"></i>
+            Problem Solving with C (PSC)
+          </h2>
+          <div class="materials-list">
+            <a href="./materials/PSC/PSC basics and syntax.pdf" class="material-card" target="_blank">
+              <div class="material-icon"><i class="fas fa-file-pdf"></i></div>
+              <div class="material-info">
+                <h3>Basics and Syntax</h3>
+                <p>Fundamental concepts and C syntax</p>
+                <span class="material-type">PDF</span>
+              </div>
+              <i class="fas fa-download download-icon"></i>
+            </a>
+            <a href="./materials/PSC/PSC CO-1 Material.docx" class="material-card" target="_blank">
+              <div class="material-icon"><i class="fas fa-file-word"></i></div>
+              <div class="material-info">
+                <h3>CO-1 Material</h3>
+                <p>Course Outcome 1 study material</p>
+                <span class="material-type">DOCX</span>
+              </div>
+              <i class="fas fa-download download-icon"></i>
+            </a>
+            <a href="./materials/PSC/PSC C03 Important Questions.docx" class="material-card" target="_blank">
+              <div class="material-icon"><i class="fas fa-file-word"></i></div>
+              <div class="material-info">
+                <h3>CO-3 Important Questions</h3>
+                <p>Key questions for CO-3 preparation</p>
+                <span class="material-type">DOCX</span>
+              </div>
+              <i class="fas fa-download download-icon"></i>
+            </a>
+            <a href="./materials/PSC/PSC Co4 Important Questions.docx" class="material-card" target="_blank">
+              <div class="material-icon"><i class="fas fa-file-word"></i></div>
+              <div class="material-info">
+                <h3>CO-4 Important Questions</h3>
+                <p>Key questions for CO-4 preparation</p>
+                <span class="material-type">DOCX</span>
+              </div>
+              <i class="fas fa-download download-icon"></i>
+            </a>
+            <a href="./materials/PSC/PSC FULL_NOTES.pdf" class="material-card" target="_blank">
+              <div class="material-icon"><i class="fas fa-file-pdf"></i></div>
+              <div class="material-info">
+                <h3>Full Notes</h3>
+                <p>Complete PSC course notes</p>
+                <span class="material-type">PDF</span>
+              </div>
+              <i class="fas fa-download download-icon"></i>
+            </a>
+            <a href="./materials/PSC/PSC Full Notes 2.pdf" class="material-card" target="_blank">
+              <div class="material-icon"><i class="fas fa-file-pdf"></i></div>
+              <div class="material-info">
+                <h3>Full Notes (Part 2)</h3>
+                <p>Additional complete PSC notes</p>
+                <span class="material-type">PDF</span>
+              </div>
+              <i class="fas fa-download download-icon"></i>
+            </a>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="materials-footer">
+      <p>&copy; 2024 KL Material. All study materials are provided for educational purposes.</p>
+    </footer>
+
+    <!-- AI Lighting canvas effect -->
+    <script src="./assets/ai-lighting.js" defer></script>
+    
+    <!-- AIME assistant widget -->
+    <script src="./assets/aime-widget.js" defer></script>
+    
+    <!-- Materials page script -->
+    <script src="./assets/materials-page.js" defer></script>
+  </body>
+</html>

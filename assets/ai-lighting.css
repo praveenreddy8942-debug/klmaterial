@@ -1,0 +1,76 @@
+/**
+ * ai-lighting.css
+ * Styles for the AI Lightings canvas background effect.
+ */
+
+/* Canvas Container */
+.ai-lighting-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+/* When disabled */
+.ai-lighting-canvas.ai-lighting-disabled {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Toggle Button (optional floating control) */
+.ai-lighting-toggle {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  background: rgba(0, 29, 61, 0.8);
+  color: #00d4ff;
+  font-size: 18px;
+  cursor: pointer;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, background 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.ai-lighting-toggle:hover {
+  transform: scale(1.1);
+  background: rgba(0, 53, 102, 0.9);
+}
+
+.ai-lighting-toggle:focus {
+  outline: 2px solid rgba(0, 212, 255, 0.5);
+  outline-offset: 2px;
+}
+
+.ai-lighting-toggle[aria-pressed="false"] {
+  opacity: 0.6;
+}
+
+/* Hide toggle if user has reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .ai-lighting-toggle {
+    display: none;
+  }
+}
+
+/* Mobile adjustments */
+@media (max-width: 480px) {
+  .ai-lighting-toggle {
+    bottom: 70px;
+    right: 10px;
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+}
