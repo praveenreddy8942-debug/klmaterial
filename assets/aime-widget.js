@@ -234,7 +234,13 @@
 
     try {
       // Get response from server (currently demo mode)
-      const response = await sendToServer(message);
+      // Uses custom handler if one is set via AIMEWidget.setResponseHandler()
+      let response;
+      if (typeof window._aimeCustomHandler === 'function') {
+        response = await window._aimeCustomHandler(message);
+      } else {
+        response = await sendToServer(message);
+      }
       
       // Remove typing indicator and show response
       hideTypingIndicator();
@@ -348,15 +354,6 @@
       }
     }
   };
-
-  // Override sendToServer if custom handler is set
-  const originalSendToServer = sendToServer;
-  async function sendToServerWithCustomHandler(message) {
-    if (typeof window._aimeCustomHandler === 'function') {
-      return window._aimeCustomHandler(message);
-    }
-    return originalSendToServer(message);
-  }
 
   // Initialize on DOM ready
   if (document.readyState === 'loading') {

@@ -57,14 +57,14 @@
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     prefersReducedMotion = mediaQuery.matches;
 
-    // Listen for changes
+    // Listen for changes - disable animation if user enables reduced motion
     mediaQuery.addEventListener('change', (e) => {
       prefersReducedMotion = e.matches;
       if (prefersReducedMotion && isEnabled) {
         disable();
-      } else if (!prefersReducedMotion && !isEnabled) {
-        // Don't auto-enable when preference changes
       }
+      // Note: We don't auto-enable when preference changes to no-preference
+      // to avoid unexpected behavior. Users must manually call AILighting.enable()
     });
   }
 
@@ -218,6 +218,12 @@
 
     container.appendChild(canvas);
     document.body.insertBefore(container, document.body.firstChild);
+    
+    // Add static fallback for reduced motion users
+    const fallback = document.createElement('div');
+    fallback.className = 'ai-lighting-fallback';
+    fallback.setAttribute('aria-hidden', 'true');
+    document.body.insertBefore(fallback, document.body.firstChild);
 
     ctx = canvas.getContext('2d');
   }
