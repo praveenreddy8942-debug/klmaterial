@@ -1,4 +1,4 @@
-/* ===== PROFESSIONAL NAVIGATION ===== */
+/* ===== ADVANCED LIQUID GLASS NAVIGATION ===== */
 
 /* Desktop Navigation */
 .desktop-nav {
@@ -7,82 +7,200 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  background: rgba(0, 8, 20, 0.8);
-  border-bottom: 1px solid rgba(0, 212, 255, 0.1);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s ease;
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  background: linear-gradient(
+    135deg,
+    rgba(0, 8, 20, 0.7) 0%,
+    rgba(0, 29, 61, 0.6) 50%,
+    rgba(0, 53, 102, 0.5) 100%
+  );
+  border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 60px rgba(0, 212, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+/* Liquid glass animated border */
+.desktop-nav::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 212, 255, 0.6),
+    rgba(0, 119, 255, 0.8),
+    rgba(0, 212, 255, 0.6),
+    transparent
+  );
+  animation: shimmerBorder 3s linear infinite;
+}
+
+@keyframes shimmerBorder {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Floating particles effect */
+.desktop-nav::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 50%, rgba(0, 119, 255, 0.1) 0%, transparent 50%);
+  background-size: 200% 200%;
+  animation: floatingGradient 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes floatingGradient {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
 
 .nav-container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 1rem 2rem;
+  padding: 1.2rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+  z-index: 1;
 }
 
 .brand {
-  font-size: 1.5rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, #00d4ff, #0077ff);
+  font-size: 1.7rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #00d4ff, #0077ff, #00d4ff);
+  background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   text-decoration: none;
-  transition: all 0.3s ease;
-  letter-spacing: 1px;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  letter-spacing: 2px;
+  text-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+  filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.3));
+  animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
 
 .brand:hover {
-  transform: scale(1.05);
-  filter: brightness(1.2);
+  transform: scale(1.08) translateY(-2px);
+  filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.6));
 }
 
 .nav-links {
   display: flex;
-  gap: 2rem;
+  gap: 1rem;
   align-items: center;
 }
 
 .nav-links a {
   color: #cce7ff;
   text-decoration: none;
-  font-weight: 500;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  transition: all 0.3s ease;
+  font-weight: 600;
+  padding: 0.7rem 1.5rem;
+  border-radius: 12px;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   overflow: hidden;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
+/* Liquid glass shimmer effect */
 .nav-links a::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transform: rotate(45deg);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Bottom glow line */
+.nav-links a::after {
   content: '';
   position: absolute;
   bottom: 0;
   left: 50%;
   width: 0;
-  height: 2px;
-  background: linear-gradient(90deg, #00d4ff, #0077ff);
-  transition: all 0.3s ease;
+  height: 3px;
+  background: linear-gradient(90deg, #00d4ff, #0077ff, #00d4ff);
+  background-size: 200% 100%;
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.8);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   transform: translateX(-50%);
+  border-radius: 10px;
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 10px rgba(0, 212, 255, 0.8); }
+  50% { box-shadow: 0 0 20px rgba(0, 212, 255, 1); }
 }
 
 .nav-links a:hover {
   color: #00d4ff;
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+  background: rgba(0, 212, 255, 0.1);
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  box-shadow: 
+    0 8px 20px rgba(0, 212, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .nav-links a:hover::before {
-  width: 80%;
+  left: 100%;
+}
+
+.nav-links a:hover::after {
+  width: 90%;
 }
 
 .nav-links a.active {
-  background: rgba(0, 212, 255, 0.1);
+  background: linear-gradient(
+    135deg,
+    rgba(0, 212, 255, 0.15),
+    rgba(0, 119, 255, 0.1)
+  );
   color: #00d4ff;
-  border: 1px solid rgba(0, 212, 255, 0.3);
+  border: 1px solid rgba(0, 212, 255, 0.4);
+  box-shadow: 
+    0 0 20px rgba(0, 212, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 0 20px rgba(0, 212, 255, 0.1);
+}
+
+.nav-links a.active::after {
+  width: 90%;
+  animation: glowPulse 1.5s ease-in-out infinite;
 }
 
 /* Mobile Navigation */
@@ -93,14 +211,18 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  background: rgba(0, 8, 20, 0.95);
-  border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+  backdrop-filter: blur(30px) saturate(180%);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  background: linear-gradient(
+    135deg,
+    rgba(0, 8, 20, 0.85),
+    rgba(0, 29, 61, 0.75)
+  );
+  border-bottom: 1px solid rgba(0, 212, 255, 0.2);
   padding: 1rem 1.5rem;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .mobile-brand {
