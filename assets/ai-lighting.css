@@ -1,0 +1,205 @@
+/**
+ * AI Lighting Effect Styles
+ * Animated gradient overlay for visual enhancement
+ * Respects prefers-reduced-motion preference
+ */
+
+/* Container for lighting effects */
+.ai-lighting {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  opacity: 0.6;
+}
+
+/* Individual light orb */
+.ai-lighting-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  mix-blend-mode: screen;
+  opacity: 0.5;
+  will-change: transform, opacity;
+}
+
+/* Primary orb - Cyan */
+.ai-lighting-orb--primary {
+  width: 40vmax;
+  height: 40vmax;
+  background: radial-gradient(circle, rgba(0, 212, 255, 0.4) 0%, transparent 70%);
+  top: -10%;
+  left: -10%;
+  animation: ai-lighting-float-1 15s ease-in-out infinite;
+}
+
+/* Secondary orb - Blue */
+.ai-lighting-orb--secondary {
+  width: 35vmax;
+  height: 35vmax;
+  background: radial-gradient(circle, rgba(0, 102, 255, 0.35) 0%, transparent 70%);
+  bottom: -10%;
+  right: -10%;
+  animation: ai-lighting-float-2 18s ease-in-out infinite;
+}
+
+/* Tertiary orb - Purple accent */
+.ai-lighting-orb--tertiary {
+  width: 30vmax;
+  height: 30vmax;
+  background: radial-gradient(circle, rgba(120, 0, 255, 0.25) 0%, transparent 70%);
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: ai-lighting-float-3 20s ease-in-out infinite;
+}
+
+/* Glow line effect */
+.ai-lighting-line {
+  position: absolute;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(0, 212, 255, 0.6) 20%,
+    rgba(0, 212, 255, 0.8) 50%,
+    rgba(0, 212, 255, 0.6) 80%,
+    transparent 100%
+  );
+  filter: blur(1px);
+  opacity: 0;
+  animation: ai-lighting-line-sweep 8s ease-in-out infinite;
+}
+
+.ai-lighting-line--1 {
+  top: 20%;
+  width: 60%;
+  left: -60%;
+  animation-delay: 0s;
+}
+
+.ai-lighting-line--2 {
+  top: 50%;
+  width: 80%;
+  left: -80%;
+  animation-delay: 2.5s;
+}
+
+.ai-lighting-line--3 {
+  top: 75%;
+  width: 50%;
+  left: -50%;
+  animation-delay: 5s;
+}
+
+/* Animations */
+@keyframes ai-lighting-float-1 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.5;
+  }
+  25% {
+    transform: translate(10%, 15%) scale(1.1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translate(5%, 5%) scale(0.95);
+    opacity: 0.4;
+  }
+  75% {
+    transform: translate(-5%, 10%) scale(1.05);
+    opacity: 0.55;
+  }
+}
+
+@keyframes ai-lighting-float-2 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.5;
+  }
+  33% {
+    transform: translate(-15%, -10%) scale(1.15);
+    opacity: 0.6;
+  }
+  66% {
+    transform: translate(-5%, -5%) scale(0.9);
+    opacity: 0.45;
+  }
+}
+
+@keyframes ai-lighting-float-3 {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 0.55;
+  }
+}
+
+@keyframes ai-lighting-line-sweep {
+  0% {
+    left: -80%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    left: 120%;
+    opacity: 0;
+  }
+}
+
+/* Reduced motion - disable animations but keep static effect */
+@media (prefers-reduced-motion: reduce) {
+  .ai-lighting-orb,
+  .ai-lighting-line {
+    animation: none !important;
+  }
+  
+  .ai-lighting-orb--primary {
+    transform: none;
+    opacity: 0.35;
+  }
+  
+  .ai-lighting-orb--secondary {
+    transform: none;
+    opacity: 0.3;
+  }
+  
+  .ai-lighting-orb--tertiary {
+    transform: translate(-50%, -50%);
+    opacity: 0.25;
+  }
+  
+  .ai-lighting-line {
+    display: none;
+  }
+}
+
+/* Performance: pause when page is not visible */
+@media (prefers-reduced-motion: no-preference) {
+  .ai-lighting[data-paused="true"] .ai-lighting-orb,
+  .ai-lighting[data-paused="true"] .ai-lighting-line {
+    animation-play-state: paused;
+  }
+}
+
+/* Disable on low-end devices (touch + small screen heuristic) */
+@media (hover: none) and (max-width: 480px) {
+  .ai-lighting {
+    opacity: 0.3;
+  }
+  
+  .ai-lighting-line {
+    display: none;
+  }
+}
