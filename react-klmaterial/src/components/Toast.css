@@ -50,8 +50,6 @@
     opacity: 0;
   }
 }
-
-/* Toast Types */
 .toast-success {
   border-color: rgba(0, 255, 127, 0.5);
 }
@@ -168,5 +166,40 @@
   .toast {
     min-width: auto;
     width: 100%;
+    padding: 12px 16px;
+    font-size: 0.9rem;
+  }
+  
+  .toast-icon {
+    width: 28px;
+    height: 28px;
+    font-size: 1.1rem;
+  }
+  
+  .toast-message {
+    font-size: 0.85rem;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 480px) {
+  .toast {
+    padding: 10px 14px;
+  }
+  
+  .toast-icon {
+    width: 24px;
+    height: 24px;
+    font-size: 1rem;
+  }
+  
+  .toast-message {
+    font-size: 0.8rem;
+  }
+  
+  .toast-close {
+    width: 20px;
+    height: 20px;
+    font-size: 1.25rem;
   }
 }

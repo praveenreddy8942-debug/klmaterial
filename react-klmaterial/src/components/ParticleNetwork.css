@@ -9,8 +9,9 @@
   opacity: 0.4;
 }
 
+/* Mobile: Disable for better performance */
 @media (max-width: 768px) {
   .particle-network {
-    opacity: 0.2;
+    display: none;
   }
 }

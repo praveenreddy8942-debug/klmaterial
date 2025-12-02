@@ -24,6 +24,7 @@
   z-index: 9999;
   animation: slideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
+  max-height: 80vh;
 }
 
 @keyframes fadeIn {
@@ -180,17 +181,62 @@
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .command-palette {
-    top: 10%;
+    top: 5%;
     width: 95%;
     max-width: none;
+    max-height: 85vh;
+    border-radius: 12px;
+  }
+
+  .command-palette-header {
+    padding: 12px 16px;
+  }
+  
+  .command-palette-input {
+    font-size: 0.95rem;
   }
 
   .command-palette-footer {
     flex-wrap: wrap;
     gap: 10px;
+    padding: 10px 16px;
   }
 
   .command-palette-hint {
     font-size: 0.7rem;
+  }
+  
+  .command-palette-item {
+    padding: 14px;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 480px) {
+  .command-palette {
+    top: 2%;
+    width: 98%;
+    max-height: 90vh;
+    border-radius: 10px;
+  }
+  
+  .command-palette-header {
+    padding: 10px 12px;
+  }
+  
+  .command-palette-input {
+    font-size: 0.9rem;
+  }
+  
+  .command-palette-item {
+    padding: 12px;
+  }
+  
+  .command-label {
+    font-size: 0.9rem;
+  }
+  
+  .command-palette-footer {
+    padding: 8px 12px;
   }
 }

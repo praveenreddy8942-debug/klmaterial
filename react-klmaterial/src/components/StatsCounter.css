@@ -81,6 +81,7 @@
 @media (max-width: 768px) {
   .stats-counter {
     padding: 3rem 1.5rem;
+    margin: 2rem 0;
   }
 
   .stats-grid {
@@ -98,5 +99,37 @@
 
   .stat-icon {
     font-size: 2.5rem;
+  }
+  
+  .stat-label {
+    font-size: 0.9rem;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 480px) {
+  .stats-counter {
+    padding: 2rem 1rem;
+    margin: 1.5rem 0;
+  }
+  
+  .stats-grid {
+    gap: 1.5rem;
+  }
+  
+  .stat-card {
+    padding: 1.25rem 0.75rem;
+  }
+  
+  .stat-value {
+    font-size: 2.5rem;
+  }
+  
+  .stat-icon {
+    font-size: 2rem;
+  }
+  
+  .stat-label {
+    font-size: 0.85rem;
   }
 }

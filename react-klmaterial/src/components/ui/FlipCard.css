@@ -81,6 +81,26 @@
   .flip-card-front,
   .flip-card-back {
     padding: 1.5rem;
+    border-radius: 16px;
+  }
+  
+  /* Make flip animation faster on mobile */
+  .flip-card-inner {
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+/* Very small screens */
+@media (max-width: 480px) {
+  .flip-card {
+    min-height: 220px;
+  }
+  
+  .flip-card-front,
+  .flip-card-back {
+    padding: 1.25rem;
+    border-radius: 14px;
+    font-size: 0.9rem;
   }
 }
 
