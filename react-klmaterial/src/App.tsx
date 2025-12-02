@@ -2,14 +2,12 @@ import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { AppProvider } from './context/AppContext';
-import { ThemeProvider } from './hooks/themeContext';
 import { registerServiceWorker } from './hooks/usePWA';
 import { initGA, initPerformanceMonitoring, useAnalytics } from './utils/analytics';
 import Navigation from './components/Navigation';
 import SEO from './components/SEO';
 import Breadcrumbs from './components/Breadcrumbs';
 import InstallPrompt from './components/InstallPrompt';
-import ThemeToggle from './components/ThemeToggle';
 import Home from './pages/Home';
 import Materials from './pages/Materials';
 import Roadmap from './pages/Roadmap';
@@ -36,9 +34,6 @@ function AppContent() {
       <SEO />
       <SeasonalAnimation />
       <Navigation />
-      <div className="theme-toggle-container">
-        <ThemeToggle />
-      </div>
       <main className="main-content">
         <Breadcrumbs />
         <Routes>
@@ -58,13 +53,11 @@ function AppContent() {
 function App() {
   return (
     <HelmetProvider>
-      <ThemeProvider>
-        <AppProvider>
-          <Router basename="/klmaterial">
-            <AppContent />
-          </Router>
-        </AppProvider>
-      </ThemeProvider>
+      <AppProvider>
+        <Router basename="/klmaterial">
+          <AppContent />
+        </Router>
+      </AppProvider>
     </HelmetProvider>
   );
 }
