@@ -40,7 +40,7 @@ const SeasonalAnimation = () => {
 
   const createSnowfall = (container: HTMLElement, isMobile: boolean) => {
     const snowflakes = ['❄', '❅', '❆', '•', '∘'];
-    const count = isMobile ? 50 : 100; // More snowflakes for realism
+    const count = isMobile ? 30 : 100; // Reduced from 50 to 30 for mobile
     
     // Create depth layers for 3D effect
     const layers = [
