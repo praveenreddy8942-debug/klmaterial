@@ -82,7 +82,6 @@
   let isOpen = false;
   let isTyping = false;
   let messageHistory = [];
-  let serverConnected = false;
 
   // ============================================================================
   // SERVER INTEGRATION HOOK
