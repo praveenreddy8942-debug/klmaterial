@@ -1,7 +1,14 @@
 /**
  * debug-force-visible.js
  * 
- * DEBUG HELPER SCRIPT - Remove before merging to main if not desired.
+ * ╔═══════════════════════════════════════════════════════════════════════════╗
+ * ║  ⚠️  WARNING: TEMPORARY DEBUG SCRIPT - DO NOT MERGE TO PRODUCTION! ⚠️     ║
+ * ║                                                                           ║
+ * ║  This file should be removed or disabled before merging to main branch.  ║
+ * ║  It is intended only for debugging blank/black page issues.              ║
+ * ╚═══════════════════════════════════════════════════════════════════════════╝
+ * 
+ * TODO: Remove this script before merging to main branch.
  * 
  * This script runs on DOMContentLoaded and resize events to:
  * 1. Force #root to be visible

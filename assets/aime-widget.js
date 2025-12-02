@@ -243,7 +243,7 @@
       try {
         response = await sendToServer(text);
       } catch (err) {
-        console.warn('AIME: Server request error:', err);
+        console.warn('[AIME] Server request error:', err);
         response = null;
       }
       
