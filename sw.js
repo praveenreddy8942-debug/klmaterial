@@ -1,10 +1,10 @@
 // Service Worker for PWA
-const CACHE_NAME = 'klmaterial-v1';
+const CACHE_NAME = 'klmaterial-v2';
 const urlsToCache = [
-  '/klmaterial/',
-  '/klmaterial/index.html',
-  '/klmaterial/assets/index-BeLr4uav.js',
-  '/klmaterial/assets/index-Bfp2myPK.css',
+  './',
+  './index.html',
+  './assets/index-D78cza6R.js',
+  './assets/index-Bu9-1msn.css',
 ];
 
 // Install Service Worker
@@ -57,7 +57,7 @@ self.addEventListener('fetch', (event) => {
           
           // Return offline page for navigation requests
           if (event.request.mode === 'navigate') {
-            return caches.match('/klmaterial/index.html');
+            return caches.match('./index.html');
           }
         });
       })
@@ -80,8 +80,8 @@ async function syncData() {
 self.addEventListener('push', (event) => {
   const options = {
     body: event.data ? event.data.text() : 'New update available!',
-    icon: '/klmaterial/icon.svg',
-    badge: '/klmaterial/icon.svg',
+    icon: './icon.svg',
+    badge: './icon.svg',
     vibrate: [200, 100, 200],
     data: {
       dateOfArrival: Date.now(),
@@ -110,7 +110,7 @@ self.addEventListener('notificationclick', (event) => {
 
   if (event.action === 'explore') {
     event.waitUntil(
-      clients.openWindow('/klmaterial/materials')
+      clients.openWindow('./materials')
     );
   }
 });

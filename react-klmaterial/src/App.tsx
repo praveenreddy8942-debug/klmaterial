@@ -73,7 +73,7 @@ function App() {
       <ToastProvider>
         <BookmarkProvider>
           <AppProvider>
-            <Router basename="/klmaterial">
+            <Router>
               <AppContent />
             </Router>
           </AppProvider>
