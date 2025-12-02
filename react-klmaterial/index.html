@@ -2,16 +2,18 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/klmaterial/icon.svg" />
-    <link rel="apple-touch-icon" href="/klmaterial/icon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Icons - using relative paths for GitHub Pages compatibility -->
+    <link rel="icon" type="image/svg+xml" href="../icon.svg" />
+    <link rel="apple-touch-icon" href="../icon.svg" />
     
     <!-- Theme Color -->
     <meta name="theme-color" content="#00d4ff" />
     <meta name="msapplication-TileColor" content="#00d4ff" />
     
-    <!-- PWA Manifest -->
-    <link rel="manifest" href="/klmaterial/manifest.json" />
+    <!-- PWA Manifest - relative path -->
+    <link rel="manifest" href="../manifest.json" />
     
     <!-- Cache Control -->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
@@ -29,6 +31,9 @@
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:title" content="KL Material - Study Hub" />
+    
+    <!-- Baseline CSS - load first to prevent black screen -->
+    <link rel="stylesheet" href="../assets/site-base.css" />
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
