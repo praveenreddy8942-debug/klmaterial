@@ -1,0 +1,76 @@
+/**
+ * AI Lighting Visual Effect Styles
+ * Creates a canvas container for the animated background effect.
+ */
+
+/* Canvas container */
+.ai-lighting-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.ai-lighting-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.6;
+}
+
+/* Fade in animation */
+.ai-lighting-container.ai-lighting-active {
+  animation: ai-lighting-fade-in 1s ease-out forwards;
+}
+
+@keyframes ai-lighting-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Disabled state */
+.ai-lighting-container.ai-lighting-disabled {
+  display: none;
+}
+
+/* Reduced motion - hide the animation entirely */
+@media (prefers-reduced-motion: reduce) {
+  .ai-lighting-container {
+    display: none;
+  }
+}
+
+/* Optional: Add a subtle static gradient when animation is disabled */
+.ai-lighting-fallback {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 20% 20%, rgba(0, 212, 255, 0.08) 0%, transparent 50%),
+              radial-gradient(ellipse at 80% 80%, rgba(0, 153, 204, 0.06) 0%, transparent 50%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ai-lighting-fallback {
+    display: block;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ai-lighting-fallback {
+    display: none;
+  }
+}
