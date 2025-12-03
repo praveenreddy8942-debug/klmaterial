@@ -28,15 +28,15 @@
 @keyframes liquidMove {
   0%, 100% {
     background-position: 0% 0%, 100% 100%, 50% 50%;
-    filter: blur(40px);
+    filter: blur(20px);
   }
   33% {
     background-position: 30% 70%, 70% 30%, 80% 20%;
-    filter: blur(50px);
+    filter: blur(25px);
   }
   66% {
     background-position: 70% 30%, 30% 70%, 20% 80%;
-    filter: blur(45px);
+    filter: blur(22px);
   }
 }
 
@@ -66,10 +66,10 @@
     rgba(0, 119, 255, 0.01),
     rgba(0, 53, 102, 0.015)
   );
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
   border-radius: 50%;
-  filter: blur(20px);
+  filter: blur(10px);
   animation: liquidPulse 10s ease-in-out infinite;
   pointer-events: none;
   opacity: 0.3;
@@ -98,10 +98,11 @@
 .gradient-orb {
   position: absolute;
   border-radius: 50%;
-  filter: blur(60px);
-  opacity: 0.15;
+  filter: blur(40px);
+  opacity: 0.12;
   animation: float 20s ease-in-out infinite;
   mix-blend-mode: screen;
+  will-change: transform;
 }
 
 .orb-1 {
