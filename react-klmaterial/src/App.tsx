@@ -11,11 +11,9 @@ import SEO from './components/SEO';
 import Breadcrumbs from './components/Breadcrumbs';
 import InstallPrompt from './components/InstallPrompt';
 import CommandPalette from './components/CommandPalette';
-import ParticleNetwork from './components/ParticleNetwork';
 import KeyboardHelper from './components/KeyboardHelper';
 import LoadingScreen from './components/LoadingScreen';
 import CursorTrail from './components/CursorTrail';
-import MeshGradient from './components/MeshGradient';
 import Home from './pages/Home';
 import Materials from './pages/Materials';
 import Roadmap from './pages/Roadmap';
@@ -43,8 +41,6 @@ function AppContent() {
       {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
       <div className="app">
         <SEO />
-        <MeshGradient />
-        <ParticleNetwork />
         <CursorTrail />
         <SeasonalAnimation />
         <Navigation />
