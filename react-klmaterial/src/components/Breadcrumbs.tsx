@@ -22,15 +22,27 @@ const Breadcrumbs: React.FC = () => {
     const paths = location.pathname.split('/').filter(Boolean);
     const breadcrumbs: BreadcrumbItem[] = [{ label: 'Home', path: '/' }];
 
+    const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+    const stripExtension = (s: string) => s.replace(/\.[^/.]+$/, '');
+
     let currentPath = '';
-    paths.forEach((path) => {
-      if (path !== 'klmaterial') {
-        currentPath += `/${path}`;
-        breadcrumbs.push({
-          label: pathMap[path] || path.charAt(0).toUpperCase() + path.slice(1),
-          path: currentPath,
-        });
-      }
+    paths.forEach((raw) => {
+      // ignore repo base folder if present
+      if (raw === 'klmaterial') return;
+
+      // remove filename extensions (index.html -> index)
+      const pathSegment = stripExtension(raw);
+
+      // Skip index (we already show Home)
+      if (pathSegment.toLowerCase() === 'index') return;
+
+      currentPath += `/${pathSegment}`;
+      const label = pathMap[pathSegment] || capitalize(pathSegment);
+
+      breadcrumbs.push({
+        label,
+        path: currentPath,
+      });
     });
 
     return breadcrumbs;
