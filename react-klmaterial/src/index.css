@@ -45,6 +45,8 @@ body {
   /* Prevent text inflation on mobile */
   text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
+  /* Optimize for performance */
+  will-change: auto;
 }
 
 /* Animated Background */
