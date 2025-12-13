@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Study Materials | Praveen Reddy</title>
+  <meta name="description"
+    content="Access CSE study materials including BEEC, DM, PSC, DSD notes, question papers, and learning resources." />
+  <meta name="keywords"
+    content="CSE materials, BEEC notes, Discrete Mathematics, Problem Solving C, DSD, engineering study materials" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://praveenreddy8942-debug.github.io/klmaterial/materials.html" />
+  <meta property="og:title" content="Study Materials | CSE Resources" />
+  <meta property="og:description"
+    content="Download CSE study materials, notes, and question papers for BEEC, DM, PSC, and DSD." />
+  <meta property="og:image" content="https://praveenreddy8942-debug.github.io/klmaterial/profile.jpg" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://praveenreddy8942-debug.github.io/klmaterial/materials.html" />
+  <meta property="twitter:title" content="Study Materials | CSE Resources" />
+  <meta property="twitter:description"
+    content="Download CSE study materials, notes, and question papers for BEEC, DM, PSC, and DSD." />
+  <meta property="twitter:image" content="https://praveenreddy8942-debug.github.io/klmaterial/profile.jpg" />
+
+  <!-- Cache Control for iOS -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+
+  <link rel="stylesheet" href="style.css?v=8.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZ0SERPS7L"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-NZ0SERPS7L');
+  </script>
+</head>
+
+<body>
+  <header>
+  <nav aria-label="Primary" role="navigation" class="nav-liquid">
+      <button class="hamburger" aria-label="Toggle Menu" aria-expanded="false" aria-controls="mobile-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+  <a href="index.html" class="mobile-brand" aria-label="KL Material Home">KL Material</a>
+      <div id="mobile-nav" class="nav-track" role="menu" aria-hidden="true">
+        <a href="index.html" role="menuitem" tabindex="-1">🏠 Home</a>
+  <a href="materials.html" role="menuitem" tabindex="-1" class="active" aria-current="page">📚 Materials</a>
+        <a href="roadmap.html" role="menuitem" tabindex="-1">🗺️ Roadmap</a>
+        <a href="about.html" role="menuitem" tabindex="-1">👨‍💻 About</a>
+        <a href="contact.html" role="menuitem" tabindex="-1">📞 Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="materials-container">
+    <div class="materials-hero">
+      <div class="hero-content">
+        <h1 class="materials-title">📚 CSE Study Materials</h1>
+        <p class="materials-subtitle">Access comprehensive study resources for your engineering journey</p>
+        <div class="stats-badges">
+          <span class="stat-badge">📖 100+ Materials</span>
+          <span class="stat-badge">🎯 4 Subjects</span>
+          <span class="stat-badge">🚀 Free Access</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Advanced Search Bar -->
+    <div class="advanced-search-container">
+      <div class="search-wrapper">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="search-bar" class="advanced-search-input" 
+          placeholder="Search by material name, subject, or topic..." 
+          autocomplete="off" />
+        <button id="clear-search" class="clear-search-btn" style="display: none;">
+          <span>✕</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Category Filter Pills -->
+    <div class="filter-pills-container">
+      <h3 class="filter-label">Filter by Subject:</h3>
+      <div class="filter-pills">
+        <button class="filter-pill active" data-category="all">
+          <span class="pill-icon">📚</span>
+          <span>All Subjects</span>
+        </button>
+        <button class="filter-pill" data-category="BEEC">
+          <span class="pill-icon">⚡</span>
+          <span>BEEC</span>
+        </button>
+        <button class="filter-pill" data-category="DM">
+          <span class="pill-icon">🔢</span>
+          <span>Discrete Math</span>
+        </button>
+        <button class="filter-pill" data-category="PSC">
+          <span class="pill-icon">💻</span>
+          <span>PSC</span>
+        </button>
+        <button class="filter-pill" data-category="DSD">
+          <span class="pill-icon">🔌</span>
+          <span>DSD</span>
+        </button>
+      </div>
+    </div>
+
+    <div id="materials-list" class="materials-grid">
+      <!-- Loading Animation -->
+      <div class="advanced-loader-container">
+        <div class="advanced-loader">
+          <div class="loader-ring"></div>
+          <div class="loader-ring"></div>
+          <div class="loader-ring"></div>
+          <span class="loader-emoji">📚</span>
+        </div>
+        <p class="loader-text">Loading amazing materials...</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 Praveen Reddy | All rights reserved.</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="github-materials.js?v=5.0"></script>
+  <script src="advanced-features.js"></script>
+  <script src="chatbot.js"></script>
+  <script src="ui.js?v=6.0"></script>
+
+  <!-- Back to Top Button -->
+  <button id="backToTop" title="Back to top">↑</button>
+</body>
+
+</html>
