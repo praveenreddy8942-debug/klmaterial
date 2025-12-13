@@ -195,6 +195,25 @@ body::after {
   backdrop-filter: blur(10px);
 }
 
+/* Profile image used on homepage */
+.profile-picture { display: inline-block; border-radius: 50%; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+.profile-img {
+  display: block;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(0, 212, 255, 0.12);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.45);
+  margin: 0 auto 18px auto;
+  background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+}
+
+@media (min-width: 769px) {
+  .profile-img { width: 160px; height: 160px; }
+}
+
+
 .center-nav ul {
   list-style: none;
   margin: 0;
