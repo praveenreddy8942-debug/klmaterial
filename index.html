@@ -1,29 +1,97 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="KL Material - Your complete study hub for CSE materials, roadmaps, and resources" />
-    <meta name="keywords" content="KL University, CSE, Study Materials, Roadmap, BEEC, DM, PSC, DSD" />
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="KL Material - Study Hub" />
-    <meta property="og:description" content="Access comprehensive CSE study materials and career roadmaps" />
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:title" content="KL Material - Study Hub" />
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-    
-    <title>KL Material - Study Hub</title>
-    <script type="module" crossorigin src="/klmaterial/assets/index-ioS__eSL.js"></script>
-    <link rel="stylesheet" crossorigin href="/klmaterial/assets/index-BKJzcodB.css">
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="KL Material - Your complete study hub for CSE materials, roadmaps, and resources" />
+  <meta name="keywords" content="KL University, CSE, Study Materials, Roadmap, BEEC, DM, PSC, DSD" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="KL Material - Study Hub" />
+  <meta property="og:description" content="Access comprehensive CSE study materials and career roadmaps" />
+  <meta property="og:image" content="/klmaterial/profile.jpg" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="KL Material - Study Hub" />
+
+  <title>KL Material - Study Hub</title>
+
+  <!-- Styles & fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css?v=8.0">
+
+  <!-- Cache control for refresh during development/Pages rollout -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+</head>
+
+<body>
+  <header>
+    <nav class="nav-liquid">
+      <button class="hamburger" aria-label="Toggle Menu" aria-expanded="false" aria-controls="mobile-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <a href="index.html" class="mobile-brand" aria-label="KL Material Home">KL Material</a>
+      <div id="mobile-nav" class="nav-track" role="menu" aria-hidden="true">
+        <a href="index.html" role="menuitem" tabindex="-1">🏠 Home</a>
+        <a href="materials.html" role="menuitem" tabindex="-1">📚 Materials</a>
+        <a href="roadmap.html" role="menuitem" tabindex="-1">🗺️ Roadmap</a>
+        <a href="about.html" role="menuitem" tabindex="-1">👨‍💻 About</a>
+        <a href="contact.html" role="menuitem" tabindex="-1">📞 Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="page-content home-page">
+    <section class="hero">
+      <div class="hero-inner">
+        <img src="profile.jpg" alt="Praveen Reddy" class="profile-img">
+        <div class="hero-text">
+          <h1 class="hero-title">KL Material</h1>
+          <p class="hero-subtitle">Study materials, roadmaps and resources for CSE students.</p>
+          <div class="hero-cta">
+            <a class="btn" href="materials.html">Browse Materials</a>
+            <a class="btn btn-ghost" href="roadmap.html">View Roadmap</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features">
+      <div class="feature-cards">
+        <a class="card" href="materials.html">
+          <h3>📚 Materials</h3>
+          <p>Notes, PDFs and curated resources grouped by subject.</p>
+        </a>
+        <a class="card" href="roadmap.html">
+          <h3>🗺️ Roadmap</h3>
+          <p>4-year roadmap for B.Tech CSE with suggested learning paths.</p>
+        </a>
+        <a class="card" href="about.html">
+          <h3>👨‍💻 About</h3>
+          <p>About the project and contact details.</p>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Praveen Reddy | All rights reserved.</p>
+  </footer>
+
+  <button id="backToTop" title="Back to top">↑</button>
+
+  <!-- Site scripts -->
+  <script src="animations.js"></script>
+  <script src="script.js"></script>
+  <script src="ui.js?v=6.0"></script>
+</body>
+
 </html>

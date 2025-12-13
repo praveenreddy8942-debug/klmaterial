@@ -3,8 +3,10 @@ const CACHE_NAME = 'klmaterial-v1';
 const urlsToCache = [
   '/klmaterial/',
   '/klmaterial/index.html',
-  '/klmaterial/assets/index-BeLr4uav.js',
-  '/klmaterial/assets/index-Bfp2myPK.css',
+  '/klmaterial/style.css',
+  '/klmaterial/script.js',
+  '/klmaterial/ui.js',
+  '/klmaterial/profile.jpg',
 ];
 
 // Install Service Worker
