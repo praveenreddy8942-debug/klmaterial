@@ -4954,7 +4954,7 @@ main.materials-container {
     background: #000814; /* Solid dark background */
     border-bottom: 1px solid rgba(0, 212, 255, 0.2);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
-    z-index: 2000; /* Topmost layer */
+    z-index: 3000; /* Above overlay and hamburger */
     border-radius: 0;
     box-sizing: border-box; /* Prevent padding from expanding width */
   }
@@ -5002,7 +5002,7 @@ main.materials-container {
     border: none;
     cursor: pointer;
     padding: 0;
-    z-index: 2001; /* Above everything */
+    z-index: 3001; /* Above header to always be visible */
     position: relative;
     flex-shrink: 0; /* Don't shrink */
     pointer-events: auto !important;
@@ -5048,7 +5048,7 @@ main.materials-container {
     padding: 30px 0;
     gap: 10px;
     transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 1999; /* Below header */
+    z-index: 2000; /* Below header, above overlay */
     overflow-y: auto; /* Scrollable if content overflows */
     box-shadow: 10px 0 50px rgba(0, 0, 0, 0.7);
     visibility: visible; /* Always visible, just moved off-screen */
@@ -5069,7 +5069,7 @@ main.materials-container {
     height: 100%;
     background: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(5px);
-    z-index: 1998;
+    z-index: 1500;
     animation: fadeIn 0.3s ease;
   }
 
