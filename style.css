@@ -4993,7 +4993,7 @@ main.materials-container {
 
   /* Hamburger: Large, High Contrast, Interactive */
   .hamburger {
-    display: flex;
+    display: flex !important;
     flex-direction: column;
     justify-content: space-between;
     width: 28px;
@@ -5002,11 +5002,13 @@ main.materials-container {
     border: none;
     cursor: pointer;
     padding: 0;
-    z-index: 3001; /* Above header to always be visible */
+    z-index: 3001;
     position: relative;
-    flex-shrink: 0; /* Don't shrink */
+    flex-shrink: 0;
     pointer-events: auto !important;
     touch-action: manipulation;
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: transparent;
   }
 
   .hamburger span {
