@@ -89,7 +89,7 @@ p {
 .page-content section,
 .materials-container section,
 .roadmap-container section {
-  margin-bottom: 48px;
+  margin-bottom: 0px;
 }
 
 .btn {
