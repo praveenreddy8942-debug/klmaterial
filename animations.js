@@ -1,16 +1,16 @@
 // Seasonal Animation System
 function getSeason() {
   const month = new Date().getMonth() + 1; // 1-12
-
+  
   // Winter: December (12), January (1), February (2)
   if (month === 12 || month === 1 || month === 2) return 'winter';
-
+  
   // Spring: March (3), April (4), May (5)
   if (month >= 3 && month <= 5) return 'spring';
-
+  
   // Summer: June (6), July (7), August (8)
   if (month >= 6 && month <= 8) return 'summer';
-
+  
   // Autumn: September (9), October (10), November (11)
   return 'autumn';
 }
@@ -20,11 +20,11 @@ function createSeasonalAnimation() {
   if (!container) return; // Guard clause if element doesn't exist
 
   const season = getSeason();
-
+  
   // Clear any existing animations
   container.innerHTML = '';
-
-  switch (season) {
+  
+  switch(season) {
     case 'winter':
       createSnowfall(container);
       break;
@@ -42,10 +42,11 @@ function createSeasonalAnimation() {
 
 function createSnowfall(container) {
   const snowflakes = ['❄', '❅', '❆'];
+  const count = 50;
+  
   // Check if mobile device
   const isMobile = window.innerWidth <= 768;
-  const count = isMobile ? 15 : 50;
-
+  
   for (let i = 0; i < count; i++) {
     const snowflake = document.createElement('div');
     snowflake.className = 'snowflake';
@@ -61,10 +62,11 @@ function createSnowfall(container) {
 
 function createPetals(container) {
   const petals = ['🌸', '🌺', '🌼', '🌻'];
+  const count = 30;
+  
   // Check if mobile device
   const isMobile = window.innerWidth <= 768;
-  const count = isMobile ? 10 : 30;
-
+  
   for (let i = 0; i < count; i++) {
     const petal = document.createElement('div');
     petal.className = 'petal';
@@ -80,10 +82,10 @@ function createPetals(container) {
 
 function createFireflies(container) {
   const count = 20;
-
+  
   // Check if mobile device
   const isMobile = window.innerWidth <= 768;
-
+  
   for (let i = 0; i < count; i++) {
     const firefly = document.createElement('div');
     firefly.className = 'firefly';
@@ -98,10 +100,11 @@ function createFireflies(container) {
 
 function createLeaves(container) {
   const leaves = ['🍂', '🍁', '🍃'];
+  const count = 35;
+  
   // Check if mobile device
   const isMobile = window.innerWidth <= 768;
-  const count = isMobile ? 12 : 35;
-
+  
   for (let i = 0; i < count; i++) {
     const leaf = document.createElement('div');
     leaf.className = 'leaf';

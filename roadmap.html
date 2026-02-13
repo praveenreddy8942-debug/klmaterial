@@ -32,14 +32,8 @@
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
 
-  <!-- Performance Optimization: Resource Hints -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="dns-prefetch" href="https://firebasestorage.googleapis.com">
-  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
-
   <link rel="stylesheet" href="style.css?v=8.0" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZ0SERPS7L"></script>
@@ -52,19 +46,19 @@
   </script>
 </head>
 
-<body class="roadmap-page">
+<body>
   <header>
-    <nav class="nav-liquid">
+  <nav class="nav-liquid">
       <button class="hamburger" aria-label="Toggle Menu" aria-expanded="false" aria-controls="mobile-nav">
         <span></span>
         <span></span>
         <span></span>
       </button>
-      <a href="index.html" class="mobile-brand" aria-label="KL Material Home">KL Material</a>
+        <a href="index.html" class="mobile-brand" aria-label="KL Material Home">KL Material</a>
       <div id="mobile-nav" class="nav-track" role="menu" aria-hidden="true">
         <a href="index.html" role="menuitem" tabindex="-1">🏠 Home</a>
         <a href="materials.html" role="menuitem" tabindex="-1">📚 Materials</a>
-        <a href="roadmap.html" role="menuitem" tabindex="-1" class="active" aria-current="page">🗺️ Roadmap</a>
+  <a href="roadmap.html" role="menuitem" tabindex="-1" class="active" aria-current="page">🗺️ Roadmap</a>
         <a href="about.html" role="menuitem" tabindex="-1">👨‍💻 About</a>
         <a href="contact.html" role="menuitem" tabindex="-1">📞 Contact</a>
       </div>
@@ -73,26 +67,13 @@
 
   <main>
     <section class="roadmap-container">
-      <!-- Breadcrumbs -->
-      <nav aria-label="Breadcrumb" class="breadcrumb-nav">
-        <ol>
-          <li><a href="index.html">Home</a></li>
-          <li aria-current="page">Roadmap</li>
-        </ol>
-      </nav>
-
       <div class="roadmap-header">
-        <p class="roadmap-kicker mono">Career Navigation</p>
         <h1>🎯 4-Year B.Tech Roadmap</h1>
         <p class="roadmap-quote">"Records and assignments will be forgotten. Skills stay. Focus on them."</p>
-        <div class="roadmap-actions">
-          <a class="btn btn-neo" href="#years">Jump to Years</a>
-          <a class="btn btn-ghost" href="#learning">Learning Links</a>
-        </div>
       </div>
 
       <!--📘 Learning & Skill Development Links Section -->
-      <section id="learning" class="learning-section">
+      <section class="learning-section">
         <h2>📘 Learning & Skill Development Links</h2>
 
         <div class="resources-grid">
@@ -121,7 +102,7 @@
       </section>
 
       <!-- Year Cards -->
-      <div id="years" class="years-grid">
+      <div class="years-grid">
         <!-- 1st Year Card -->
         <div class="year-card">
           <div class="year-badge">Year 1</div>
@@ -224,8 +205,8 @@
   <!-- Back to Top Button -->
   <button id="backToTop" title="Back to top">↑</button>
 
-  <script src="advanced-features.js" defer></script>
-  <script src="ui.js?v=6.0" defer></script>
+  <script src="advanced-features.js"></script>
+  <script src="ui.js?v=6.0"></script>
 </body>
 
 </html>
