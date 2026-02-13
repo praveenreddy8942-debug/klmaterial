@@ -44,6 +44,7 @@ const filterButtons = document.querySelectorAll(".filter-pill");
 
 let allMaterials = {};
 let activeCategory = "all";
+let currentQuery = "";
 
 // GitHub API URL
 function getGitHubAPIUrl(folder) {
@@ -150,6 +151,7 @@ if (clearBtn) {
 }
 
 function filterMaterials(query) {
+  currentQuery = query;
   if (!query) {
     if (activeCategory === "all") {
       displayMaterials(allMaterials);
@@ -217,6 +219,7 @@ function displayMaterials(grouped) {
       const name = file.name.replace(/_/g, " ");
       const fileExt = name.split('.').pop().toUpperCase();
       const downloadUrl = getDownloadUrl(file);
+      const displayName = currentQuery ? highlightMatch(name, currentQuery) : escapeHtml(name);
 
       const card = document.createElement("div");
       card.className = "material-card";
@@ -226,7 +229,7 @@ function displayMaterials(grouped) {
           <span class="file-type-badge">${fileExt}</span>
         </div>
         <div class="card-body">
-          <h3 class="material-name">${name}</h3>
+          <h3 class="material-name">${displayName}</h3>
         </div>
         <div class="card-footer">
           <a href="${downloadUrl}" download class="download-link">
@@ -243,6 +246,27 @@ function displayMaterials(grouped) {
     subjectCard.appendChild(body);
     materialsList.appendChild(subjectCard);
   }
+}
+
+function escapeHtml(value) {
+  return value.replace(/[&<>"']/g, (char) => {
+    switch (char) {
+      case '&': return '&amp;';
+      case '<': return '&lt;';
+      case '>': return '&gt;';
+      case '"': return '&quot;';
+      case "'": return '&#39;';
+      default: return char;
+    }
+  });
+}
+
+function highlightMatch(text, query) {
+  const safeText = escapeHtml(text);
+  const safeQuery = escapeHtml(query);
+  if (!safeQuery) return safeText;
+  const pattern = new RegExp(`(${safeQuery.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'ig');
+  return safeText.replace(pattern, '<mark>$1</mark>');
 }
 
 function getFileIcon(ext) {

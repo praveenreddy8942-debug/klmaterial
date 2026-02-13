@@ -6883,6 +6883,13 @@ main.materials-container {
     }
 
     .card-footer {
+
+    .material-name mark {
+      background: rgba(0, 212, 255, 0.25);
+      color: #ffffff;
+      padding: 0 4px;
+      border-radius: 6px;
+    }
       padding: 15px;
       flex-direction: column;
       gap: 8px;

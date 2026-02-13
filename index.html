@@ -6,13 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="KL Material - Your complete study hub for CSE materials, roadmaps, and resources" />
   <meta name="keywords" content="KL University, CSE, Study Materials, Roadmap, BEEC, DM, PSC, DSD" />
+  <meta name="theme-color" content="#001d3d" />
+  <link rel="canonical" href="https://praveenreddy8942-debug.github.io/klmaterial/" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="KL Material - Study Hub" />
   <meta property="og:description" content="Access comprehensive CSE study materials and career roadmaps" />
   <meta property="og:image" content="/klmaterial/profile.jpg" />
-  <meta property="og:url" content="https://praveenreddy8942-debug.github.io/klmaterial/index.html" />
+  <meta property="og:url" content="https://praveenreddy8942-debug.github.io/klmaterial/" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
@@ -20,6 +22,70 @@
   <meta name="twitter:image" content="https://praveenreddy8942-debug.github.io/klmaterial/profile.jpg" />
 
   <title>KL Material - Study Hub</title>
+
+  <!-- Performance Optimization: Resource Hints -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+
+  <link rel="stylesheet" href="style.css?v=8.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="manifest" href="/klmaterial/manifest.json" />
+  <link rel="icon" href="/klmaterial/icon.svg" />
+  <link rel="apple-touch-icon" href="/klmaterial/icon.svg" />
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZ0SERPS7L"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-NZ0SERPS7L');
+  </script>
+
+  <!-- Cache control for refresh during development/Pages rollout -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "KL Material",
+      "url": "https://praveenreddy8942-debug.github.io/klmaterial/",
+      "description": "CSE study hub with materials, roadmaps, and resources",
+      "publisher": {
+        "@type": "Person",
+        "name": "Praveen Reddy"
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <header>
+    <nav class="nav-liquid">
+      <button class="hamburger" aria-label="Toggle Menu" aria-expanded="false" aria-controls="mobile-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <a href="index.html" class="mobile-brand" aria-label="KL Material Home">KL Material</a>
+      <div id="mobile-nav" class="nav-track" role="menu" aria-hidden="true">
+        <a href="index.html" role="menuitem" tabindex="-1">🏠 Home</a>
+        <a href="materials.html" role="menuitem" tabindex="-1">📚 Materials</a>
+        <a href="roadmap.html" role="menuitem" tabindex="-1">🗺️ Roadmap</a>
+        <a href="about.html" role="menuitem" tabindex="-1">👨‍💻 About</a>
+        <a href="contact.html" role="menuitem" tabindex="-1">📞 Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="page-content home-page">
+    <!-- Seasonal animation overlay (created by animations.js) -->
+    <div id="seasonalAnimation" class="season-container" aria-hidden="true"></div>
 
     <section class="hero hero-advanced">
       <div class="hero-aurora" aria-hidden="true"></div>
@@ -48,49 +114,6 @@
         <div class="hero-panel">
           <div class="hero-panel-card">
             <p class="panel-title mono">Hub Status</p>
-            <div class="hero-stats">
-              <div class="hero-stat">
-                <span>Core Subjects</span>
-                <strong>4</strong>
-              </div>
-              <div class="hero-stat">
-                <span>Roadmap Years</span>
-                <strong>4</strong>
-              </div>
-              <div class="hero-stat">
-                <span>Key Pages</span>
-                <strong>5</strong>
-              </div>
-            </div>
-            <div class="hero-panel-list">
-              <div class="hero-panel-item"><span class="hero-panel-dot"></span> Search + filters ready for quick scans</div>
-              <div class="hero-panel-item"><span class="hero-panel-dot"></span> Roadmap links organized by year</div>
-              <div class="hero-panel-item"><span class="hero-panel-dot"></span> Mobile-first layouts with fast load</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="signal-strip" aria-label="Site signals">
-      <span class="signal-label mono">Signal</span>
-      <div class="signal-mask">
-        <div class="signal-track">
-          <div class="signal-set">
-            <span>BEEC notes grouped by unit</span>
-            <span>DM resources tagged for quick search</span>
-            <span>PSC and DSD materials ready to download</span>
-            <span>Roadmap links verified for 2026</span>
-          </div>
-          <div class="signal-set" aria-hidden="true">
-            <span>BEEC notes grouped by unit</span>
-            <span>DM resources tagged for quick search</span>
-            <span>PSC and DSD materials ready to download</span>
-            <span>Roadmap links verified for 2026</span>
-          </div>
-        </div>
-      </div>
-    </section>
             <div class="hero-stats">
               <div class="hero-stat">
                 <span>Core Subjects</span>
