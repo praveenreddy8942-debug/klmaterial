@@ -27,6 +27,13 @@
   --accent-secondary: #0077ff;
   --card-bg: rgba(255, 255, 255, 0.03);
   --border-color: rgba(0, 212, 255, 0.1);
+  --font-display: "Space Grotesk", "Poppins", sans-serif;
+  --font-body: "Space Grotesk", "Poppins", sans-serif;
+  --font-mono: "Space Mono", monospace;
+  --surface-1: rgba(8, 16, 30, 0.6);
+  --surface-2: rgba(10, 20, 40, 0.8);
+  --shadow-soft: 0 12px 30px rgba(0, 0, 0, 0.35);
+  --shadow-strong: 0 18px 45px rgba(0, 0, 0, 0.45);
 }
 
 /* General */
@@ -40,7 +47,7 @@ html {
 body {
   margin: 0;
   padding-top: 70px;
-  /* Default desktop padding */
+  font-family: var(--font-body);
   font-family: "Poppins", sans-serif;
   color: var(--text-primary);
   background: transparent;
@@ -58,6 +65,127 @@ body {
   -webkit-overflow-scrolling: touch;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+}
+
+/* ===== Professional Polish ===== */
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+p {
+  line-height: 1.7;
+}
+
+.page-content,
+.materials-container,
+.roadmap-container {
+  max-width: 1100px;
+}
+
+.page-content section,
+.materials-container section,
+.roadmap-container section {
+  margin-bottom: 48px;
+}
+
+.btn {
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+:is(
+  .card,
+  .neo-card,
+  .material-card,
+  .resource-card,
+  .year-card,
+  .about-section,
+  .feature-item,
+  .stat-card,
+  .contact-card-modern,
+  .subject-card
+) {
+  background: var(--surface-1);
+  border: 1px solid rgba(0, 212, 255, 0.18);
+  box-shadow: var(--shadow-soft);
+}
+
+:is(
+  .card,
+  .neo-card,
+  .material-card,
+  .resource-card,
+  .year-card,
+  .about-section,
+  .feature-item,
+  .stat-card,
+  .contact-card-modern,
+  .subject-card
+):hover {
+  border-color: rgba(0, 212, 255, 0.45);
+  box-shadow: var(--shadow-strong);
+}
+
+.section-head,
+.roadmap-header,
+.materials-hero,
+.contact-hero,
+.about-hero {
+  position: relative;
+}
+
+.section-head::after,
+.roadmap-header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -16px;
+  width: 64px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-primary), transparent);
+  opacity: 0.6;
+}
+
+.section-title,
+.roadmap-header h1,
+.materials-title,
+.contact-title,
+.about-title {
+  text-shadow: 0 12px 25px rgba(0, 0, 0, 0.35);
+}
+
+.stat-badge,
+.filter-pill,
+.quick-pill {
+  border-color: rgba(0, 212, 255, 0.35);
+}
+
+.materials-hero,
+.roadmap-header,
+.about-hero,
+.contact-hero {
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.16), rgba(0, 119, 255, 0.08));
+  border: 1px solid rgba(0, 212, 255, 0.22);
+  box-shadow: var(--shadow-soft);
+  border-radius: 26px;
+}
+
+@media (max-width: 768px) {
+  .page-content,
+  .materials-container,
+  .roadmap-container {
+    max-width: 100%;
+  }
+
+  .section-head::after,
+  .roadmap-header::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }
 
 /* Mobile Animation Optimizations */
