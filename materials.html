@@ -39,7 +39,7 @@
   <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
 
   <link rel="stylesheet" href="style.css?v=8.0" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZ0SERPS7L"></script>
@@ -52,7 +52,7 @@
   </script>
 </head>
 
-<body>
+<body class="materials-page">
   <header>
     <nav aria-label="Primary" role="navigation" class="nav-liquid">
       <button class="hamburger" aria-label="Toggle Menu" aria-expanded="false" aria-controls="mobile-nav">
@@ -82,8 +82,13 @@
 
     <div class="materials-hero">
       <div class="hero-content">
+        <p class="materials-kicker mono">Materials Vault</p>
         <h1 class="materials-title">📚 CSE Study Materials</h1>
         <p class="materials-subtitle">Access comprehensive study resources for your engineering journey</p>
+        <div class="hero-actions">
+          <a class="btn btn-neo" href="#materials-list">Browse All</a>
+          <a class="btn btn-ghost" href="#filters">Filter Subjects</a>
+        </div>
         <div class="stats-badges">
           <span class="stat-badge">📖 100+ Materials</span>
           <span class="stat-badge">🎯 4 Subjects</span>
@@ -93,7 +98,7 @@
     </div>
 
     <!-- Advanced Search Bar -->
-    <div class="advanced-search-container">
+    <div id="search" class="advanced-search-container">
       <div class="search-wrapper">
         <span class="search-icon">🔍</span>
         <input type="text" id="search-bar" class="advanced-search-input"
@@ -105,7 +110,7 @@
     </div>
 
     <!-- Category Filter Pills -->
-    <div class="filter-pills-container">
+    <div id="filters" class="filter-pills-container">
       <h3 class="filter-label">Filter by Subject:</h3>
       <div class="filter-pills">
         <button class="filter-pill active" data-category="all">

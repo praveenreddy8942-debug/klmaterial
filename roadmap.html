@@ -39,7 +39,7 @@
   <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
 
   <link rel="stylesheet" href="style.css?v=8.0" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZ0SERPS7L"></script>
@@ -52,7 +52,7 @@
   </script>
 </head>
 
-<body>
+<body class="roadmap-page">
   <header>
     <nav class="nav-liquid">
       <button class="hamburger" aria-label="Toggle Menu" aria-expanded="false" aria-controls="mobile-nav">
@@ -82,12 +82,17 @@
       </nav>
 
       <div class="roadmap-header">
+        <p class="roadmap-kicker mono">Career Navigation</p>
         <h1>🎯 4-Year B.Tech Roadmap</h1>
         <p class="roadmap-quote">"Records and assignments will be forgotten. Skills stay. Focus on them."</p>
+        <div class="roadmap-actions">
+          <a class="btn btn-neo" href="#years">Jump to Years</a>
+          <a class="btn btn-ghost" href="#learning">Learning Links</a>
+        </div>
       </div>
 
       <!--📘 Learning & Skill Development Links Section -->
-      <section class="learning-section">
+      <section id="learning" class="learning-section">
         <h2>📘 Learning & Skill Development Links</h2>
 
         <div class="resources-grid">
@@ -116,7 +121,7 @@
       </section>
 
       <!-- Year Cards -->
-      <div class="years-grid">
+      <div id="years" class="years-grid">
         <!-- 1st Year Card -->
         <div class="year-card">
           <div class="year-badge">Year 1</div>

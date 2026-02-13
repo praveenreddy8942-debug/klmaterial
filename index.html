@@ -21,143 +21,163 @@
 
   <title>KL Material - Study Hub</title>
 
-  <!-- Performance Optimization: Resource Hints -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="dns-prefetch" href="https://firebasestorage.googleapis.com">
-  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
-  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
-
-  <!-- Styles & fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="style.css?v=8.0">
-  <link rel="manifest" href="/klmaterial/manifest.json" />
-  <link rel="icon" href="/klmaterial/icon.svg" />
-  <link rel="apple-touch-icon" href="/klmaterial/icon.svg" />
-
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZ0SERPS7L"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'G-NZ0SERPS7L');
-  </script>
-
-  <!-- Cache control for refresh during development/Pages rollout -->
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-  <meta http-equiv="Pragma" content="no-cache" />
-  <meta http-equiv="Expires" content="0" />
-  <!-- SEO Schema Markup -->
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "KL Material",
-      "url": "https://praveenreddy8942-debug.github.io/klmaterial/",
-      "description": "A centralized study hub for KL University CSE students.",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://praveenreddy8942-debug.github.io/klmaterial/materials.html?q={search_term_string}",
-        "query-input": "required name=search_term_string"
-      },
-      "author": {
-        "@type": "Person",
-        "name": "Praveen Reddy",
-        "url": "https://praveenreddy8942-debug.github.io/klmaterial/about.html"
-      }
-    }
-  </script>
-</head>
-
-<body>
-  <header>
-    <nav class="nav-liquid">
-      <button class="hamburger" aria-label="Toggle Menu" aria-expanded="false" aria-controls="mobile-nav">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <a href="index.html" class="mobile-brand" aria-label="KL Material Home">KL Material</a>
-      <div id="mobile-nav" class="nav-track" role="menu" aria-hidden="true">
-        <a href="index.html" role="menuitem" tabindex="-1">🏠 Home</a>
-        <a href="materials.html" role="menuitem" tabindex="-1">📚 Materials</a>
-        <a href="roadmap.html" role="menuitem" tabindex="-1">🗺️ Roadmap</a>
-        <a href="about.html" role="menuitem" tabindex="-1">👨‍💻 About</a>
-        <a href="contact.html" role="menuitem" tabindex="-1">📞 Contact</a>
-      </div>
-    </nav>
-  </header>
-
-  <main class="page-content home-page">
-    <!-- Seasonal animation overlay (created by animations.js) -->
-    <div id="seasonalAnimation" class="season-container" aria-hidden="true"></div>
-    <section class="hero modern-hero">
-      <div class="hero-content">
-        <div class="hero-text-side">
-          <div class="badge-pill">🚀 Your Ultimate Study Hub</div>
-          <h1 class="hero-title">Master Your <span class="gradient-text">CSE Journey</span></h1>
-          <p class="hero-description">
-            A centralized platform for KL University CSE students to access notes,
-            question papers, and roadmaps.
-          </p>
-
-          <!-- Professional Home Search -->
-          <div class="home-search-container">
-            <div class="home-search-wrapper">
-              <span class="search-icon">🔍</span>
-              <input type="text" id="home-search-input" placeholder="What do you want to learn today?"
-                autocomplete="off">
-              <button id="home-search-btn" aria-label="Search">Search</button>
-            </div>
+    <section class="hero hero-advanced">
+      <div class="hero-aurora" aria-hidden="true"></div>
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="hero-inner">
+        <div class="hero-identity">
+          <div class="hero-avatar">
+            <img src="profile.jpg" alt="Praveen Reddy" class="profile-img hero-profile" width="160" height="160" loading="eager">
+            <span class="hero-status">Updated Feb 2026</span>
           </div>
-
-          <div class="hero-cta-group">
-            <a class="btn btn-primary glow-effect" href="materials.html">
-              <span>📚 Browse Materials</span>
-            </a>
-            <a class="btn btn-secondary glass-effect" href="roadmap.html">
-              <span>🗺️ View Roadmap</span>
-            </a>
+          <div class="hero-text">
+            <p class="hero-kicker mono">CSE Study Hub</p>
+            <h1 class="hero-title"><span>KL Material</span> for CSE Success</h1>
+            <p class="hero-subtitle">Curated notes, roadmaps, and project-ready resources organized for fast, focused study.</p>
+            <div class="hero-cta">
+              <a class="btn btn-neo" href="materials.html">Browse Materials</a>
+              <a class="btn btn-ghost btn-neo-outline" href="roadmap.html">View Roadmap</a>
+            </div>
+            <div class="hero-quicklinks">
+              <a class="quick-pill" href="materials.html">Filter by Subject</a>
+              <a class="quick-pill" href="roadmap.html">4-Year Roadmap</a>
+              <a class="quick-pill" href="contact.html">Get Help</a>
+            </div>
           </div>
         </div>
-        <div class="hero-visual-side">
-          <div class="profile-container tilt-effect">
-            <div class="profile-glow"></div>
-            <img src="profile.jpg" alt="Praveen Reddy" class="profile-img-lg" width="280" height="280" loading="eager">
-            <div class="floating-badge badge-1">
-              <i class="fa-solid fa-code"></i> Developer
+        <div class="hero-panel">
+          <div class="hero-panel-card">
+            <p class="panel-title mono">Hub Status</p>
+            <div class="hero-stats">
+              <div class="hero-stat">
+                <span>Core Subjects</span>
+                <strong>4</strong>
+              </div>
+              <div class="hero-stat">
+                <span>Roadmap Years</span>
+                <strong>4</strong>
+              </div>
+              <div class="hero-stat">
+                <span>Key Pages</span>
+                <strong>5</strong>
+              </div>
             </div>
-            <div class="floating-badge badge-2">
-              <i class="fa-solid fa-graduation-cap"></i> Student
+            <div class="hero-panel-list">
+              <div class="hero-panel-item"><span class="hero-panel-dot"></span> Search + filters ready for quick scans</div>
+              <div class="hero-panel-item"><span class="hero-panel-dot"></span> Roadmap links organized by year</div>
+              <div class="hero-panel-item"><span class="hero-panel-dot"></span> Mobile-first layouts with fast load</div>
             </div>
           </div>
         </div>
       </div>
+    </section>
 
-      <div class="scroll-indicator">
-        <span>Explore</span>
-        <div class="mouse">
-          <div class="wheel"></div>
+    <section class="signal-strip" aria-label="Site signals">
+      <span class="signal-label mono">Signal</span>
+      <div class="signal-mask">
+        <div class="signal-track">
+          <div class="signal-set">
+            <span>BEEC notes grouped by unit</span>
+            <span>DM resources tagged for quick search</span>
+            <span>PSC and DSD materials ready to download</span>
+            <span>Roadmap links verified for 2026</span>
+          </div>
+          <div class="signal-set" aria-hidden="true">
+            <span>BEEC notes grouped by unit</span>
+            <span>DM resources tagged for quick search</span>
+            <span>PSC and DSD materials ready to download</span>
+            <span>Roadmap links verified for 2026</span>
+          </div>
+        </div>
+      </div>
+    </section>
+            <div class="hero-stats">
+              <div class="hero-stat">
+                <span>Core Subjects</span>
+                <strong>4</strong>
+              </div>
+              <div class="hero-stat">
+                <span>Roadmap Years</span>
+                <strong>4</strong>
+              </div>
+              <div class="hero-stat">
+                <span>Key Pages</span>
+                <strong>5</strong>
+              </div>
+            </div>
+            <div class="hero-panel-list">
+              <div class="hero-panel-item"><span class="hero-panel-dot"></span> Search + filters ready for quick scans</div>
+              <div class="hero-panel-item"><span class="hero-panel-dot"></span> Roadmap links organized by year</div>
+              <div class="hero-panel-item"><span class="hero-panel-dot"></span> Mobile-first layouts with fast load</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="signal-strip" aria-label="Site signals">
+      <span class="signal-label mono">Signal</span>
+      <div class="signal-mask">
+        <div class="signal-track">
+          <div class="signal-set">
+            <span>BEEC notes grouped by unit</span>
+            <span>DM resources tagged for quick search</span>
+            <span>PSC and DSD materials ready to download</span>
+            <span>Roadmap links verified for 2026</span>
+          </div>
+          <div class="signal-set" aria-hidden="true">
+            <span>BEEC notes grouped by unit</span>
+            <span>DM resources tagged for quick search</span>
+            <span>PSC and DSD materials ready to download</span>
+            <span>Roadmap links verified for 2026</span>
+          </div>
         </div>
       </div>
     </section>
 
     <section class="features">
+      <div class="section-head">
+        <p class="section-kicker mono">What you get</p>
+        <h2 class="section-title">Everything organized. Zero noise.</h2>
+        <p class="section-subtitle">Cut straight to what matters with focused materials, roadmaps, and support.</p>
+      </div>
       <div class="feature-cards">
-        <a class="card" href="materials.html">
-          <h3>📚 Materials</h3>
-          <p>Notes, PDFs and curated resources grouped by subject.</p>
+        <a class="card neo-card" href="materials.html">
+          <h3>📚 Materials Vault</h3>
+          <p>Notes, PDFs, and curated resources grouped by subject and keyword.</p>
         </a>
-        <a class="card" href="roadmap.html">
-          <h3>🗺️ Roadmap</h3>
-          <p>4-year roadmap for B.Tech CSE with suggested learning paths.</p>
+        <a class="card neo-card" href="roadmap.html">
+          <h3>🗺️ Roadmap Navigator</h3>
+          <p>4-year CSE roadmap with skill stacks, projects, and career focus.</p>
         </a>
-        <a class="card" href="about.html">
-          <h3>👨‍💻 About</h3>
-          <p>About the project and contact details.</p>
+        <a class="card neo-card" href="about.html">
+          <h3>👨‍💻 Builder Profile</h3>
+          <p>Learn more about the project, the vision, and how to reach out.</p>
         </a>
+      </div>
+    </section>
+
+    <section class="home-pathway">
+      <div class="section-head">
+        <p class="section-kicker mono">How to use it</p>
+        <h2 class="section-title">A fast loop for every semester.</h2>
+      </div>
+      <div class="pathway-grid">
+        <div class="pathway-step">
+          <p class="step-label mono">Step 01</p>
+          <h3>Discover</h3>
+          <p>Open materials by subject, scan keywords, and pick your focus.</p>
+        </div>
+        <div class="pathway-step">
+          <p class="step-label mono">Step 02</p>
+          <h3>Plan</h3>
+          <p>Use the roadmap to map skills, projects, and exam priorities.</p>
+        </div>
+        <div class="pathway-step">
+          <p class="step-label mono">Step 03</p>
+          <h3>Execute</h3>
+          <p>Download, practice, and loop back with faster revisions.</p>
+        </div>
       </div>
     </section>
   </main>
