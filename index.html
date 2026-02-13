@@ -35,6 +35,16 @@
   <link rel="icon" href="/klmaterial/icon.svg" />
   <link rel="apple-touch-icon" href="/klmaterial/icon.svg" />
 
+  <!-- Critical CSS for Above-the-Fold Hero -->
+  <style>
+    html { background: #000814; }
+    body { margin: 0; padding-top: 70px; font-family: 'Space Grotesk', Poppins, sans-serif; color: white; background: linear-gradient(135deg, #000814, #001d3d); }
+    header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(10px); height: 70px; }
+    main { width: 100%; max-width: 100%; padding: clamp(16px, 4vw, 48px); }
+    .hero-advanced { padding: clamp(20px, 5vw, 60px) clamp(16px, 4vw, 48px); }
+    .sections { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+  </style>
+
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZ0SERPS7L"></script>
   <script>

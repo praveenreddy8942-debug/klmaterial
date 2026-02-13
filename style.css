@@ -966,6 +966,106 @@ body::after {
   }
 }
 
+/* ===== Fullscreen Layout Overrides ===== */
+main,
+.page-content,
+.materials-container,
+.roadmap-container,
+.contact-page,
+.about-page,
+.materials-page,
+.roadmap-page,
+.home-page {
+  width: 100%;
+  max-width: 100%;
+}
+
+.page-content,
+.materials-container,
+.roadmap-container {
+  padding-left: clamp(16px, 4vw, 48px);
+  padding-right: clamp(16px, 4vw, 48px);
+}
+
+.materials-hero,
+.roadmap-header,
+.about-hero,
+.contact-hero,
+.features,
+.home-pathway {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.feature-cards,
+.pathway-grid,
+.resources-grid,
+.years-grid,
+.materials-grid,
+.contact-grid,
+.stats-grid,
+.features-grid {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 768px) {
+  .hero-aurora,
+  .hero-grid,
+  .season-container,
+  #particleCanvas {
+    display: none;
+  }
+
+  .materials-hero,
+  .roadmap-header,
+  .about-hero,
+  .contact-hero {
+    border-radius: 18px;
+  }
+
+  :is(
+    .card,
+    .neo-card,
+    .material-card,
+    .resource-card,
+    .year-card,
+    .about-section,
+    .feature-item,
+    .stat-card,
+    .contact-card-modern,
+    .subject-card
+  ) {
+    box-shadow: none;
+  }
+}
+
+/* ===== Performance Optimizations ===== */
+/* Image lazy loading */
+img {
+  loading: lazy;
+  decoding: async;
+}
+
+/* Reduce CLS (Cumulative Layout Shift) by setting aspect ratios */
+img, iframe {
+  aspect-ratio: auto;
+}
+
+/* Optimize font loading with font-display: swap */
+/* Already set in Google Fonts link (display=swap) */
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 .btn {
   background: linear-gradient(90deg, #00bfff, #0080ff);
   color: var(--text-primary);
