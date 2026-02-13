@@ -5045,13 +5045,14 @@ main.materials-container {
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    padding: 30px 0;
-    gap: 10px;
+    padding: 20px 0;
+    gap: 0;
     transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 2000; /* Below header, above overlay */
     overflow-y: auto; /* Scrollable if content overflows */
     box-shadow: 10px 0 50px rgba(0, 0, 0, 0.7);
     visibility: visible; /* Always visible, just moved off-screen */
+    opacity: 1 !important;
   }
 
   body.nav-active .nav-track {
@@ -5100,15 +5101,16 @@ main.materials-container {
     text-shadow: none !important;
     visibility: visible !important;
     opacity: 1 !important;
+    display: block !important;
   }
 
   /* Navigation Links: Large Touch Targets (only inside drawer) */
   .nav-track a {
-    display: flex;
+    display: flex !important;
     align-items: center;
     width: 100%;
-    padding: 18px 30px;
-    font-size: 1.1rem;
+    padding: 16px 30px;
+    font-size: 1.05rem;
     font-weight: 500;
     color: #b0e0ff !important; /* Force visibility */
     -webkit-text-fill-color: #b0e0ff !important; /* iOS Safari fix */
@@ -5118,7 +5120,10 @@ main.materials-container {
     background: transparent;
     opacity: 1 !important; /* Always visible */
     transform: none; /* No movement */
-    gap: 15px; /* Space between icon and text */
+    gap: 12px; /* Space between icon and text */
+    white-space: nowrap;
+    z-index: 2001;
+    visibility: visible !important;
   }
 
   /* Removed complex animations that were hiding text */
