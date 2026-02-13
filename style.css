@@ -39,7 +39,8 @@ html {
 
 body {
   margin: 0;
-  padding-top: 100px;
+  padding-top: 70px;
+  /* Default desktop padding */
   font-family: "Poppins", sans-serif;
   color: var(--text-primary);
   background: transparent;
@@ -276,6 +277,8 @@ body::after {
 .hero {
   text-align: center;
   padding-top: 140px;
+  position: relative;
+  z-index: 1;
 }
 
 /* hero-banner styles removed pending image placement choice */
@@ -5416,10 +5419,12 @@ body::after {
       max-width: 100%;
       transform: none;
       position: fixed;
-      background: #000814;
-      /* Solid dark background */
+      background: rgba(0, 8, 20, 0.95);
+      /* Slightly transparent dark background */
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       border-bottom: 1px solid rgba(0, 212, 255, 0.2);
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
       z-index: 2000;
       /* Topmost layer */
       border-radius: 0;
@@ -5680,25 +5685,27 @@ body::after {
 
   /* Content Spacing: Guaranteed No Overlap */
   .hero {
-    padding-top: 160px;
+    padding-top: 100px;
+    /* Reduced from 160px */
     padding-left: 20px;
     padding-right: 20px;
   }
 
   .materials-container {
-    padding-top: 140px;
+    padding-top: 100px;
+    /* Reduced from 140px */
     padding-left: 15px;
     padding-right: 15px;
   }
 
   .roadmap-container {
-    padding-top: 140px;
+    padding-top: 100px;
     padding-left: 15px;
     padding-right: 15px;
   }
 
   .page-content {
-    padding-top: 140px;
+    padding-top: 100px;
     padding-left: 20px;
     padding-right: 20px;
   }
@@ -5708,6 +5715,7 @@ body::after {
     font-size: 1.8rem;
     line-height: 1.3;
     word-wrap: break-word;
+    margin-top: 0;
   }
 
   .profile-pic {
