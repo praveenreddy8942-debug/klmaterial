@@ -4987,7 +4987,7 @@ main.materials-container {
     left: 50%;
     transform: translateX(-50%); /* Perfect centering */
     text-align: center;
-    pointer-events: auto;
+    pointer-events: none;
     z-index: 1;
   }
 
@@ -5005,6 +5005,8 @@ main.materials-container {
     z-index: 2001; /* Above everything */
     position: relative;
     flex-shrink: 0; /* Don't shrink */
+    pointer-events: auto !important;
+    touch-action: manipulation;
   }
 
   .hamburger span {
