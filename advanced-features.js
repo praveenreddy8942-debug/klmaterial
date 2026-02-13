@@ -64,16 +64,28 @@ class ParticleSystem {
     this.canvas = null;
     this.ctx = null;
     this.particles = [];
-    this.particleCount = 50;
+    // Reduce particle count based on device
+    this.particleCount = window.innerWidth < 768 ? 20 : 50;
     this.mouse = { x: null, y: null, radius: 150 };
+    this.animationFrameId = null;
     this.init();
   }
 
   init() {
+    // Only initialize on desktop or high-performance devices
+    if (window.innerWidth < 768 && !this.isHighPerformance()) {
+      return; // Skip particle system on mobile
+    }
     this.createCanvas();
     this.createParticles();
     this.animate();
     this.attachEventListeners();
+  }
+
+  isHighPerformance() {
+    // Check if device has good performance characteristics
+    // Fallback to false if hardwareConcurrency is not supported
+    return navigator.hardwareConcurrency ? navigator.hardwareConcurrency > 4 : false;
   }
 
   createCanvas() {
@@ -104,6 +116,8 @@ class ParticleSystem {
   }
 
   animate() {
+    if (!this.ctx) return; // Safety check
+    
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     
     this.particles.forEach((particle, i) => {
@@ -115,7 +129,7 @@ class ParticleSystem {
       if (particle.x < 0 || particle.x > this.canvas.width) particle.vx *= -1;
       if (particle.y < 0 || particle.y > this.canvas.height) particle.vy *= -1;
 
-      // Mouse interaction
+      // Mouse interaction (only if mouse is active)
       if (this.mouse.x !== null && this.mouse.y !== null) {
         const dx = this.mouse.x - particle.x;
         const dy = this.mouse.y - particle.y;
@@ -134,8 +148,9 @@ class ParticleSystem {
       this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
       this.ctx.fill();
 
-      // Connect nearby particles
-      this.particles.slice(i + 1).forEach(otherParticle => {
+      // Connect nearby particles (only check next particles to avoid duplicates)
+      for (let j = i + 1; j < this.particles.length; j++) {
+        const otherParticle = this.particles[j];
         const dx = particle.x - otherParticle.x;
         const dy = particle.y - otherParticle.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
@@ -148,10 +163,19 @@ class ParticleSystem {
           this.ctx.lineTo(otherParticle.x, otherParticle.y);
           this.ctx.stroke();
         }
-      });
+      }
     });
 
-    requestAnimationFrame(() => this.animate());
+    this.animationFrameId = requestAnimationFrame(() => this.animate());
+  }
+
+  destroy() {
+    if (this.animationFrameId) {
+      cancelAnimationFrame(this.animationFrameId);
+    }
+    if (this.canvas && this.canvas.parentNode) {
+      this.canvas.parentNode.removeChild(this.canvas);
+    }
   }
 
   attachEventListeners() {
@@ -160,7 +184,7 @@ class ParticleSystem {
     window.addEventListener('mousemove', (e) => {
       this.mouse.x = e.clientX;
       this.mouse.y = e.clientY;
-    });
+    }, { passive: true }); // Add passive for better performance
 
     window.addEventListener('mouseleave', () => {
       this.mouse.x = null;
@@ -274,7 +298,7 @@ class ScrollProgress {
   }
 
   attachEventListeners() {
-    window.addEventListener('scroll', () => this.updateProgress());
+    window.addEventListener('scroll', () => this.updateProgress(), { passive: true });
   }
 }
 
@@ -313,7 +337,7 @@ class CustomCursor {
       
       this.cursorDot.style.left = e.clientX + 'px';
       this.cursorDot.style.top = e.clientY + 'px';
-    });
+    }, { passive: true }); // Add passive for better performance
 
     // Add hover effect on interactive elements
     const interactiveElements = document.querySelectorAll('a, button, .card, input, textarea');

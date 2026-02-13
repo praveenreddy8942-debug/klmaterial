@@ -22,6 +22,9 @@
   <title>KL Material - Study Hub</title>
 
   <!-- Styles & fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="style.css?v=8.0">
@@ -68,7 +71,7 @@
     <div id="seasonalAnimation" class="season-container" aria-hidden="true"></div>
     <section class="hero">
       <div class="hero-inner">
-  <img src="profile.jpg" alt="Praveen Reddy" class="profile-img" width="160" height="160" loading="eager">
+  <img src="profile.jpg" alt="Praveen Reddy" class="profile-img" width="160" height="160" fetchpriority="high" decoding="async">
         <div class="hero-text">
           <h1 class="hero-title">KL Material</h1>
           <p class="hero-subtitle">Study materials, roadmaps and resources for CSE students.</p>
@@ -105,10 +108,10 @@
   <button id="backToTop" title="Back to top">↑</button>
 
   <!-- Site scripts -->
-  <script src="advanced-features.js"></script>
-  <script src="animations.js"></script>
-  <script src="chatbot.js"></script>
-  <script src="ui.js?v=6.0"></script>
+  <script src="advanced-features.js" defer></script>
+  <script src="animations.js" defer></script>
+  <script src="chatbot.js" async></script>
+  <script src="ui.js?v=6.0" defer></script>
   <!-- Register service worker (if supported) to enable offline cache and updates -->
   <script>
     if ('serviceWorker' in navigator) {

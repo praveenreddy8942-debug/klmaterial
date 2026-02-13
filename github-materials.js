@@ -147,6 +147,9 @@ function displayMaterials(grouped) {
   if (!materialsList) return;
   materialsList.innerHTML = "";
 
+  // Use document fragment for better performance
+  const fragment = document.createDocumentFragment();
+
   for (const subject in grouped) {
     const subjectCard = document.createElement("div");
     subjectCard.className = "subject-card";
@@ -199,8 +202,11 @@ function displayMaterials(grouped) {
     body.appendChild(grid);
     subjectCard.appendChild(header);
     subjectCard.appendChild(body);
-    materialsList.appendChild(subjectCard);
+    fragment.appendChild(subjectCard);
   }
+  
+  // Single DOM update for better performance
+  materialsList.appendChild(fragment);
 }
 
 function getFileIcon(ext) {
@@ -235,15 +241,15 @@ async function loadMaterials() {
   try {
     const grouped = {};
 
-    // Fetch files from each subject folder
-    for (const [key, config] of Object.entries(subjects)) {
+    // Prepare headers once
+    const headers = {};
+    if (GITHUB_TOKEN) {
+      headers['Authorization'] = `token ${GITHUB_TOKEN}`;
+    }
+
+    // Fetch all subjects in parallel for better performance
+    const fetchPromises = Object.entries(subjects).map(async ([key, config]) => {
       try {
-        // Add authentication header if token is provided
-        const headers = {};
-        if (GITHUB_TOKEN) {
-          headers['Authorization'] = `token ${GITHUB_TOKEN}`;
-        }
-        
         console.log(`Fetching ${config.folder}...`);
         const response = await fetch(getGitHubAPIUrl(config.folder), { headers });
         
@@ -255,20 +261,11 @@ async function loadMaterials() {
             const errorData = await response.json();
             console.error('403 Error details:', errorData);
             if (errorData.message && errorData.message.includes('rate limit')) {
-              materialsList.innerHTML = `
-                <div class="no-results">
-                  <h3>⏱️ GitHub API Rate Limit Reached</h3>
-                  <p>Too many requests! Please wait 10-15 minutes and refresh.</p>
-                  <p style="font-size: 0.9rem; opacity: 0.8; margin-top: 10px;">
-                    <strong>Fix this permanently:</strong> The site owner can add a GitHub token to increase the rate limit from 60 to 5,000 requests/hour.
-                  </p>
-                </div>
-              `;
-              return;
+              return { error: 'rate_limit', errorData };
             }
           }
           console.warn(`Folder ${config.folder} not found or empty`);
-          continue;
+          return null;
         }
 
         const files = await response.json();
@@ -278,16 +275,46 @@ async function loadMaterials() {
         const materialFiles = files.filter(file => file.type === 'file');
         
         if (materialFiles.length > 0) {
-          grouped[config.name] = materialFiles.map(file => ({
-            name: file.name,
-            folder: config.folder,
-            size: file.size
-          }));
+          return {
+            subject: config.name,
+            files: materialFiles.map(file => ({
+              name: file.name,
+              folder: config.folder,
+              size: file.size
+            }))
+          };
         }
+        return null;
       } catch (error) {
         console.error(`Error loading ${config.folder}:`, error);
+        return null;
       }
+    });
+
+    // Wait for all fetches to complete in parallel
+    const results = await Promise.all(fetchPromises);
+
+    // Check for rate limit error
+    const rateLimitError = results.find(r => r && r.error === 'rate_limit');
+    if (rateLimitError) {
+      materialsList.innerHTML = `
+        <div class="no-results">
+          <h3>⏱️ GitHub API Rate Limit Reached</h3>
+          <p>Too many requests! Please wait 10-15 minutes and refresh.</p>
+          <p style="font-size: 0.9rem; opacity: 0.8; margin-top: 10px;">
+            <strong>Fix this permanently:</strong> The site owner can add a GitHub token to increase the rate limit from 60 to 5,000 requests/hour.
+          </p>
+        </div>
+      `;
+      return;
     }
+
+    // Build grouped object from results
+    results.forEach(result => {
+      if (result && result.subject && result.files) {
+        grouped[result.subject] = result.files;
+      }
+    });
 
     allMaterials = grouped;
     console.log('Total materials grouped:', Object.keys(grouped).length, 'subjects');

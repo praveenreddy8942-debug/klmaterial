@@ -42,7 +42,8 @@ function createSeasonalAnimation() {
 
 function createSnowfall(container) {
   const snowflakes = ['❄', '❅', '❆'];
-  const count = 50;
+  // Reduce count on mobile for better performance
+  const count = window.innerWidth <= 768 ? 20 : 50;
   
   // Check if mobile device
   const isMobile = window.innerWidth <= 768;
@@ -62,7 +63,8 @@ function createSnowfall(container) {
 
 function createPetals(container) {
   const petals = ['🌸', '🌺', '🌼', '🌻'];
-  const count = 30;
+  // Reduce count on mobile for better performance
+  const count = window.innerWidth <= 768 ? 15 : 30;
   
   // Check if mobile device
   const isMobile = window.innerWidth <= 768;
@@ -81,7 +83,8 @@ function createPetals(container) {
 }
 
 function createFireflies(container) {
-  const count = 20;
+  // Reduce count on mobile for better performance
+  const count = window.innerWidth <= 768 ? 10 : 20;
   
   // Check if mobile device
   const isMobile = window.innerWidth <= 768;
@@ -100,7 +103,8 @@ function createFireflies(container) {
 
 function createLeaves(container) {
   const leaves = ['🍂', '🍁', '🍃'];
-  const count = 35;
+  // Reduce count on mobile for better performance
+  const count = window.innerWidth <= 768 ? 18 : 35;
   
   // Check if mobile device
   const isMobile = window.innerWidth <= 768;
