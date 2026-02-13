@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 backToTopBtn.classList.remove('show');
             }
-        });
+        }, { passive: true }); // Add passive for better scroll performance
 
         backToTopBtn.addEventListener('click', () => {
             window.scrollTo({

@@ -17,7 +17,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
 
-// DOM Elements
+// DOM Elements - Cache queries for better performance
 const materialsList = document.getElementById("materials-list");
 const searchBar = document.getElementById("search-bar");
 const clearBtn = document.getElementById("clear-search");
@@ -137,6 +137,9 @@ function displayMaterials(grouped) {
   if (!materialsList) return;
   materialsList.innerHTML = "";
 
+  // Use document fragment for better performance
+  const fragment = document.createDocumentFragment();
+
   for (const subject in grouped) {
     // Subject Card wrapper
     const subjectCard = document.createElement("div");
@@ -216,8 +219,11 @@ function displayMaterials(grouped) {
     subjectCard.appendChild(header);
     subjectCard.appendChild(body);
 
-    materialsList.appendChild(subjectCard);
+    fragment.appendChild(subjectCard);
   }
+  
+  // Single DOM update for better performance
+  materialsList.appendChild(fragment);
 }
 
 // Helper function to get subject icon
