@@ -66,16 +66,40 @@
   <main class="page-content home-page">
     <!-- Seasonal animation overlay (created by animations.js) -->
     <div id="seasonalAnimation" class="season-container" aria-hidden="true"></div>
-    <section class="hero">
-      <div class="hero-inner">
-        <img src="profile.jpg" alt="Praveen Reddy" class="profile-img" width="160" height="160" loading="eager">
-        <div class="hero-text">
-          <h1 class="hero-title">KL Material</h1>
-          <p class="hero-subtitle">Study materials, roadmaps and resources for CSE students.</p>
-          <div class="hero-cta">
-            <a class="btn" href="materials.html">Browse Materials</a>
-            <a class="btn btn-ghost" href="roadmap.html">View Roadmap</a>
+    <section class="hero modern-hero">
+      <div class="hero-content">
+        <div class="hero-text-side">
+          <div class="badge-pill">🚀 Your Ultimate Study Hub</div>
+          <h1 class="hero-title">Master Your <span class="gradient-text">CSE Journey</span></h1>
+          <p class="hero-description">Access curated study materials, comprehensive roadmaps, and resources designed to
+            help you excel at KL University.</p>
+          <div class="hero-cta-group">
+            <a class="btn btn-primary glow-effect" href="materials.html">
+              <span>📚 Browse Materials</span>
+            </a>
+            <a class="btn btn-secondary glass-effect" href="roadmap.html">
+              <span>🗺️ View Roadmap</span>
+            </a>
           </div>
+        </div>
+        <div class="hero-visual-side">
+          <div class="profile-container tilt-effect">
+            <div class="profile-glow"></div>
+            <img src="profile.jpg" alt="Praveen Reddy" class="profile-img-lg" width="280" height="280" loading="eager">
+            <div class="floating-badge badge-1">
+              <i class="fa-solid fa-code"></i> Developer
+            </div>
+            <div class="floating-badge badge-2">
+              <i class="fa-solid fa-graduation-cap"></i> Student
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="scroll-indicator">
+        <span>Explore</span>
+        <div class="mouse">
+          <div class="wheel"></div>
         </div>
       </div>
     </section>
@@ -104,12 +128,12 @@
 
   <button id="backToTop" title="Back to top">↑</button>
 
-  <!-- Site scripts -->
-  <script src="advanced-features.js"></script>
-  <script src="animations.js"></script>
-  <script src="chatbot.js"></script>
-  <script src="tilt.js"></script>
-  <script src="ui.js?v=6.0"></script>
+  <!-- Site scripts (Deferred for performance) -->
+  <script src="advanced-features.js" defer></script>
+  <script src="animations.js" defer></script>
+  <script src="chatbot.js" defer></script>
+  <script src="tilt.js" defer></script>
+  <script src="ui.js?v=6.0" defer></script>
   <!-- Register service worker (if supported) to enable offline cache and updates -->
   <script>
     if ('serviceWorker' in navigator) {
