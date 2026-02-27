@@ -4380,6 +4380,80 @@ main.materials-container {
   word-wrap: break-word;
 }
 
+/* Material metadata (downloads + ratings) */
+.material-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: #8ab4d4;
+}
+
+.meta-downloads {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  opacity: 0.8;
+}
+
+.meta-rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.meta-rating small {
+  color: #ffd700;
+  font-weight: 600;
+  margin-left: 2px;
+}
+
+.stars-row {
+  display: inline-flex;
+  gap: 1px;
+}
+
+.star {
+  cursor: pointer;
+  font-size: 1rem;
+  color: #555;
+  transition: color 0.2s, transform 0.15s;
+  user-select: none;
+}
+
+.star:hover,
+.star.filled {
+  color: #ffd700;
+}
+
+.star.half {
+  color: #ffd700;
+  opacity: 0.6;
+}
+
+.star:hover {
+  transform: scale(1.3);
+}
+
+.stars-row:hover .star {
+  color: #555;
+}
+
+.stars-row:hover .star:hover,
+.stars-row:hover .star:hover ~ .star {
+  color: #555;
+}
+
+.stars-row .star:hover ~ .star {
+  color: #555;
+}
+
+.stars-row:hover .star:has(~ .star:hover),
+.stars-row:hover .star:hover {
+  color: #ffd700;
+}
+
 .card-footer {
   padding: 20px;
   display: flex;

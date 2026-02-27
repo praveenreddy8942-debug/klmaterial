@@ -1,5 +1,5 @@
 // Service Worker for PWA
-const CACHE_NAME = 'klmaterial-v2';
+const CACHE_NAME = 'klmaterial-v3';
 const urlsToCache = [
   '/klmaterial/',
   '/klmaterial/index.html',
@@ -12,6 +12,7 @@ const urlsToCache = [
   '/klmaterial/advanced-features.js',
   '/klmaterial/chatbot.js',
   '/klmaterial/github-materials.js',
+  '/klmaterial/firebase-db.js',
   '/klmaterial/profile.jpg',
   '/klmaterial/icon.svg',
   '/klmaterial/manifest.json',

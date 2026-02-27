@@ -45,6 +45,7 @@ const filterButtons = document.querySelectorAll(".filter-pill");
 let allMaterials = {};
 let activeCategory = "all";
 let currentQuery = "";
+let materialsMetadata = new Map();
 
 // GitHub API URL
 function getGitHubAPIUrl(folder) {
@@ -222,6 +223,24 @@ function displayMaterials(grouped) {
       const downloadUrl = getDownloadUrl(file);
       const displayName = currentQuery ? highlightMatch(name, currentQuery) : escapeHtml(name);
 
+      // Get metadata from Firebase (if available)
+      const fdb = window.firebaseDB;
+      const docId = fdb ? fdb.getDocId(file.folder, file.name) : '';
+      const meta = materialsMetadata.get(docId);
+      const downloadCount = meta ? (meta.downloads || 0) : 0;
+      const rating = meta ? (meta.rating || 0) : 0;
+      const ratingCount = meta ? (meta.ratingCount || 0) : 0;
+
+      // Build star display
+      const fullStars = Math.floor(rating);
+      const hasHalf = (rating - fullStars) >= 0.5;
+      let starsHtml = '';
+      for (let s = 1; s <= 5; s++) {
+        if (s <= fullStars) starsHtml += '<span class="star filled" data-star="' + s + '">★</span>';
+        else if (s === fullStars + 1 && hasHalf) starsHtml += '<span class="star half" data-star="' + s + '">★</span>';
+        else starsHtml += '<span class="star" data-star="' + s + '">☆</span>';
+      }
+
       const card = document.createElement("div");
       card.className = "material-card";
       card.innerHTML = `
@@ -231,14 +250,27 @@ function displayMaterials(grouped) {
         </div>
         <div class="card-body">
           <h3 class="material-name">${displayName}</h3>
+          <div class="material-meta">
+            <span class="meta-downloads" title="Downloads">⬇ ${downloadCount}</span>
+            <span class="meta-rating" title="${rating} / 5 (${ratingCount} ratings)">
+              <span class="stars-row" data-folder="${file.folder}" data-file="${escapeHtml(file.name)}">${starsHtml}</span>
+              <small>${ratingCount > 0 ? rating.toFixed(1) : ''}</small>
+            </span>
+          </div>
         </div>
         <div class="card-footer">
-          <a href="${downloadUrl}" download class="download-link">
+          <a href="${downloadUrl}" download class="download-link" data-folder="${file.folder}" data-file="${escapeHtml(file.name)}">
             <span class="download-icon">⬇</span>
             <span>Download</span>
           </a>
         </div>
       `;
+
+      // Track view
+      if (fdb && fdb.isReady) {
+        fdb.trackView(file.folder, file.name);
+      }
+
       grid.appendChild(card);
     });
 
@@ -384,6 +416,18 @@ async function loadMaterials() {
       `;
     } else {
       console.log('Displaying materials...');
+
+      // Fetch metadata from Firebase (downloads, ratings)
+      const fdb = window.firebaseDB;
+      if (fdb && fdb.isReady) {
+        try {
+          materialsMetadata = await fdb.getAllMetadata();
+          console.log('[firebase-db] Loaded metadata for', materialsMetadata.size, 'materials');
+        } catch (e) {
+          console.warn('[firebase-db] Could not load metadata:', e);
+        }
+      }
+
       displayMaterials(grouped);
     }
   } catch (error) {
@@ -418,5 +462,68 @@ if (materialsList) {
       const searchContainer = document.querySelector('.advanced-search-container');
       if (searchContainer) searchContainer.scrollIntoView({ behavior: 'smooth' });
     }
+  });
+}
+
+// ─── Event Delegation: Download Tracking & Star Ratings ───
+if (materialsList) {
+  // Track downloads
+  materialsList.addEventListener('click', (e) => {
+    const downloadLink = e.target.closest('.download-link[data-folder]');
+    if (downloadLink) {
+      const folder = downloadLink.dataset.folder;
+      const file = downloadLink.dataset.file;
+      const fdb = window.firebaseDB;
+      if (fdb && fdb.isReady && folder && file) {
+        fdb.trackDownload(folder, file);
+        // Update the count in the UI
+        const card = downloadLink.closest('.material-card');
+        if (card) {
+          const countEl = card.querySelector('.meta-downloads');
+          if (countEl) {
+            const current = parseInt(countEl.textContent.replace(/\D/g, '')) || 0;
+            countEl.textContent = '⬇ ' + (current + 1);
+          }
+        }
+      }
+    }
+  });
+
+  // Handle star rating clicks
+  materialsList.addEventListener('click', (e) => {
+    const star = e.target.closest('.star[data-star]');
+    if (!star) return;
+
+    const starsRow = star.closest('.stars-row');
+    if (!starsRow) return;
+
+    const folder = starsRow.dataset.folder;
+    const file = starsRow.dataset.file;
+    const rating = parseInt(star.dataset.star);
+    const fdb = window.firebaseDB;
+
+    if (!fdb || !fdb.isReady || !folder || !file) return;
+
+    fdb.rateMaterial(folder, file, rating).then((result) => {
+      if (result.success) {
+        // Update stars display
+        const allStars = starsRow.querySelectorAll('.star');
+        allStars.forEach((s, i) => {
+          if (i < rating) {
+            s.textContent = '★';
+            s.classList.add('filled');
+            s.classList.remove('half');
+          } else {
+            s.textContent = '☆';
+            s.classList.remove('filled', 'half');
+          }
+        });
+        // Update rating text
+        const small = starsRow.parentElement.querySelector('small');
+        if (small) small.textContent = result.rating.toFixed(1);
+      } else if (result.message) {
+        console.info('[rating]', result.message);
+      }
+    });
   });
 }
