@@ -38,7 +38,7 @@ If asked about unrelated topics, politely redirect to academics.`;
     win.innerHTML = `
       <div class="gchat-header">
         <div class="gchat-header-info">
-          <span class="gchat-avatar">🤖</span>
+          <span class="gchat-avatar"><i class="fa-solid fa-robot"></i></span>
           <div>
             <strong>KL Study Buddy</strong>
             <small>Powered by Gemini AI</small>
@@ -48,8 +48,8 @@ If asked about unrelated topics, politely redirect to academics.`;
       </div>
       <div id="gchat-messages" class="gchat-messages">
         <div class="gchat-msg bot">
-          <span class="gchat-msg-icon">🤖</span>
-          <div class="gchat-bubble">Hi! I'm your KL Study Buddy 📚<br>Ask me anything about BEEC, DM, PSC, DSD, career roadmaps, or study tips!</div>
+          <span class="gchat-msg-icon"><i class="fa-solid fa-robot"></i></span>
+          <div class="gchat-bubble">Hi! I'm your KL Study Buddy <i class="fa-solid fa-book-open"></i><br>Ask me anything about BEEC, DM, PSC, DSD, career roadmaps, or study tips!</div>
         </div>
       </div>
       <form id="gchat-form" class="gchat-input-area" autocomplete="off">
@@ -92,7 +92,7 @@ If asked about unrelated topics, politely redirect to academics.`;
     appendMsg('user', query);
 
     if (GEMINI_API_KEY === 'YOUR_GEMINI_API_KEY') {
-      appendMsg('bot', '⚠️ API key not configured. Get a free Gemini key at <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a> and paste it in chatbot.js');
+      appendMsg('bot', '<i class="fa-solid fa-triangle-exclamation"></i> API key not configured. Get a free Gemini key at <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a> and paste it in chatbot.js');
       return;
     }
 
@@ -104,7 +104,7 @@ If asked about unrelated topics, politely redirect to academics.`;
     } catch (err) {
       removeTyping(typingId);
       console.error('Gemini API error:', err);
-      appendMsg('bot', '😅 Sorry, something went wrong. Please try again in a moment.');
+      appendMsg('bot', '<i class="fa-solid fa-face-smile-wink"></i> Sorry, something went wrong. Please try again in a moment.');
     }
   }
 
@@ -145,7 +145,7 @@ If asked about unrelated topics, politely redirect to academics.`;
     const div = document.createElement('div');
     div.className = 'gchat-msg ' + (role === 'user' ? 'user' : 'bot');
 
-    const icon = role === 'user' ? '👤' : '🤖';
+    const icon = role === 'user' ? '<i class="fa-solid fa-user"></i>' : '<i class="fa-solid fa-robot"></i>';
     // Basic formatting: bold, inline code, line breaks
     const html = text
       .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
@@ -166,7 +166,7 @@ If asked about unrelated topics, politely redirect to academics.`;
     const id = 'typing-' + Date.now();
     div.id = id;
     div.className = 'gchat-msg bot';
-    div.innerHTML = '<span class="gchat-msg-icon">🤖</span><div class="gchat-bubble gchat-typing"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>';
+    div.innerHTML = '<span class="gchat-msg-icon"><i class="fa-solid fa-robot"></i></span><div class="gchat-bubble gchat-typing"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>';
     container.appendChild(div);
     container.scrollTop = container.scrollHeight;
     return id;

@@ -544,9 +544,9 @@ function displayMaterials(grouped) {
       const hasHalf = (rating - fullStars) >= 0.5;
       let starsHtml = '';
       for (let s = 1; s <= 5; s++) {
-        if (s <= fullStars) starsHtml += '<span class="star filled" data-star="' + s + '">★</span>';
-        else if (s === fullStars + 1 && hasHalf) starsHtml += '<span class="star half" data-star="' + s + '">★</span>';
-        else starsHtml += '<span class="star" data-star="' + s + '">☆</span>';
+        if (s <= fullStars) starsHtml += '<span class="star filled" data-star="' + s + '"><i class="fa-solid fa-star"></i></span>';
+        else if (s === fullStars + 1 && hasHalf) starsHtml += '<span class="star half" data-star="' + s + '"><i class="fa-solid fa-star-half-stroke"></i></span>';
+        else starsHtml += '<span class="star" data-star="' + s + '"><i class="fa-regular fa-star"></i></span>';
       }
 
       const card = document.createElement("div");
@@ -857,11 +857,11 @@ if (materialsList) {
         const allStars = starsRow.querySelectorAll('.star');
         allStars.forEach((s, i) => {
           if (i < rating) {
-            s.textContent = '★';
+            s.innerHTML = '<i class="fa-solid fa-star"></i>';
             s.classList.add('filled');
             s.classList.remove('half');
           } else {
-            s.textContent = '☆';
+            s.innerHTML = '<i class="fa-regular fa-star"></i>';
             s.classList.remove('filled', 'half');
           }
         });
