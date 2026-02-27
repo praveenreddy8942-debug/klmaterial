@@ -1,115 +1,109 @@
 // ====================================
-// Firebase Firestore — Materials Metadata
+// Supabase — Materials Metadata
 // Tracks downloads, ratings, and views
+// Free tier: 500MB, no credit card needed
 // ====================================
 
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js';
-import {
-  getFirestore,
-  doc,
-  getDoc,
-  setDoc,
-  updateDoc,
-  increment,
-  collection,
-  getDocs
-} from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js';
+// ─── Supabase Config ─────────────────────────────────
+// Replace these with your Supabase project credentials
+// Get them from: https://supabase.com → Project Settings → API
+const SUPABASE_URL = "YOUR_SUPABASE_URL";           // e.g. https://abcdefgh.supabase.co
+const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY"; // public anon key (safe for client-side)
 
-// ─── Firebase Config ─────────────────────────────────
-// Replace these with your Firebase project credentials
-// Get them from: https://console.firebase.google.com → Project Settings → Your Apps → Web App
-const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
-};
+let supabase = null;
+let isDbReady = false;
 
-let db = null;
-let isFirebaseReady = false;
-
-// Initialize Firebase only if config is set
-function initFirebase() {
-  if (firebaseConfig.apiKey === "YOUR_API_KEY") {
-    console.warn('[firebase-db] Firebase not configured. Database features disabled.');
+// Load Supabase client library
+async function loadSupabase() {
+  if (SUPABASE_URL === "YOUR_SUPABASE_URL") {
+    console.warn('[supabase-db] Supabase not configured. Database features disabled.');
     return false;
   }
 
   try {
-    const app = initializeApp(firebaseConfig);
-    db = getFirestore(app);
-    isFirebaseReady = true;
-    console.log('[firebase-db] Firestore connected.');
+    const { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm');
+    supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    isDbReady = true;
+    console.log('[supabase-db] Connected.');
     return true;
   } catch (error) {
-    console.error('[firebase-db] Init failed:', error);
+    console.error('[supabase-db] Init failed:', error);
     return false;
   }
 }
 
 // ─── Document ID Helper ─────────────────────────────
-// Creates a safe Firestore document ID from folder + filename
 function getDocId(folder, fileName) {
-  return `${folder}_${fileName}`.replace(/[\/\\.#$\[\]]/g, '_');
+  return (folder + '_' + fileName).replace(/[\/\\.#$\[\]]/g, '_');
+}
+
+// ─── Upsert Helper ──────────────────────────────────
+async function upsertMaterial(docId, folder, fileName, updates) {
+  const { data: existing } = await supabase
+    .from('materials')
+    .select('id, downloads, rating, rating_count, views')
+    .eq('doc_id', docId)
+    .maybeSingle();
+
+  if (existing) {
+    await supabase
+      .from('materials')
+      .update(updates)
+      .eq('doc_id', docId);
+    return existing;
+  } else {
+    const row = {
+      doc_id: docId,
+      folder: folder,
+      file_name: fileName,
+      downloads: 0,
+      rating: 0,
+      rating_count: 0,
+      views: 0,
+      last_downloaded: null,
+      ...updates
+    };
+    await supabase.from('materials').insert(row);
+    return null;
+  }
 }
 
 // ─── Track Download ─────────────────────────────────
-// Call this when a user clicks a download link
 async function trackDownload(folder, fileName) {
-  if (!isFirebaseReady) return;
-
+  if (!isDbReady) return;
   const docId = getDocId(folder, fileName);
-  const ref = doc(db, 'materials', docId);
 
   try {
-    const docSnap = await getDoc(ref);
-    if (docSnap.exists()) {
-      await updateDoc(ref, {
-        downloads: increment(1),
-        lastDownloaded: new Date().toISOString()
-      });
-    } else {
-      await setDoc(ref, {
-        folder: folder,
-        fileName: fileName,
-        downloads: 1,
-        rating: 0,
-        ratingCount: 0,
-        views: 0,
-        lastDownloaded: new Date().toISOString(),
-        createdAt: new Date().toISOString()
-      });
+    const existing = await upsertMaterial(docId, folder, fileName, {
+      downloads: 1,
+      last_downloaded: new Date().toISOString()
+    });
+    if (existing) {
+      await supabase
+        .from('materials')
+        .update({
+          downloads: (existing.downloads || 0) + 1,
+          last_downloaded: new Date().toISOString()
+        })
+        .eq('doc_id', docId);
     }
   } catch (error) {
-    console.error('[firebase-db] Track download error:', error);
+    console.error('[supabase-db] Track download error:', error);
   }
 }
 
 // ─── Track View ─────────────────────────────────────
-// Call this when materials are displayed on screen
 async function trackView(folder, fileName) {
-  if (!isFirebaseReady) return;
-
+  if (!isDbReady) return;
   const docId = getDocId(folder, fileName);
-  const ref = doc(db, 'materials', docId);
 
   try {
-    const docSnap = await getDoc(ref);
-    if (docSnap.exists()) {
-      await updateDoc(ref, { views: increment(1) });
-    } else {
-      await setDoc(ref, {
-        folder: folder,
-        fileName: fileName,
-        downloads: 0,
-        rating: 0,
-        ratingCount: 0,
-        views: 1,
-        lastDownloaded: null,
-        createdAt: new Date().toISOString()
-      });
+    const existing = await upsertMaterial(docId, folder, fileName, { views: 1 });
+    if (existing) {
+      await supabase
+        .from('materials')
+        .update({ views: (existing.views || 0) + 1 })
+        .eq('doc_id', docId);
     }
   } catch (error) {
     // Silently fail — views are non-critical
@@ -117,100 +111,114 @@ async function trackView(folder, fileName) {
 }
 
 // ─── Rate Material ──────────────────────────────────
-// star: 1-5 rating value
 async function rateMaterial(folder, fileName, star) {
-  if (!isFirebaseReady) return { success: false };
+  if (!isDbReady) return { success: false };
 
   const docId = getDocId(folder, fileName);
-  const ref = doc(db, 'materials', docId);
+  const ratedKey = 'rated_' + docId;
 
-  // Prevent duplicate ratings per session
-  const ratedKey = `rated_${docId}`;
   if (sessionStorage.getItem(ratedKey)) {
     return { success: false, message: 'Already rated this session' };
   }
 
   try {
-    const docSnap = await getDoc(ref);
-    if (docSnap.exists()) {
-      const data = docSnap.data();
-      const newCount = (data.ratingCount || 0) + 1;
-      const newTotal = ((data.rating || 0) * (data.ratingCount || 0)) + star;
-      const newAvg = newTotal / newCount;
+    const { data: existing } = await supabase
+      .from('materials')
+      .select('id, rating, rating_count')
+      .eq('doc_id', docId)
+      .maybeSingle();
 
-      await updateDoc(ref, {
-        rating: Math.round(newAvg * 10) / 10,
-        ratingCount: newCount
-      });
+    if (existing) {
+      const newCount = (existing.rating_count || 0) + 1;
+      const newTotal = ((existing.rating || 0) * (existing.rating_count || 0)) + star;
+      const newAvg = Math.round((newTotal / newCount) * 10) / 10;
+
+      await supabase
+        .from('materials')
+        .update({ rating: newAvg, rating_count: newCount })
+        .eq('doc_id', docId);
 
       sessionStorage.setItem(ratedKey, 'true');
-      return { success: true, rating: Math.round(newAvg * 10) / 10, count: newCount };
+      return { success: true, rating: newAvg, count: newCount };
     } else {
-      await setDoc(ref, {
-        folder: folder,
-        fileName: fileName,
-        downloads: 0,
-        rating: star,
-        ratingCount: 1,
-        views: 0,
-        lastDownloaded: null,
-        createdAt: new Date().toISOString()
-      });
+      await supabase
+        .from('materials')
+        .insert({
+          doc_id: docId,
+          folder: folder,
+          file_name: fileName,
+          downloads: 0,
+          rating: star,
+          rating_count: 1,
+          views: 0,
+          last_downloaded: null
+        });
 
       sessionStorage.setItem(ratedKey, 'true');
       return { success: true, rating: star, count: 1 };
     }
   } catch (error) {
-    console.error('[firebase-db] Rate error:', error);
+    console.error('[supabase-db] Rate error:', error);
     return { success: false, message: error.message };
   }
 }
 
-// ─── Get Metadata for All Materials ─────────────────
-// Returns a Map of docId → { downloads, rating, ratingCount, views }
+// ─── Get All Metadata ───────────────────────────────
 async function getAllMetadata() {
-  if (!isFirebaseReady) return new Map();
+  if (!isDbReady) return new Map();
 
   try {
-    const snapshot = await getDocs(collection(db, 'materials'));
+    const { data, error } = await supabase
+      .from('materials')
+      .select('doc_id, downloads, rating, rating_count, views');
+
+    if (error) throw error;
+
     const metadata = new Map();
-
-    snapshot.forEach((docSnap) => {
-      metadata.set(docSnap.id, docSnap.data());
+    (data || []).forEach(function (row) {
+      metadata.set(row.doc_id, {
+        downloads: row.downloads || 0,
+        rating: row.rating || 0,
+        ratingCount: row.rating_count || 0,
+        views: row.views || 0
+      });
     });
-
     return metadata;
   } catch (error) {
-    console.error('[firebase-db] Get metadata error:', error);
+    console.error('[supabase-db] Get metadata error:', error);
     return new Map();
   }
 }
 
 // ─── Get Single Material Metadata ───────────────────
 async function getMetadata(folder, fileName) {
-  if (!isFirebaseReady) return null;
-
+  if (!isDbReady) return null;
   const docId = getDocId(folder, fileName);
-  const ref = doc(db, 'materials', docId);
 
   try {
-    const docSnap = await getDoc(ref);
-    return docSnap.exists() ? docSnap.data() : null;
+    const { data, error } = await supabase
+      .from('materials')
+      .select('*')
+      .eq('doc_id', docId)
+      .maybeSingle();
+
+    if (error) return null;
+    return data;
   } catch (error) {
     return null;
   }
 }
 
 // ─── Initialize ─────────────────────────────────────
-const firebaseReady = initFirebase();
+loadSupabase();
 
-// Export for use in other scripts
+// Export for use in other scripts (kept as firebaseDB for compatibility)
 window.firebaseDB = {
-  isReady: isFirebaseReady,
-  trackDownload,
-  trackView,
-  rateMaterial,
-  getAllMetadata,
-  getMetadata,
-  getDocId
+  get isReady() { return isDbReady; },
+  trackDownload: trackDownload,
+  trackView: trackView,
+  rateMaterial: rateMaterial,
+  getAllMetadata: getAllMetadata,
+  getMetadata: getMetadata,
+  getDocId: getDocId
 };
