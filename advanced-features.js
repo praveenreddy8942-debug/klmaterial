@@ -238,48 +238,6 @@ class ScrollReveal {
   }
 }
 
-// 4. Typing Animation
-class TypingEffect {
-  constructor(element, texts, speed = 100) {
-    this.element = element;
-    this.texts = texts;
-    this.speed = speed;
-    this.textIndex = 0;
-    this.charIndex = 0;
-    this.isDeleting = false;
-    this.type();
-  }
-
-  type() {
-    const currentText = this.texts[this.textIndex];
-    
-    if (this.isDeleting) {
-      this.element.textContent = currentText.substring(0, this.charIndex - 1);
-      this.charIndex--;
-    } else {
-      this.element.textContent = currentText.substring(0, this.charIndex + 1);
-      this.charIndex++;
-    }
-
-    let typeSpeed = this.speed;
-
-    if (this.isDeleting) {
-      typeSpeed /= 2;
-    }
-
-    if (!this.isDeleting && this.charIndex === currentText.length) {
-      typeSpeed = 2000;
-      this.isDeleting = true;
-    } else if (this.isDeleting && this.charIndex === 0) {
-      this.isDeleting = false;
-      this.textIndex = (this.textIndex + 1) % this.texts.length;
-      typeSpeed = 500;
-    }
-
-    setTimeout(() => this.type(), typeSpeed);
-  }
-}
-
 // 5. Scroll Progress Indicator
 class ScrollProgress {
   constructor() {
@@ -364,36 +322,6 @@ class CustomCursor {
         this.cursorDot.classList.remove('cursor-hover');
       });
     });
-  }
-}
-
-// 7. Animated Counter
-class AnimatedCounter {
-  constructor(element, target, duration = 2000) {
-    this.element = element;
-    this.target = parseInt(target);
-    this.duration = duration;
-    this.startTime = null;
-    this.animate();
-  }
-
-  animate() {
-    if (!this.startTime) this.startTime = Date.now();
-    
-    const elapsed = Date.now() - this.startTime;
-    const progress = Math.min(elapsed / this.duration, 1);
-    
-    // Easing function
-    const easeOutQuad = progress * (2 - progress);
-    const current = Math.floor(easeOutQuad * this.target);
-    
-    this.element.textContent = current;
-    
-    if (progress < 1) {
-      requestAnimationFrame(() => this.animate());
-    } else {
-      this.element.textContent = this.target;
-    }
   }
 }
 

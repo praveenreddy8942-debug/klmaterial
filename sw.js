@@ -15,6 +15,7 @@ const urlsToCache = [
   '/klmaterial/profile.jpg',
   '/klmaterial/icon.svg',
   '/klmaterial/manifest.json',
+  '/klmaterial/offline.html',
 ];
 
 // Install Service Worker
@@ -70,7 +71,7 @@ self.addEventListener('fetch', (event) => {
           
           // Return offline page for navigation requests
           if (event.request.mode === 'navigate') {
-            return caches.match('/klmaterial/index.html');
+            return caches.match('/klmaterial/offline.html');
           }
         });
       })
@@ -123,7 +124,7 @@ self.addEventListener('notificationclick', (event) => {
 
   if (event.action === 'explore') {
     event.waitUntil(
-      clients.openWindow('/klmaterial/materials')
+      clients.openWindow('/klmaterial/materials.html')
     );
   }
 });
