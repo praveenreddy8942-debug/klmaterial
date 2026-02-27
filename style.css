@@ -5756,14 +5756,17 @@ main.materials-container {
     padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px));
   }
 
-  /* Move back-to-top button above the bottom nav */
+  /* Move back-to-top button to LEFT side, above the bottom nav */
   #backToTop {
     bottom: calc(70px + env(safe-area-inset-bottom, 0px));
+    right: auto;
+    left: 20px;
   }
 
-  /* Move chatbot FAB above the bottom nav */
+  /* Chatbot FAB stays on RIGHT side, above the bottom nav */
   #gemini-chat-fab {
     bottom: calc(75px + env(safe-area-inset-bottom, 0px));
+    right: 20px;
   }
 }
 
