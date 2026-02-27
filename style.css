@@ -5688,6 +5688,7 @@ main.materials-container {
     position: fixed;
     background: #000814; /* Solid dark background */
     border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+    overflow: visible !important; /* CRITICAL: prevent iOS compositing layer from clipping .nav-track */
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
     z-index: 3000; /* Above overlay and hamburger */
     border-radius: 0;
@@ -5775,6 +5776,7 @@ main.materials-container {
     left: -100% !important;
     width: 85% !important;
     max-width: 320px !important;
+    height: calc(100vh - 70px) !important; /* Fallback for older iOS that don't support dvh */
     height: calc(100dvh - 70px) !important; /* Full height minus header (dvh for mobile) */
     background: linear-gradient(180deg, #001229 0%, #000814 100%) !important;
     border-right: 1px solid rgba(0, 212, 255, 0.1) !important;
@@ -5790,6 +5792,8 @@ main.materials-container {
     box-shadow: 10px 0 50px rgba(0, 0, 0, 0.7) !important;
     visibility: visible !important; /* Always visible, just moved off-screen */
     opacity: 1 !important;
+    -webkit-transform: translateZ(0); /* Force own compositing layer on iOS Safari */
+    transform: translateZ(0);
   }
 
   body.nav-active .nav-track {
@@ -5806,8 +5810,11 @@ main.materials-container {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(5px);
+    background: rgba(0, 0, 0, 0.85);
+    /* backdrop-filter removed: on iOS Safari it creates a compositing layer
+       that can pop above the nav drawer despite lower z-index */
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
     z-index: 1500;
     animation: fadeIn 0.3s ease;
   }
@@ -5845,23 +5852,27 @@ main.materials-container {
   /* Navigation Links: Large Touch Targets (only inside drawer) */
   .nav-track a {
     display: flex !important;
-    align-items: center;
-    width: 100%;
-    padding: 16px 30px;
-    font-size: 1.05rem;
-    font-weight: 500;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    width: 100% !important;
+    padding: 16px 30px !important;
+    font-size: 1.05rem !important;
+    font-weight: 500 !important;
     color: #b0e0ff !important; /* Force visibility */
     -webkit-text-fill-color: #b0e0ff !important; /* iOS Safari fix */
-    text-decoration: none;
+    text-decoration: none !important;
     border-left: 4px solid transparent;
+    border-radius: 0 !important;
     transition: background 0.2s ease, color 0.2s ease, border-left-color 0.2s ease !important;
-    background: transparent;
+    background: transparent !important;
     opacity: 1 !important; /* Always visible */
-    transform: none; /* No movement */
-    gap: 12px; /* Space between icon and text */
+    transform: none !important; /* No movement — prevent desktop :focus translateY leak */
+    gap: 12px !important; /* Space between icon and text */
     white-space: nowrap;
     z-index: 2001;
     visibility: visible !important;
+    min-height: 44px !important; /* Explicit touch target */
+    box-shadow: none !important;
   }
 
   /* Hide desktop nav marker in mobile drawer — it has no mobile styles
@@ -6000,10 +6011,11 @@ main.materials-container {
   }
   
   .nav-track {
-    top: 65px;
-    height: calc(100dvh - 65px);
-    width: 90%; /* Wider drawer on small screens */
-    max-width: 280px;
+    top: 65px !important;
+    height: calc(100vh - 65px) !important; /* Fallback for older iOS */
+    height: calc(100dvh - 65px) !important;
+    width: 90% !important; /* Wider drawer on small screens */
+    max-width: 280px !important;
   }
   
   .nav-track a {
@@ -6022,6 +6034,8 @@ main.materials-container {
   
   body.nav-active::before {
     top: 65px;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
   }
 }
 
@@ -6068,28 +6082,33 @@ main.materials-container {
   align-items: center;
 }
 
-.nav-liquid a {
-  color: #d9f2ff;
-  text-decoration: none;
-  padding: 8px 12px;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 0.95rem;
-  transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
-}
+/* Desktop-only nav-liquid link styles — these MUST NOT leak to mobile.
+   Previously outside any media query, causing cascade conflicts with
+   .nav-track a rules on mobile (same specificity, later position = wins). */
+@media (min-width: 769px) {
+  .nav-liquid a {
+    color: #d9f2ff;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+  }
 
-.nav-liquid a:hover,
-.nav-liquid a:focus {
-  background: linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0, 86, 128, 0.12);
-  outline: none;
-}
+  .nav-liquid a:hover,
+  .nav-liquid a:focus {
+    background: linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 86, 128, 0.12);
+    outline: none;
+  }
 
-.nav-liquid a[aria-current="page"] {
-  background: linear-gradient(90deg, rgba(0, 212, 255, 0.14), rgba(0,119,255,0.06));
-  color: #ffffff;
-  box-shadow: 0 8px 30px rgba(0, 212, 255, 0.08);
+  .nav-liquid a[aria-current="page"] {
+    background: linear-gradient(90deg, rgba(0, 212, 255, 0.14), rgba(0,119,255,0.06));
+    color: #ffffff;
+    box-shadow: 0 8px 30px rgba(0, 212, 255, 0.08);
+  }
 }
 
 /* glossy sheen - removed for clean look */

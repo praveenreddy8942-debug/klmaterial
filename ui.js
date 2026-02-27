@@ -203,11 +203,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (isTransparent) anyHidden = true;
 
                 // Force inline styles that override problematic rules (safe defaults)
-                link.style.color = '#b0e0ff';
-                link.style.webkitTextFillColor = '#b0e0ff'; // Use explicit color, NOT 'initial' (some browsers treat initial as transparent)
-                link.style.backgroundClip = 'border-box';
-                link.style.webkitBackgroundClip = 'border-box';
-                link.style.textShadow = 'none';
+                // Use setProperty with 'important' so inline styles beat CSS !important rules
+                link.style.setProperty('color', '#b0e0ff', 'important');
+                link.style.setProperty('-webkit-text-fill-color', '#b0e0ff', 'important');
+                link.style.setProperty('background-clip', 'border-box', 'important');
+                link.style.setProperty('-webkit-background-clip', 'border-box', 'important');
+                link.style.setProperty('text-shadow', 'none', 'important');
+                link.style.setProperty('opacity', '1', 'important');
+                link.style.setProperty('visibility', 'visible', 'important');
             });
 
             if (anyHidden) {
