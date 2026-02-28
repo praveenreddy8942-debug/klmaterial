@@ -85,7 +85,7 @@ class ParticleSystem {
     this.canvas.id = 'particleCanvas';
     this.canvas.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none;';
     document.body.appendChild(this.canvas);
-    
+
     this.ctx = this.canvas.getContext('2d');
     this.resize();
   }
@@ -109,11 +109,11 @@ class ParticleSystem {
 
   animate() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    
+
     // Build spatial grid for efficient neighbor lookup (avoids O(n²))
     const cellSize = this.connectionDistance;
     const grid = {};
-    
+
     this.particles.forEach((particle, i) => {
       // Update position
       particle.x += particle.vx;
@@ -128,7 +128,7 @@ class ParticleSystem {
         const dx = this.mouse.x - particle.x;
         const dy = this.mouse.y - particle.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
-        
+
         if (distance < this.mouse.radius) {
           const force = (this.mouse.radius - distance) / this.mouse.radius;
           particle.x -= (dx / distance) * force * 3;
@@ -141,7 +141,7 @@ class ParticleSystem {
       this.ctx.beginPath();
       this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
       this.ctx.fill();
-      
+
       // Insert into spatial grid
       const cx = Math.floor(particle.x / cellSize);
       const cy = Math.floor(particle.y / cellSize);
@@ -149,28 +149,28 @@ class ParticleSystem {
       if (!grid[key]) grid[key] = [];
       grid[key].push({ particle, index: i });
     });
-    
+
     // Draw connections using spatial grid (only check neighboring cells)
     const checked = new Set();
     this.particles.forEach((particle, i) => {
       const cx = Math.floor(particle.x / cellSize);
       const cy = Math.floor(particle.y / cellSize);
-      
+
       for (let nx = cx - 1; nx <= cx + 1; nx++) {
         for (let ny = cy - 1; ny <= cy + 1; ny++) {
           const neighbors = grid[nx + ',' + ny];
           if (!neighbors) continue;
-          
+
           for (const neighbor of neighbors) {
             if (neighbor.index <= i) continue; // avoid duplicate pairs
             const pairKey = i + '-' + neighbor.index;
             if (checked.has(pairKey)) continue;
             checked.add(pairKey);
-            
+
             const dx = particle.x - neighbor.particle.x;
             const dy = particle.y - neighbor.particle.y;
             const distance = Math.sqrt(dx * dx + dy * dy);
-            
+
             if (distance < this.connectionDistance) {
               this.ctx.strokeStyle = `rgba(0, 212, 255, ${0.2 * (1 - distance / this.connectionDistance)})`;
               this.ctx.lineWidth = 1;
@@ -189,7 +189,7 @@ class ParticleSystem {
 
   attachEventListeners() {
     window.addEventListener('resize', () => this.resize());
-    
+
     window.addEventListener('mousemove', (e) => {
       this.mouse.x = e.clientX;
       this.mouse.y = e.clientY;
@@ -224,8 +224,8 @@ class ScrollReveal {
 
   observe() {
     // Add reveal-on-scroll class to elements (excluding <section> to avoid hiding entire page sections)
-    const selectors = ['.card', '.about-section', '.contact-card-modern', '.stat-card', '.feature-item'];
-    
+    const selectors = ['.card', '.about-section', '.contact-card-modern', '.stat-card', '.feature-item', '.year-card', '.resource-card', '.repeat-card', '.stat-item', '.category-btn'];
+
     selectors.forEach(selector => {
       const elements = document.querySelectorAll(selector);
       elements.forEach(el => {
@@ -257,7 +257,7 @@ class ScrollProgress {
     const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
     const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
     const scrolled = (winScroll / height) * 100;
-    
+
     const progressBar = document.getElementById('scrollProgress');
     if (progressBar) {
       progressBar.style.width = scrolled + '%';
@@ -304,7 +304,7 @@ class CustomCursor {
     document.addEventListener('mousemove', (e) => {
       this.cursor.style.left = e.clientX + 'px';
       this.cursor.style.top = e.clientY + 'px';
-      
+
       this.cursorDot.style.left = e.clientX + 'px';
       this.cursorDot.style.top = e.clientY + 'px';
     });
@@ -316,7 +316,7 @@ class CustomCursor {
         this.cursor.classList.add('cursor-hover');
         this.cursorDot.classList.add('cursor-hover');
       });
-      
+
       el.addEventListener('mouseleave', () => {
         this.cursor.classList.remove('cursor-hover');
         this.cursorDot.classList.remove('cursor-hover');
