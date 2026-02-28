@@ -94,7 +94,7 @@ If asked about unrelated topics, politely redirect to academics.`;
     appendMsg('user', query);
 
     if (GEMINI_API_KEY === 'YOUR_GEMINI_API_KEY') {
-      appendMsg('bot', '<i class="fa-solid fa-triangle-exclamation"></i> API key not configured. Get a free Gemini key at <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a> and paste it in chatbot.js');
+      appendMsg('bot', '<i class="fa-solid fa-triangle-exclamation"></i> API key not configured. Get a free Gemini key at <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a> and paste it in chatbot.js', true);
       return;
     }
 
@@ -107,9 +107,9 @@ If asked about unrelated topics, politely redirect to academics.`;
       removeTyping(typingId);
       console.error('Gemini API error:', err);
       if (err.isRateLimit) {
-        appendMsg('bot', '<i class="fa-solid fa-clock"></i> The AI is busy right now (rate limit reached). Please wait a minute and try again.');
+        appendMsg('bot', '<i class="fa-solid fa-clock"></i> The AI is busy right now (rate limit reached). Please wait a minute and try again.', true);
       } else {
-        appendMsg('bot', '<i class="fa-solid fa-face-smile-wink"></i> Sorry, something went wrong. Please try again in a moment.');
+        appendMsg('bot', '<i class="fa-solid fa-face-smile-wink"></i> Sorry, something went wrong. Please try again in a moment.', true);
       }
     }
   }
@@ -168,20 +168,24 @@ If asked about unrelated topics, politely redirect to academics.`;
   }
 
   // ─── UI HELPERS ───────────────────────────────────────
-  function appendMsg(role, text) {
+  function appendMsg(role, text, raw) {
     const container = document.getElementById('gchat-messages');
     const div = document.createElement('div');
     div.className = 'gchat-msg ' + (role === 'user' ? 'user' : 'bot');
 
     const icon = role === 'user' ? '<i class="fa-solid fa-user"></i>' : '<i class="fa-solid fa-robot"></i>';
-    // Basic formatting: bold, inline code, line breaks
-    const html = text
-      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-      .replace(/`(.*?)`/g, '<code>$1</code>')
-      .replace(/\n/g, '<br>')
-      // Restore anchor tags that got escaped (for our own messages)
-      .replace(/&lt;a href=&quot;(.*?)&quot;(.*?)&gt;(.*?)&lt;\/a&gt;/g, '<a href="$1"$2>$3</a>');
+    let html;
+    if (raw) {
+      // Trust the HTML as-is (used for internal bot messages with icons/links)
+      html = text;
+    } else {
+      // Sanitize user/AI content, then apply basic markdown-like formatting
+      html = text
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/`(.*?)`/g, '<code>$1</code>')
+        .replace(/\n/g, '<br>');
+    }
 
     div.innerHTML = '<span class="gchat-msg-icon">' + icon + '</span><div class="gchat-bubble">' + html + '</div>';
     container.appendChild(div);
