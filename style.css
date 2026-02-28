@@ -28,6 +28,23 @@
   --accent-secondary: #0077ff;
   --card-bg: rgba(255, 255, 255, 0.03);
   --border-color: rgba(0, 212, 255, 0.1);
+
+  /* Design Tokens */
+  --radius-sm: 8px;
+  --radius-md: 15px;
+  --radius-lg: 20px;
+  --radius-xl: 24px;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 15px 40px rgba(0, 0, 0, 0.2);
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 40px;
+  --space-xl: 60px;
+  --max-content: 75ch;
+  --focus-ring: 0 0 0 3px rgba(0, 212, 255, 0.5);
+  --focus-ring-light: 0 0 0 3px rgba(0, 119, 255, 0.4);
 }
 
 /* General */
@@ -7129,4 +7146,155 @@ footer:not(.site-footer) {
   font-size: 0.9rem;
   margin-top: 50px;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* ====================================
+   PRO POLISH — Focus, Interactions,
+   Readability
+==================================== */
+
+/* ===== Focus-Visible Ring System ===== */
+:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 3px;
+  box-shadow: var(--focus-ring);
+  border-radius: var(--radius-sm);
+}
+
+/* Remove outline on mouse click */
+:focus:not(:focus-visible) {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Light mode focus ring */
+html[data-theme="light"] :focus-visible {
+  outline-color: var(--accent-secondary);
+  box-shadow: var(--focus-ring-light);
+}
+
+/* Specific element focus refinements */
+.btn:focus-visible {
+  outline-offset: 4px;
+}
+
+.category-btn:focus-visible,
+.stat-item:focus-visible,
+.card:focus-visible,
+.advanced-card:focus-visible {
+  outline-offset: 4px;
+  border-radius: var(--radius-md);
+}
+
+.footer-social a:focus-visible {
+  border-radius: 10px;
+}
+
+nav a:focus-visible {
+  border-radius: var(--radius-sm);
+}
+
+/* Back-to-top focus */
+#backToTop:focus-visible {
+  border-radius: 50%;
+  outline-offset: 4px;
+}
+
+/* ===== Button Press / Active Feedback ===== */
+.btn:active {
+  transform: scale(0.97) !important;
+  transition: transform 0.1s ease;
+}
+
+.category-btn:active {
+  transform: scale(0.96) !important;
+}
+
+.footer-social a:active {
+  transform: scale(0.92) !important;
+}
+
+.contact-card-modern:active {
+  transform: scale(0.98) !important;
+}
+
+#backToTop:active {
+  transform: scale(0.9) !important;
+}
+
+/* ===== Animated Link Underlines ===== */
+.footer-links a {
+  position: relative;
+}
+
+.footer-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+  transition: width 0.3s ease;
+  border-radius: 1px;
+}
+
+.footer-links a:hover::after {
+  width: 100%;
+}
+
+html[data-theme="light"] .footer-links a::after {
+  background: linear-gradient(90deg, #0077ff, #00b4d8);
+}
+
+/* ===== Card Shine Sweep (extended) ===== */
+.stat-item,
+.contact-card-modern,
+.category-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-item::before,
+.contact-card-modern::before,
+.category-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.06), transparent);
+  transition: left 0.5s ease;
+  pointer-events: none;
+}
+
+.stat-item:hover::before,
+.contact-card-modern:hover::before,
+.category-btn:hover::before {
+  left: 100%;
+}
+
+html[data-theme="light"] .stat-item::before,
+html[data-theme="light"] .contact-card-modern::before,
+html[data-theme="light"] .category-btn::before {
+  background: linear-gradient(90deg, transparent, rgba(0, 119, 255, 0.05), transparent);
+}
+
+/* ===== Text Readability — Max Line Width ===== */
+.hero-subtitle,
+.stat-desc,
+.contact-subtitle,
+.about-section p,
+.roadmap-quote,
+.cta-advanced p,
+.footer-brand p {
+  max-width: var(--max-content);
+  margin-inline: auto;
+}
+
+/* Ensure paragraphs inside cards stay readable */
+.advanced-card p,
+.contact-card-modern p {
+  max-width: 55ch;
 }
