@@ -7,6 +7,9 @@
 // ─── Supabase Config ─────────────────────────────────
 // Replace these with your Supabase project credentials
 // Get them from: https://supabase.com → Project Settings → API
+// WARNING: The anon key below is public and exposed in client-side code.
+// You MUST enforce strict Row Level Security (RLS) policies in Supabase to prevent unauthorized access.
+// See: https://supabase.com/docs/guides/auth/row-level-security
 const SUPABASE_URL = "https://eygokxdsdmoalyclurwv.supabase.co";           // e.g. https://abcdefgh.supabase.co
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV5Z29reGRzZG1vYWx5Y2x1cnd2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxOTM3NTIsImV4cCI6MjA4Nzc2OTc1Mn0.4KwjN2oIhajzj-ERiplfZUIbcajBN2far035eo8dOv8"; // public anon key (safe for client-side)
 

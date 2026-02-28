@@ -5,11 +5,16 @@
   'use strict';
 
   // ─── CONFIG ───────────────────────────────────────────
-  const GEMINI_API_KEY = 'AIzaSyDHZrHZRhDhvzmCANQZ0NXrf0qLjv1r484'; // ← Get free key: https://aistudio.google.com/apikey
+  // Gemini API key removed for security reasons.
+  // To use Gemini, set up a backend proxy endpoint and call it from here.
+  // Example:
+  // fetch('/api/gemini', { method: 'POST', body: JSON.stringify({ prompt, model }) })
+  //   .then(res => res.json())
+  //   .then(data => { /* handle Gemini response */ });
   const MODELS = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-2.0-flash-lite'];
-  function getApiUrl(model) {
-    return `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_API_KEY}`;
-  }
+  // function getApiUrl(model) {
+  //   return `/api/gemini?model=${model}`;
+  // }
 
   const SYSTEM_PROMPT = `You are KL Study Buddy, a friendly AI assistant on the KL Material Study Hub website.
 You help B.Tech CSE students with:
