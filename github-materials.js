@@ -170,7 +170,8 @@ function populateSemesterSelector(year) {
   });
   semesterSelector.innerHTML = html;
 
-  // Attach click handler
+  // Attach click handler (remove first to prevent duplicates)
+  semesterSelector.removeEventListener("click", handleSemesterClick);
   semesterSelector.addEventListener("click", handleSemesterClick);
 }
 
@@ -211,7 +212,8 @@ function populateSubjectSelector(year, semester) {
   }
   subjectSelector.innerHTML = html;
 
-  // Attach click handler
+  // Attach click handler (remove first to prevent duplicates)
+  subjectSelector.removeEventListener("click", handleSubjectClick);
   subjectSelector.addEventListener("click", handleSubjectClick);
 }
 
@@ -246,7 +248,7 @@ function updateBreadcrumb() {
     path += ` → ${subjects[activeSubject].icon} ${activeSubject}`;
   }
 
-  breadcrumbPath.textContent = path;
+  breadcrumbPath.innerHTML = path;
 }
 
 // Reset button

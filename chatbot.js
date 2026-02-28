@@ -6,26 +6,10 @@
 
   // ─── CONFIG ───────────────────────────────────────────
   // Gemini API key removed for security reasons.
-  // To use Gemini, set up a backend proxy endpoint and call it from here.
-  // Example:
-  // fetch('/api/gemini', { method: 'POST', body: JSON.stringify({ prompt, model }) })
-  //   .then(res => res.json())
-  //   .then(data => { /* handle Gemini response */ });
-  const MODELS = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-2.0-flash-lite'];
-  // function getApiUrl(model) {
-  //   return `/api/gemini?model=${model}`;
-  // }
+  // To re-enable AI chat, set up a backend proxy endpoint and
+  // restore the callGemini() logic. See git history for the
+  // original implementation with model fallback.
 
-  const SYSTEM_PROMPT = `You are KL Study Buddy, a friendly AI assistant on the KL Material Study Hub website.
-You help B.Tech CSE students with:
-- Study materials for subjects like BEEC, Discrete Mathematics, PSC, DSD
-- Career roadmaps, learning paths, and placement preparation
-- Explaining technical concepts in simple language
-- Study tips and exam strategies
-Keep responses concise (2-4 sentences unless more detail is asked). Use simple language.
-If asked about unrelated topics, politely redirect to academics.`;
-
-  let chatHistory = [];
   let isOpen = false;
 
   // ─── CREATE UI ────────────────────────────────────────
@@ -98,78 +82,8 @@ If asked about unrelated topics, politely redirect to academics.`;
     input.value = '';
     appendMsg('user', query);
 
-    if (GEMINI_API_KEY === 'YOUR_GEMINI_API_KEY') {
-      appendMsg('bot', '<i class="fa-solid fa-triangle-exclamation"></i> API key not configured. Get a free Gemini key at <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a> and paste it in chatbot.js', true);
-      return;
-    }
-
-    const typingId = showTyping();
-    try {
-      const reply = await callGemini(query);
-      removeTyping(typingId);
-      appendMsg('bot', reply);
-    } catch (err) {
-      removeTyping(typingId);
-      console.error('Gemini API error:', err);
-      if (err.isRateLimit) {
-        appendMsg('bot', '<i class="fa-solid fa-clock"></i> The AI is busy right now (rate limit reached). Please wait a minute and try again.', true);
-      } else {
-        appendMsg('bot', '<i class="fa-solid fa-face-smile-wink"></i> Sorry, something went wrong. Please try again in a moment.', true);
-      }
-    }
-  }
-
-  // ─── GEMINI API (with model fallback) ──────────────────
-  async function callGemini(userMessage) {
-    chatHistory.push({ role: 'user', parts: [{ text: userMessage }] });
-
-    // Trim history to last 20 messages to prevent memory leak
-    if (chatHistory.length > 20) {
-      chatHistory = chatHistory.slice(-20);
-    }
-    const recent = chatHistory;
-    const body = JSON.stringify({
-      system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
-      contents: recent,
-      generationConfig: { temperature: 0.7, topP: 0.9, maxOutputTokens: 512 }
-    });
-
-    let lastError = null;
-
-    // Try each model in order; skip to next on rate limit (429)
-    for (const model of MODELS) {
-      try {
-        const res = await fetch(getApiUrl(model), {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: body
-        });
-
-        if (res.status === 429) {
-          // Rate limited on this model, try next
-          lastError = new Error('Rate limit on ' + model);
-          lastError.isRateLimit = true;
-          continue;
-        }
-
-        if (!res.ok) {
-          const errData = await res.json().catch(() => ({}));
-          throw new Error(errData.error?.message || 'HTTP ' + res.status);
-        }
-
-        const data = await res.json();
-        const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || 'No response received. Try again.';
-        chatHistory.push({ role: 'model', parts: [{ text: reply }] });
-        return reply;
-      } catch (err) {
-        lastError = err;
-        if (err.isRateLimit) continue; // try next model
-        throw err; // non-rate-limit error, stop
-      }
-    }
-
-    // All models rate limited
-    throw lastError;
+    // Gemini API key was removed for security. Show a friendly notice instead of crashing.
+    appendMsg('bot', '<i class="fa-solid fa-triangle-exclamation"></i> AI chat is not configured yet. To enable it, set up a backend proxy for the Gemini API and update <code>chatbot.js</code>.', true);
   }
 
   // ─── UI HELPERS ───────────────────────────────────────
@@ -195,23 +109,6 @@ If asked about unrelated topics, politely redirect to academics.`;
     div.innerHTML = '<span class="gchat-msg-icon">' + icon + '</span><div class="gchat-bubble">' + html + '</div>';
     container.appendChild(div);
     container.scrollTop = container.scrollHeight;
-  }
-
-  function showTyping() {
-    const container = document.getElementById('gchat-messages');
-    const div = document.createElement('div');
-    const id = 'typing-' + Date.now();
-    div.id = id;
-    div.className = 'gchat-msg bot';
-    div.innerHTML = '<span class="gchat-msg-icon"><i class="fa-solid fa-robot"></i></span><div class="gchat-bubble gchat-typing"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>';
-    container.appendChild(div);
-    container.scrollTop = container.scrollHeight;
-    return id;
-  }
-
-  function removeTyping(id) {
-    const el = document.getElementById(id);
-    if (el) el.remove();
   }
 
   // ─── INIT ─────────────────────────────────────────────

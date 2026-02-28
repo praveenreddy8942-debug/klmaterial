@@ -13,6 +13,7 @@
   <meta name="author" content="Praveen Reddy" />
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
   <link rel="canonical" href="https://praveenreddy8942-debug.github.io/klmaterial/materials.html" />
+  <meta name="theme-color" content="#00d4ff" />
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
@@ -30,10 +31,8 @@
     content="Download CSE study materials, notes, and question papers for BEEC, DM, PSC, and DSD." />
   <meta property="twitter:image" content="https://praveenreddy8942-debug.github.io/klmaterial/profile.jpg" />
 
-  <!-- Cache Control for iOS -->
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-  <meta http-equiv="Pragma" content="no-cache" />
-  <meta http-equiv="Expires" content="0" />
+
+
 
   <link rel="stylesheet" href="style.css?v=20.0" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -42,8 +41,11 @@
   <link rel="apple-touch-icon" href="icon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-  <noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" /></noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" media="print"
+    onload="this.media='all'" />
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  </noscript>
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZ0SERPS7L"></script>
@@ -89,19 +91,21 @@
 
 <body>
   <header>
-  <nav aria-label="Primary" role="navigation" class="nav-liquid">
+    <nav aria-label="Primary" role="navigation" class="nav-liquid">
       <button class="hamburger" aria-label="Toggle Menu" aria-expanded="false" aria-controls="mobile-nav">
         <span></span>
         <span></span>
         <span></span>
       </button>
-  <a href="index.html" class="mobile-brand" aria-label="KL Material Home">KL Material</a>
+      <a href="index.html" class="mobile-brand" aria-label="KL Material Home">KL Material</a>
       <div id="mobile-nav" class="nav-track" role="menu" aria-hidden="true">
-        <a href="index.html" role="menuitem" tabindex="-1"><i class="fa-solid fa-house"></i> Home</a>
-  <a href="materials.html" role="menuitem" tabindex="-1" class="active" aria-current="page"><i class="fa-solid fa-book"></i> Materials</a>
-        <a href="roadmap.html" role="menuitem" tabindex="-1"><i class="fa-solid fa-map"></i> Roadmap</a>
-        <a href="about.html" role="menuitem" tabindex="-1"><i class="fa-solid fa-user"></i> About</a>
-        <a href="contact.html" role="menuitem" tabindex="-1"><i class="fa-solid fa-address-book"></i> Contact</a>
+        <a href="index.html" role="menuitem" tabindex="-1" data-nav-link><i class="fa-solid fa-house"></i> Home</a>
+        <a href="materials.html" role="menuitem" tabindex="-1" class="active" aria-current="page" data-nav-link><i
+            class="fa-solid fa-book"></i> Materials</a>
+        <a href="roadmap.html" role="menuitem" tabindex="-1" data-nav-link><i class="fa-solid fa-map"></i> Roadmap</a>
+        <a href="about.html" role="menuitem" tabindex="-1" data-nav-link><i class="fa-solid fa-user"></i> About</a>
+        <a href="contact.html" role="menuitem" tabindex="-1" data-nav-link><i class="fa-solid fa-address-book"></i>
+          Contact</a>
       </div>
     </nav>
   </header>
@@ -123,9 +127,8 @@
     <div class="advanced-search-container">
       <div class="search-wrapper">
         <span class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-        <input type="text" id="search-bar" class="advanced-search-input" 
-          placeholder="Search by material name, subject, or topic..." 
-          autocomplete="off" />
+        <input type="text" id="search-bar" class="advanced-search-input"
+          placeholder="Search by material name, subject, or topic..." autocomplete="off" />
         <button id="clear-search" class="clear-search-btn" style="display: none;">
           <span><i class="fa-solid fa-xmark"></i></span>
         </button>
@@ -168,7 +171,8 @@
       <div class="filter-breadcrumb" id="filter-breadcrumb" style="display: none;">
         <span class="breadcrumb-label">Showing:</span>
         <span class="breadcrumb-path" id="breadcrumb-path"></span>
-        <button class="breadcrumb-reset" id="breadcrumb-reset" title="Reset filters"><i class="fa-solid fa-xmark"></i> Reset</button>
+        <button class="breadcrumb-reset" id="breadcrumb-reset" title="Reset filters"><i class="fa-solid fa-xmark"></i>
+          Reset</button>
       </div>
     </div>
 

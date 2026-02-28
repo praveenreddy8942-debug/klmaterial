@@ -1,5 +1,5 @@
 // Service Worker for PWA
-const CACHE_NAME = 'klmaterial-v6';
+const CACHE_NAME = 'klmaterial-v7';
 const urlsToCache = [
   '/klmaterial/',
   '/klmaterial/index.html',
@@ -17,6 +17,7 @@ const urlsToCache = [
   '/klmaterial/icon.svg',
   '/klmaterial/manifest.json',
   '/klmaterial/offline.html',
+  '/klmaterial/animations.js',
 ];
 
 // Install Service Worker
@@ -57,11 +58,11 @@ self.addEventListener('fetch', (event) => {
       .then((response) => {
         // Clone the response
         const responseToCache = response.clone();
-        
+
         caches.open(CACHE_NAME).then((cache) => {
           cache.put(event.request, responseToCache);
         });
-        
+
         return response;
       })
       .catch(() => {
@@ -69,7 +70,7 @@ self.addEventListener('fetch', (event) => {
           if (response) {
             return response;
           }
-          
+
           // Return offline page for navigation requests
           if (event.request.mode === 'navigate') {
             return caches.match('/klmaterial/offline.html');
