@@ -218,8 +218,8 @@ async function getMetadata(folder, fileName) {
 // ─── Initialize ─────────────────────────────────────
 loadSupabase();
 
-// Export for use in other scripts (kept as firebaseDB for compatibility)
-window.firebaseDB = {
+// Export for use in other scripts
+window.supabaseDB = {
   get isReady() { return isDbReady; },
   trackDownload: trackDownload,
   trackView: trackView,
@@ -228,3 +228,6 @@ window.firebaseDB = {
   getMetadata: getMetadata,
   getDocId: getDocId
 };
+
+// Backward-compat shim (remove after all references are updated)
+window.firebaseDB = window.supabaseDB;

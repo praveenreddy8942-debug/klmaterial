@@ -87,7 +87,7 @@ klmaterial/
 ├── chatbot.js          # Smart local chatbot
 ├── animations.js       # Seasonal & counter animations
 ├── advanced-features.js# Theme, particles, scroll reveal, cursor
-├── firebase-db.js      # Supabase integration (downloads, ratings)
+├── supabase-db.js      # Supabase integration (downloads, ratings)
 ├── sw.js               # Service Worker
 ├── manifest.json       # PWA manifest
 ├── sitemap.xml         # SEO sitemap

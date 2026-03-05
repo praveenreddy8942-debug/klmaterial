@@ -534,9 +534,9 @@ function displayMaterials(grouped) {
       const downloadUrl = getDownloadUrl(file);
       const displayName = currentQuery ? highlightMatch(name, currentQuery) : escapeHtml(name);
 
-      // Get metadata from Firebase (if available)
-      const fdb = window.firebaseDB;
-      const docId = fdb ? fdb.getDocId(file.folder, file.name) : '';
+      // Get metadata from Supabase (if available)
+      const sdb = window.supabaseDB;
+      const docId = sdb ? sdb.getDocId(file.folder, file.name) : '';
       const meta = materialsMetadata.get(docId);
       const downloadCount = meta ? (meta.downloads || 0) : 0;
       const rating = meta ? (meta.rating || 0) : 0;
@@ -578,9 +578,9 @@ function displayMaterials(grouped) {
       `;
 
       // Track view (only once per file per session)
-      if (fdb && fdb.isReady && !viewedFiles.has(docId)) {
+      if (sdb && sdb.isReady && !viewedFiles.has(docId)) {
         viewedFiles.add(docId);
-        fdb.trackView(file.folder, file.name);
+        sdb.trackView(file.folder, file.name);
       }
 
       grid.appendChild(card);
@@ -733,14 +733,14 @@ async function loadMaterials() {
     } else {
       console.log('Displaying materials...');
 
-      // Fetch metadata from Firebase (downloads, ratings)
-      const fdb = window.firebaseDB;
-      if (fdb && fdb.isReady) {
+      // Fetch metadata from Supabase (downloads, ratings)
+      const sdb = window.supabaseDB;
+      if (sdb && sdb.isReady) {
         try {
-          materialsMetadata = await fdb.getAllMetadata();
-          console.log('[firebase-db] Loaded metadata for', materialsMetadata.size, 'materials');
+          materialsMetadata = await sdb.getAllMetadata();
+          console.log('[supabase-db] Loaded metadata for', materialsMetadata.size, 'materials');
         } catch (e) {
-          console.warn('[firebase-db] Could not load metadata:', e);
+          console.warn('[supabase-db] Could not load metadata:', e);
         }
       }
 
@@ -824,9 +824,9 @@ if (materialsList) {
     if (downloadLink) {
       const folder = downloadLink.dataset.folder;
       const file = downloadLink.dataset.file;
-      const fdb = window.firebaseDB;
-      if (fdb && fdb.isReady && folder && file) {
-        fdb.trackDownload(folder, file);
+      const sdb = window.supabaseDB;
+      if (sdb && sdb.isReady && folder && file) {
+        sdb.trackDownload(folder, file);
         // Update the count in the UI
         const card = downloadLink.closest('.material-card');
         if (card) {
@@ -851,11 +851,11 @@ if (materialsList) {
     const folder = starsRow.dataset.folder;
     const file = starsRow.dataset.file;
     const rating = parseInt(star.dataset.star);
-    const fdb = window.firebaseDB;
+    const sdb = window.supabaseDB;
 
-    if (!fdb || !fdb.isReady || !folder || !file) return;
+    if (!sdb || !sdb.isReady || !folder || !file) return;
 
-    fdb.rateMaterial(folder, file, rating).then((result) => {
+    sdb.rateMaterial(folder, file, rating).then((result) => {
       if (result.success) {
         // Update stars display
         const allStars = starsRow.querySelectorAll('.star');
