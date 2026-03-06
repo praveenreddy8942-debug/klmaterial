@@ -12,9 +12,49 @@
   - Animated backgrounds
   - Touch-optimized interactions
   - Search functionality
-  - Firebase integration
+  - Supabase integration
   - Chatbase chatbot support
   - Gemini AI chatbot
+
+  TABLE OF CONTENTS
+  -----------------
+  1.  Variables & Resets .............. ~L22
+  2.  General / Body / Background ..... ~L50
+  3.  Desktop/PC Optimizations ........ ~L183
+  4.  Centered Navbar ................. ~L232
+  5.  Hero Section .................... ~L296
+  6.  Buttons ......................... ~L394
+  7.  Footer (base) ................... ~L498
+  8.  Materials Page .................. ~L510
+  9.  Floating Navbar (Desktop) ....... ~L512
+  10. Desktop Navigation .............. ~L561
+  11. Materials Grid & Cards .......... ~L658
+  12. About & Contact Pages ........... ~L822
+  13. Roadmap Page .................... ~L1243
+  14. Tablet/Medium Screens ........... ~L1546
+  15. Portfolio Homepage Layout ........ ~L1559
+  16. Contact Page .................... ~L1603
+  17. Premium Footer .................. ~L1820
+  18. Back to Top Button .............. ~L1983
+  19. Responsive Design ............... ~L2016
+  20. Loading Animations .............. ~L2098
+  21. iOS Safari Fixes ................ ~L2162
+  22. Mobile Nav ...................... ~L2185
+  23. Advanced Index Sections ......... ~L2235
+  24. Seasonal Animations ............. ~L2588
+  25. Gemini AI Chatbot ............... ~L2810
+  26. Advanced Materials Design ....... ~L4471
+  27. Cascading Filter Selectors ...... ~L4624
+  28. Subject Cards ................... ~L5411
+  29. Accessibility (Reduced Motion) .. ~L6805
+  30. Custom Scrollbar ................ ~L6822
+  31. Scroll Reveal ................... ~L6859
+  32. Hero Entrance Animations ........ ~L6872
+  33. Feature Cards Grid .............. ~L6905
+  34. Light Theme ..................... ~L6938
+  35. Focus-Visible Ring System ....... ~L7283
+  36. Glassmorphism Upgrade ........... ~L7433
+  37. Mobile Bottom Nav ............... ~L7500+
 ====================================
 */
 
@@ -2740,10 +2780,13 @@ html[data-theme="light"] .footer-bottom {
 }
 
 @keyframes springSparkle {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 0;
     transform: scale(0.5);
   }
+
   50% {
     opacity: 1;
     transform: scale(1.2);

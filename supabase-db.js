@@ -229,5 +229,3 @@ window.supabaseDB = {
   getDocId: getDocId
 };
 
-// Backward-compat shim (remove after all references are updated)
-window.firebaseDB = window.supabaseDB;

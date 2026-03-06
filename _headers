@@ -1,3 +1,9 @@
+# ⚠️ This file has NO EFFECT on GitHub Pages.
+# GitHub Pages does not process _headers files (that's a Netlify/Cloudflare Pages feature).
+# CSP is now enforced via <meta http-equiv="Content-Security-Policy"> in each HTML page.
+# This file is kept for reference only — if you migrate to Netlify or Cloudflare Pages
+# these headers will automatically take effect.
+
 /*
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
