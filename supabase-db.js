@@ -40,83 +40,39 @@ function getDocId(folder, fileName) {
   return (folder + '_' + fileName).replace(/[\/\\.#$\[\]]/g, '_');
 }
 
-// ─── Upsert Helper (atomic – avoids read-then-write race condition) ──
-async function upsertMaterial(docId, folder, fileName, updates) {
-  const row = {
-    doc_id: docId,
-    folder: folder,
-    file_name: fileName,
-    downloads: 0,
-    rating: 0,
-    rating_count: 0,
-    views: 0,
-    last_downloaded: null,
-    ...updates
-  };
-  const { data, error } = await supabase
-    .from('materials')
-    .upsert(row, { onConflict: 'doc_id' })
-    .select('id, downloads, rating, rating_count, views')
-    .single();
-  if (error) throw error;
-  return data;
-}
-
-// ─── Track Download ─────────────────────────────────
+// ─── Track Download (via RPC for security) ──────────
 async function trackDownload(folder, fileName) {
   if (!isDbReady) return;
   const docId = getDocId(folder, fileName);
 
   try {
-    // Fetch current count, then increment atomically
-    const { data: existing } = await supabase
-      .from('materials')
-      .select('downloads')
-      .eq('doc_id', docId)
-      .maybeSingle();
-
-    const newCount = (existing?.downloads || 0) + 1;
-    await supabase
-      .from('materials')
-      .upsert({
-        doc_id: docId,
-        folder: folder,
-        file_name: fileName,
-        downloads: newCount,
-        last_downloaded: new Date().toISOString()
-      }, { onConflict: 'doc_id' });
+    await supabase.rpc('increment_download', {
+      p_doc_id: docId,
+      p_folder: folder,
+      p_file_name: fileName
+    });
   } catch (error) {
     console.error('[supabase-db] Track download error:', error);
   }
 }
 
-// ─── Track View ─────────────────────────────────────
+// ─── Track View (via RPC for security) ──────────────
 async function trackView(folder, fileName) {
   if (!isDbReady) return;
   const docId = getDocId(folder, fileName);
 
   try {
-    const { data: existing } = await supabase
-      .from('materials')
-      .select('views')
-      .eq('doc_id', docId)
-      .maybeSingle();
-
-    const newViews = (existing?.views || 0) + 1;
-    await supabase
-      .from('materials')
-      .upsert({
-        doc_id: docId,
-        folder: folder,
-        file_name: fileName,
-        views: newViews
-      }, { onConflict: 'doc_id' });
+    await supabase.rpc('increment_view', {
+      p_doc_id: docId,
+      p_folder: folder,
+      p_file_name: fileName
+    });
   } catch (error) {
     // Silently fail — views are non-critical
   }
 }
 
-// ─── Rate Material ──────────────────────────────────
+// ─── Rate Material (via RPC for security) ───────────
 async function rateMaterial(folder, fileName, star) {
   if (!isDbReady) return { success: false };
 
@@ -128,41 +84,17 @@ async function rateMaterial(folder, fileName, star) {
   }
 
   try {
-    const { data: existing } = await supabase
-      .from('materials')
-      .select('id, rating, rating_count')
-      .eq('doc_id', docId)
-      .maybeSingle();
+    const { data, error } = await supabase.rpc('submit_rating', {
+      p_doc_id: docId,
+      p_folder: folder,
+      p_file_name: fileName,
+      p_star: star
+    });
 
-    if (existing) {
-      const newCount = (existing.rating_count || 0) + 1;
-      const newTotal = ((existing.rating || 0) * (existing.rating_count || 0)) + star;
-      const newAvg = Math.round((newTotal / newCount) * 10) / 10;
+    if (error) throw error;
 
-      await supabase
-        .from('materials')
-        .update({ rating: newAvg, rating_count: newCount })
-        .eq('doc_id', docId);
-
-      sessionStorage.setItem(ratedKey, 'true');
-      return { success: true, rating: newAvg, count: newCount };
-    } else {
-      await supabase
-        .from('materials')
-        .insert({
-          doc_id: docId,
-          folder: folder,
-          file_name: fileName,
-          downloads: 0,
-          rating: star,
-          rating_count: 1,
-          views: 0,
-          last_downloaded: null
-        });
-
-      sessionStorage.setItem(ratedKey, 'true');
-      return { success: true, rating: star, count: 1 };
-    }
+    sessionStorage.setItem(ratedKey, 'true');
+    return { success: true, rating: data.new_rating, count: data.new_count };
   } catch (error) {
     console.error('[supabase-db] Rate error:', error);
     return { success: false, message: error.message };
@@ -228,4 +160,3 @@ window.supabaseDB = {
   getMetadata: getMetadata,
   getDocId: getDocId
 };
-

@@ -2,6 +2,7 @@
   "name": "KL Material - Study Hub",
   "short_name": "KL Material",
   "description": "Your complete study hub for CSE materials, roadmaps, and resources",
+  "id": "/klmaterial/",
   "start_url": "/klmaterial/",
   "scope": "/klmaterial/",
   "display": "standalone",
@@ -17,6 +18,14 @@
     }
   ],
   "categories": ["education", "productivity"],
+  "screenshots": [
+    {
+      "src": "/klmaterial/assets/profile.jpg",
+      "sizes": "160x160",
+      "type": "image/jpeg",
+      "label": "KL Material Study Hub homepage"
+    }
+  ],
   "shortcuts": [
     {
       "name": "Materials",

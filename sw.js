@@ -1,5 +1,5 @@
 // Service Worker for PWA
-const CACHE_NAME = 'klmaterial-v12';
+const CACHE_NAME = 'klmaterial-v13';
 const urlsToCache = [
   '/klmaterial/',
   '/klmaterial/index.html',
@@ -20,6 +20,7 @@ const urlsToCache = [
   '/klmaterial/offline.html',
   '/klmaterial/privacy.html',
   '/klmaterial/animations.js',
+  '/klmaterial/cookie-consent.js',
 ];
 
 // Install Service Worker

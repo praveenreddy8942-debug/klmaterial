@@ -465,8 +465,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // Theme Manager
   new ThemeManager();
 
-  // Particle System
-  new ParticleSystem();
+  // Particle System (desktop only — saves CPU/battery on mobile)
+  if (window.innerWidth >= 768) {
+    new ParticleSystem();
+  }
 
   // Scroll Reveal
   new ScrollReveal();

@@ -8135,3 +8135,117 @@ html[data-theme="light"] .reveal-heading {
     display: none;
   }
 }
+
+/* ===== Cookie Consent Banner ===== */
+#cookie-consent {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10001;
+  background: rgba(0, 8, 20, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(0, 212, 255, 0.2);
+  padding: 16px 20px;
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#cookie-consent.visible {
+  transform: translateY(0);
+}
+
+.consent-content {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.consent-content p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  line-height: 1.5;
+  flex: 1;
+  min-width: 200px;
+}
+
+.consent-content a {
+  color: var(--accent-primary);
+  text-decoration: underline;
+}
+
+.consent-buttons {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.consent-btn {
+  padding: 8px 22px;
+  border-radius: 6px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+  min-height: 38px;
+}
+
+.consent-accept {
+  background: linear-gradient(135deg, #00d4ff, #0077ff);
+  color: #fff;
+}
+
+.consent-accept:hover {
+  box-shadow: 0 4px 15px rgba(0, 212, 255, 0.4);
+  transform: translateY(-1px);
+}
+
+.consent-decline {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-secondary);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.consent-decline:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--text-primary);
+}
+
+/* Mobile: stack vertically above bottom nav */
+@media (max-width: 768px) {
+  #cookie-consent {
+    bottom: 64px;
+    padding: 14px 16px;
+  }
+
+  .consent-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
+
+  .consent-buttons {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Light theme */
+html[data-theme="light"] #cookie-consent {
+  background: rgba(255, 255, 255, 0.95);
+  border-top-color: rgba(0, 119, 255, 0.2);
+}
+
+html[data-theme="light"] .consent-decline {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.15);
+  color: #333;
+}

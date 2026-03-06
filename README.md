@@ -110,6 +110,7 @@ klmaterial/
 
 1. **Clone the repo:**
    ```bash
+   git lfs install          # Required — PDFs are tracked with Git LFS
    git clone https://github.com/klstudyhub/klmaterial.git
    ```
 
