@@ -6794,15 +6794,24 @@ main.materials-container {
    Previously outside any media query, causing cascade conflicts with
    .nav-track a rules on mobile (same specificity, later position = wins). */
 @media (min-width: 769px) {
-  .nav-liquid {
-    width: auto;
-    max-width: 100%;
-    justify-content: center;
+  header > .nav-liquid {
+    width: max-content !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 0 !important;
+    padding: 0 !important;
   }
 
-  #mobile-nav.nav-track {
-    margin-left: auto;
-    margin-right: auto;
+  header > .nav-liquid > #mobile-nav.nav-track {
+    width: max-content !important;
+    max-width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
   }
 
   .nav-liquid a {
