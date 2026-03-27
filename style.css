@@ -8979,3 +8979,39 @@ html[data-theme="light"] .bottom-nav {
   }
 }
 /* END LIQUID GLASS DESIGN SYSTEM v22 */
+
+/* Final desktop centering override for primary navigation.
+   Kept at file end to win against earlier duplicated nav rules. */
+@media (min-width: 769px) {
+  header {
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%) !important;
+    width: max-content !important;
+    max-width: 95% !important;
+    margin: 0 auto !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  header > nav.nav-liquid {
+    width: max-content !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  header > nav.nav-liquid > #mobile-nav.nav-track {
+    width: max-content !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+  }
+}
