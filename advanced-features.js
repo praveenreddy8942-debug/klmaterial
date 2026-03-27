@@ -133,7 +133,7 @@ class ParticleSystem {
         const dy = this.mouse.y - particle.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
 
-        if (distance > 0 && distance < this.mouse.radius) {
+        if (distance < this.mouse.radius) {
           const force = (this.mouse.radius - distance) / this.mouse.radius;
           particle.x -= (dx / distance) * force * 3;
           particle.y -= (dy / distance) * force * 3;

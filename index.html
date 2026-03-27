@@ -1,1801 +1,410 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>KL Material | Apple Glass Study Hub</title>
-  <meta
-    name="description"
-    content="KL Material is a production-ready single-page study hub for KL University CSE students with real subject resources, a 4-year roadmap, and an Apple-style liquid glass interface."
-  />
-  <meta name="theme-color" content="#dfefff" />
+  <meta name="description"
+    content="KL Material - Free CSE study materials, notes, question papers & career roadmap for KL University B.Tech students. Access BEEC, DM, PSC, DSD resources instantly." />
+  <meta name="keywords"
+    content="KL University, CSE study materials, B.Tech CSE notes, BEEC notes, Discrete Mathematics DM, Problem Solving using C PSC, Digital System Design DSD, KL University materials, engineering study resources, free CSE notes, KL Material study hub, semester notes, question papers, CSE roadmap" />
   <meta name="author" content="Praveen Reddy" />
-  <meta property="og:title" content="KL Material | Apple Glass Study Hub" />
-  <meta
-    property="og:description"
-    content="A complete single-file KL Material rebuild with an authentic Apple liquid glass interface and real study resources."
-  />
-  <meta property="og:image" content="assets/profile.jpg" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="theme-color" content="#00d4ff" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' https: data:; connect-src 'self' https://api.github.com https://data.jsdelivr.com https://raw.githubusercontent.com https://media.githubusercontent.com https://*.supabase.co https://www.google-analytics.com; frame-ancestors 'none'" />
+  <link rel="canonical" href="https://klstudyhub.github.io/klmaterial/" />
+
+  <!-- Open Graph -->
   <meta property="og:type" content="website" />
+  <meta property="og:title" content="KL Material - Free CSE Study Materials & Roadmap | KL University" />
+  <meta property="og:description"
+    content="Free CSE study materials, notes, question papers & career roadmap for KL University B.Tech students. BEEC, DM, PSC, DSD resources." />
+  <meta property="og:image" content="https://klstudyhub.github.io/klmaterial/assets/profile.jpg" />
+  <meta property="og:url" content="https://klstudyhub.github.io/klmaterial/index.html" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="KL Material - Free CSE Study Materials & Roadmap | KL University" />
+  <meta name="twitter:description"
+    content="Free CSE study materials, notes & career roadmap for KL University B.Tech students." />
+  <meta name="twitter:image" content="https://klstudyhub.github.io/klmaterial/assets/profile.jpg" />
+
+  <title>KL Material - Free CSE Study Materials, Notes & Roadmap | KL University</title>
+
+  <!-- Optimize Font Loading with preconnect and async loading -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="assets/profile.jpg" as="image">
+
+  <!-- Styles & fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"
+    media="print" onload="this.media='all'">
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet">
+  </noscript>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="style.css?v=22.0">
+  <link rel="stylesheet" href="kl-liquid-glass.css?v=1.0">
+  <link rel="manifest" href="manifest.json" />
   <link rel="icon" href="icon.svg" />
   <link rel="apple-touch-icon" href="icon.svg" />
-  <style>
-    :root {
-      color-scheme: light;
-      --bg: #eef4ff;
-      --bg-soft: rgba(255, 255, 255, 0.5);
-      --surface: linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.28));
-      --surface-strong: linear-gradient(180deg, rgba(255, 255, 255, 0.84), rgba(255, 255, 255, 0.34));
-      --stroke: rgba(255, 255, 255, 0.62);
-      --stroke-soft: rgba(120, 148, 182, 0.16);
-      --text: #142033;
-      --text-muted: rgba(20, 32, 51, 0.68);
-      --accent: #4fa2ff;
-      --accent-deep: #1780ff;
-      --mint: #63d3c3;
-      --peach: #ffb98a;
-      --rose: #ff92aa;
-      --shadow: 0 28px 80px rgba(98, 132, 176, 0.18);
-      --shadow-tight: 0 16px 36px rgba(91, 121, 164, 0.14);
-      --radius-xl: 32px;
-      --radius-lg: 24px;
-      --radius-md: 18px;
-      --radius-sm: 14px;
-      --max-width: 1280px;
-      --blur: blur(28px) saturate(180%);
-      --transition: 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
-    }
 
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at 14% 16%, rgba(122, 190, 255, 0.78), transparent 22%),
-        radial-gradient(circle at 84% 18%, rgba(255, 183, 138, 0.54), transparent 22%),
-        radial-gradient(circle at 78% 74%, rgba(99, 211, 195, 0.46), transparent 22%),
-        radial-gradient(circle at 22% 86%, rgba(255, 146, 170, 0.34), transparent 24%),
-        linear-gradient(180deg, #f6fbff 0%, #edf3ff 48%, #eef2fa 100%);
-      background-attachment: fixed;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
-    }
-
-    body::before,
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: -2;
-    }
-
-    body::before {
-      background:
-        radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.85), transparent 44%),
-        radial-gradient(circle at 50% 100%, rgba(174, 215, 255, 0.25), transparent 30%);
-      mix-blend-mode: screen;
-    }
-
-    body::after {
-      z-index: -1;
-      opacity: 0.42;
-      background-image:
-        linear-gradient(rgba(255, 255, 255, 0.16) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.16) 1px, transparent 1px);
-      background-size: 28px 28px;
-      mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.72), transparent 86%);
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button,
-    input {
-      font: inherit;
-    }
-
-    img {
-      display: block;
-      max-width: 100%;
-    }
-
-    .skip-link {
-      position: absolute;
-      left: 16px;
-      top: -56px;
-      padding: 12px 16px;
-      border-radius: 999px;
-      background: rgba(20, 32, 51, 0.9);
-      color: #fff;
-      z-index: 100;
-      transition: top var(--transition);
-    }
-
-    .skip-link:focus {
-      top: 16px;
-    }
-
-    .glass {
-      position: relative;
-      border: 1px solid var(--stroke);
-      border-bottom-color: rgba(120, 148, 182, 0.12);
-      background: var(--surface);
-      box-shadow: var(--shadow);
-      backdrop-filter: var(--blur);
-      -webkit-backdrop-filter: var(--blur);
-      overflow: hidden;
-      isolation: isolate;
-    }
-
-    .glass::before {
-      content: "";
-      position: absolute;
-      inset: 1px 1px auto 1px;
-      height: 46%;
-      border-radius: inherit;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.56), rgba(255, 255, 255, 0.08));
-      pointer-events: none;
-      opacity: 0.95;
-      z-index: -1;
-    }
-
-    .page-shell {
-      width: min(var(--max-width), calc(100% - 32px));
-      margin: 0 auto;
-      padding: 24px 0 88px;
-    }
-
-    .topbar-wrap {
-      position: sticky;
-      top: 14px;
-      z-index: 20;
-      padding-top: 8px;
-    }
-
-    .topbar {
-      display: grid;
-      grid-template-columns: auto 1fr auto;
-      align-items: center;
-      gap: 16px;
-      padding: 14px 18px;
-      border-radius: 999px;
-    }
-
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      min-width: 0;
-    }
-
-    .brand-mark {
-      width: 42px;
-      height: 42px;
-      border-radius: 15px;
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.4)),
-        linear-gradient(135deg, rgba(79, 162, 255, 0.82), rgba(99, 211, 195, 0.66));
-      box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.9),
-        0 10px 22px rgba(79, 162, 255, 0.2);
-      display: grid;
-      place-items: center;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      color: #0d274a;
-    }
-
-    .brand-copy {
-      min-width: 0;
-    }
-
-    .brand-copy strong,
-    .brand-copy span {
-      display: block;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .brand-copy strong {
-      font-size: 1rem;
-      letter-spacing: -0.02em;
-    }
-
-    .brand-copy span {
-      font-size: 0.77rem;
-      color: var(--text-muted);
-    }
-
-    .nav {
-      justify-self: center;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.34);
-      border: 1px solid rgba(255, 255, 255, 0.56);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
-    }
-
-    .nav a {
-      padding: 10px 16px;
-      border-radius: 999px;
-      font-size: 0.94rem;
-      color: var(--text-muted);
-      transition: background var(--transition), color var(--transition), transform var(--transition);
-    }
-
-    .nav a:hover,
-    .nav a:focus-visible,
-    .nav a.is-active {
-      color: var(--text);
-      background: rgba(255, 255, 255, 0.58);
-      box-shadow: 0 10px 24px rgba(120, 148, 182, 0.12);
-      outline: none;
-      transform: translateY(-1px);
-    }
-
-    .nav-action {
-      justify-self: end;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 16px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.6);
-      background: var(--surface-strong);
-      box-shadow: var(--shadow-tight);
-      color: var(--text);
-      transition: transform var(--transition), box-shadow var(--transition);
-    }
-
-    .nav-action:hover,
-    .nav-action:focus-visible {
-      transform: translateY(-1px);
-      box-shadow: 0 18px 30px rgba(79, 162, 255, 0.16);
-      outline: none;
-    }
-
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
-      gap: 24px;
-      align-items: stretch;
-      padding: 34px 0 20px;
-    }
-
-    .hero-copy,
-    .hero-panel {
-      border-radius: var(--radius-xl);
-    }
-
-    .hero-copy {
-      padding: 34px;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      margin-bottom: 20px;
-      background: rgba(255, 255, 255, 0.5);
-      border: 1px solid rgba(255, 255, 255, 0.7);
-      color: rgba(20, 32, 51, 0.84);
-      font-size: 0.84rem;
-      letter-spacing: 0.01em;
-    }
-
-    .eyebrow-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent), var(--mint));
-      box-shadow: 0 0 0 4px rgba(79, 162, 255, 0.14);
-    }
-
-    h1,
-    h2,
-    h3,
-    p {
-      margin: 0;
-    }
-
-    .hero h1 {
-      max-width: 12ch;
-      font-size: clamp(3.35rem, 8vw, 6.5rem);
-      line-height: 0.96;
-      letter-spacing: -0.06em;
-    }
-
-    .hero-copy p {
-      max-width: 60ch;
-      margin-top: 18px;
-      font-size: 1.08rem;
-      line-height: 1.7;
-      color: var(--text-muted);
-    }
-
-    .hero-cta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 28px;
-    }
-
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      min-height: 50px;
-      padding: 0 20px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.66);
-      background: rgba(255, 255, 255, 0.52);
-      color: var(--text);
-      box-shadow: var(--shadow-tight);
-      cursor: pointer;
-      transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
-    }
-
-    .button:hover,
-    .button:focus-visible {
-      transform: translateY(-1px);
-      box-shadow: 0 18px 28px rgba(86, 121, 165, 0.14);
-      outline: none;
-    }
-
-    .button.primary {
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(203, 233, 255, 0.52));
-      border-color: rgba(255, 255, 255, 0.76);
-    }
-
-    .button.subtle {
-      background: rgba(255, 255, 255, 0.32);
-      color: var(--text-muted);
-    }
-
-    .hero-metrics {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 26px;
-    }
-
-    .metric {
-      padding: 18px;
-      border-radius: 22px;
-      background: rgba(255, 255, 255, 0.36);
-      border: 1px solid rgba(255, 255, 255, 0.58);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
-    }
-
-    .metric strong {
-      display: block;
-      font-size: 1.45rem;
-      letter-spacing: -0.04em;
-    }
-
-    .metric span {
-      display: block;
-      margin-top: 6px;
-      font-size: 0.84rem;
-      color: var(--text-muted);
-    }
-
-    .hero-panel {
-      display: grid;
-      grid-template-rows: auto auto 1fr;
-      gap: 16px;
-      padding: 20px;
-    }
-
-    .hero-profile {
-      display: grid;
-      grid-template-columns: 112px 1fr;
-      gap: 16px;
-      align-items: center;
-      padding: 16px;
-      border-radius: 26px;
-      background: rgba(255, 255, 255, 0.42);
-      border: 1px solid rgba(255, 255, 255, 0.62);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
-    }
-
-    .hero-profile img {
-      width: 112px;
-      height: 112px;
-      object-fit: cover;
-      border-radius: 28px;
-      border: 1px solid rgba(255, 255, 255, 0.8);
-      box-shadow: 0 14px 34px rgba(79, 162, 255, 0.12);
-    }
-
-    .hero-profile small,
-    .hero-profile p {
-      color: var(--text-muted);
-    }
-
-    .hero-profile strong {
-      display: block;
-      font-size: 1.45rem;
-      letter-spacing: -0.04em;
-      margin-bottom: 4px;
-    }
-
-    .stack-list,
-    .quick-list {
-      display: grid;
-      gap: 12px;
-    }
-
-    .stack-row,
-    .quick-card {
-      display: grid;
-      gap: 8px;
-      padding: 18px;
-      border-radius: 24px;
-      background: rgba(255, 255, 255, 0.36);
-      border: 1px solid rgba(255, 255, 255, 0.56);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
-    }
-
-    .stack-row strong,
-    .quick-card strong,
-    .section-heading h2 {
-      letter-spacing: -0.03em;
-    }
-
-    .stack-row span,
-    .quick-card p {
-      color: var(--text-muted);
-      line-height: 1.55;
-    }
-
-    .section {
-      padding-top: 20px;
-    }
-
-    .section-heading {
-      display: flex;
-      justify-content: space-between;
-      align-items: end;
-      gap: 20px;
-      margin-bottom: 18px;
-    }
-
-    .section-heading h2 {
-      font-size: clamp(2rem, 4vw, 3rem);
-      line-height: 1.02;
-    }
-
-    .section-heading p {
-      max-width: 56ch;
-      color: var(--text-muted);
-      line-height: 1.7;
-    }
-
-    .capsule {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 36px;
-      padding: 0 14px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.48);
-      border: 1px solid rgba(255, 255, 255, 0.66);
-      color: var(--text-muted);
-      font-size: 0.84rem;
-      white-space: nowrap;
-    }
-
-    .overview-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .overview-card {
-      padding: 24px;
-      border-radius: 28px;
-    }
-
-    .overview-card strong {
-      display: block;
-      font-size: 1.1rem;
-      margin-bottom: 10px;
-      letter-spacing: -0.03em;
-    }
-
-    .overview-card p {
-      color: var(--text-muted);
-      line-height: 1.65;
-    }
-
-    .materials-shell {
-      padding: 22px;
-      border-radius: 32px;
-    }
-
-    .materials-toolbar {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 18px;
-      align-items: center;
-      margin-bottom: 18px;
-    }
-
-    .search-box {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      min-height: 58px;
-      padding: 0 16px;
-      border-radius: 22px;
-      background: rgba(255, 255, 255, 0.42);
-      border: 1px solid rgba(255, 255, 255, 0.64);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
-    }
-
-    .search-box input {
-      width: 100%;
-      border: 0;
-      background: transparent;
-      color: var(--text);
-      outline: none;
-    }
-
-    .filter-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 18px;
-    }
-
-    .filter-chip {
-      border: 0;
-      padding: 11px 16px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.42);
-      border: 1px solid rgba(255, 255, 255, 0.62);
-      color: var(--text-muted);
-      cursor: pointer;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.68);
-      transition: transform var(--transition), background var(--transition), color var(--transition);
-    }
-
-    .filter-chip:hover,
-    .filter-chip:focus-visible,
-    .filter-chip.is-active {
-      background: rgba(255, 255, 255, 0.7);
-      color: var(--text);
-      outline: none;
-      transform: translateY(-1px);
-    }
-
-    .subject-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .subject-card {
-      padding: 22px;
-      border-radius: 28px;
-      display: grid;
-      gap: 18px;
-      background:
-        radial-gradient(circle at top right, rgba(255, 255, 255, 0.42), transparent 34%),
-        rgba(255, 255, 255, 0.34);
-      border: 1px solid rgba(255, 255, 255, 0.62);
-      box-shadow: var(--shadow-tight);
-    }
-
-    .subject-top {
-      display: flex;
-      justify-content: space-between;
-      gap: 14px;
-      align-items: start;
-    }
-
-    .subject-badge {
-      width: 48px;
-      height: 48px;
-      border-radius: 16px;
-      display: grid;
-      place-items: center;
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      color: #11345f;
-      box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.82),
-        0 12px 24px rgba(79, 162, 255, 0.12);
-    }
-
-    .subject-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .subject-meta span {
-      display: inline-flex;
-      align-items: center;
-      min-height: 30px;
-      padding: 0 10px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.46);
-      border: 1px solid rgba(255, 255, 255, 0.62);
-      color: var(--text-muted);
-      font-size: 0.76rem;
-    }
-
-    .subject-card h3 {
-      font-size: 1.28rem;
-      line-height: 1.08;
-      letter-spacing: -0.04em;
-    }
-
-    .subject-card p {
-      color: var(--text-muted);
-      line-height: 1.65;
-    }
-
-    .resource-preview {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .resource-chip {
-      max-width: 100%;
-      padding: 9px 12px;
-      border-radius: 16px;
-      background: rgba(255, 255, 255, 0.52);
-      border: 1px solid rgba(255, 255, 255, 0.64);
-      color: rgba(20, 32, 51, 0.8);
-      font-size: 0.8rem;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .subject-actions {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .inline-link {
-      color: var(--accent-deep);
-      font-weight: 600;
-      letter-spacing: -0.02em;
-    }
-
-    .roadmap-grid,
-    .workflow-grid,
-    .creator-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .roadmap-card,
-    .workflow-card,
-    .creator-card {
-      padding: 24px;
-      border-radius: 28px;
-    }
-
-    .roadmap-card {
-      display: grid;
-      gap: 14px;
-    }
-
-    .roadmap-step {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 34px;
-      width: fit-content;
-      padding: 0 12px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.46);
-      border: 1px solid rgba(255, 255, 255, 0.64);
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
-    .roadmap-card ul,
-    .workflow-card ul {
-      margin: 0;
-      padding-left: 20px;
-      color: var(--text-muted);
-      line-height: 1.7;
-    }
-
-    .workflow-card {
-      display: grid;
-      gap: 12px;
-    }
-
-    .workflow-emphasis {
-      font-size: 2.6rem;
-      line-height: 1;
-      letter-spacing: -0.06em;
-      color: var(--text);
-    }
-
-    .stack-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .stack-tags span {
-      padding: 9px 12px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.44);
-      border: 1px solid rgba(255, 255, 255, 0.62);
-      color: var(--text-muted);
-      font-size: 0.82rem;
-    }
-
-    .creator-card {
-      display: grid;
-      gap: 18px;
-    }
-
-    .creator-profile {
-      display: grid;
-      grid-template-columns: 80px 1fr;
-      gap: 16px;
-      align-items: center;
-    }
-
-    .creator-avatar {
-      width: 80px;
-      height: 80px;
-      border-radius: 22px;
-      object-fit: cover;
-      border: 1px solid rgba(255, 255, 255, 0.76);
-    }
-
-    .contact-list {
-      display: grid;
-      gap: 10px;
-    }
-
-    .contact-pill {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      min-height: 56px;
-      padding: 0 18px;
-      border-radius: 20px;
-      background: rgba(255, 255, 255, 0.42);
-      border: 1px solid rgba(255, 255, 255, 0.62);
-      transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
-    }
-
-    .contact-pill:hover,
-    .contact-pill:focus-visible {
-      transform: translateY(-1px);
-      background: rgba(255, 255, 255, 0.62);
-      box-shadow: 0 16px 26px rgba(86, 121, 165, 0.12);
-      outline: none;
-    }
-
-    .footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      margin-top: 22px;
-      padding: 18px 20px;
-      border-radius: 999px;
-      color: var(--text-muted);
-      font-size: 0.92rem;
-    }
-
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-    }
-
-    .footer-links a {
-      color: var(--text-muted);
-    }
-
-    .sheet {
-      position: fixed;
-      inset: 0;
-      display: grid;
-      place-items: center;
-      padding: 20px;
-      background: rgba(232, 240, 252, 0.38);
-      backdrop-filter: blur(18px) saturate(160%);
-      -webkit-backdrop-filter: blur(18px) saturate(160%);
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity var(--transition), visibility var(--transition);
-      z-index: 50;
-    }
-
-    .sheet.is-open {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .sheet-card {
-      width: min(920px, 100%);
-      max-height: min(86vh, 920px);
-      display: grid;
-      grid-template-rows: auto auto 1fr;
-      gap: 16px;
-      padding: 20px;
-      border-radius: 34px;
-      overflow: hidden;
-    }
-
-    .sheet-top {
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      align-items: start;
-    }
-
-    .sheet-title strong {
-      display: block;
-      font-size: 1.65rem;
-      letter-spacing: -0.05em;
-      margin-bottom: 6px;
-    }
-
-    .sheet-title span {
-      color: var(--text-muted);
-    }
-
-    .sheet-close {
-      width: 44px;
-      height: 44px;
-      border-radius: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.7);
-      background: rgba(255, 255, 255, 0.5);
-      cursor: pointer;
-      color: var(--text);
-      box-shadow: var(--shadow-tight);
-    }
-
-    .sheet-summary {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .sheet-list {
-      overflow: auto;
-      display: grid;
-      gap: 10px;
-      padding-right: 4px;
-    }
-
-    .file-link {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 16px;
-      align-items: center;
-      padding: 16px 18px;
-      border-radius: 22px;
-      background: rgba(255, 255, 255, 0.42);
-      border: 1px solid rgba(255, 255, 255, 0.62);
-      color: var(--text);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
-      transition: transform var(--transition), background var(--transition), box-shadow var(--transition);
-    }
-
-    .file-link:hover,
-    .file-link:focus-visible {
-      transform: translateY(-1px);
-      background: rgba(255, 255, 255, 0.64);
-      box-shadow: 0 18px 28px rgba(86, 121, 165, 0.12);
-      outline: none;
-    }
-
-    .file-meta {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--text-muted);
-      font-size: 0.82rem;
-      white-space: nowrap;
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(18px);
-      transition: opacity 520ms ease, transform 520ms ease;
-    }
-
-    .reveal.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    @media (max-width: 1120px) {
-      .hero,
-      .roadmap-grid,
-      .workflow-grid,
-      .creator-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .overview-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .subject-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .hero h1 {
-        max-width: none;
-      }
-    }
-
-    @media (max-width: 860px) {
-      .topbar {
-        grid-template-columns: 1fr;
-        justify-items: center;
-        border-radius: 28px;
-      }
-
-      .brand,
-      .nav-action {
-        justify-self: center;
-      }
-
-      .nav {
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-
-      .hero-metrics {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .materials-toolbar {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 680px) {
-      .page-shell {
-        width: min(calc(100% - 20px), var(--max-width));
-        padding-bottom: 48px;
-      }
-
-      .hero-copy,
-      .hero-panel,
-      .materials-shell,
-      .overview-card,
-      .roadmap-card,
-      .workflow-card,
-      .creator-card {
-        padding: 18px;
-        border-radius: 24px;
-      }
-
-      .hero-profile {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-metrics,
-      .overview-grid,
-      .subject-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .section-heading,
-      .footer {
-        flex-direction: column;
-        align-items: start;
-      }
-
-      .footer {
-        border-radius: 28px;
-      }
-
-      .nav a,
-      .button,
-      .contact-pill {
-        min-height: 48px;
-      }
-
-      .sheet {
-        padding: 12px;
-      }
-
-      .sheet-card {
-        padding: 16px;
-        border-radius: 26px;
-      }
-
-      .file-link {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
-      *,
-      *::before,
-      *::after {
-        animation: none !important;
-        transition: none !important;
-      }
-    }
-  </style>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZ0SERPS7L"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-NZ0SERPS7L');
+  </script>
+  <script defer src="cookie-consent.js"></script>
+
+  <!-- Cache control moved to server headers (.htaccess / _headers file) -->
+
+  <!-- Structured Data - Website -->
   <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "KL Material",
-      "alternateName": "KL Material Study Hub",
-      "url": "https://klstudyhub.github.io/klmaterial/",
-      "author": {
-        "@type": "Person",
-        "name": "Praveen Reddy"
-      },
-      "description": "A single-page study hub for KL University CSE students with notes, resources, and a 4-year roadmap."
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "KL Material",
+    "alternateName": "KL Material Study Hub",
+    "url": "https://klstudyhub.github.io/klmaterial/",
+    "description": "Free CSE study materials, notes, question papers & career roadmap for KL University B.Tech students.",
+    "publisher": {
+      "@type": "Person",
+      "name": "Praveen Reddy",
+      "url": "https://klstudyhub.github.io/klmaterial/about.html",
+      "sameAs": [
+        "https://github.com/klstudyhub",
+        "https://www.linkedin.com/in/praveen-reddy-37b0a6365",
+        "https://www.instagram.com/praveen_retotal_13"
+      ]
+    },
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://klstudyhub.github.io/klmaterial/materials.html?search={search_term_string}",
+      "query-input": "required name=search_term_string"
     }
+  }
+  </script>
+
+  <!-- Structured Data - Educational Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "KL Material Study Hub",
+    "url": "https://klstudyhub.github.io/klmaterial/",
+    "description": "A comprehensive study hub providing free CSE materials for KL University B.Tech students",
+    "founder": {
+      "@type": "Person",
+      "name": "Praveen Reddy"
+    },
+    "subject": ["Computer Science", "Engineering", "BEEC", "Discrete Mathematics", "Problem Solving using C", "Digital System Design"]
+  }
+  </script>
+
+  <!-- Structured Data - BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://klstudyhub.github.io/klmaterial/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Materials",
+        "item": "https://klstudyhub.github.io/klmaterial/materials.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Roadmap",
+        "item": "https://klstudyhub.github.io/klmaterial/roadmap.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "About",
+        "item": "https://klstudyhub.github.io/klmaterial/about.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 5,
+        "name": "Contact",
+        "item": "https://klstudyhub.github.io/klmaterial/contact.html"
+      }
+    ]
+  }
   </script>
 </head>
+
 <body>
-  <a class="skip-link" href="#main-content">Skip to content</a>
+  <!-- Skip to main content link for keyboard accessibility -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
 
-  <div class="page-shell">
-    <div class="topbar-wrap">
-      <header class="topbar glass">
-        <a class="brand" href="#overview" aria-label="KL Material home">
-          <span class="brand-mark">KL</span>
-          <span class="brand-copy">
-            <strong>KL Material</strong>
-            <span>Apple glass study hub for KL University CSE</span>
-          </span>
-        </a>
+  <header>
+    <nav class="nav-liquid" aria-label="Primary">
+      <button class="hamburger" aria-label="Toggle Menu" aria-expanded="false" aria-controls="mobile-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <a href="index.html" class="mobile-brand" aria-label="KL Material Home">KL Material</a>
+      <div id="mobile-nav" class="nav-track" role="menu" aria-hidden="true">
+        <a href="index.html" role="menuitem" tabindex="-1" class="active" aria-current="page" data-nav-link><i
+            class="fa-solid fa-house"></i> Home</a>
+        <a href="materials.html" role="menuitem" tabindex="-1" data-nav-link><i class="fa-solid fa-book"></i>
+          Materials</a>
+        <a href="roadmap.html" role="menuitem" tabindex="-1" data-nav-link><i class="fa-solid fa-map"></i>
+          Roadmap</a>
+        <a href="cgpa.html" role="menuitem" tabindex="-1" data-nav-link><i class="fa-solid fa-calculator"></i>
+          CGPA Calc</a>
+        <a href="about.html" role="menuitem" tabindex="-1" data-nav-link><i class="fa-solid fa-user"></i>
+          About</a>
+        <a href="contact.html" role="menuitem" tabindex="-1" data-nav-link><i class="fa-solid fa-address-book"></i>
+          Contact</a>
+      </div>
+    </nav>
+  </header>
 
-        <nav class="nav" aria-label="Section navigation">
-          <a href="#overview" class="is-active">Overview</a>
-          <a href="#materials">Materials</a>
-          <a href="#roadmap">Roadmap</a>
-          <a href="#workflow">Workflow</a>
-          <a href="#contact">Contact</a>
-        </nav>
+  <main class="page-content home-page" id="main-content">
+    <!-- Seasonal animation overlay (created by animations.js) -->
+    <div id="seasonalAnimation" class="season-container" role="presentation" aria-hidden="true"></div>
 
-        <a class="nav-action" href="#materials">
-          <span>Open Resources</span>
-          <span aria-hidden="true">+</span>
-        </a>
-      </header>
-    </div>
-
-    <main id="main-content">
-      <section class="hero" id="overview">
-        <div class="hero-copy glass reveal">
-          <span class="eyebrow">
-            <span class="eyebrow-dot" aria-hidden="true"></span>
-            A single-file rebuild with real content
-          </span>
-          <h1>Study smarter with liquid glass clarity.</h1>
-          <p>
-            KL Material is rebuilt as one production-ready Apple-style experience. It now packages your
-            subject library, roadmap, creator profile, and study workflow into a single polished interface
-            with authentic glass depth, soft motion, and real downloadable resources.
-          </p>
+    <section class="hero">
+      <div class="hero-inner">
+        <img src="assets/profile.jpg" alt="Praveen Reddy" class="profile-img" width="160" height="160" loading="eager">
+        <div class="hero-text">
+          <h1 class="hero-title">KL Material</h1>
+          <p class="hero-subtitle">Your complete study hub for CSE materials, roadmaps and resources</p>
+          <div class="typed-wrapper">
+            <span class="typed-text" id="typed-text"></span><span class="typed-cursor">|</span>
+          </div>
           <div class="hero-cta">
-            <a class="button primary" href="#materials">Browse 57 resources</a>
-            <a class="button subtle" href="#roadmap">See the 4-year plan</a>
-          </div>
-          <div class="hero-metrics" aria-label="Platform stats">
-            <div class="metric">
-              <strong>9</strong>
-              <span>core subjects</span>
-            </div>
-            <div class="metric">
-              <strong>57</strong>
-              <span>live files mapped</span>
-            </div>
-            <div class="metric">
-              <strong>4</strong>
-              <span>years of roadmap</span>
-            </div>
-            <div class="metric">
-              <strong>1</strong>
-              <span>complete HTML file</span>
-            </div>
+            <a class="btn" href="materials.html">
+              <i class="fas fa-book-open"></i> Browse Materials
+            </a>
+            <a class="btn btn-ghost" href="roadmap.html">
+              <i class="fas fa-map"></i> View Roadmap
+            </a>
           </div>
         </div>
-
-        <aside class="hero-panel glass reveal">
-          <div class="hero-profile">
-            <img src="assets/profile.jpg" alt="Praveen Reddy" />
-            <div>
-              <strong>Praveen Reddy</strong>
-              <small>CS student, curator, builder</small>
-              <p>
-                Building a cleaner, sharper study experience for KL University students with fewer clicks and
-                much better visual quality.
-              </p>
-            </div>
-          </div>
-
-          <div class="stack-list">
-            <div class="stack-row">
-              <strong>Materials cockpit</strong>
-              <span>Search by subject, semester, or file name and open the full resource sheet in place.</span>
-            </div>
-            <div class="stack-row">
-              <strong>Roadmap planning</strong>
-              <span>See what to focus on in each year so course work and career prep move together.</span>
-            </div>
-          </div>
-
-          <div class="quick-list">
-            <div class="quick-card">
-              <strong>Built for modern Apple glass behavior</strong>
-              <p>Large radii, layered blur, specular highlights, soft shadows, and responsive depth.</p>
-            </div>
-          </div>
-        </aside>
-      </section>
-
-      <section class="section reveal" aria-labelledby="why-title">
-        <div class="section-heading">
-          <div>
-            <span class="capsule">What this rebuild includes</span>
-            <h2 id="why-title">A tighter product, not just a prettier landing page.</h2>
-          </div>
-          <p>
-            The site now behaves like a complete study dashboard: clear hierarchy, real materials,
-            a better roadmap, and one consistent interaction model across desktop and mobile.
-          </p>
-        </div>
-
-        <div class="overview-grid">
-          <article class="overview-card glass">
-            <strong>Single-page architecture</strong>
-            <p>Everything important lives in one file: overview, materials explorer, roadmap, workflow, and contact.</p>
-          </article>
-          <article class="overview-card glass">
-            <strong>Real subject coverage</strong>
-            <p>BEEC, DM, PSC, DSD, PP, LACE, DS, FIS, and COA are mapped to the actual files already in the repo.</p>
-          </article>
-          <article class="overview-card glass">
-            <strong>Production-minded polish</strong>
-            <p>Responsive layout, reduced motion support, keyboard-safe navigation, and no dependency on external UI libraries.</p>
-          </article>
-          <article class="overview-card glass">
-            <strong>Apple-style tone</strong>
-            <p>Soft chrome, light diffusion, rounded planes, and calm information density instead of noisy gradients and clutter.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="section reveal" id="materials" aria-labelledby="materials-title">
-        <div class="materials-shell glass">
-          <div class="section-heading">
-            <div>
-              <span class="capsule">Materials explorer</span>
-              <h2 id="materials-title">Browse subjects, then open the exact files you need.</h2>
-            </div>
-            <p>
-              Search by course code, topic, or file name. Filter by semester to cut the list down fast.
-              Every subject card opens a glass sheet with direct links to the real documents in this repository.
-            </p>
-          </div>
-
-          <div class="materials-toolbar">
-            <label class="search-box" for="subject-search">
-              <span aria-hidden="true">Search</span>
-              <input
-                id="subject-search"
-                type="search"
-                placeholder="Try: DSD, CO-2, Python, or queue"
-                autocomplete="off"
-              />
-            </label>
-            <div class="capsule" id="results-count" aria-live="polite">9 subjects shown</div>
-          </div>
-
-          <div class="filter-row" role="toolbar" aria-label="Semester filters">
-            <button class="filter-chip is-active" type="button" data-filter="all">All</button>
-            <button class="filter-chip" type="button" data-filter="sem1">Semester 1</button>
-            <button class="filter-chip" type="button" data-filter="sem2">Semester 2</button>
-          </div>
-
-          <div class="subject-grid" id="subject-grid"></div>
-        </div>
-      </section>
-
-      <section class="section reveal" id="roadmap" aria-labelledby="roadmap-title">
-        <div class="section-heading">
-          <div>
-            <span class="capsule">Career roadmap</span>
-            <h2 id="roadmap-title">Four years, one clearer path.</h2>
-          </div>
-          <p>
-            The roadmap keeps the original KL Material intent, but tightens the sequencing: build fundamentals,
-            ship projects, get internship proof, then convert that into placement-ready momentum.
-          </p>
-        </div>
-
-        <div class="roadmap-grid">
-          <article class="roadmap-card glass">
-            <span class="roadmap-step">Year 1</span>
-            <h3>Build your base</h3>
-            <p>Choose one language and get genuinely fluent in the basics before chasing too many tools.</p>
-            <ul>
-              <li>Learn Python, C, or Java deeply enough to solve problems without tutorials.</li>
-              <li>Understand loops, arrays, conditions, and debugging discipline.</li>
-              <li>Ship 1 or 2 tiny projects and publish everything to GitHub.</li>
-            </ul>
-          </article>
-
-          <article class="roadmap-card glass">
-            <span class="roadmap-step">Year 2</span>
-            <h3>Build projects and pick a direction</h3>
-            <p>Move from raw coursework into visible work that proves capability.</p>
-            <ul>
-              <li>Choose a path: web, app, ML, or strong DSA plus development.</li>
-              <li>Build 2 or 3 projects with clear README files and clean demos.</li>
-              <li>Start consistent problem solving and show progress publicly.</li>
-            </ul>
-          </article>
-
-          <article class="roadmap-card glass">
-            <span class="roadmap-step">Year 3</span>
-            <h3>Convert skills into internship proof</h3>
-            <p>Polish your resume, sharpen your interview flow, and start applying earlier.</p>
-            <ul>
-              <li>Prepare resume, GitHub, LinkedIn, and project walkthroughs.</li>
-              <li>Push deeper into DSA and intermediate-level product building.</li>
-              <li>Apply across LinkedIn, Internshala, and startup hiring boards.</li>
-            </ul>
-          </article>
-
-          <article class="roadmap-card glass">
-            <span class="roadmap-step">Year 4</span>
-            <h3>Get placed with a sharper story</h3>
-            <p>Placement gets easier when your projects, internship work, and problem solving reinforce each other.</p>
-            <ul>
-              <li>Revise DSA, projects, and system understanding together.</li>
-              <li>Practice interviews using your own shipped work as evidence.</li>
-              <li>Apply both on-campus and off-campus until an offer closes the loop.</li>
-            </ul>
-          </article>
-        </div>
-      </section>
-
-      <section class="section reveal" id="workflow" aria-labelledby="workflow-title">
-        <div class="section-heading">
-          <div>
-            <span class="capsule">Study workflow</span>
-            <h2 id="workflow-title">What to do every semester so effort compounds.</h2>
-          </div>
-          <p>
-            KL Material works best when you use it as a cadence tool: one source of truth for notes,
-            one review loop for practice, and one visible track for progress.
-          </p>
-        </div>
-
-        <div class="workflow-grid">
-          <article class="workflow-card glass">
-            <span class="capsule">Weekly rhythm</span>
-            <div class="workflow-emphasis">3 blocks</div>
-            <ul>
-              <li>Concept block: read notes and clarify fundamentals.</li>
-              <li>Practice block: solve questions, problems, or lab tasks.</li>
-              <li>Output block: summarize, revise, or turn learning into a mini project.</li>
-            </ul>
-          </article>
-
-          <article class="workflow-card glass">
-            <span class="capsule">How to use the materials</span>
-            <p>
-              Start from the subject card, open the resource sheet, then pick one note set and one question-heavy file.
-              That keeps each session directional instead of random.
-            </p>
-            <div class="stack-tags">
-              <span>Notes</span>
-              <span>Question banks</span>
-              <span>Lab programs</span>
-              <span>Model papers</span>
-              <span>Code files</span>
-            </div>
-          </article>
-
-          <article class="workflow-card glass">
-            <span class="capsule">Repeat every year</span>
-            <ul>
-              <li>Remember the goal at the start of every semester.</li>
-              <li>Keep building and publishing, not just studying.</li>
-              <li>Stay active on LinkedIn and GitHub so progress is visible.</li>
-              <li>Do not confuse assignments with real skill growth.</li>
-            </ul>
-          </article>
-
-          <article class="workflow-card glass">
-            <span class="capsule">Tech direction</span>
-            <p>
-              This rebuild keeps the original KL Material focus but upgrades the product surface.
-              It is now clean enough to grow into a serious student product instead of just a link list.
-            </p>
-            <div class="stack-tags">
-              <span>One-page UX</span>
-              <span>Responsive layout</span>
-              <span>Apple glass system</span>
-              <span>Real file data</span>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="section reveal" id="contact" aria-labelledby="contact-title">
-        <div class="section-heading">
-          <div>
-            <span class="capsule">Creator and contact</span>
-            <h2 id="contact-title">Built by a student, designed to feel premium.</h2>
-          </div>
-          <p>
-            KL Material is curated by Praveen Reddy to make academic resources easier to discover,
-            easier to trust, and much less frustrating to use.
-          </p>
-        </div>
-
-        <div class="creator-grid">
-          <article class="creator-card glass">
-            <div class="creator-profile">
-              <img class="creator-avatar" src="assets/profile.jpg" alt="Praveen Reddy portrait" />
-              <div>
-                <h3>Praveen Reddy</h3>
-                <p>CS student, study hub creator, and the person organizing this material into something students can actually use.</p>
-              </div>
-            </div>
-            <div class="stack-list">
-              <div class="stack-row">
-                <strong>Mission</strong>
-                <span>Create one reliable place where KL University students can find academic material without noise.</span>
-              </div>
-              <div class="stack-row">
-                <strong>Vision</strong>
-                <span>Turn a scattered collection of notes into a durable platform that supports both exams and long-term skill growth.</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="creator-card glass">
-            <h3>Reach out or keep up</h3>
-            <div class="contact-list">
-              <a class="contact-pill" href="mailto:praveenreddy8942@gmail.com">
-                <span>Email</span>
-                <span class="inline-link">praveenreddy8942@gmail.com</span>
-              </a>
-              <a class="contact-pill" href="https://github.com/klstudyhub" target="_blank" rel="noopener noreferrer">
-                <span>GitHub</span>
-                <span class="inline-link">@klstudyhub</span>
-              </a>
-              <a class="contact-pill" href="https://www.linkedin.com/in/praveen-reddy-37b0a6365" target="_blank" rel="noopener noreferrer">
-                <span>LinkedIn</span>
-                <span class="inline-link">Connect professionally</span>
-              </a>
-              <a class="contact-pill" href="https://www.instagram.com/praveen_retotal_13" target="_blank" rel="noopener noreferrer">
-                <span>Instagram</span>
-                <span class="inline-link">@praveen_retotal_13</span>
-              </a>
-              <a class="contact-pill" href="https://chat.whatsapp.com/LWNBaMmNNuSH08ztjFg39B?mode=wwt" target="_blank" rel="noopener noreferrer">
-                <span>WhatsApp Group</span>
-                <span class="inline-link">Join the study community</span>
-              </a>
-            </div>
-          </article>
-        </div>
-      </section>
-    </main>
-
-    <footer class="footer glass">
-      <span>KL Material rebuilt as a single-file Apple glass experience.</span>
-      <div class="footer-links">
-        <a href="#overview">Overview</a>
-        <a href="#materials">Materials</a>
-        <a href="#roadmap">Roadmap</a>
-        <a href="#contact">Contact</a>
       </div>
-    </footer>
-  </div>
+    </section>
 
-  <div class="sheet" id="resource-sheet" aria-hidden="true">
-    <div class="sheet-card glass" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
-      <div class="sheet-top">
-        <div class="sheet-title">
-          <strong id="sheet-title">Resources</strong>
-          <span id="sheet-subtitle">Open a subject to view files.</span>
+    <!-- Advanced Stats Section -->
+    <section class="stats-section">
+      <h2>By The Numbers</h2>
+      <div class="stats-container">
+        <div class="stat-item">
+          <div class="stat-number" data-target="9">9</div>
+          <div class="stat-label">Subjects</div>
+          <p class="stat-desc">Comprehensive course coverage</p>
         </div>
-        <button class="sheet-close" id="sheet-close" type="button" aria-label="Close resource sheet">x</button>
+        <div class="stat-item">
+          <div class="stat-number" data-target="100" data-suffix="+">100+</div>
+          <div class="stat-label">Materials</div>
+          <p class="stat-desc">PDFs, notes & resources</p>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" data-target="4">4</div>
+          <div class="stat-label">Years</div>
+          <p class="stat-desc">Complete B.Tech roadmap</p>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" data-target="1000" data-suffix="+">1000+</div>
+          <div class="stat-label">Students</div>
+          <p class="stat-desc">Already benefited</p>
+        </div>
       </div>
-      <div class="sheet-summary" id="sheet-summary"></div>
-      <div class="sheet-list" id="sheet-list"></div>
+    </section>
+
+    <!-- Main Features Section -->
+    <section class="features">
+      <h2>Core Features</h2>
+      <div class="feature-cards">
+        <a class="card
+          advanced-card" href="materials.html">
+          <div class="card-icon"><i class="fa-solid fa-book-open"></i></div>
+          <h3>Materials Hub</h3>
+          <p>Notes, PDFs and curated resources
+            grouped by subject for easy access.</p>
+          <span class="card-arrow">→</span>
+        </a>
+        <a class="card advanced-card" href="roadmap.html">
+          <div class="card-icon"><i class="fa-solid fa-map"></i></div>
+          <h3>Career Roadmap</h3>
+          <p>4-year roadmap for B.Tech CSE with suggested learning paths and
+            milestones.</p>
+          <span class="card-arrow">→</span>
+        </a>
+        <a class="card advanced-card" href="about.html">
+          <div class="card-icon"><i class="fa-solid fa-circle-info"></i></div>
+          <h3>About</h3>
+          <p>Learn about the project and contact
+            details for feedback or collaboration.</p>
+          <span class="card-arrow">→</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Quick Access Categories -->
+    <section class="quick-access">
+      <h2>Quick Access</h2>
+      <div class="category-grid">
+        <!-- Tools -->
+        <a href="cgpa.html" class="category-btn" style="--accent: #f1c40f;">
+          <span class="cat-icon"><i class="fa-solid fa-calculator"></i></span>
+          <span class="cat-name">CGPA Calc</span>
+        </a>
+        <!-- Odd Semester -->
+        <a href="materials.html?category=BEEC" class="category-btn" style="--accent: #ff6b6b;">
+          <span class="cat-icon"><i class="fa-solid fa-bolt"></i></span>
+          <span class="cat-name">BEEC</span>
+        </a>
+        <a href="materials.html?category=DM" class="category-btn" style="--accent: #4ecdc4;">
+          <span class="cat-icon"><i class="fa-solid fa-calculator"></i></span>
+          <span class="cat-name">Discrete Math</span>
+        </a>
+        <a href="materials.html?category=DSD" class="category-btn" style="--accent: #45b7d1;">
+          <span class="cat-icon"><i class="fa-solid fa-microchip"></i></span>
+          <span class="cat-name">DSD</span>
+        </a>
+        <a href="materials.html?category=PSC" class="category-btn" style="--accent: #96ceb4;">
+          <span class="cat-icon"><i class="fa-solid fa-code"></i></span>
+          <span class="cat-name">PSC</span>
+        </a>
+        <!-- Even Semester -->
+        <a href="materials.html?category=PP" class="category-btn" style="--accent: #3776AB;">
+          <span class="cat-icon"><i class="fa-brands fa-python"></i></span>
+          <span class="cat-name">Python</span>
+        </a>
+        <a href="materials.html?category=LACE" class="category-btn" style="--accent: #e67e22;">
+          <span class="cat-icon"><i class="fa-solid fa-square-root-variable"></i></span>
+          <span class="cat-name">LACE</span>
+        </a>
+        <a href="materials.html?category=DS" class="category-btn" style="--accent: #9b59b6;">
+          <span class="cat-icon"><i class="fa-solid fa-diagram-project"></i></span>
+          <span class="cat-name">Data Structures</span>
+        </a>
+        <a href="materials.html?category=FIS" class="category-btn" style="--accent: #1abc9c;">
+          <span class="cat-icon"><i class="fa-solid fa-tower-broadcast"></i></span>
+          <span class="cat-name">FIS</span>
+        </a>
+        <a href="materials.html?category=COA" class="category-btn" style="--accent: #e74c3c;">
+          <span class="cat-icon"><i class="fa-solid fa-computer"></i></span>
+          <span class="cat-name">COA</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-advanced">
+      <h2>Get Started Now</h2>
+      <p>Access curated study
+        materials organized by semester and subject</p>
+      <a href="materials.html" class="btn btn-lg">Explore All Materials</a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>KL Material</h3>
+        <p>Your complete study hub for CSE materials, roadmaps, and resources — always free, always accessible.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="materials.html"><i class="fa-solid fa-book"></i> Materials</a></li>
+          <li><a href="roadmap.html"><i class="fa-solid fa-map"></i> Roadmap</a></li>
+          <li><a href="cgpa.html"><i class="fa-solid fa-calculator"></i> CGPA Calc</a></li>
+          <li><a href="about.html"><i class="fa-solid fa-user"></i> About</a></li>
+          <li><a href="contact.html"><i class="fa-solid fa-address-book"></i> Contact</a></li>
+          <li><a href="privacy.html"><i class="fa-solid fa-shield-halved"></i> Privacy</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <div class="footer-social">
+          <a href="https://github.com/klstudyhub" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i
+              class="fab fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/praveen-reddy-37b0a6365" target="_blank" rel="noopener noreferrer"
+            aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.instagram.com/praveen_retotal_13" target="_blank" rel="noopener noreferrer"
+            aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="mailto:praveenreddy8942@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+        </div>
+      </div>
     </div>
-  </div>
+    <div class="footer-bottom">
+      <p>© 2026 Praveen Reddy · Made with <span>❤️</span> for KL University students</p>
+    </div>
+  </footer>
 
+  <button id="backToTop" title="Back to top">↑</button>
+
+  <!-- Site scripts (deferred for better performance) -->
+  <script defer src="advanced-features.js"></script>
+  <script defer src="fantasy-effects.js"></script>
+  <script defer src="animations.js"></script>
+  <script defer src="study-timer.js"></script>
+  <script defer src="chatbot.js?v=3.0"></script>
+  <script defer src="ui.js?v=7.0"></script>
+
+  <!-- Mobile Bottom Navigation Bar -->
+  <nav class="bottom-nav" aria-label="Mobile navigation">
+    <a href="index.html" class="bottom-nav-item active" aria-current="page">
+      <i class="fa-solid fa-house"></i>
+      <span>Home</span>
+    </a>
+    <a href="materials.html" class="bottom-nav-item">
+      <i class="fa-solid fa-book"></i>
+      <span>Materials</span>
+    </a>
+    <a href="roadmap.html" class="bottom-nav-item">
+      <i class="fa-solid fa-map"></i>
+      <span>Roadmap</span>
+    </a>
+    <a href="cgpa.html" class="bottom-nav-item">
+      <i class="fa-solid fa-calculator"></i>
+      <span>CGPA</span>
+    </a>
+    <a href="about.html" class="bottom-nav-item">
+      <i class="fa-solid fa-user"></i>
+      <span>About</span>
+    </a>
+    <a href="contact.html" class="bottom-nav-item">
+      <i class="fa-solid fa-address-book"></i>
+      <span>Contact</span>
+    </a>
+  </nav>
+
+  <!-- Register service worker (if supported) to enable offline cache and updates -->
   <script>
-    const SUBJECTS = [
-      {
-        code: "BEEC",
-        title: "Basic Electrical & Electronic Circuits",
-        year: 1,
-        semester: 1,
-        accent: "linear-gradient(135deg, rgba(79, 162, 255, 0.92), rgba(99, 211, 195, 0.86))",
-        blurb: "Core electrical concepts, circuit notes, and compact CO-focused revision sets.",
-        files: [
-          "materials/BEEC/BEEC Updated CO1 & CO2 Notes_unlocked.pdf",
-          "materials/BEEC/BEEC Updated CO3 & CO4 Notes_unlocked.pdf"
-        ]
-      },
-      {
-        code: "DM",
-        title: "Discrete Mathematics",
-        year: 1,
-        semester: 1,
-        accent: "linear-gradient(135deg, rgba(88, 141, 255, 0.88), rgba(255, 186, 120, 0.82))",
-        blurb: "Four CO-wise PDFs that split the subject into manageable, exam-ready blocks.",
-        files: [
-          "materials/DM/DM CO-1 Material_efecb4d79b6e84268fcdc4dc92ae43f9.pdf",
-          "materials/DM/DM CO-2 Material_df4a0e9c5868f21e1ff8422bc06a9e58.pdf",
-          "materials/DM/DM CO-3 Material_884f340d5afd6fb948de6395d7297e02.pdf",
-          "materials/DM/CO_4_Material_1bbf75bb8a3be89c7e1b47d157fd6b2f.pdf"
-        ]
-      },
-      {
-        code: "PSC",
-        title: "Problem Solving Through C",
-        year: 1,
-        semester: 1,
-        accent: "linear-gradient(135deg, rgba(255, 164, 112, 0.9), rgba(255, 108, 149, 0.82))",
-        blurb: "C fundamentals, full notes, and important question sets for exam preparation.",
-        files: [
-          "materials/PSC/PSC CO-1 Material.docx",
-          "materials/PSC/PSC basics and syntax.pdf",
-          "materials/PSC/PSC FULL_NOTES.pdf",
-          "materials/PSC/PSC Full Notes 2.pdf",
-          "materials/PSC/PSC C03 Important Questions.docx",
-          "materials/PSC/PSC Co4 Important Questions.docx"
-        ]
-      },
-      {
-        code: "DSD",
-        title: "Digital System Design",
-        year: 1,
-        semester: 1,
-        accent: "linear-gradient(135deg, rgba(87, 185, 255, 0.92), rgba(111, 123, 255, 0.82))",
-        blurb: "Terminal questions, notes, and focused CO coverage for DSD revision.",
-        files: [
-          "materials/DSD/DSD CO-1 terminal questions and answers.pdf",
-          "materials/DSD/DSD CO-2 Terminal Questions.pdf",
-          "materials/DSD/DSD CO3 Notes.pdf",
-          "materials/DSD/DSD CO4 Notes.pdf",
-          "materials/DSD/DSD CO-4 last topics.pdf"
-        ]
-      },
-      {
-        code: "PP",
-        title: "Python Programming",
-        year: 1,
-        semester: 2,
-        accent: "linear-gradient(135deg, rgba(103, 204, 163, 0.88), rgba(79, 162, 255, 0.82))",
-        blurb: "Python basics through advanced notes, function topics, and sample paper support.",
-        files: [
-          "materials/PP/CO-1 Material.pdf",
-          "materials/PP/CO-2(Functions, Lambda,List,Set,Tuple,Dictionary).pdf",
-          "materials/PP/Python Basics to Advanced Notes📚.pdf",
-          "materials/PP/Python SAMPLE_QP_PP.pdf"
-        ]
-      },
-      {
-        code: "LACE",
-        title: "Linear Algebra & Calculus for Engineers",
-        year: 1,
-        semester: 2,
-        accent: "linear-gradient(135deg, rgba(255, 189, 129, 0.92), rgba(255, 145, 164, 0.82))",
-        blurb: "Notes, formulas, and in-sem question material for faster revision cycles.",
-        files: [
-          "materials/LACE/LACE CO-1 NOTES.pdf",
-          "materials/LACE/LACE CO-1,2_formulas.pdf",
-          "materials/LACE/LACE CO-2 NOTES.pdf",
-          "materials/LACE/LACE In Sem 1 QP With Ans.pdf"
-        ]
-      },
-      {
-        code: "DS",
-        title: "Data Structures",
-        year: 1,
-        semester: 2,
-        accent: "linear-gradient(135deg, rgba(108, 144, 255, 0.92), rgba(99, 211, 195, 0.82))",
-        blurb: "The largest library in KL Material: notes, code files, sort algorithms, model papers, and lab assets.",
-        files: [
-          "materials/DS/DST CO-1 Notes.pdf",
-          "materials/DS/DST CO-1&2.pdf",
-          "materials/DS/DST CO-2.pdf",
-          "materials/DS/DS insem1.pdf",
-          "materials/DS/DataStructures Notes by Zeelan Basha sir _compressed.pdf",
-          "materials/DS/Algorithm efficiency.pptx",
-          "materials/DS/DS Key.docx",
-          "materials/DS/Ds model paper sem in 1.doc",
-          "materials/DS/Timecomplexity.docx",
-          "materials/DS/co2-codes_liked list_stack_Jqueue.docx",
-          "materials/DS/BUBBLE SORT.txt",
-          "materials/DS/INSERTION SORT.txt",
-          "materials/DS/MERGE SORT.txt",
-          "materials/DS/QUICK SORT.txt",
-          "materials/DS/SHELL SORT.txt",
-          "materials/DS/INFIX TO POSTFIX CONVERSION.txt",
-          "materials/DS/POSTFIX EVALUATION.txt",
-          "materials/DS/QUEUE USING LINKED LIST.txt",
-          "materials/DS/STACK USING LINKED LIST.txt",
-          "materials/DS/stack using structures.txt",
-          "materials/DS/SLL.txt",
-          "materials/DS/DLL.txt",
-          "materials/DS/CLL.txt",
-          "materials/DS/PHOTO-2026-02-14-13-56-29.jpg",
-          "materials/DS/PHOTO-2026-02-14-13-56-30.jpg"
-        ]
-      },
-      {
-        code: "FIS",
-        title: "Fundamentals of IoT & Sensors",
-        year: 1,
-        semester: 2,
-        accent: "linear-gradient(135deg, rgba(79, 162, 255, 0.9), rgba(130, 215, 255, 0.84))",
-        blurb: "Focused question banks plus a lab programs PDF for practical preparation.",
-        files: [
-          "materials/FIS/CO1 QB-25 Marks_unlocked.pdf",
-          "materials/FIS/CO2 QB-25 Marks_unlocked.pdf",
-          "materials/FIS/CO1&CO2 FIS Lab Programs-20 Marks_unlocked.pdf"
-        ]
-      },
-      {
-        code: "COA",
-        title: "Computer Organization & Architecture",
-        year: 1,
-        semester: 2,
-        accent: "linear-gradient(135deg, rgba(95, 192, 197, 0.9), rgba(101, 129, 255, 0.84))",
-        blurb: "COA notes with unlocked PDFs and a comparative analysis topic file for exam prep.",
-        files: [
-          "materials/COA/CO1_unlocked.pdf",
-          "materials/COA/CO2-1_unlocked.pdf",
-          "materials/COA/CO2 Topic Comparative analysis-25 Marks_unlocked.pdf"
-        ]
-      }
-    ];
-
-    const roadmapSections = document.querySelectorAll("main section[id]");
-    const navLinks = Array.from(document.querySelectorAll(".nav a"));
-    const searchInput = document.getElementById("subject-search");
-    const filterButtons = Array.from(document.querySelectorAll(".filter-chip"));
-    const subjectGrid = document.getElementById("subject-grid");
-    const resultsCount = document.getElementById("results-count");
-    const sheet = document.getElementById("resource-sheet");
-    const sheetTitle = document.getElementById("sheet-title");
-    const sheetSubtitle = document.getElementById("sheet-subtitle");
-    const sheetSummary = document.getElementById("sheet-summary");
-    const sheetList = document.getElementById("sheet-list");
-    const sheetClose = document.getElementById("sheet-close");
-    const revealNodes = document.querySelectorAll(".reveal");
-
-    let activeFilter = "all";
-    let activeSheetTrigger = null;
-
-    function cleanLabel(path) {
-      const filename = path.split("/").pop() || path;
-      return filename
-        .replace(/\.[^.]+$/, "")
-        .replace(/_/g, " ")
-        .replace(/\s+/g, " ")
-        .trim();
-    }
-
-    function extensionOf(path) {
-      return (path.split(".").pop() || "").toUpperCase();
-    }
-
-    function subjectMatches(subject, query) {
-      if (!query) return true;
-      const haystack = [
-        subject.code,
-        subject.title,
-        subject.blurb,
-        ...subject.files.map(cleanLabel)
-      ].join(" ").toLowerCase();
-      return haystack.includes(query);
-    }
-
-    function filterMatches(subject) {
-      if (activeFilter === "all") return true;
-      if (activeFilter === "sem1") return subject.semester === 1;
-      if (activeFilter === "sem2") return subject.semester === 2;
-      return true;
-    }
-
-    function filteredSubjects() {
-      const query = searchInput.value.trim().toLowerCase();
-      return SUBJECTS.filter((subject) => filterMatches(subject) && subjectMatches(subject, query));
-    }
-
-    function renderSubjects() {
-      const subjects = filteredSubjects();
-      resultsCount.textContent = `${subjects.length} subject${subjects.length === 1 ? "" : "s"} shown`;
-      subjectGrid.innerHTML = "";
-
-      if (!subjects.length) {
-        const empty = document.createElement("article");
-        empty.className = "subject-card glass";
-        empty.innerHTML = `
-          <div class="subject-top">
-            <div>
-              <h3>No subjects match this search</h3>
-              <p>Try a course code like DS, a topic like Python, or switch the semester filter.</p>
-            </div>
-          </div>
-        `;
-        subjectGrid.appendChild(empty);
-        return;
-      }
-
-      subjects.forEach((subject) => {
-        const card = document.createElement("article");
-        card.className = "subject-card";
-        const preview = subject.files.slice(0, 3).map((file) => {
-          return `<span class="resource-chip" title="${cleanLabel(file)}">${cleanLabel(file)}</span>`;
-        }).join("");
-
-        card.innerHTML = `
-          <div class="subject-top">
-            <div class="subject-badge" style="background:${subject.accent}">${subject.code}</div>
-            <div class="subject-meta">
-              <span>Year ${subject.year}</span>
-              <span>Semester ${subject.semester}</span>
-              <span>${subject.files.length} files</span>
-            </div>
-          </div>
-          <div>
-            <h3>${subject.title}</h3>
-            <p>${subject.blurb}</p>
-          </div>
-          <div class="resource-preview">${preview}</div>
-          <div class="subject-actions">
-            <button class="button primary" type="button" data-subject="${subject.code}">View all resources</button>
-            <span class="inline-link">${subject.code} library</span>
-          </div>
-        `;
-
-        subjectGrid.appendChild(card);
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('sw.js').then(function (reg) {
+          console.log('ServiceWorker registration successful with scope: ', reg.scope);
+        }).catch(function (err) {
+          console.warn('ServiceWorker registration failed: ', err);
+        });
       });
     }
-
-    function openSheet(code, trigger) {
-      const subject = SUBJECTS.find((item) => item.code === code);
-      if (!subject) return;
-
-      activeSheetTrigger = trigger || null;
-      sheetTitle.textContent = `${subject.code} resources`;
-      sheetSubtitle.textContent = subject.title;
-      sheetSummary.innerHTML = `
-        <span class="capsule">Year ${subject.year}</span>
-        <span class="capsule">Semester ${subject.semester}</span>
-        <span class="capsule">${subject.files.length} files</span>
-      `;
-      sheetList.innerHTML = subject.files.map((path) => {
-        const href = encodeURI(path);
-        return `
-          <a class="file-link" href="${href}" target="_blank" rel="noopener noreferrer">
-            <div>
-              <strong>${cleanLabel(path)}</strong>
-            </div>
-            <div class="file-meta">
-              <span>${extensionOf(path)}</span>
-              <span>Open</span>
-            </div>
-          </a>
-        `;
-      }).join("");
-
-      sheet.classList.add("is-open");
-      sheet.setAttribute("aria-hidden", "false");
-      document.body.style.overflow = "hidden";
-      sheetClose.focus();
-    }
-
-    function closeSheet() {
-      sheet.classList.remove("is-open");
-      sheet.setAttribute("aria-hidden", "true");
-      document.body.style.overflow = "";
-      if (activeSheetTrigger) activeSheetTrigger.focus();
-    }
-
-    subjectGrid.addEventListener("click", (event) => {
-      const button = event.target.closest("button[data-subject]");
-      if (!button) return;
-      openSheet(button.dataset.subject, button);
-    });
-
-    sheetClose.addEventListener("click", closeSheet);
-    sheet.addEventListener("click", (event) => {
-      if (event.target === sheet) closeSheet();
-    });
-
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && sheet.classList.contains("is-open")) {
-        closeSheet();
-      }
-    });
-
-    searchInput.addEventListener("input", renderSubjects);
-
-    filterButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        activeFilter = button.dataset.filter;
-        filterButtons.forEach((item) => item.classList.toggle("is-active", item === button));
-        renderSubjects();
-      });
-    });
-
-    const sectionObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          navLinks.forEach((link) => {
-            link.classList.toggle("is-active", link.getAttribute("href") === `#${entry.target.id}`);
-          });
-        }
-      });
-    }, { threshold: 0.45, rootMargin: "-10% 0px -35% 0px" });
-
-    roadmapSections.forEach((section) => sectionObserver.observe(section));
-
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.14 });
-
-    revealNodes.forEach((node) => revealObserver.observe(node));
-
-    renderSubjects();
   </script>
 </body>
+
 </html>

@@ -855,10 +855,10 @@ if (materialsList) {
     // Handle ?q=search_term for search
     const query = urlParams.get('q');
     if (query && searchBar) {
-      searchBar.value = query;
+      searchBar.value = decodeURIComponent(query);
       const inputEvent = new Event('input');
       searchBar.dispatchEvent(inputEvent);
-      filterMaterials(query.toLowerCase().trim());
+      filterMaterials(decodeURIComponent(query).toLowerCase().trim());
 
       const searchContainer = document.querySelector('.advanced-search-container');
       if (searchContainer) searchContainer.scrollIntoView({ behavior: 'smooth' });
@@ -888,5 +888,43 @@ if (materialsList) {
         }
       }
     }
+  });
+
+  // Handle star rating clicks
+  materialsList.addEventListener('click', (e) => {
+    const star = e.target.closest('.star[data-star]');
+    if (!star) return;
+
+    const starsRow = star.closest('.stars-row');
+    if (!starsRow) return;
+
+    const folder = starsRow.dataset.folder;
+    const file = starsRow.dataset.file;
+    const rating = parseInt(star.dataset.star);
+    const sdb = window.supabaseDB;
+
+    if (!sdb || !sdb.isReady || !folder || !file) return;
+
+    sdb.rateMaterial(folder, file, rating).then((result) => {
+      if (result.success) {
+        // Update stars display
+        const allStars = starsRow.querySelectorAll('.star');
+        allStars.forEach((s, i) => {
+          if (i < rating) {
+            s.innerHTML = '<i class="fa-solid fa-star"></i>';
+            s.classList.add('filled');
+            s.classList.remove('half');
+          } else {
+            s.innerHTML = '<i class="fa-regular fa-star"></i>';
+            s.classList.remove('filled', 'half');
+          }
+        });
+        // Update rating text
+        const small = starsRow.parentElement.querySelector('small');
+        if (small) small.textContent = result.rating.toFixed(1);
+      } else if (result.message) {
+        console.info('[rating]', result.message);
+      }
+    });
   });
 }

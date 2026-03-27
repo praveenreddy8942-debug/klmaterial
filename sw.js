@@ -1,32 +1,30 @@
 // Service Worker for PWA
-const CACHE_NAME = 'klmaterial-v24';
-const APP_SCOPE = new URL(self.registration.scope).pathname.replace(/\/$/, '');
-const appUrl = (path = '') => `${APP_SCOPE}${path ? `/${path.replace(/^\//, '')}` : '/'}`;
+const CACHE_NAME = 'klmaterial-v23';
 const urlsToCache = [
-  appUrl('kl-liquid-glass.css'),
-  appUrl(),
-  appUrl('index.html'),
-  appUrl('materials.html'),
-  appUrl('roadmap.html'),
-  appUrl('about.html'),
-  appUrl('contact.html'),
-  appUrl('cgpa.html'),
-  appUrl('privacy.html'),
-  appUrl('offline.html'),
-  appUrl('404.html'),
-  appUrl('style.css'),
-  appUrl('ui.js'),
-  appUrl('advanced-features.js'),
-  appUrl('fantasy-effects.js'),
-  appUrl('animations.js'),
-  appUrl('chatbot.js'),
-  appUrl('github-materials.js'),
-  appUrl('supabase-db.js'),
-  appUrl('cookie-consent.js'),
-  appUrl('study-timer.js'),
-  appUrl('assets/profile.jpg'),
-  appUrl('icon.svg'),
-  appUrl('manifest.json'),
+  '/klmaterial/kl-liquid-glass.css',
+  '/klmaterial/',
+  '/klmaterial/index.html',
+  '/klmaterial/materials.html',
+  '/klmaterial/roadmap.html',
+  '/klmaterial/about.html',
+  '/klmaterial/contact.html',
+  '/klmaterial/cgpa.html',
+  '/klmaterial/privacy.html',
+  '/klmaterial/offline.html',
+  '/klmaterial/404.html',
+  '/klmaterial/style.css',
+  '/klmaterial/ui.js',
+  '/klmaterial/advanced-features.js',
+  '/klmaterial/fantasy-effects.js',
+  '/klmaterial/animations.js',
+  '/klmaterial/chatbot.js',
+  '/klmaterial/github-materials.js',
+  '/klmaterial/supabase-db.js',
+  '/klmaterial/cookie-consent.js',
+  '/klmaterial/study-timer.js',
+  '/klmaterial/assets/profile.jpg',
+  '/klmaterial/icon.svg',
+  '/klmaterial/manifest.json',
 ];
 
 // Install Service Worker
@@ -82,7 +80,7 @@ self.addEventListener('fetch', (event) => {
 
           // Return offline page for navigation requests
           if (event.request.mode === 'navigate') {
-            return caches.match(appUrl('offline.html'));
+            return caches.match('/klmaterial/offline.html');
           }
         });
       })
@@ -105,8 +103,8 @@ async function syncData() {
 self.addEventListener('push', (event) => {
   const options = {
     body: event.data ? event.data.text() : 'New update available!',
-    icon: appUrl('icon.svg'),
-    badge: appUrl('icon.svg'),
+    icon: '/klmaterial/icon.svg',
+    badge: '/klmaterial/icon.svg',
     vibrate: [200, 100, 200],
     data: {
       dateOfArrival: Date.now(),
@@ -135,7 +133,7 @@ self.addEventListener('notificationclick', (event) => {
 
   if (event.action === 'explore') {
     event.waitUntil(
-      clients.openWindow(appUrl('materials.html'))
+      clients.openWindow('/klmaterial/materials.html')
     );
   }
 });

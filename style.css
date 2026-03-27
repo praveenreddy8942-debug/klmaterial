@@ -221,18 +221,6 @@ body::after {
 
 /* ===== Desktop/PC Optimizations ===== */
 @media (min-width: 1200px) {
-
-  .nav {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
-    width: fit-content;
-    left: 50%;
-    transform: translateX(-50%);
-    position: relative;
-  }
-
   .center-nav a {
     font-size: 1.15em;
     margin: 0 25px;

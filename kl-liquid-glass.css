@@ -10,19 +10,19 @@
    ══════════════════════════════════════════════════════════ */
 :root {
   /* ── The core filter — this IS the glass ── */
-  --apple-blur:   blur(48px) saturate(280%) brightness(1.18);
-  --apple-blur-sm: blur(32px) saturate(260%) brightness(1.14);
-  --apple-blur-xs: blur(20px) saturate(240%) brightness(1.10);
+  --apple-blur:   blur(50px) saturate(200%);
+  --apple-blur-sm: blur(30px) saturate(180%);
+  --apple-blur-xs: blur(20px) saturate(150%);
 
   /* ── Dark-mode glass surface ── */
-  --apple-bg:          rgba(255, 255, 255, 0.10);
-  --apple-bg-hover:    rgba(255, 255, 255, 0.16);
-  --apple-border:      rgba(255, 255, 255, 0.22);
-  --apple-border-hover:rgba(255, 255, 255, 0.40);
+  --apple-bg:          rgba(255, 255, 255, 0.08);
+  --apple-bg-hover:    rgba(255, 255, 255, 0.14);
+  --apple-border:      rgba(255, 255, 255, 0.18);
+  --apple-border-hover:rgba(255, 255, 255, 0.35);
 
   /* ── Specular (the "liquid" bright edge) ── */
-  --apple-specular: inset 0 1.5px 0 rgba(255,255,255,0.55),
-                    inset 0 -0.5px 0 rgba(0,0,0,0.18);
+  --apple-specular: inset 0 1px 0 rgba(255,255,255,0.40),
+                    inset 0 -1px 0 rgba(0,0,0,0.10);
 
   /* ── Depth shadow ── */
   --apple-shadow:   0 20px 80px rgba(0,0,0,0.50),
@@ -64,6 +64,9 @@ body::before {
   box-shadow: var(--apple-specular), var(--apple-shadow);
   position: relative;
   overflow: hidden;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  will-change: transform, backdrop-filter;
   transition: transform 0.4s var(--apple-spring),
               box-shadow 0.3s var(--apple-ease),
               border-color 0.3s,
@@ -125,6 +128,9 @@ body::before {
   header {
     backdrop-filter: var(--apple-blur) !important;
     -webkit-backdrop-filter: var(--apple-blur) !important;
+  -webkit-transform: translateZ(0) !important;
+  transform: translateZ(0) !important;
+  will-change: transform, backdrop-filter !important;
     background: rgba(255, 255, 255, 0.09) !important;
     border: 1px solid rgba(255, 255, 255, 0.20) !important;
     box-shadow:
@@ -196,6 +202,9 @@ body::before {
     background: rgba(8, 12, 30, 0.68) !important;
     backdrop-filter: var(--apple-blur) !important;
     -webkit-backdrop-filter: var(--apple-blur) !important;
+  -webkit-transform: translateZ(0) !important;
+  transform: translateZ(0) !important;
+  will-change: transform, backdrop-filter !important;
     border-bottom: 1px solid rgba(255,255,255,0.12) !important;
     border-radius: 0 !important;
     box-shadow:
@@ -252,6 +261,9 @@ body::before {
 .card {
   backdrop-filter: var(--apple-blur) !important;
   -webkit-backdrop-filter: var(--apple-blur) !important;
+  -webkit-transform: translateZ(0) !important;
+  transform: translateZ(0) !important;
+  will-change: transform, backdrop-filter !important;
   background: rgba(255,255,255,0.09) !important;
   border: 1px solid rgba(255,255,255,0.20) !important;
   border-radius: 24px !important;
@@ -325,6 +337,9 @@ body::before {
 .stat-card {
   backdrop-filter: var(--apple-blur) !important;
   -webkit-backdrop-filter: var(--apple-blur) !important;
+  -webkit-transform: translateZ(0) !important;
+  transform: translateZ(0) !important;
+  will-change: transform, backdrop-filter !important;
   background: rgba(255,255,255,0.09) !important;
   border: 1px solid rgba(255,255,255,0.20) !important;
   border-radius: 20px !important;
@@ -363,6 +378,9 @@ body::before {
 .category-btn {
   backdrop-filter: var(--apple-blur) !important;
   -webkit-backdrop-filter: var(--apple-blur) !important;
+  -webkit-transform: translateZ(0) !important;
+  transform: translateZ(0) !important;
+  will-change: transform, backdrop-filter !important;
   background: rgba(255,255,255,0.10) !important;
   border: 1px solid rgba(255,255,255,0.22) !important;
   border-top-color: rgba(255,255,255,0.40) !important;
@@ -401,6 +419,9 @@ body::before {
 .btn:not(.btn-neo) {
   backdrop-filter: var(--apple-blur-xs) !important;
   -webkit-backdrop-filter: var(--apple-blur-xs) !important;
+  -webkit-transform: translateZ(0) !important;
+  transform: translateZ(0) !important;
+  will-change: transform, backdrop-filter !important;
   box-shadow:
     inset 0 1.5px 0 rgba(255,255,255,0.45),
     inset 0 -0.5px 0 rgba(0,0,0,0.12),
@@ -456,6 +477,9 @@ body::before {
 .cta-advanced {
   backdrop-filter: var(--apple-blur) !important;
   -webkit-backdrop-filter: var(--apple-blur) !important;
+  -webkit-transform: translateZ(0) !important;
+  transform: translateZ(0) !important;
+  will-change: transform, backdrop-filter !important;
   background: rgba(0, 130, 255, 0.12) !important;
   border: 1px solid rgba(255,255,255,0.22) !important;
   border-radius: 28px !important;
@@ -487,6 +511,9 @@ body::before {
 .repeat-card {
   backdrop-filter: var(--apple-blur) !important;
   -webkit-backdrop-filter: var(--apple-blur) !important;
+  -webkit-transform: translateZ(0) !important;
+  transform: translateZ(0) !important;
+  will-change: transform, backdrop-filter !important;
   background: rgba(255,255,255,0.09) !important;
   border: 1px solid rgba(255,255,255,0.20) !important;
   box-shadow:
@@ -526,6 +553,9 @@ body::before {
 .material-card {
   backdrop-filter: var(--apple-blur-sm) !important;
   -webkit-backdrop-filter: var(--apple-blur-sm) !important;
+  -webkit-transform: translateZ(0) !important;
+  transform: translateZ(0) !important;
+  will-change: transform, backdrop-filter !important;
   background: rgba(255,255,255,0.09) !important;
   border: 1px solid rgba(255,255,255,0.18) !important;
   box-shadow:
@@ -562,6 +592,9 @@ body::before {
 .search-input {
   backdrop-filter: var(--apple-blur-sm) !important;
   -webkit-backdrop-filter: var(--apple-blur-sm) !important;
+  -webkit-transform: translateZ(0) !important;
+  transform: translateZ(0) !important;
+  will-change: transform, backdrop-filter !important;
   background: rgba(255,255,255,0.09) !important;
   border: 1px solid rgba(255,255,255,0.22) !important;
   box-shadow:
@@ -589,6 +622,9 @@ body::before {
 .filter-btn {
   backdrop-filter: var(--apple-blur-xs) !important;
   -webkit-backdrop-filter: var(--apple-blur-xs) !important;
+  -webkit-transform: translateZ(0) !important;
+  transform: translateZ(0) !important;
+  will-change: transform, backdrop-filter !important;
   background: rgba(255,255,255,0.09) !important;
   border: 1px solid rgba(255,255,255,0.20) !important;
   box-shadow:
@@ -616,6 +652,9 @@ body::before {
   .bottom-nav {
     backdrop-filter: var(--apple-blur) !important;
     -webkit-backdrop-filter: var(--apple-blur) !important;
+  -webkit-transform: translateZ(0) !important;
+  transform: translateZ(0) !important;
+  will-change: transform, backdrop-filter !important;
     background: rgba(8, 12, 32, 0.70) !important;
     border-top: 1px solid rgba(255,255,255,0.14) !important;
     box-shadow:
@@ -676,6 +715,9 @@ body::before {
 .site-footer {
   backdrop-filter: var(--apple-blur-sm) !important;
   -webkit-backdrop-filter: var(--apple-blur-sm) !important;
+  -webkit-transform: translateZ(0) !important;
+  transform: translateZ(0) !important;
+  will-change: transform, backdrop-filter !important;
   background: rgba(4, 8, 22, 0.62) !important;
   border-top: 1px solid rgba(255,255,255,0.10) !important;
   box-shadow:
@@ -685,6 +727,9 @@ body::before {
 .footer-social a {
   backdrop-filter: var(--apple-blur-xs) !important;
   -webkit-backdrop-filter: var(--apple-blur-xs) !important;
+  -webkit-transform: translateZ(0) !important;
+  transform: translateZ(0) !important;
+  will-change: transform, backdrop-filter !important;
   background: rgba(255,255,255,0.09) !important;
   border: 1px solid rgba(255,255,255,0.18) !important;
   box-shadow:
@@ -709,6 +754,9 @@ body::before {
 .theme-toggle {
   backdrop-filter: var(--apple-blur-xs) !important;
   -webkit-backdrop-filter: var(--apple-blur-xs) !important;
+  -webkit-transform: translateZ(0) !important;
+  transform: translateZ(0) !important;
+  will-change: transform, backdrop-filter !important;
   background: rgba(255,255,255,0.10) !important;
   border: 1px solid rgba(255,255,255,0.22) !important;
   box-shadow:
@@ -728,6 +776,9 @@ body::before {
 #backToTop {
   backdrop-filter: var(--apple-blur-sm) !important;
   -webkit-backdrop-filter: var(--apple-blur-sm) !important;
+  -webkit-transform: translateZ(0) !important;
+  transform: translateZ(0) !important;
+  will-change: transform, backdrop-filter !important;
   background: rgba(0,212,255,0.16) !important;
   border: 1px solid rgba(0,212,255,0.35) !important;
   border-radius: 50% !important;
@@ -748,6 +799,9 @@ body::before {
 #study-timer-widget {
   backdrop-filter: var(--apple-blur) !important;
   -webkit-backdrop-filter: var(--apple-blur) !important;
+  -webkit-transform: translateZ(0) !important;
+  transform: translateZ(0) !important;
+  will-change: transform, backdrop-filter !important;
   background: rgba(6, 10, 28, 0.74) !important;
   border: 1px solid rgba(255,255,255,0.16) !important;
   box-shadow:
@@ -759,6 +813,9 @@ body::before {
 .pwa-install-banner {
   backdrop-filter: var(--apple-blur) !important;
   -webkit-backdrop-filter: var(--apple-blur) !important;
+  -webkit-transform: translateZ(0) !important;
+  transform: translateZ(0) !important;
+  will-change: transform, backdrop-filter !important;
   background: rgba(6, 10, 28, 0.82) !important;
   border-top: 1px solid rgba(255,255,255,0.12) !important;
   box-shadow:
@@ -853,14 +910,14 @@ body::before {
    LIGHT THEME — White Glass (iOS light mode)
    ══════════════════════════════════════════════════════════ */
 html[data-theme="light"] {
-  --apple-bg:          rgba(255, 255, 255, 0.62);
-  --apple-bg-hover:    rgba(255, 255, 255, 0.80);
-  --apple-border:      rgba(0, 0, 0, 0.07);
-  --apple-border-hover:rgba(0, 119, 255, 0.30);
-  --apple-specular:    inset 0 1.5px 0 rgba(255,255,255,0.95),
-                       inset 0 -0.5px 0 rgba(0,0,0,0.06);
-  --apple-shadow:      0 16px 60px rgba(0,0,0,0.12),
-                       0  4px 18px rgba(0,0,0,0.07);
+  --apple-bg:          rgba(255, 255, 255, 0.60);
+  --apple-bg-hover:    rgba(255, 255, 255, 0.75);
+  --apple-border:      rgba(0, 0, 0, 0.05);
+  --apple-border-hover:rgba(0, 119, 255, 0.25);
+  --apple-specular:    inset 0 1px 0 rgba(255,255,255,0.80),
+                       inset 0 -0.5px 0 rgba(0,0,0,0.04);
+  --apple-shadow:      0 16px 60px rgba(0,0,0,0.10),
+                       0  4px 18px rgba(0,0,0,0.06);
 }
 
 html[data-theme="light"] header {
