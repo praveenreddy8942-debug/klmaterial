@@ -393,6 +393,25 @@
     </a>
   </nav>
 
+  <!-- Navigation menu keyboard accessibility fix (desktop only) -->
+  <script>
+    (function () {
+      const nav = document.querySelector('.nav-track');
+      const hamburger = nav ? nav.parentElement.querySelector('.hamburger') : null;
+      if (!nav || !hamburger) return; // Skip on mobile where these are hidden
+      const navLinks = document.querySelectorAll('[data-nav-link]');
+
+      const observer = new MutationObserver(() => {
+        const isActive = hamburger.getAttribute('aria-expanded') === 'true';
+        navLinks.forEach(link => {
+          link.setAttribute('tabindex', isActive ? '0' : '-1');
+        });
+      });
+
+      observer.observe(hamburger, { attributes: true });
+    })();
+  </script>
+
   <!-- Register service worker (if supported) to enable offline cache and updates -->
   <script>
     if ('serviceWorker' in navigator) {

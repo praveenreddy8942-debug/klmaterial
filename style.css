@@ -598,21 +598,6 @@ footer {
 
 /* ===== Desktop Navigation Styles ===== */
 @media (min-width: 769px) {
-  .nav-liquid {
-    justify-content: center;
-    padding: 0;
-  }
-
-  .nav-track,
-  #mobile-nav {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 8px;
-    overflow: visible;
-  }
-
   nav {
     display: flex;
     align-items: center;
@@ -705,10 +690,6 @@ footer {
     opacity: 0;
     pointer-events: none;
     box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
-  }
-
-  .nav-track a[tabindex="-1"] {
-    pointer-events: auto;
   }
 }
 

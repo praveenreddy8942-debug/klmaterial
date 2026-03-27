@@ -114,161 +114,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const hamburger = document.querySelector('.hamburger');
     const body = document.body;
     const nav = document.getElementById('mobile-nav');
-    const navLinks = nav ? Array.from(nav.querySelectorAll('a[data-nav-link]')) : [];
-    const mobileNavQuery = window.matchMedia('(max-width: 768px)');
+    const navLinks = nav ? Array.from(nav.querySelectorAll('a[role="menuitem"]')) : [];
 
     // Track scroll position to prevent jump when body becomes position:fixed
     let _savedScrollY = 0;
-    let _previouslyFocused = null;
-    let _trapListener = null;
-
-    function isMobileNavViewport() {
-        return mobileNavQuery.matches;
-    }
-
-    function updateNavAriaCurrent() {
-        if (!nav) return;
-        const items = Array.from(nav.querySelectorAll('a[data-nav-link]'));
-        const currentPath = window.location.pathname.replace(/\/+$/, '');
-        items.forEach(item => {
-            try {
-                const url = new URL(item.href, window.location.origin);
-                const itemPath = url.pathname.replace(/\/+$/, '');
-                if (itemPath === currentPath) {
-                    item.setAttribute('aria-current', 'page');
-                    item.classList.add('active');
-                } else {
-                    item.removeAttribute('aria-current');
-                    item.classList.remove('active');
-                }
-            } catch (e) {
-                // ignore malformed href
-            }
-        });
-    }
-
-    function ensureNavTextVisible() {
-        if (!nav) return;
-        const links = Array.from(nav.querySelectorAll('a'));
-        let anyHidden = false;
-
-        links.forEach(link => {
-            const cs = window.getComputedStyle(link);
-            const color = cs.color || '';
-            const webkitFill = cs.getPropertyValue('-webkit-text-fill-color') || '';
-
-            const isTransparent = /^(rgba\(0,\s*0,\s*0,\s*0\)|transparent)$/.test(color.trim())
-                || webkitFill.trim() === 'transparent' || webkitFill.trim() === '-webkit-text-fill-color';
-
-            if (isTransparent) anyHidden = true;
-
-            link.style.setProperty('color', '#b0e0ff', 'important');
-            link.style.setProperty('-webkit-text-fill-color', '#b0e0ff', 'important');
-            link.style.setProperty('background-clip', 'border-box', 'important');
-            link.style.setProperty('-webkit-background-clip', 'border-box', 'important');
-            link.style.setProperty('text-shadow', 'none', 'important');
-            link.style.setProperty('opacity', '1', 'important');
-            link.style.setProperty('visibility', 'visible', 'important');
-        });
-
-        if (anyHidden) {
-            console.info('[ui.js] Forced mobile nav link colors because computed styles looked transparent.\n' +
-                'If labels are still not visible, please tell me: which page (index/materials/etc.),\n' +
-                'the device and browser (e.g. iPhone Safari, Chrome Android), and whether emojis show but text does not.');
-        }
-    }
-
-    function activateFocusTrap() {
-        _previouslyFocused = document.activeElement;
-        const focusableSelector = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex]:not([tabindex="-1"])';
-
-        function getFocusable() {
-            const candidates = Array.from(document.querySelectorAll(focusableSelector));
-            return candidates.filter(el => {
-                const visible = (el.offsetWidth > 0 || el.offsetHeight > 0) || el.getClientRects().length > 0;
-                const insideNav = nav && nav.contains(el);
-                const isHamburger = el === hamburger;
-                return visible && (insideNav || isHamburger);
-            });
-        }
-
-        _trapListener = function (e) {
-            if (e.key === 'Escape') {
-                e.preventDefault();
-                menuActions.close();
-                return;
-            }
-
-            if (e.key === 'Tab') {
-                const focusable = getFocusable();
-                if (focusable.length === 0) return;
-                const first = focusable[0];
-                const last = focusable[focusable.length - 1];
-
-                if (e.shiftKey) {
-                    if (document.activeElement === first) {
-                        e.preventDefault();
-                        last.focus();
-                    }
-                } else if (document.activeElement === last) {
-                    e.preventDefault();
-                    first.focus();
-                }
-            }
-        };
-
-        document.addEventListener('keydown', _trapListener);
-    }
-
-    function deactivateFocusTrap() {
-        if (_trapListener) document.removeEventListener('keydown', _trapListener);
-        _trapListener = null;
-        if (_previouslyFocused && typeof _previouslyFocused.focus === 'function') {
-            _previouslyFocused.focus();
-        }
-        _previouslyFocused = null;
-    }
-
-    function syncNavMode() {
-        if (!hamburger || !nav) return;
-
-        const isMobile = isMobileNavViewport();
-        const isOpen = isMobile && body.classList.contains('nav-active');
-
-        if (!isMobile) {
-            const wasOpen = body.classList.contains('nav-active');
-            body.classList.remove('nav-active');
-            body.style.top = '';
-            document.documentElement.style.overflow = '';
-            if (wasOpen) window.scrollTo(0, _savedScrollY);
-            hamburger.setAttribute('aria-expanded', 'false');
-            hamburger.setAttribute('aria-hidden', 'true');
-            nav.setAttribute('aria-hidden', 'false');
-            nav.removeAttribute('role');
-            navLinks.forEach(link => {
-                link.removeAttribute('tabindex');
-                link.removeAttribute('role');
-            });
-            deactivateFocusTrap();
-            updateNavAriaCurrent();
-            return;
-        }
-
-        hamburger.removeAttribute('aria-hidden');
-        hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-        nav.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
-        nav.setAttribute('role', 'menu');
-        navLinks.forEach(link => {
-            link.setAttribute('role', 'menuitem');
-            link.setAttribute('tabindex', isOpen ? '0' : '-1');
-        });
-        updateNavAriaCurrent();
-    }
 
     // Use an object so event listeners always call the latest version
     const menuActions = {
         open() {
-            if (!isMobileNavViewport()) return;
             // Save scroll position before body becomes position:fixed
             _savedScrollY = window.scrollY;
             body.style.top = `-${_savedScrollY}px`;
@@ -281,7 +134,6 @@ document.addEventListener('DOMContentLoaded', () => {
             document.documentElement.style.overflow = 'hidden';
         },
         close() {
-            const shouldRestoreFocus = isMobileNavViewport();
             body.classList.remove('nav-active');
             body.style.top = '';
             // Restore scroll position
@@ -289,16 +141,18 @@ document.addEventListener('DOMContentLoaded', () => {
             hamburger.setAttribute('aria-expanded', 'false');
             if (nav) nav.setAttribute('aria-hidden', 'true');
             navLinks.forEach(link => link.setAttribute('tabindex', '-1'));
-            if (shouldRestoreFocus) hamburger.focus();
+            hamburger.focus();
             document.documentElement.style.overflow = '';
         }
     };
 
     if (hamburger) {
-        syncNavMode();
+        // ensure initial state
+        hamburger.setAttribute('aria-expanded', 'false');
+        if (nav) nav.setAttribute('aria-hidden', 'true');
+        navLinks.forEach(link => link.setAttribute('tabindex', '-1'));
 
         hamburger.addEventListener('click', (e) => {
-            if (!isMobileNavViewport()) return;
             e.stopPropagation();
             if (body.classList.contains('nav-active')) menuActions.close();
             else menuActions.open();
@@ -306,8 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Close menu when clicking outside
         document.addEventListener('click', (e) => {
-            if (isMobileNavViewport() &&
-                body.classList.contains('nav-active') &&
+            if (body.classList.contains('nav-active') &&
                 !e.target.closest('#mobile-nav') &&
                 !e.target.closest('.hamburger')) {
                 menuActions.close();
@@ -316,16 +169,131 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Close menu when clicking a link
         navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                if (isMobileNavViewport()) menuActions.close();
-            });
+            link.addEventListener('click', () => menuActions.close());
         });
 
+        // Update aria-current based on current URL (helps screen readers)
+        function updateAriaCurrent() {
+            if (!nav) return;
+            const items = Array.from(nav.querySelectorAll('a[role="menuitem"]'));
+            const currentPath = window.location.pathname.replace(/\/+$/, ''); // strip trailing slash
+            items.forEach(item => {
+                try {
+                    const url = new URL(item.href, window.location.origin);
+                    const itemPath = url.pathname.replace(/\/+$/, '');
+                    if (itemPath === currentPath) {
+                        item.setAttribute('aria-current', 'page');
+                    } else {
+                        item.removeAttribute('aria-current');
+                    }
+                } catch (e) {
+                    // ignore malformed href
+                }
+            });
+        }
+
+        // Ensure nav link text is visible across browsers (fallback for text-clip/gradient issues)
+        function ensureNavTextVisible() {
+            if (!nav) return;
+            const links = Array.from(nav.querySelectorAll('a'));
+            let anyHidden = false;
+
+            links.forEach(link => {
+                const cs = window.getComputedStyle(link);
+                const color = cs.color || '';
+                const webkitFill = cs.getPropertyValue('-webkit-text-fill-color') || '';
+
+                // If color is transparent or text-fill is transparent, force readable styles
+                const isTransparent = /^(rgba\(0,\s*0,\s*0,\s*0\)|transparent)$/.test(color.trim())
+                    || webkitFill.trim() === 'transparent' || webkitFill.trim() === '-webkit-text-fill-color';
+
+                if (isTransparent) anyHidden = true;
+
+                // Force inline styles that override problematic rules (safe defaults)
+                // Use setProperty with 'important' so inline styles beat CSS !important rules
+                link.style.setProperty('color', '#b0e0ff', 'important');
+                link.style.setProperty('-webkit-text-fill-color', '#b0e0ff', 'important');
+                link.style.setProperty('background-clip', 'border-box', 'important');
+                link.style.setProperty('-webkit-background-clip', 'border-box', 'important');
+                link.style.setProperty('text-shadow', 'none', 'important');
+                link.style.setProperty('opacity', '1', 'important');
+                link.style.setProperty('visibility', 'visible', 'important');
+            });
+
+            if (anyHidden) {
+                // Helpful debug message for the developer / QA
+                console.info('[ui.js] Forced mobile nav link colors because computed styles looked transparent.\n' +
+                    'If labels are still not visible, please tell me: which page (index/materials/etc.),\n' +
+                    'the device and browser (e.g. iPhone Safari, Chrome Android), and whether emojis show but text does not.');
+            }
+        }
+
         // run initially
-        updateNavAriaCurrent();
+        updateAriaCurrent();
         // update when history changes (back/forward)
-        window.addEventListener('popstate', updateNavAriaCurrent);
-        mobileNavQuery.addEventListener('change', syncNavMode);
+        window.addEventListener('popstate', updateAriaCurrent);
+
+        // Keyboard controls: Escape to close. We'll add a robust focus trap on open.
+        let _previouslyFocused = null;
+        let _trapListener = null;
+
+        function activateFocusTrap() {
+            _previouslyFocused = document.activeElement;
+            const focusableSelector = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+            // Return visible elements inside the nav plus the hamburger button so Tab stays within the control set
+            function getFocusable() {
+                const candidates = Array.from(document.querySelectorAll(focusableSelector));
+                return candidates.filter(el => {
+                    // visible check: element has layout or client rects
+                    const visible = (el.offsetWidth > 0 || el.offsetHeight > 0) || el.getClientRects().length > 0;
+                    // include if inside nav OR the hamburger itself
+                    const insideNav = nav && nav.contains(el);
+                    const isHamburger = el === hamburger;
+                    return visible && (insideNav || isHamburger);
+                });
+            }
+
+            _trapListener = function (e) {
+                if (e.key === 'Escape') {
+                    e.preventDefault();
+                    menuActions.close();
+                    return;
+                }
+
+                if (e.key === 'Tab') {
+                    const focusable = getFocusable();
+                    if (focusable.length === 0) return;
+                    const first = focusable[0];
+                    const last = focusable[focusable.length - 1];
+
+                    // When Shift+Tab on first, go to last
+                    if (e.shiftKey) {
+                        if (document.activeElement === first) {
+                            e.preventDefault();
+                            last.focus();
+                        }
+                    } else {
+                        // When Tab on last, cycle to first
+                        if (document.activeElement === last) {
+                            e.preventDefault();
+                            first.focus();
+                        }
+                    }
+                }
+            };
+
+            document.addEventListener('keydown', _trapListener);
+        }
+
+        function deactivateFocusTrap() {
+            if (_trapListener) document.removeEventListener('keydown', _trapListener);
+            _trapListener = null;
+            if (_previouslyFocused && typeof _previouslyFocused.focus === 'function') {
+                _previouslyFocused.focus();
+            }
+            _previouslyFocused = null;
+        }
 
         // Enhance open/close to include focus trap and nav text fallback
         const _origOpen = menuActions.open.bind(menuActions);
@@ -342,7 +310,7 @@ document.addEventListener('DOMContentLoaded', () => {
             _origClose();
             deactivateFocusTrap();
             // keep aria-current in sync after closing
-            try { syncNavMode(); } catch (e) { /* ignore */ }
+            try { updateAriaCurrent(); } catch (e) { /* ignore */ }
         };
     }
 });
