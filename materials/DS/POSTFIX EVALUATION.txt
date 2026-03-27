@@ -1,0 +1,59 @@
+#include<stdio.h>
+#include<ctype.h>
+#define size 50
+
+int top=-1;
+int a[size];
+void push(int ele);
+int pop();
+int main()
+{
+    char postfix[size],ch;
+    int i=0,res,result,A,B;
+    printf("\nenter postfix expression");
+    scanf("%s",postfix);
+    while((ch=postfix[i++])!='\0')
+    {
+        if(isdigit(ch))
+        {
+            push(ch-'0');
+        }
+        else if(ch=='+'||ch=='-'||ch=='*'||ch=='/'||ch=='^')
+        {
+        A=pop();
+        B=pop();
+        switch(ch)
+        {
+            case '*': res=B*A;
+                      push(res);
+                      break;
+            case '/':res=B/A;
+                     push(res);
+                     break;
+            case '+':res=B+A;
+                     push(res);
+                     break;
+            case '-':res=B-A;
+                    push(res);
+                    break;
+            case '^':res=B^A;
+                     push(res);
+                     break;
+        }
+       
+        }
+    }
+   
+        result=pop();
+   
+        printf("\nthe evaluation of postfix expression=%d",result);
+       
+    }
+void push(int ele)
+{
+    a[++top]=ele;
+}
+int pop()
+{
+    return a[top--];
+}

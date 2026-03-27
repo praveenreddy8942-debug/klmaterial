@@ -1,0 +1,981 @@
+/* ============================================================
+   KL MATERIAL — EXACT iPHONE LIQUID GLASS  v3.0
+   Apple iOS / visionOS — True Glass Formula:
+   blur(48px) saturate(280%) brightness(1.18)
+   Nearly-transparent tint · Bright specular · Deep depth
+   ============================================================ */
+
+/* ══════════════════════════════════════════════════════════
+   APPLE GLASS VARIABLES
+   ══════════════════════════════════════════════════════════ */
+:root {
+  /* ── The core filter — this IS the glass ── */
+  --apple-blur:   blur(50px) saturate(200%);
+  --apple-blur-sm: blur(30px) saturate(180%);
+  --apple-blur-xs: blur(20px) saturate(150%);
+
+  /* ── Dark-mode glass surface ── */
+  --apple-bg:          rgba(255, 255, 255, 0.08);
+  --apple-bg-hover:    rgba(255, 255, 255, 0.14);
+  --apple-border:      rgba(255, 255, 255, 0.18);
+  --apple-border-hover:rgba(255, 255, 255, 0.35);
+
+  /* ── Specular (the "liquid" bright edge) ── */
+  --apple-specular: inset 0 1px 0 rgba(255,255,255,0.40),
+                    inset 0 -1px 0 rgba(0,0,0,0.10);
+
+  /* ── Depth shadow ── */
+  --apple-shadow:   0 20px 80px rgba(0,0,0,0.50),
+                    0  6px 24px rgba(0,0,0,0.30);
+  --apple-shadow-hover: 0 32px 100px rgba(0,0,0,0.60),
+                        0 10px 40px rgba(0,0,0,0.35);
+
+  /* ── Motion ── */
+  --apple-spring:   cubic-bezier(0.34, 1.56, 0.64, 1);
+  --apple-ease:     cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   BACKGROUND MESH
+   ══════════════════════════════════════════════════════════ */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 10%  10%, rgba(56,  120, 255, 0.18) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 70% at 85%  15%, rgba(120,  60, 240, 0.14) 0%, transparent 55%),
+    radial-gradient(ellipse 55% 75% at 15%  85%, rgba(0,  200, 130, 0.10) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 50% at 80%  80%, rgba(255, 140,  40, 0.08) 0%, transparent 55%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   .glass UTILITY — drop class="glass" on anything
+   ══════════════════════════════════════════════════════════ */
+.glass {
+  backdrop-filter: var(--apple-blur);
+  -webkit-backdrop-filter: var(--apple-blur);
+  background: var(--apple-bg);
+  border: 1px solid var(--apple-border);
+  box-shadow: var(--apple-specular), var(--apple-shadow);
+  position: relative;
+  overflow: hidden;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  will-change: transform, backdrop-filter;
+  transition: transform 0.4s var(--apple-spring),
+              box-shadow 0.3s var(--apple-ease),
+              border-color 0.3s,
+              background 0.3s;
+}
+
+/* ── Specular sheen overlay ── */
+.glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.24) 0%,
+    rgba(255,255,255,0.06) 35%,
+    rgba(255,255,255,0.00) 60%,
+    rgba(255,255,255,0.04) 100%
+  );
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* ── Iridescent rainbow border on hover (prism effect) ── */
+.glass::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: conic-gradient(from 180deg,
+    rgba(0, 210, 255, 0) 0deg,
+    rgba(0, 210, 255, 0.6) 60deg,
+    rgba(120, 80, 255, 0.5) 120deg,
+    rgba(255, 100, 180, 0.4) 180deg,
+    rgba(255, 200, 80, 0.3) 240deg,
+    rgba(0, 210, 255, 0.5) 300deg,
+    rgba(0, 210, 255, 0) 360deg
+  );
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.glass:hover {
+  background: var(--apple-bg-hover);
+  border-color: var(--apple-border-hover);
+  box-shadow: var(--apple-specular), var(--apple-shadow-hover);
+  transform: translateY(-4px);
+}
+
+.glass:hover::after {
+  opacity: 1;
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   DESKTOP HEADER — Floating Pill
+   ══════════════════════════════════════════════════════════ */
+@media (min-width: 769px) {
+  header {
+    backdrop-filter: var(--apple-blur) !important;
+    -webkit-backdrop-filter: var(--apple-blur) !important;
+  -webkit-transform: translateZ(0) !important;
+  transform: translateZ(0) !important;
+  will-change: transform, backdrop-filter !important;
+    background: rgba(255, 255, 255, 0.09) !important;
+    border: 1px solid rgba(255, 255, 255, 0.20) !important;
+    box-shadow:
+      inset 0 1.5px 0 rgba(255,255,255,0.50),
+      inset 0 -0.5px 0 rgba(0,0,0,0.15),
+      0 20px 80px rgba(0,0,0,0.50),
+      0  6px 24px rgba(0,0,0,0.28) !important;
+    transition: all 0.4s var(--apple-ease) !important;
+  }
+
+  /* Light-sheen diagonal overlay */
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(135deg,
+      rgba(255,255,255,0.20) 0%,
+      rgba(255,255,255,0.04) 40%,
+      rgba(255,255,255,0.00) 70%
+    );
+    pointer-events: none;
+  }
+
+  header:hover {
+    background: rgba(255, 255, 255, 0.14) !important;
+    border-color: rgba(255, 255, 255, 0.32) !important;
+    box-shadow:
+      inset 0 2px 0 rgba(255,255,255,0.60),
+      inset 0 -0.5px 0 rgba(0,0,0,0.18),
+      0 32px 100px rgba(0,0,0,0.58),
+      0 10px 36px rgba(0,0,0,0.30) !important;
+    transform: translateX(-50%) translateY(-3px) !important;
+  }
+
+  /* Nav links */
+  nav a {
+    color: rgba(255,255,255,0.82) !important;
+    transition: all 0.25s var(--apple-ease) !important;
+  }
+
+  nav a:hover {
+    color: #fff !important;
+    background: rgba(255,255,255,0.12) !important;
+    border: 1px solid rgba(255,255,255,0.18) !important;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.30) !important;
+  }
+
+  nav a.active {
+    color: #fff !important;
+    background: rgba(0, 212, 255, 0.20) !important;
+    border: 1px solid rgba(0,212,255,0.42) !important;
+    box-shadow:
+      inset 0 1.5px 0 rgba(255,255,255,0.40),
+      inset 0 -0.5px 0 rgba(0,0,0,0.10),
+      0 4px 16px rgba(0,212,255,0.30) !important;
+    text-shadow: 0 0 14px rgba(0,212,255,1) !important;
+    font-weight: 600 !important;
+  }
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   MOBILE HEADER — Full-Width Glass Bar
+   ══════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  header {
+    background: rgba(8, 12, 30, 0.68) !important;
+    backdrop-filter: var(--apple-blur) !important;
+    -webkit-backdrop-filter: var(--apple-blur) !important;
+  -webkit-transform: translateZ(0) !important;
+  transform: translateZ(0) !important;
+  will-change: transform, backdrop-filter !important;
+    border-bottom: 1px solid rgba(255,255,255,0.12) !important;
+    border-radius: 0 !important;
+    box-shadow:
+      inset 0 1.5px 0 rgba(255,255,255,0.18),
+      inset 0 -1px 0 rgba(255,255,255,0.06),
+      0 10px 50px rgba(0,0,0,0.60) !important;
+  }
+
+  /* Animated shimmer edge */
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(0,212,255,0.60) 20%,
+      rgba(255,255,255,0.50) 50%,
+      rgba(0,119,255,0.60) 80%,
+      transparent 100%);
+    background-size: 200% 100%;
+    pointer-events: none;
+    animation: iosNavShimmer 4s ease-in-out infinite;
+  }
+
+  @keyframes iosNavShimmer {
+    0%   { background-position: 0%   50%; opacity: 0.7; }
+    50%  { background-position: 100% 50%; opacity: 1.0; }
+    100% { background-position: 0%   50%; opacity: 0.7; }
+  }
+
+  /* Animated brand wordmark */
+  .mobile-brand {
+    background: linear-gradient(90deg, #fff 0%, #00d4ff 30%, #fff 60%, #0077ff 80%, #fff 100%) !important;
+    background-size: 300% 100% !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    animation: iosBrandFlow 5s linear infinite !important;
+  }
+
+  @keyframes iosBrandFlow {
+    0%   { background-position: 0%   50%; }
+    100% { background-position: 300% 50%; }
+  }
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   FEATURE CARDS — Deep iOS Glass
+   ══════════════════════════════════════════════════════════ */
+.advanced-card,
+.feature-card,
+.card {
+  backdrop-filter: var(--apple-blur) !important;
+  -webkit-backdrop-filter: var(--apple-blur) !important;
+  -webkit-transform: translateZ(0) !important;
+  transform: translateZ(0) !important;
+  will-change: transform, backdrop-filter !important;
+  background: rgba(255,255,255,0.09) !important;
+  border: 1px solid rgba(255,255,255,0.20) !important;
+  border-radius: 24px !important;
+  box-shadow:
+    inset 0 1.5px 0 rgba(255,255,255,0.50),
+    inset 0 -0.5px 0 rgba(0,0,0,0.14),
+    0 16px 60px rgba(0,0,0,0.45),
+    0  4px 18px rgba(0,0,0,0.25) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  transition:
+    transform 0.45s var(--apple-spring),
+    box-shadow 0.35s var(--apple-ease),
+    border-color 0.3s !important;
+}
+
+/* Top specular edge */
+.advanced-card::before,
+.feature-card::before,
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255,255,255,0.70) 30%,
+    rgba(255,255,255,0.90) 50%,
+    rgba(255,255,255,0.70) 70%,
+    transparent 100%);
+  pointer-events: none;
+}
+
+/* Diagonal inner sheen */
+.advanced-card::after,
+.feature-card::after,
+.card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.18) 0%,
+    rgba(255,255,255,0.04) 35%,
+    rgba(255,255,255,0.00) 55%,
+    rgba(255,255,255,0.03) 100%
+  );
+  pointer-events: none;
+  border-radius: inherit;
+  transition: opacity 0.3s ease;
+}
+
+.advanced-card:hover,
+.feature-card:hover,
+.card:hover {
+  background: rgba(255,255,255,0.14) !important;
+  border-color: rgba(255,255,255,0.36) !important;
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,0.65),
+    inset 0 -0.5px 0 rgba(0,0,0,0.18),
+    0 28px 90px rgba(0,0,0,0.55),
+    0  8px 30px rgba(0,0,0,0.30) !important;
+  transform: translateY(-10px) scale(1.015) !important;
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   STAT CARDS
+   ══════════════════════════════════════════════════════════ */
+.stat-item,
+.stat-card {
+  backdrop-filter: var(--apple-blur) !important;
+  -webkit-backdrop-filter: var(--apple-blur) !important;
+  -webkit-transform: translateZ(0) !important;
+  transform: translateZ(0) !important;
+  will-change: transform, backdrop-filter !important;
+  background: rgba(255,255,255,0.09) !important;
+  border: 1px solid rgba(255,255,255,0.20) !important;
+  border-radius: 20px !important;
+  box-shadow:
+    inset 0 1.5px 0 rgba(255,255,255,0.50),
+    inset 0 -0.5px 0 rgba(0,0,0,0.12),
+    0 12px 50px rgba(0,0,0,0.42) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  transition: transform 0.45s var(--apple-spring), box-shadow 0.35s var(--apple-ease) !important;
+}
+
+.stat-item::before,
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.80), transparent);
+  pointer-events: none;
+}
+
+.stat-item:hover,
+.stat-card:hover {
+  background: rgba(255,255,255,0.14) !important;
+  transform: translateY(-8px) scale(1.025) !important;
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,0.65),
+    0 24px 70px rgba(0,0,0,0.52) !important;
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   CATEGORY BUTTONS — iOS Control Center Tile
+   ══════════════════════════════════════════════════════════ */
+.category-btn {
+  backdrop-filter: var(--apple-blur) !important;
+  -webkit-backdrop-filter: var(--apple-blur) !important;
+  -webkit-transform: translateZ(0) !important;
+  transform: translateZ(0) !important;
+  will-change: transform, backdrop-filter !important;
+  background: rgba(255,255,255,0.10) !important;
+  border: 1px solid rgba(255,255,255,0.22) !important;
+  border-top-color: rgba(255,255,255,0.40) !important;
+  box-shadow:
+    inset 0 1.5px 0 rgba(255,255,255,0.50),
+    inset 0 -0.5px 0 rgba(0,0,0,0.12),
+    0 8px 30px rgba(0,0,0,0.38) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  transition: transform 0.45s var(--apple-spring), box-shadow 0.3s var(--apple-ease) !important;
+}
+
+.category-btn::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.80), transparent);
+  pointer-events: none;
+}
+
+.category-btn:hover {
+  background: rgba(255,255,255,0.16) !important;
+  border-color: rgba(255,255,255,0.38) !important;
+  transform: translateY(-7px) scale(1.06) !important;
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,0.65),
+    0 18px 55px rgba(0,0,0,0.48),
+    0 0 26px color-mix(in srgb, var(--accent, #00d4ff) 40%, transparent) !important;
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   BUTTONS — iOS-style pill
+   ══════════════════════════════════════════════════════════ */
+.btn:not(.btn-neo) {
+  backdrop-filter: var(--apple-blur-xs) !important;
+  -webkit-backdrop-filter: var(--apple-blur-xs) !important;
+  -webkit-transform: translateZ(0) !important;
+  transform: translateZ(0) !important;
+  will-change: transform, backdrop-filter !important;
+  box-shadow:
+    inset 0 1.5px 0 rgba(255,255,255,0.45),
+    inset 0 -0.5px 0 rgba(0,0,0,0.12),
+    0 6px 22px rgba(0,212,255,0.30) !important;
+  border-radius: 100px !important;
+  font-weight: 600 !important;
+  transition: transform 0.4s var(--apple-spring), box-shadow 0.3s var(--apple-ease) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Shimmer sweep */
+.btn:not(.btn-neo)::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -80%;
+  width: 55%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.30), transparent);
+  transform: skewX(-18deg);
+  transition: left 0.7s ease;
+  pointer-events: none;
+}
+
+.btn:hover:not(.btn-neo)::after { left: 140%; }
+
+.btn:hover {
+  transform: translateY(-3px) scale(1.03) !important;
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,0.55),
+    0 12px 36px rgba(0,212,255,0.40) !important;
+}
+
+/* Ghost button */
+.btn.btn-ghost {
+  background: rgba(255,255,255,0.09) !important;
+  border: 1px solid rgba(255,255,255,0.28) !important;
+  color: #fff !important;
+  box-shadow:
+    inset 0 1.5px 0 rgba(255,255,255,0.35),
+    0 6px 20px rgba(0,0,0,0.25) !important;
+}
+
+.btn.btn-ghost:hover {
+  background: rgba(255,255,255,0.16) !important;
+  border-color: rgba(255,255,255,0.45) !important;
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   CTA SECTION — iOS Blue-tinted Glass
+   ══════════════════════════════════════════════════════════ */
+.cta-advanced {
+  backdrop-filter: var(--apple-blur) !important;
+  -webkit-backdrop-filter: var(--apple-blur) !important;
+  -webkit-transform: translateZ(0) !important;
+  transform: translateZ(0) !important;
+  will-change: transform, backdrop-filter !important;
+  background: rgba(0, 130, 255, 0.12) !important;
+  border: 1px solid rgba(255,255,255,0.22) !important;
+  border-radius: 28px !important;
+  box-shadow:
+    inset 0 1.5px 0 rgba(255,255,255,0.45),
+    inset 0 -0.5px 0 rgba(0,0,0,0.10),
+    0 16px 60px rgba(0,100,255,0.25) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.cta-advanced::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg,rgba(255,255,255,0.18) 0%,transparent 55%);
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   CONTACT / ABOUT / RESOURCE CARDS
+   ══════════════════════════════════════════════════════════ */
+.contact-card-modern,
+.about-section,
+.resource-card,
+.year-card,
+.repeat-card {
+  backdrop-filter: var(--apple-blur) !important;
+  -webkit-backdrop-filter: var(--apple-blur) !important;
+  -webkit-transform: translateZ(0) !important;
+  transform: translateZ(0) !important;
+  will-change: transform, backdrop-filter !important;
+  background: rgba(255,255,255,0.09) !important;
+  border: 1px solid rgba(255,255,255,0.20) !important;
+  box-shadow:
+    inset 0 1.5px 0 rgba(255,255,255,0.48),
+    inset 0 -0.5px 0 rgba(0,0,0,0.12),
+    0 12px 50px rgba(0,0,0,0.42) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  transition: transform 0.45s var(--apple-spring), box-shadow 0.35s var(--apple-ease) !important;
+}
+
+.contact-card-modern::before,
+.resource-card::before,
+.year-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.70), transparent);
+  pointer-events: none;
+}
+
+.contact-card-modern:hover,
+.resource-card:hover,
+.year-card:hover {
+  background: rgba(255,255,255,0.14) !important;
+  transform: translateY(-9px) scale(1.02) !important;
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,0.65),
+    0 28px 80px rgba(0,0,0,0.52) !important;
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   MATERIAL CARDS
+   ══════════════════════════════════════════════════════════ */
+.material-card {
+  backdrop-filter: var(--apple-blur-sm) !important;
+  -webkit-backdrop-filter: var(--apple-blur-sm) !important;
+  -webkit-transform: translateZ(0) !important;
+  transform: translateZ(0) !important;
+  will-change: transform, backdrop-filter !important;
+  background: rgba(255,255,255,0.09) !important;
+  border: 1px solid rgba(255,255,255,0.18) !important;
+  box-shadow:
+    inset 0 1.5px 0 rgba(255,255,255,0.44),
+    0 10px 40px rgba(0,0,0,0.38) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  transition: transform 0.45s var(--apple-spring), box-shadow 0.35s var(--apple-ease) !important;
+}
+
+.material-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.65), transparent);
+  pointer-events: none;
+}
+
+.material-card:hover {
+  background: rgba(255,255,255,0.14) !important;
+  border-color: rgba(255,255,255,0.32) !important;
+  transform: translateY(-6px) !important;
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,0.60),
+    0 22px 65px rgba(0,0,0,0.48) !important;
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   SEARCH BAR — iOS Search Field
+   ══════════════════════════════════════════════════════════ */
+.advanced-search-input,
+.search-input {
+  backdrop-filter: var(--apple-blur-sm) !important;
+  -webkit-backdrop-filter: var(--apple-blur-sm) !important;
+  -webkit-transform: translateZ(0) !important;
+  transform: translateZ(0) !important;
+  will-change: transform, backdrop-filter !important;
+  background: rgba(255,255,255,0.09) !important;
+  border: 1px solid rgba(255,255,255,0.22) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.30),
+    0  4px 20px rgba(0,0,0,0.28) !important;
+  transition: border-color 0.3s, box-shadow 0.3s, background 0.3s !important;
+}
+
+.advanced-search-input:focus,
+.search-input:focus {
+  background: rgba(255,255,255,0.14) !important;
+  border-color: rgba(0,212,255,0.60) !important;
+  box-shadow:
+    inset 0 1.5px 0 rgba(255,255,255,0.40),
+    0 0 0 3px rgba(0,212,255,0.22),
+    0 8px 35px rgba(0,0,0,0.35) !important;
+  outline: none !important;
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   FILTER PILLS — iOS Segment Control
+   ══════════════════════════════════════════════════════════ */
+.selector-pill,
+.filter-btn {
+  backdrop-filter: var(--apple-blur-xs) !important;
+  -webkit-backdrop-filter: var(--apple-blur-xs) !important;
+  -webkit-transform: translateZ(0) !important;
+  transform: translateZ(0) !important;
+  will-change: transform, backdrop-filter !important;
+  background: rgba(255,255,255,0.09) !important;
+  border: 1px solid rgba(255,255,255,0.20) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.35),
+    0 2px 12px rgba(0,0,0,0.22) !important;
+  transition: all 0.35s var(--apple-spring) !important;
+}
+
+.selector-pill:hover,
+.selector-pill.active,
+.filter-btn.active {
+  background: rgba(0,212,255,0.18) !important;
+  border-color: rgba(0,212,255,0.45) !important;
+  box-shadow:
+    inset 0 1.5px 0 rgba(255,255,255,0.45),
+    0 6px 22px rgba(0,212,255,0.28) !important;
+  transform: translateY(-2px) scale(1.04) !important;
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   BOTTOM NAV — iOS Tab Bar
+   ══════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .bottom-nav {
+    backdrop-filter: var(--apple-blur) !important;
+    -webkit-backdrop-filter: var(--apple-blur) !important;
+  -webkit-transform: translateZ(0) !important;
+  transform: translateZ(0) !important;
+  will-change: transform, backdrop-filter !important;
+    background: rgba(8, 12, 32, 0.70) !important;
+    border-top: 1px solid rgba(255,255,255,0.14) !important;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.16),
+      0 -6px 40px rgba(0,0,0,0.55) !important;
+    padding-bottom: max(env(safe-area-inset-bottom, 0px), 8px) !important;
+    height: auto !important;
+    min-height: 60px !important;
+  }
+
+  .bottom-nav-item {
+    color: rgba(255,255,255,0.48) !important;
+    -webkit-text-fill-color: rgba(255,255,255,0.48) !important;
+    border-radius: 14px !important;
+    padding: 6px 10px !important;
+    transition: all 0.3s var(--apple-spring) !important;
+  }
+
+  /* Active: glass pill just like iOS */
+  .bottom-nav-item.active {
+    color: #00d4ff !important;
+    -webkit-text-fill-color: #00d4ff !important;
+    background: rgba(0,212,255,0.15) !important;
+    border: 1px solid rgba(0,212,255,0.32) !important;
+    box-shadow:
+      inset 0 1.5px 0 rgba(255,255,255,0.30),
+      0 4px 18px rgba(0,212,255,0.30) !important;
+  }
+
+  .bottom-nav-item.active i {
+    transform: scale(1.18) !important;
+    filter: drop-shadow(0 0 10px rgba(0,212,255,0.80)) !important;
+  }
+
+  /* Top accent bar */
+  .bottom-nav-item.active::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 32px; height: 3px;
+    background: linear-gradient(90deg, #00d4ff, #0077ff);
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0 0 12px rgba(0,212,255,0.7);
+  }
+
+  /* Spring tap feedback */
+  .bottom-nav-item:active {
+    transform: scale(0.85) !important;
+    transition: transform 0.08s ease !important;
+  }
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   FOOTER
+   ══════════════════════════════════════════════════════════ */
+.site-footer {
+  backdrop-filter: var(--apple-blur-sm) !important;
+  -webkit-backdrop-filter: var(--apple-blur-sm) !important;
+  -webkit-transform: translateZ(0) !important;
+  transform: translateZ(0) !important;
+  will-change: transform, backdrop-filter !important;
+  background: rgba(4, 8, 22, 0.62) !important;
+  border-top: 1px solid rgba(255,255,255,0.10) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.10) !important;
+}
+
+.footer-social a {
+  backdrop-filter: var(--apple-blur-xs) !important;
+  -webkit-backdrop-filter: var(--apple-blur-xs) !important;
+  -webkit-transform: translateZ(0) !important;
+  transform: translateZ(0) !important;
+  will-change: transform, backdrop-filter !important;
+  background: rgba(255,255,255,0.09) !important;
+  border: 1px solid rgba(255,255,255,0.18) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.28),
+    0 4px 14px rgba(0,0,0,0.35) !important;
+  transition: transform 0.4s var(--apple-spring), box-shadow 0.3s, background 0.3s !important;
+}
+
+.footer-social a:hover {
+  background: rgba(255,255,255,0.16) !important;
+  border-color: rgba(255,255,255,0.35) !important;
+  transform: translateY(-5px) scale(1.12) !important;
+  box-shadow:
+    inset 0 1.5px 0 rgba(255,255,255,0.40),
+    0 12px 30px rgba(0,212,255,0.35) !important;
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   SMALL INTERACTIVE ELEMENTS
+   ══════════════════════════════════════════════════════════ */
+.theme-toggle {
+  backdrop-filter: var(--apple-blur-xs) !important;
+  -webkit-backdrop-filter: var(--apple-blur-xs) !important;
+  -webkit-transform: translateZ(0) !important;
+  transform: translateZ(0) !important;
+  will-change: transform, backdrop-filter !important;
+  background: rgba(255,255,255,0.10) !important;
+  border: 1px solid rgba(255,255,255,0.22) !important;
+  box-shadow:
+    inset 0 1.5px 0 rgba(255,255,255,0.40),
+    0 4px 18px rgba(0,0,0,0.40) !important;
+  transition: transform 0.4s var(--apple-spring), box-shadow 0.3s !important;
+}
+
+.theme-toggle:hover {
+  background: rgba(255,255,255,0.18) !important;
+  transform: rotate(20deg) scale(1.12) !important;
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,0.55),
+    0 8px 26px rgba(0,0,0,0.45) !important;
+}
+
+#backToTop {
+  backdrop-filter: var(--apple-blur-sm) !important;
+  -webkit-backdrop-filter: var(--apple-blur-sm) !important;
+  -webkit-transform: translateZ(0) !important;
+  transform: translateZ(0) !important;
+  will-change: transform, backdrop-filter !important;
+  background: rgba(0,212,255,0.16) !important;
+  border: 1px solid rgba(0,212,255,0.35) !important;
+  border-radius: 50% !important;
+  box-shadow:
+    inset 0 1.5px 0 rgba(255,255,255,0.40),
+    0 8px 28px rgba(0,0,0,0.45) !important;
+  transition: transform 0.4s var(--apple-spring), box-shadow 0.3s !important;
+}
+
+#backToTop:hover {
+  background: rgba(0,212,255,0.26) !important;
+  transform: translateY(-6px) scale(1.12) !important;
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,0.55),
+    0 18px 45px rgba(0,212,255,0.45) !important;
+}
+
+#study-timer-widget {
+  backdrop-filter: var(--apple-blur) !important;
+  -webkit-backdrop-filter: var(--apple-blur) !important;
+  -webkit-transform: translateZ(0) !important;
+  transform: translateZ(0) !important;
+  will-change: transform, backdrop-filter !important;
+  background: rgba(6, 10, 28, 0.74) !important;
+  border: 1px solid rgba(255,255,255,0.16) !important;
+  box-shadow:
+    inset 0 1.5px 0 rgba(255,255,255,0.22),
+    0 20px 70px rgba(0,0,0,0.60) !important;
+}
+
+#cookie-consent,
+.pwa-install-banner {
+  backdrop-filter: var(--apple-blur) !important;
+  -webkit-backdrop-filter: var(--apple-blur) !important;
+  -webkit-transform: translateZ(0) !important;
+  transform: translateZ(0) !important;
+  will-change: transform, backdrop-filter !important;
+  background: rgba(6, 10, 28, 0.82) !important;
+  border-top: 1px solid rgba(255,255,255,0.12) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.12),
+    0 -14px 50px rgba(0,0,0,0.50) !important;
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   PROFILE IMAGE — iOS Glass Ring
+   ══════════════════════════════════════════════════════════ */
+.profile-img {
+  border: 2px solid rgba(255,255,255,0.36) !important;
+  box-shadow:
+    0 0 0  6px rgba(255,255,255,0.08),
+    0 0 0 12px rgba(0,212,255,0.06),
+    0 0 0 18px rgba(0,212,255,0.03),
+    0 14px 50px rgba(0,0,0,0.55) !important;
+  transition: transform 0.45s var(--apple-spring), box-shadow 0.35s !important;
+}
+
+.profile-img:hover {
+  transform: scale(1.06) !important;
+  box-shadow:
+    0 0 0  8px rgba(255,255,255,0.12),
+    0 0 0 16px rgba(0,212,255,0.10),
+    0 20px 65px rgba(0,0,0,0.60) !important;
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   PHONE UX OPTIMIZATIONS (≤768px)
+   ══════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .stats-container      { grid-template-columns: repeat(2, 1fr) !important; gap: 14px !important; }
+  .stat-item            { padding: 20px 14px !important; border-radius: 18px !important; }
+  .stat-number          { font-size: 2.2rem !important; }
+  .category-grid        { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
+  .category-btn         { padding: 16px 10px !important; border-radius: 18px !important; }
+  .advanced-features-grid { grid-template-columns: 1fr !important; gap: 14px !important; }
+  .advanced-card        { padding: 22px 18px !important; }
+  .hero h1              { font-size: 1.85rem !important; line-height: 1.22 !important; }
+  .hero                 { padding-top: 88px !important; }
+  .btn                  { padding: 12px 24px !important; font-size: 0.95rem !important; }
+  main, .page-content, .materials-container { padding-left: 16px !important; padding-right: 16px !important; }
+  .site-footer          { padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px)) !important; }
+  input, textarea, select { font-size: 16px !important; } /* prevent iOS zoom */
+  * { -webkit-tap-highlight-color: rgba(0,212,255,0.10) !important; }
+
+  .bottom-nav-item,
+  .theme-toggle,
+  #backToTop { min-width: 44px !important; min-height: 44px !important; }
+}
+
+@media (max-width: 380px) {
+  .stats-container { grid-template-columns: 1fr !important; }
+  .hero h1         { font-size: 1.60rem !important; }
+  .stat-number     { font-size: 1.9rem !important; }
+  .bottom-nav-item { font-size: 0.58rem !important; }
+  .bottom-nav-item i { font-size: 1.0rem !important; }
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   STRIP BASE STYLES — Ensure Glass Shines Through
+   (Overrides hardcoded linear-gradients in style.css)
+   ══════════════════════════════════════════════════════════ */
+.stats-section,
+.quick-access,
+.features {
+  background: transparent !important;
+  border-top: none !important;
+  border-bottom: none !important;
+}
+
+.advanced-card,
+.stat-item,
+.category-btn,
+.cta-advanced,
+.contact-card-modern,
+.about-section,
+.resource-card,
+.year-card,
+.material-card {
+  /* Reset the base background so our glass mixin wins */
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   LIGHT THEME — White Glass (iOS light mode)
+   ══════════════════════════════════════════════════════════ */
+html[data-theme="light"] {
+  --apple-bg:          rgba(255, 255, 255, 0.60);
+  --apple-bg-hover:    rgba(255, 255, 255, 0.75);
+  --apple-border:      rgba(0, 0, 0, 0.05);
+  --apple-border-hover:rgba(0, 119, 255, 0.25);
+  --apple-specular:    inset 0 1px 0 rgba(255,255,255,0.80),
+                       inset 0 -0.5px 0 rgba(0,0,0,0.04);
+  --apple-shadow:      0 16px 60px rgba(0,0,0,0.10),
+                       0  4px 18px rgba(0,0,0,0.06);
+}
+
+html[data-theme="light"] header {
+  background: rgba(252, 253, 255, 0.80) !important;
+  border-bottom-color: rgba(0,0,0,0.08) !important;
+  box-shadow:
+    inset 0 -1px 0 rgba(0,0,0,0.06),
+    0 8px 40px rgba(0,0,0,0.10) !important;
+}
+
+html[data-theme="light"] .advanced-card,
+html[data-theme="light"] .stat-item,
+html[data-theme="light"] .category-btn,
+html[data-theme="light"] .contact-card-modern,
+html[data-theme="light"] .resource-card,
+html[data-theme="light"] .material-card {
+  background: rgba(255,255,255,0.72) !important;
+  border-color: rgba(0,0,0,0.06) !important;
+  box-shadow:
+    inset 0 1.5px 0 rgba(255,255,255,1.0),
+    0 10px 40px rgba(0,0,0,0.10) !important;
+}
+
+html[data-theme="light"] .site-footer {
+  background: rgba(245, 248, 255, 0.85) !important;
+  border-top-color: rgba(0,0,0,0.08) !important;
+}
+
+@media (max-width: 768px) {
+  html[data-theme="light"] header {
+    background: rgba(252, 253, 255, 0.86) !important;
+  }
+  html[data-theme="light"] .bottom-nav {
+    background: rgba(248,250,252,0.90) !important;
+    border-top-color: rgba(0,0,0,0.09) !important;
+  }
+  html[data-theme="light"] .bottom-nav-item {
+    color: rgba(0,0,0,0.42) !important;
+    -webkit-text-fill-color: rgba(0,0,0,0.42) !important;
+  }
+  html[data-theme="light"] .bottom-nav-item.active {
+    color: #0077ff !important;
+    -webkit-text-fill-color: #0077ff !important;
+    background: rgba(0,119,255,0.10) !important;
+    border-color: rgba(0,119,255,0.22) !important;
+  }
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   REDUCED MOTION
+   ══════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration:  0.01ms !important;
+    transform: none !important;
+  }
+}
+
+/* END kl-liquid-glass.css v3.0 — Exact iPhone Glass */

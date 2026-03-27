@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>You're Offline — KL Material</title>
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#00d4ff" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data:; frame-ancestors 'none'" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="style.css?v=22.0" />
+  <link rel="stylesheet" href="kl-liquid-glass.css?v=1.0" />
+  <link rel="icon" href="icon.svg" />
+  <link rel="apple-touch-icon" href="icon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"
+    media="print" onload="this.media='all'" />
+
+  <style>
+    .offline-page {
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .offline-icon {
+      font-size: 4.5rem;
+      margin-bottom: 24px;
+      animation: pulse 2.5s ease-in-out infinite;
+      color: var(--accent-primary, #00d4ff);
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.65; transform: scale(0.94); }
+    }
+
+    .offline-title {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 700;
+      margin: 0 0 12px;
+      background: linear-gradient(135deg, #00d4ff, #0077ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .offline-sub {
+      color: var(--text-secondary, rgba(255,255,255,0.55));
+      font-size: 1rem;
+      max-width: 42ch;
+      line-height: 1.75;
+      margin: 0 0 32px;
+    }
+
+    .offline-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 48px;
+    }
+
+    #retry-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Cached pages section */
+    .cached-section {
+      width: 100%;
+      max-width: 480px;
+      text-align: left;
+    }
+
+    .cached-section h2 {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--text-secondary, rgba(255,255,255,0.4));
+      margin: 0 0 14px;
+    }
+
+    .cached-links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .cached-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 12px;
+      color: var(--text-primary, #fff);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .cached-link:hover {
+      background: rgba(0,212,255,0.1);
+      border-color: rgba(0,212,255,0.3);
+      color: #00d4ff;
+    }
+
+    .cached-link i {
+      color: var(--accent-primary, #00d4ff);
+      width: 18px;
+      text-align: center;
+    }
+
+    /* Offline tips */
+    .tips-section {
+      margin-top: 40px;
+      width: 100%;
+      max-width: 480px;
+      background: rgba(0,212,255,0.04);
+      border: 1px solid rgba(0,212,255,0.12);
+      border-radius: 16px;
+      padding: 20px 22px;
+      text-align: left;
+    }
+
+    .tips-section h2 {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #00d4ff;
+      margin: 0 0 12px;
+    }
+
+    .tips-section ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .tips-section li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-size: 0.88rem;
+      color: var(--text-secondary, rgba(255,255,255,0.55));
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+
+    .tips-section li i {
+      color: #00d4ff;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    /* Status indicator */
+    #connection-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.8rem;
+      padding: 5px 14px;
+      border-radius: 50px;
+      margin-bottom: 24px;
+      background: rgba(231,76,60,0.12);
+      border: 1px solid rgba(231,76,60,0.3);
+      color: #e74c3c;
+    }
+
+    #connection-status.online {
+      background: rgba(0,255,136,0.1);
+      border-color: rgba(0,255,136,0.3);
+      color: #00ff88;
+    }
+
+    #status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: currentColor;
+      animation: pulse 1.8s infinite;
+    }
+  </style>
+</head>
+
+<body class="no-timer">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header>
+    <nav class="nav-liquid" aria-label="Primary">
+      <button class="hamburger" aria-label="Toggle Menu" aria-expanded="false" aria-controls="mobile-nav">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="index.html" class="mobile-brand" aria-label="KL Material Home">KL Material</a>
+      <div id="mobile-nav" class="nav-track" role="menu" aria-hidden="true">
+        <a href="index.html" role="menuitem" tabindex="-1" data-nav-link><i class="fa-solid fa-house"></i> Home</a>
+        <a href="materials.html" role="menuitem" tabindex="-1" data-nav-link><i class="fa-solid fa-book"></i> Materials</a>
+        <a href="roadmap.html" role="menuitem" tabindex="-1" data-nav-link><i class="fa-solid fa-map"></i> Roadmap</a>
+        <a href="cgpa.html" role="menuitem" tabindex="-1" data-nav-link><i class="fa-solid fa-calculator"></i> CGPA Calc</a>
+        <a href="about.html" role="menuitem" tabindex="-1" data-nav-link><i class="fa-solid fa-user"></i> About</a>
+        <a href="contact.html" role="menuitem" tabindex="-1" data-nav-link><i class="fa-solid fa-address-book"></i> Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="page-content" id="main-content">
+    <div class="offline-page">
+
+      <div id="connection-status" role="status" aria-live="polite">
+        <span id="status-dot"></span>
+        <span id="status-text">No internet connection</span>
+      </div>
+
+      <div class="offline-icon" aria-hidden="true">
+        <i class="fa-solid fa-wifi"></i>
+      </div>
+
+      <h1 class="offline-title">You're offline</h1>
+      <p class="offline-sub">
+        No worries — the pages you've visited before are still available below.
+        Check your connection and retry when you're ready.
+      </p>
+
+      <div class="offline-actions">
+        <button class="btn" id="retry-btn" onclick="retryConnection()">
+          <i class="fa-solid fa-rotate-right"></i> Retry Connection
+        </button>
+        <a class="btn btn-ghost" href="index.html">
+          <i class="fa-solid fa-house"></i> Go Home
+        </a>
+      </div>
+
+      <!-- Cached pages the SW has stored -->
+      <div class="cached-section">
+        <h2><i class="fa-solid fa-database" style="margin-right:6px"></i>Available Offline</h2>
+        <div class="cached-links">
+          <a href="index.html" class="cached-link"><i class="fa-solid fa-house"></i> Home</a>
+          <a href="materials.html" class="cached-link"><i class="fa-solid fa-book"></i> Materials</a>
+          <a href="roadmap.html" class="cached-link"><i class="fa-solid fa-map"></i> Roadmap</a>
+          <a href="cgpa.html" class="cached-link"><i class="fa-solid fa-calculator"></i> CGPA Calculator</a>
+          <a href="about.html" class="cached-link"><i class="fa-solid fa-user"></i> About</a>
+        </div>
+      </div>
+
+      <!-- Study tips while offline -->
+      <div class="tips-section">
+        <h2><i class="fa-solid fa-lightbulb" style="margin-right:6px"></i>Study Tips while offline</h2>
+        <ul>
+          <li><i class="fa-solid fa-check"></i> Review notes you've already downloaded</li>
+          <li><i class="fa-solid fa-check"></i> Practice solved problems without looking at solutions</li>
+          <li><i class="fa-solid fa-check"></i> Use the roadmap page to plan your next learning steps</li>
+          <li><i class="fa-solid fa-check"></i> Try the CGPA Calculator — it works fully offline!</li>
+        </ul>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>KL Material</h3>
+        <p>Always free, always accessible — even offline.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="materials.html"><i class="fa-solid fa-book"></i> Materials</a></li>
+          <li><a href="roadmap.html"><i class="fa-solid fa-map"></i> Roadmap</a></li>
+          <li><a href="cgpa.html"><i class="fa-solid fa-calculator"></i> CGPA Calc</a></li>
+          <li><a href="about.html"><i class="fa-solid fa-user"></i> About</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Praveen Reddy · Made with <span>❤️</span> for KL University students</p>
+    </div>
+  </footer>
+
+  <button id="backToTop" title="Back to top">↑</button>
+
+  <script defer src="advanced-features.js"></script>
+  <script defer src="ui.js?v=7.0"></script>
+
+  <script>
+    // Auto-reload when connection is restored
+    function retryConnection() {
+      const btn = document.getElementById('retry-btn');
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Checking…';
+      btn.disabled = true;
+      fetch('index.html', { method: 'HEAD', cache: 'no-store' })
+        .then(() => { window.location.href = 'index.html'; })
+        .catch(() => {
+          btn.innerHTML = '<i class="fa-solid fa-rotate-right"></i> Retry Connection';
+          btn.disabled = false;
+        });
+    }
+
+    function updateStatus(online) {
+      const el = document.getElementById('connection-status');
+      const txt = document.getElementById('status-text');
+      el.className = online ? 'online' : '';
+      txt.textContent = online ? 'Back online! Redirecting…' : 'No internet connection';
+      if (online) setTimeout(() => { window.location.href = 'index.html'; }, 1200);
+    }
+
+    window.addEventListener('online',  () => updateStatus(true));
+    window.addEventListener('offline', () => updateStatus(false));
+    if (navigator.onLine) updateStatus(true);
+  </script>
+</body>
+
+</html>

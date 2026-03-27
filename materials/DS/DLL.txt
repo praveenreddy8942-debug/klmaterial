@@ -1,0 +1,250 @@
+#include <stdio.h>
+#include<stdlib.h>
+
+struct node
+{
+    int data;
+    struct node *next,*prev;
+};
+struct node *start=NULL;
+void create();
+void display();
+void insertatbeg();
+void insertatend();
+void delatbeg();
+void insertatspec();
+void delatend();
+void delatspec();
+void findreverse()
+int main()
+{
+    int opt,n,i;
+    while(1)
+    {
+        printf("\n1.create\n2.display\n3.insertatbeg\n4.exit\n5.inseratend\n6.insertatspec\n7.delatbeg\n8.delatend\n9.delatspec");
+        printf("\nenter your option");
+        scanf("%d",&opt);
+        switch(opt)
+        {
+            case 1: printf("\netner no.of nodes");
+            scanf("%d",&n);
+            for(i=1;i<=n;i++)
+            {
+                create();
+            }
+            break;
+            case 2: display();
+            break;
+           case 3: insertatbeg();
+            break;
+           case 4: exit(0);
+            case 5:insertatend();
+            break;
+            case 6:  insertatspec();
+            break;
+            case 7:delatbeg();
+            break;
+            case 8: delatend();
+            break;
+            case 9:  delatspec();
+            break;
+            case 10:  findreverse()
+            break;
+        }
+    }
+}
+void create()
+{
+    struct node *newnode,*ptr;
+    int ele;
+    printf("enter element");
+    scanf("%d",&ele);
+    newnode=(struct node *)malloc(sizeof(struct node));
+    newnode->data=ele;
+    newnode->prev=NULL;
+    newnode->next=NULL;
+    if(start==NULL)
+    {
+        start=newnode;
+       
+    }
+    else
+    {
+        ptr=start;
+        while(ptr->next!=NULL)
+        {
+            ptr=ptr->next;
+        }
+        newnode->prev=ptr;
+        ptr->next=newnode;
+       
+       
+    }
+}
+void display()
+{
+    struct node *ptr;
+    ptr=start;
+    while(ptr!=NULL)
+    {
+        printf("%d->",ptr->data);
+        ptr=ptr->next;
+    }
+   
+   
+}
+void insertatbeg()
+{
+    struct node *ptr,*newnode;
+    int ele;
+    printf("enter element");
+    scanf("%d",&ele);
+    newnode=(struct node *)malloc(sizeof(struct node));
+    newnode->data=ele;
+    newnode->prev=NULL;
+    newnode->next=NULL;
+    if(start==NULL)
+    {
+        start=newnode;
+       
+    }
+    else
+    {
+     
+     
+      newnode->next=start;
+      start->prev=newnode;
+      start=newnode;
+     
+      }
+       
+}
+void insertatend()
+{
+    struct node *ptr,*newnode;
+    int ele;
+    printf("enter element");
+    scanf("%d",&ele);
+    newnode=(struct node *)malloc(sizeof(struct node));
+    newnode->data=ele;
+    newnode->prev=NULL;
+    newnode->next=NULL;
+    if(start==NULL)
+    {
+        start=newnode;
+       
+    }
+    else
+    {
+     
+      ptr=start;
+      while(ptr->next!=NULL)
+      {
+           ptr=ptr->next;
+      }
+     newnode->prev=ptr;
+        ptr->next=newnode;
+      }
+       
+}
+void insertatspec()
+{
+    struct node *ptr=start,*newnode;
+    int ele,loc,i;
+    printf("enter element");
+    scanf("%d",&ele);
+    printf("\nenter loacation after which node you want to insert");
+    scanf("%d",&loc);
+    newnode=(struct node *)malloc(sizeof(struct node));
+    newnode->data=ele;
+    for(i=0;i<loc-1;i++)
+    {
+        ptr=ptr->next;
+    }
+     
+      newnode->next=ptr->next;
+      ptr->next->prev=newnode;
+      newnode->prev=ptr;
+      ptr->next=newnode;
+}
+void delatbeg()
+{
+    struct node *ptr=start;
+    if(start==NULL)
+    {
+        printf("list is empty");
+    }
+    else
+    {
+         if(start->next==NULL)
+         {
+             start=NULL;
+             free(ptr);
+         }
+         else
+         {
+             start=ptr->next;
+           
+             start->prev=NULL;
+         }
+         free(ptr);
+    }
+}
+             
+   
+void delatend()
+{
+    struct node *ptr1=start,*ptr2;
+    if(start==NULL)
+    {
+        printf("list is empty");
+    }
+    else
+    {
+         if(start->next==NULL)
+         {
+             start=NULL;
+             free(ptr1);
+         }
+         else
+         {
+             while(ptr1->next!=NULL)
+             {
+                 ptr2=ptr1;
+                 ptr1=ptr1->next;
+             }
+             ptr2->next=NULL;
+           }
+         free(ptr1);
+    }
+}
+void delatspec()
+{
+    struct node *ptr1=start,*ptr2;
+    int delele;
+    printf("\nenter element to be deleted");
+    scanf("%d",&delele);
+    while(ptr1->data!=delele)
+    {
+                  ptr2=ptr1;
+                 ptr1=ptr1->next;
+     }
+            ptr2->next=ptr1->next;
+            ptr1->next->prev=ptr2;
+           
+         free(ptr1);
+   
+}
+void findreverse()
+{
+     struct node *ptr=start;
+      while(ptr->next!=NULL)
+      {
+          ptr=ptr->next;
+      }
+      while(ptr!=NULL)
+      {                                                                              
+          printf("%d  ",ptr->data);
+          ptr=ptr->prev;
+      }
+}

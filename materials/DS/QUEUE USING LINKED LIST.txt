@@ -1,0 +1,94 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int data;
+    struct node *next;
+};
+struct node *front=NULL,*rear=NULL;
+void enqueue();
+void dequeue();
+void display();
+void peek();
+int main()
+{
+    int opt;
+    while(1)
+{
+    printf("\n1.enqueue\n2.dequeue\n3.peek\n4.display\n5.exit");
+    printf("\nenter your option");
+    scanf("%d",&opt);
+    switch(opt)
+    {
+        case 1:
+                enqueue();
+                break;
+                case 2: dequeue();
+                break;
+                case 3:peek();
+                break;
+                case 4: display();
+                break;
+                case 5: exit(0);
+               
+               
+    }
+}
+return 0;
+}
+void enqueue()
+{
+    struct node *newnode;
+    int ele;
+    newnode=(struct node *)malloc(sizeof(struct node));
+    printf("\nenter your element");
+    scanf("%d",&ele);
+    newnode->data=ele;
+    newnode->next=NULL;
+    if(front==NULL || rear==NULL)
+    {
+        front=newnode;
+        rear=newnode;
+    }
+    else
+    {
+        rear->next=newnode;
+        rear=newnode;
+    }
+}
+void dequeue()
+{
+    struct node *ptr;
+    ptr=front;
+    if(front==NULL || rear==NULL)
+    {
+        printf("\nqueue is empty");
+    }
+    else
+    {
+        printf("%d is deleted",front->data);
+        front=front->next;
+        free(ptr);
+    }
+}
+void peek()
+{
+    if(front==NULL || rear==NULL)
+    {
+        printf("\nqueue is empty");
+    }
+    else
+    {
+        printf("\npeek element in the queue=%d",front->data);
+    }
+   
+}
+void display()
+{
+    struct node *ptr=front;
+    while(ptr!=NULL)
+    {
+        printf("%d->",ptr->data);
+        ptr=ptr->next;
+    }
+}
