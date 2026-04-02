@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Praveen Reddy | KL Material</title>
+<style>
+/* About Page Specific Styles */
+.profile-card { max-width: 600px; margin: 0 auto 40px; padding: 48px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.avatar { width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(135deg, #2060ff, #8020ff); display: flex; align-items: center; justify-content: center; font-size: 40px; font-weight: 700; box-shadow: 0 8px 32px rgba(32,96,255,0.4); margin-bottom: 8px; border: 2px solid rgba(255,255,255,0.2); }
+.status-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; background: rgba(0,229,160,0.1); border: 1px solid rgba(0,229,160,0.2); border-radius: 99px; font-size: 14px; font-weight: 500; color: #00e5a0; }
+.status-dot { width: 8px; height: 8px; background: #00e5a0; border-radius: 50%; box-shadow: 0 0 10px #00e5a0; }
+.mission-vision { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 40px; }
+.text-card { padding: 32px; display: flex; flex-direction: column; gap: 16px; }
+.text-card h2 { font-size: 1.5rem; }
+.text-card p { line-height: 1.6; color: var(--text-secondary); font-size: 1.05rem; }
+.features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-bottom: 40px; }
+.feature-card { padding: 32px; display: flex; flex-direction: column; gap: 12px; }
+.feature-icon { font-size: 32px; margin-bottom: 8px; }
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-bottom: 60px; }
+.stat { padding: 24px; text-align: center; font-weight: 500; display: flex; align-items: center; justify-content: center; min-height: 100px; }
+.cta-card { padding: 40px; text-align: center; border: 1px solid rgba(128,32,255,0.4); box-shadow: 0 8px 32px rgba(128,32,255,0.15), inset 0 0 20px rgba(128,32,255,0.05); }
+@media(max-width: 768px) { .mission-vision, .features-grid { grid-template-columns: 1fr; } .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+</style>
+    <link rel="stylesheet" href="shared.css">
+    <link rel="stylesheet" href="kl-liquid-glass.css">
+    <link rel="stylesheet" href="glass-components.css">
+</head>
+<body>
+<div class="bg-layer">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="blob blob-4"></div>
+</div>
+<div class="main-wrapper">
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">KL Material</a>
+            <div class="nav-links" id="nLinks">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="materials.html" class="nav-link">Materials</a>
+                <a href="roadmap.html" class="nav-link">Roadmap</a>
+                <a href="cgpa.html" class="nav-link">CGPA Calc</a>
+                <a href="about.html" class="nav-link active">About</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+            <button  class="mobile-btn" id="mobBtn" hamburger>
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </nav>
+    <main class="container" style="padding-top: 60px;">
+        
+        <div class="glass glass-card profile-card stagger" style="animation-delay:0.1s">
+            <div class="avatar">PR</div>
+            <h1 style="font-size:2.5rem; letter-spacing:-1px;">Praveen Reddy</h1>
+            <p style="color:var(--text-secondary); font-size:1.1rem">CS Student &middot; Study Hub Creator &middot; Tech Enthusiast</p>
+            <div class="status-badge">
+                <div class="status-dot"></div> Available
+            </div>
+        </div>
+
+        <div class="mission-vision stagger" style="animation-delay:0.2s">
+            <div class="glass glass-card text-card">
+                <h2>Our Mission</h2>
+                <p>Creating a centralized platform to organize and share academic materials, making quality education resources accessible to all students.</p>
+            </div>
+            <div class="glass glass-card text-card">
+                <h2>Our Vision</h2>
+                <p>Building a comprehensive study hub where students can find all their academic resources in one place and excel in their learning journey.</p>
+            </div>
+        </div>
+
+        <h2 class="stagger" style="text-align:center; margin-bottom:24px; animation-delay:0.3s">What you'll find here</h2>
+        
+        <div class="features-grid stagger" style="animation-delay:0.4s">
+            <div class="glass glass-card feature-card">
+                <div class="feature-icon">📚</div>
+                <h3>Study Materials</h3>
+                <p style="color:var(--text-secondary)">Curated notes and resources for all subjects</p>
+            </div>
+            <div class="glass glass-card feature-card">
+                <div class="feature-icon">📝</div>
+                <h3>Question Papers</h3>
+                <p style="color:var(--text-secondary)">Previous year papers and practice tests</p>
+            </div>
+            <div class="glass glass-card feature-card">
+                <div class="feature-icon">🗺️</div>
+                <h3>Career Roadmap</h3>
+                <p style="color:var(--text-secondary)">4-year B.Tech guidance and resources</p>
+            </div>
+            <div class="glass glass-card feature-card">
+                <div class="feature-icon">🔄</div>
+                <h3>Regular Updates</h3>
+                <p style="color:var(--text-secondary)">Fresh content added continuously</p>
+            </div>
+        </div>
+
+        <div class="stats-grid stagger" style="animation-delay:0.5s">
+            <div class="glass glass-card stat">100+ Study Materials</div>
+            <div class="glass glass-card stat">9 Subjects Covered</div>
+            <div class="glass glass-card stat">24/7 Access</div>
+            <div class="glass glass-card stat">Free Always</div>
+        </div>
+
+        <div class="glass glass-card cta-card stagger" style="animation-delay:0.6s">
+            <h2 style="margin-bottom:24px">Have suggestions or want to contribute?</h2>
+            <a href="contact.html" class="btn btn-primary">Get in Touch &rarr;</a>
+        </div>
+
+    </main>
+    <footer class="glass footer stagger" style="animation-delay:0.7s">
+        <div style="font-weight:600;font-size:18px">KL Material</div>
+        <p style="color:var(--text-secondary);margin-top:8px">always free, always accessible</p>
+        <div class="footer-links">
+            <a href="materials.html">Materials</a><a href="roadmap.html">Roadmap</a><a href="cgpa.html">CGPA Calc</a><a href="about.html">About</a><a href="contact.html">Contact</a><a href="#">Privacy</a>
+        </div>
+        <div style="color:var(--text-muted);font-size:13px">&copy; 2026 Praveen Reddy &middot; Made with ❤️ for KL University students</div>
+    </footer>
+    <button class="glass scroll-top" id="sTop" onclick="window.scrollTo(0,0)">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"></polyline></svg>
+    </button>
+</div>
+<script>
+
+</script>
+
+<script src="ui.js"></script>
+<script src="advanced-features.js"></script>
+<script src="chatbot.js"></script>
+</body>
+</html>

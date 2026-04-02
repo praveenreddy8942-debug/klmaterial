@@ -1,0 +1,287 @@
+#include<stdio.h>
+struct node
+{
+  int data;
+  struct node *next;
+  };
+  struct node *start=NULL;
+  void insertatbeg()
+  {
+  struct node *newnode;
+       int val;
+       newnode=(struct node *)malloc(sizeof(struct node));
+       printf("\nenter value to be inserted into the node");
+       scanf("%d",&val);
+       newnode->data=val;
+       if(start==NULL)
+       {
+       newnode->next=NULL;
+       start=newnode;
+       }
+       else
+       {
+	  newnode->next=start;
+	  start=newnode;
+	}
+
+}
+void insertatend()
+{
+       struct node *newnode,*ptr=start;
+       int val;
+       newnode=(struct node *)malloc(sizeof(struct node));
+       printf("\nenter value to be inserted into the node");
+       scanf("%d",&val);
+       newnode->data=val;
+       newnode->next=NULL;
+       if(start==NULL)
+       {
+
+       start=newnode;
+       }
+       else
+       {
+	  while(ptr->next!=NULL)
+	  {
+	      ptr=ptr->next;
+	   }
+	   ptr->next=newnode;
+	}
+}
+void insertatspec()
+{
+
+       struct node *newnode,*ptr=start;
+       int val,i,loc;
+       newnode=(struct node *)malloc(sizeof(struct node));
+       printf("\nenter value to be inserted into the node");
+       scanf("%d",&val);
+       printf("\nenter loaction after which node you want to insert a node");
+       scanf("%d",&loc);
+       newnode->data=val;
+
+       if(loc==0)
+       {
+		    newnode->next=NULL;
+		    start=newnode;
+       }
+       else
+       {
+		  for(i=0;i<loc-1;i++)
+		  {
+		    ptr=ptr->next;
+		   }
+		   newnode->next=ptr->next;
+		   ptr->next=newnode;
+	}
+}
+void delatbeg()
+{
+struct node *ptr=start;
+if(start==NULL)
+{
+printf("list is empty");
+}
+else
+{
+ if(ptr->next==NULL)
+ {
+ start=NULL;
+ free(ptr);
+ }
+ else
+ {
+   start=ptr->next;
+   free(ptr);
+   }
+   }
+ }
+void delatend()
+{
+   struct node *ptr1=start,*ptr2;
+   if(start==NULL)
+   {
+      printf("\nList is empty");
+   }
+   else
+   {
+      if(start->next==NULL)
+      start=NULL;
+      else
+      {
+	 while(ptr1->next!=NULL)
+	 {
+	    ptr2=ptr1;
+	    ptr1=ptr1->next;
+	}
+	ptr2->next=NULL;
+	}
+	free(ptr1);
+	}
+      }
+
+ void delatspec()
+ {
+ struct node *ptr1=start,*ptr2;
+ int delval;
+ printf("\nenter value of the node to be deleted");
+ scanf("%d",&delval);
+ while(ptr1->data!=delval)
+ {
+    ptr2=ptr1;
+    ptr1=ptr1->next;
+   }
+   ptr2->next=ptr1->next;
+   free(ptr1);
+ }
+
+ void create()
+ {
+   struct node *newnode,*ptr;
+   int ele;
+   printf("enter data into the node");
+   scanf("%d",&ele);
+   newnode=(struct node*)malloc(sizeof(struct node));
+   newnode->data=ele;
+   newnode->next=NULL;
+   if(start==NULL)
+   {
+       start=newnode;
+   }
+   else
+   {
+      ptr=start;
+      while(ptr->next!=NULL)
+	  {
+	      ptr=ptr->next;
+	   }
+	   ptr->next=newnode;
+
+   }
+   }
+   void display()
+   {
+      struct node *ptr;
+      ptr=start;
+      while(ptr!=NULL)
+      {
+	printf(" %d->",ptr->data);
+	ptr=ptr->next;
+      }
+    }
+    void nodecount()
+    {
+      struct node *ptr=start;
+      int count=0;
+      while(ptr!=NULL)
+      {
+	 count++;
+	 ptr=ptr->next;
+       }
+       printf("\nno.of nodes=%d",count);
+       }
+       void search()
+       {
+	  struct node *ptr=start;
+	  int ele,flag=0;
+	  printf("\nenter element to be search");
+	  scanf("%d",&ele);
+	  while(ptr!=NULL)
+	  {
+	    if(ptr->data==ele)
+	    {
+	    flag=1;
+	    break;
+	    }
+	    ptr=ptr->next;
+	  }
+	  if(flag==1)
+	  printf("found");
+	  else
+	  printf("not");
+	}
+	void reverse(struct node *start)
+	{
+	  struct node *ptr=start;
+	  if(ptr!=NULL)
+	  {
+	     reverse(ptr->next);
+	     printf("%d\t",ptr->data);
+	    }
+	 }
+	 struct node sort(struct node *start )
+	 {
+	   struct node *p,*q;
+	   int t;
+	   for(p=start; p->next!=NULL; p=p->next)
+	   {
+	     for(q=p->next;q!=NULL; q=q->next);
+	     {
+	       if(p->data>q->data)
+	       {
+	       t=p->data;
+	       p->data=q->data;
+	       q->data=t;
+	       }
+	       }
+	       }
+	     }
+    void main()
+    {
+int i,n,opt;
+      do
+      {
+      printf("\n1.create\n2.insertatbeg\n3.insertatend\n4.insertatspec\n5.delatbeg\n6.delatend\n7.delatspec\n8.display\n9.nodecount\n10.search\n11.reverse\n12.exit");
+      printf("\nenter your option");
+      scanf("%d",&opt);
+
+      switch(opt)
+      {
+      case 1:
+      printf("\nenter no.of nodes you want to create");
+      scanf("%d",&n);
+      for(i=1;i<=n;i++)
+      {
+	 create();
+       }
+       break;
+       case 2:
+       insertatbeg();
+       break;
+       case 3:
+       insertatend();
+       break;
+
+       case 4:
+       insertatspec();
+       break;
+       case 5:delatbeg();
+       break;
+       case 6:
+       delatend();
+       break;
+       case 7:
+       delatspec();
+       break;
+       case 8:
+	printf("\nthe elements in the linked list are\n");
+	display();
+       break;
+       case 9:
+       nodecount();
+       break;
+       case 10:
+       search();
+       break;
+       case 11:
+       reverse(start);
+       break;
+       case 12:
+       sort();
+       break;
+       case 13:
+	exit();
+       }
+       }while(opt<=12);
+
+     }

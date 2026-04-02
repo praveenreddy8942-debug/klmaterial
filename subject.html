@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="View and download CSE study materials, notes, and PDFs for your subject at KL University — free access for all students.">
+<title>Subject Materials — KL Material</title>
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Subject/Materials Viewer Specific Styles */
+.stats-pills { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 8px; }
+.pill { padding: 6px 16px; border-radius: 999px; font-size: 14px; font-weight: 500; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); }
+.filter-bar { padding: 24px; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr auto; gap: 16px; margin-bottom: 40px; border-radius: 24px; }
+@media(max-width: 900px) { .filter-bar { grid-template-columns: 1fr; } }
+</style>
+    
+<style>
+/* GitHub Materials Glass Overrides */
+.selector-pills { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 15px; }
+.selector-pill {
+  padding: 10px 20px; border-radius: 999px; background: var(--glass-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); border: 1px solid var(--glass-border); color: var(--text-primary); font-size: 0.95rem; font-weight: 500; cursor: pointer; transition: all 0.3s var(--ease-spring); display: flex; align-items: center; gap: 8px;
+}
+.selector-pill:hover { background: rgba(255, 255, 255, 0.15); transform: translateY(-2px); border-color: rgba(255, 255, 255, 0.4); }
+.selector-pill.active { background: rgba(255, 255, 255, 0.25); border-color: rgba(255, 255, 255, 0.6); box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1); }
+
+.subject-card { margin-top: 40px; background: transparent; width: 100%; }
+.subject-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid var(--glass-border); }
+.subject-title { font-size: 1.8rem; font-weight: 600; }
+.materials-cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
+
+.material-card {
+  background: var(--glass-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); border: 1px solid var(--glass-border); border-radius: 20px; overflow: hidden; transition: all 0.4s var(--ease-spring); display: flex; flex-direction: column; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+.material-card:hover { transform: translateY(-5px) scale(1.02); border-color: var(--glass-border-focus); background: rgba(255, 255, 255, 0.12); box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.45) inset; }
+.card-header { padding: 20px; display: flex; justify-content: space-between; align-items: center; background: rgba(255, 255, 255, 0.03); border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
+.file-icon { font-size: 2.2rem; }
+.file-type-badge { background: rgba(255, 255, 255, 0.15); padding: 4px 12px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; }
+.card-body { padding: 20px; flex-grow: 1; }
+.material-name { font-size: 1.1rem; margin-bottom: 10px; line-height: 1.4; color: var(--text-primary); }
+.material-meta { display: flex; gap: 15px; font-size: 0.85rem; color: var(--text-secondary); }
+.card-footer { padding: 15px 20px; border-top: 1px solid rgba(255, 255, 255, 0.08); }
+.download-link { display: flex; align-items: center; gap: 8px; color: var(--text-primary); font-weight: 500; transition: color 0.2s; }
+.download-link:hover { color: white; }
+.star.filled { color: #f59e0b; }
+.star.half { color: #f59e0b; }
+.star { color: rgba(255, 255, 255, 0.2); }
+#filter-breadcrumb { margin-top: 15px; padding: 10px 20px; background: rgba(255,255,255,0.05); border-radius: 12px; display: flex; justify-content: space-between; align-items: center; }
+#breadcrumb-reset { background: rgba(255,255,255,0.1); border: none; padding: 5px 12px; border-radius: 8px; color: white; cursor: pointer; }
+.no-results { text-align: center; padding: 40px; font-size: 1.2rem; color: var(--text-secondary); }
+#clear-search { position: absolute; right: 15px; background: none; border: none; color: var(--text-muted); font-size: 1.5rem; cursor: pointer; display: none; }
+</style>
+    <link rel="stylesheet" href="shared.css">
+    <link rel="stylesheet" href="kl-liquid-glass.css">
+    <link rel="stylesheet" href="glass-components.css">
+
+</head>
+<body>
+<div class="bg-layer">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="blob blob-4"></div>
+</div>
+
+<div class="main-wrapper">
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">KL Material</a>
+            <div class="nav-links" id="nLinks">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="materials.html" class="nav-link active">Materials</a>
+                <a href="roadmap.html" class="nav-link">Roadmap</a>
+                <a href="cgpa.html" class="nav-link">CGPA Calc</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+            <button  class="mobile-btn" id="mobBtn" hamburger>
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </nav>
+
+    <header class="page-header stagger" style="animation-delay:0.1s">
+        <h1 class="page-title" id="subject-main-title">Loading Subject...</h1>
+        <p class="page-subtitle" id="subject-subtitle">View and download all resources for this course.</p>
+        <div class="stats-pills">
+            <div class="pill">9 Subjects</div>
+            <div class="pill">Free Access</div>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <div class="glass filter-bar stagger" id="search-container-box" style="animation-delay:0.2s">
+            <div style="display: flex; align-items: center; position: relative; width: 100%;">
+                <input type="text" id="search-bar" class="glass-input" placeholder="Search files in this subject (e.g. Notes, Textbook)..." style="width: 100%;">
+                <button id="clear-search">&times;</button>
+            </div>
+            
+            <!-- Hidden required selectors for github-materials.js -->
+            <div id="year-selector" class="selector-pills" style="display:none;"></div>
+            <div id="semester-group" style="display:none;"><div id="semester-selector" class="selector-pills"></div></div>
+            <div id="subject-group" style="display:none;"><div id="subject-selector" class="selector-pills"></div></div>
+            <div id="filter-breadcrumb" style="display:none"><span id="breadcrumb-path"></span><button id="breadcrumb-reset">Reset</button></div>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+             <a href="materials.html" class="btn btn-glass" style="padding: 8px 16px; font-size: 14px;">&larr; Back to Subjects</a>
+        </div>
+
+        <!-- Dynamic Materials Container -->
+        <div id="materials-list">
+            <!-- github-materials.js will inject cards here -->
+            <div style="text-align:center; padding: 40px;">
+                <p>Loading files securely from GitHub...</p>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="glass footer stagger" style="animation-delay:0.8s">
+        <div style="font-weight:600;font-size:18px">KL Material</div>
+        <p style="color:var(--text-secondary);margin-top:8px">always free, always accessible</p>
+        <div class="footer-links">
+            <a href="materials.html">Materials</a><a href="roadmap.html">Roadmap</a><a href="cgpa.html">CGPA Calc</a><a href="about.html">About</a><a href="contact.html">Contact</a><a href="#">Privacy</a>
+        </div>
+        <div style="color:var(--text-muted);font-size:13px">&copy; 2026 Praveen Reddy &middot; Made with ❤️ for KL University students</div>
+    </footer>
+
+    <button class="glass scroll-top" id="sTop" onclick="window.scrollTo(0,0)">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"></polyline></svg>
+    </button>
+</div>
+
+
+<script src="https://kit.fontawesome.com/fe6e676100.js" crossorigin crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-db.js"></script>
+<script src="github-materials.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const subCode = urlParams.get('sub');
+    
+    if (subCode && typeof subjects !== 'undefined' && subjects[subCode]) {
+        // Update Title dynamically
+        const titleEl = document.getElementById("subject-main-title");
+        if(titleEl) titleEl.innerText = subjects[subCode].name;
+        
+        // Auto-select in github-materials.js
+        window.activeSubject = subCode;
+        window.activeYear = subjects[subCode].year.toString();
+        window.activeSemester = subjects[subCode].semester.toString();
+        
+        if (typeof loadMaterials === 'function') {
+            loadMaterials().then(() => {
+                // If the script forcefully changed anything we can override here if needed
+                // It natively filters the display elements!
+            });
+        }
+    } else {
+        // No subject param provided, throw error or redirect back to materials index
+        const titleEl = document.getElementById("subject-main-title");
+        if(titleEl) titleEl.innerText = "Subject Not Found";
+        const subtitleEl = document.getElementById("subject-subtitle");
+        if(subtitleEl) subtitleEl.innerText = "Please return to the Materials page & select a valid core subject.";
+        document.getElementById("search-container-box").style.display = 'none';
+        document.getElementById("materials-list").innerHTML = '';
+    }
+  });
+</script>
+<script src="ui.js"></script>
+
+<script src="advanced-features.js"></script>
+<script src="chatbot.js"></script>
+</body>
+</html>

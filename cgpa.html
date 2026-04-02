@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="KL University CGPA Calculator — instantly compute your semester GPA and cumulative CGPA using the 10-point grade scale.">
+<title>CGPA Calculator — KL Material</title>
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* CGPA Page Specific Styles */
+.grade-scale { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; padding: 24px; margin-bottom: 40px; }
+.grade-badge { padding: 4px 12px; border-radius: 99px; font-weight: 500; font-size: 14px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); }
+.result-card { max-width: 600px; margin: 0 auto 40px; padding: 40px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.gpa-number { font-size: 4rem; font-weight: 700; background: linear-gradient(135deg, #fff, #aab); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; }
+.subjects-panel { padding: 32px; margin-bottom: 40px; }
+.subject-row { display: grid; grid-template-columns: 2fr 1fr 1fr auto; gap: 16px; margin-bottom: 16px; align-items: center; }
+.subject-row .remove-btn { background: rgba(255,50,50,0.2); color: #ff5555; border: 1px solid rgba(255,50,50,0.3); padding: 12px 16px; border-radius: 12px; cursor: pointer; transition: all 0.2s; font-family: inherit; }
+.subject-row .remove-btn:hover { background: rgba(255,50,50,0.4); }
+.panel-actions { display: flex; justify-content: space-between; margin-top: 32px; flex-wrap: wrap; gap: 16px; }
+@media(max-width: 600px) { .subject-row { grid-template-columns: 1fr; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 16px; } .panel-actions { flex-direction: column; } .panel-actions .btn { width: 100%; } }
+</style>
+    <link rel="stylesheet" href="shared.css">
+    <link rel="stylesheet" href="kl-liquid-glass.css">
+    <link rel="stylesheet" href="glass-components.css">
+</head>
+<body>
+<div class="bg-layer">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="blob blob-4"></div>
+</div>
+<div class="main-wrapper">
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">KL Material</a>
+            <div class="nav-links" id="nLinks">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="materials.html" class="nav-link">Materials</a>
+                <a href="roadmap.html" class="nav-link">Roadmap</a>
+                <a href="cgpa.html" class="nav-link active">CGPA Calc</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+            <button  class="mobile-btn" id="mobBtn" hamburger>
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </nav>
+    <header class="page-header stagger" style="animation-delay:0.1s">
+        <h1 class="page-title">CGPA Calculator</h1>
+        <p class="page-subtitle">KL University 10-point grade scale</p>
+    </header>
+
+    <main class="container">
+        <div class="glass glass-card grade-scale stagger" style="animation-delay:0.2s">
+            <div class="grade-badge" style="color:#30d158; border-color:rgba(48,209,88,0.5)">O = 10</div>
+            <div class="grade-badge" style="color:#00e5a0; border-color:rgba(0,229,160,0.5)">A+ = 9</div>
+            <div class="grade-badge" style="color:#2060ff; border-color:rgba(32,96,255,0.5)">A = 8</div>
+            <div class="grade-badge" style="color:#8020ff; border-color:rgba(128,32,255,0.5)">B+ = 7</div>
+            <div class="grade-badge" style="color:#ff9f0a; border-color:rgba(255,159,10,0.5)">B = 6</div>
+            <div class="grade-badge" style="color:#ff5520; border-color:rgba(255,85,32,0.5)">C = 5</div>
+            <div class="grade-badge" style="color:#ff3b30; border-color:rgba(255,59,48,0.5)">F = 0</div>
+        </div>
+
+        <div class="glass glass-card result-card stagger" style="animation-delay:0.3s">
+            <span style="color:var(--text-secondary); font-weight:500">Current Semester GPA</span>
+            <div class="gpa-number" id="gpaDisplay">&mdash;</div>
+            <div style="font-size:18px; color:var(--text-muted)">out of 10.00</div>
+            <div style="display:flex; gap:16px; margin-top:16px">
+                <div class="grade-badge" id="gradeDisplay">Grade: &mdash;</div>
+                <div class="grade-badge" id="creditsDisplay">Total Credits: 0</div>
+            </div>
+            <button class="btn btn-primary" style="margin-top:16px" onclick="copyResult()">Copy Result</button>
+        </div>
+
+        <div class="glass glass-card subjects-panel stagger" style="animation-delay:0.4s">
+            <div id="subjectsContainer">
+                <div class="subject-row">
+                    <input type="text" class="glass-input sub-name" placeholder="Subject Name" oninput="calculate()">
+                    <select class="glass-input sub-grade" onchange="calculate()">
+                        <option value="" disabled selected>Grade</option>
+                        <option value="10">O (10)</option>
+                        <option value="9">A+ (9)</option>
+                        <option value="8">A (8)</option>
+                        <option value="7">B+ (7)</option>
+                        <option value="6">B (6)</option>
+                        <option value="5">C (5)</option>
+                        <option value="0">F (0)</option>
+                    </select>
+                    <input type="number" class="glass-input sub-credits" placeholder="Credits" min="1" max="5" oninput="calculate()">
+                    <button class="remove-btn" onclick="removeRow(this)">X</button>
+                </div>
+            </div>
+            
+            <div class="panel-actions">
+                <button class="btn btn-glass" onclick="addRow()">+ Add Subject</button>
+                <button class="btn btn-glass" onclick="clearAll()">Clear All</button>
+            </div>
+        </div>
+
+        <div class="glass glass-card result-card stagger" style="animation-delay:0.5s">
+            <span style="color:var(--text-secondary); font-weight:500">Cumulative CGPA across all semesters</span>
+            <div class="subject-row" style="width:100%; grid-template-columns:1fr 1fr; border:none; padding:16px 0;">
+                <input type="number" id="prevCgpa" class="glass-input" placeholder="Previous CGPA (e.g. 8.5)" step="0.01" oninput="calculate()">
+                <input type="number" id="prevCredits" class="glass-input" placeholder="Previous Credits (e.g. 45)" oninput="calculate()">
+            </div>
+            <div class="gpa-number" id="cumulDisplay" style="font-size:2.5rem; margin-top:16px">&mdash;</div>
+            <div style="font-size:16px; color:var(--text-muted)">Overall CGPA</div>
+        </div>
+
+    </main>
+    <footer class="glass footer stagger" style="animation-delay:0.6s">
+        <div style="font-weight:600;font-size:18px">KL Material</div>
+        <p style="color:var(--text-secondary);margin-top:8px">always free, always accessible</p>
+        <div class="footer-links">
+            <a href="materials.html">Materials</a><a href="roadmap.html">Roadmap</a><a href="cgpa.html">CGPA Calc</a><a href="about.html">About</a><a href="contact.html">Contact</a><a href="#">Privacy</a>
+        </div>
+        <div style="color:var(--text-muted);font-size:13px">&copy; 2026 Praveen Reddy &middot; Made with ❤️ for KL University students</div>
+    </footer>
+    <button class="glass scroll-top" id="sTop" onclick="window.scrollTo(0,0)">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"></polyline></svg>
+    </button>
+</div>
+
+<script>
+    function getGradeLabel(val) {
+        const map = {'10':'O','9':'A+','8':'A','7':'B+','6':'B','5':'C','0':'F'};
+        return map[val] || '—';
+    }
+
+    function calculate() {
+        const grades = document.querySelectorAll('.sub-grade');
+        const credits = document.querySelectorAll('.sub-credits');
+        let totalPoints = 0, totalCredits = 0;
+        grades.forEach((g, i) => {
+            const gv = parseFloat(g.value);
+            const cv = parseFloat(credits[i].value);
+            if (!isNaN(gv) && !isNaN(cv) && cv > 0) {
+                totalPoints += gv * cv;
+                totalCredits += cv;
+            }
+        });
+        const gpaDisplay = document.getElementById('gpaDisplay');
+        const gradeDisplay = document.getElementById('gradeDisplay');
+        const creditsDisplay = document.getElementById('creditsDisplay');
+        if (totalCredits > 0) {
+            const gpa = (totalPoints / totalCredits).toFixed(2);
+            gpaDisplay.textContent = gpa;
+            const g = parseFloat(gpa);
+            gradeDisplay.textContent = 'Grade: ' + (g >= 9.5 ? 'O' : g >= 8.5 ? 'A+' : g >= 7.5 ? 'A' : g >= 6.5 ? 'B+' : g >= 5.5 ? 'B' : g >= 4.5 ? 'C' : 'F');
+            creditsDisplay.textContent = 'Total Credits: ' + totalCredits;
+        } else {
+            gpaDisplay.textContent = '—';
+            gradeDisplay.textContent = 'Grade: —';
+            creditsDisplay.textContent = 'Total Credits: 0';
+        }
+        // Cumulative calc
+        const prevCgpa = parseFloat(document.getElementById('prevCgpa').value);
+        const prevCr = parseFloat(document.getElementById('prevCredits').value);
+        const cumulDisplay = document.getElementById('cumulDisplay');
+        if (!isNaN(prevCgpa) && !isNaN(prevCr) && prevCr > 0 && totalCredits > 0) {
+            const cumul = ((prevCgpa * prevCr + totalPoints) / (prevCr + totalCredits)).toFixed(2);
+            cumulDisplay.textContent = cumul;
+        } else {
+            cumulDisplay.textContent = '—';
+        }
+    }
+
+    function makeRow() {
+        const row = document.createElement('div');
+        row.className = 'subject-row';
+        row.innerHTML = `
+            <input type="text" class="glass-input sub-name" placeholder="Subject Name" oninput="calculate()">
+            <select class="glass-input sub-grade" onchange="calculate()">
+                <option value="" disabled selected>Grade</option>
+                <option value="10">O (10)</option>
+                <option value="9">A+ (9)</option>
+                <option value="8">A (8)</option>
+                <option value="7">B+ (7)</option>
+                <option value="6">B (6)</option>
+                <option value="5">C (5)</option>
+                <option value="0">F (0)</option>
+            </select>
+            <input type="number" class="glass-input sub-credits" placeholder="Credits" min="1" max="5" oninput="calculate()">
+            <button class="remove-btn" onclick="removeRow(this)">✕</button>
+        `;
+        return row;
+    }
+
+    function addRow() {
+        document.getElementById('subjectsContainer').appendChild(makeRow());
+    }
+
+    function removeRow(btn) {
+        const rows = document.querySelectorAll('.subject-row');
+        if (rows.length > 1) { btn.closest('.subject-row').remove(); calculate(); }
+    }
+
+    function clearAll() {
+        const container = document.getElementById('subjectsContainer');
+        container.innerHTML = '';
+        container.appendChild(makeRow());
+        document.getElementById('prevCgpa').value = '';
+        document.getElementById('prevCredits').value = '';
+        calculate();
+    }
+
+    function copyResult() {
+        const gpa = document.getElementById('gpaDisplay').textContent;
+        const grade = document.getElementById('gradeDisplay').textContent;
+        const credits = document.getElementById('creditsDisplay').textContent;
+        const text = `Semester GPA: ${gpa} | ${grade} | ${credits}`;
+        navigator.clipboard.writeText(text).then(() => {
+            showToast('Result copied to clipboard! 📋');
+        }).catch(() => {
+            // Fallback
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            ta.style.position = 'fixed'; ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+            showToast('Result copied! 📋');
+        });
+    }
+
+    function showToast(msg) {
+        let toast = document.getElementById('klToast');
+        if (!toast) {
+            toast = document.createElement('div');
+            toast.id = 'klToast';
+            toast.className = 'toast-msg';
+            document.body.appendChild(toast);
+        }
+        toast.textContent = msg;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+</script>
+
+<script src="ui.js"></script>
+<script src="advanced-features.js"></script>
+<script src="chatbot.js"></script>
+</body>
+</html>

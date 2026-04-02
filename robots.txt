@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+Disallow: /assets/
+Disallow: /sw.js
+
+# Crawl-delay for polite crawling
+Crawl-delay: 1
+
+# Sitemaps
+Sitemap: https://klstudyhub.github.io/klmaterial/sitemap.xml
+
+# Allow all major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /

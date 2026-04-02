@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apple Liquid Glass UI - visionOS Inspired</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* 
+         * APPLE LIQUID GLASS UI DESIGN SYSTEM
+         * Inspired by visionOS, iOS 18, and macOS Sequoia
+         */
+
+        :root {
+            /* Core Backgrounds */
+            --bg-base: #0a0a1a;
+            
+            /* Glass Variables */
+            --glass-bg: rgba(255, 255, 255, 0.04);
+            --glass-bg-hover: rgba(255, 255, 255, 0.08); /* slightly brighter on hover */
+            --glass-bg-nav: rgba(10, 10, 26, 0.6);
+            --glass-blur: blur(40px) saturate(180%);
+            
+            /* Borders for specularity / 3D edge */
+            --glass-border-t: rgba(255, 255, 255, 0.6);
+            --glass-border-l: rgba(255, 255, 255, 0.3);
+            --glass-border-b: rgba(0, 0, 0, 0.08);
+            --glass-border-r: rgba(0, 0, 0, 0.08);
+            
+            /* Refraction Gradients */
+            --refraction-gradient: radial-gradient(circle at top left, rgba(255,255,255,0.15) 0%, transparent 60%);
+            
+            /* Text Colors */
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            
+            /* Easing Functions for Apple-like elasticity */
+            --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+            --ease-float: cubic-bezier(0.45, 0.05, 0.55, 0.95);
+            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* typography */
+        h1, h2, h3, h4, h5 {
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+        
+        .thin-title {
+            font-weight: 300;
+        }
+
+        /* ========================================================= 
+           1. BACKGROUND BLOBS (Organic Floating Animations)
+           ========================================================= */
+        .background-blobs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.5;
+            will-change: transform;
+            /* Slow, organic moving float animation */
+            animation: float 25s infinite alternate var(--ease-float);
+        }
+
+        .blob-blue {
+            background-color: #007aff;
+            width: 45vw; height: 45vw;
+            top: -10%; left: -10%;
+        }
+
+        .blob-purple {
+            background-color: #bf5af2;
+            width: 50vw; height: 50vw;
+            top: 40%; right: -20%;
+            animation-duration: 30s;
+            animation-delay: -5s;
+        }
+
+        .blob-teal {
+            background-color: #30d158; /* Apple green/teal */
+            width: 40vw; height: 40vw;
+            bottom: -20%; left: 20%;
+            animation-duration: 28s;
+            animation-delay: -10s;
+        }
+
+        .blob-orange {
+            background-color: #ff9f0a;
+            width: 35vw; height: 35vw;
+            top: 10%; left: 50%;
+            animation-duration: 22s;
+            animation-delay: -15s;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(5%, 10%) scale(1.05); }
+            66% { transform: translate(-5%, 5%) scale(0.95); }
+            100% { transform: translate(8%, -5%) scale(1.1); }
+        }
+
+        /* ========================================================= 
+           2. LIQUID GLASS MASTER CLASS
+           ========================================================= */
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur); /* Safari support */
+            
+            /* Inner borders to create 3D bevel / Specular highlight illusion on edge */
+            border-top: 1px solid var(--glass-border-t);
+            border-left: 1px solid var(--glass-border-l);
+            border-bottom: 1px solid var(--glass-border-b);
+            border-right: 1px solid var(--glass-border-r);
+            
+            border-radius: 28px;
+            box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden; /* Contains specular sweep & refraction */
+            transition: all 0.4s var(--ease-spring);
+        }
+
+        /* Refraction & Surface Reflection Illusion */
+        .glass-panel::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: var(--refraction-gradient); /* Subtly lights up top left */
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Animated Specular highlight sweep (like light catching the glass) */
+        .glass-panel::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -150%;
+            width: 50%; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.08), transparent);
+            transform: skewX(-25deg);
+            z-index: 2;
+            pointer-events: none;
+            animation: shimmerSweep 8s infinite var(--ease-float);
+        }
+
+        @keyframes shimmerSweep {
+            0% { left: -150%; }
+            15% { left: 200%; }
+            100% { left: 200%; }
+        }
+
+        /* Glass Panel Hover Dynamics */
+        .glass-card-hoverable:hover {
+            transform: translateY(-6px) scale(1.02);
+            background: var(--glass-bg-hover);
+            box-shadow: 0 32px 56px -12px rgba(0, 0, 0, 0.5);
+            /* Specular border gets slightly brighter on hover */
+            border-top: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        /* ========================================================= 
+           3. UI COMPONENTS
+           ========================================================= */
+        
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 120px 24px 60px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        /* --- STICKY NAVBAR --- */
+        .navbar {
+            position: fixed;
+            top: 0; width: 100%;
+            z-index: 100;
+            padding: 16px 0;
+            /* Wait to apply full glass until scrolled via JS */
+            background: transparent;
+            transition: all 0.5s var(--ease-out);
+            border-bottom: 1px solid transparent;
+        }
+
+        .navbar.scrolled {
+            background: var(--glass-bg-nav);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border-bottom: 1px solid var(--glass-border-b);
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 20px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            opacity: 0.8;
+            transition: opacity 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+        }
+
+        /* --- BUTTONS --- */
+        .btn {
+            padding: 12px 24px;
+            border-radius: 40px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            outline: none;
+            transition: all 0.3s var(--ease-spring);
+            will-change: transform;
+            position: relative;
+            overflow: hidden; /* For ripples */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        .btn-primary {
+            background: #ffffff;
+            color: #000000;
+            box-shadow: 0 4px 14px rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn-primary:hover {
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .btn-glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn-glass:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* --- RIPPLE EFFECT --- */
+        .ripple {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: scale(0);
+            animation: ripple-anim 0.6s linear;
+            pointer-events: none;
+        }
+        
+        .btn-primary .ripple {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        @keyframes ripple-anim {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* --- PILL BUTTONS --- */
+        .pill-container {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .pill {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            padding: 80px 40px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .hero h1 {
+            font-size: 64px;
+            line-height: 1.1;
+            /* Gradient text effect for extra wow factor */
+            background: linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.6) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: var(--text-secondary);
+            font-weight: 300;
+            max-width: 600px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        /* --- STATS ROW --- */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .stat-card {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .stat-value {
+            font-size: 40px;
+            font-weight: 600;
+            letter-spacing: -1px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* --- FEATURE CARDS GRID --- */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .feature-card {
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.05));
+            border: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+        }
+
+        .feature-card p {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+
+        .feature-arrow {
+            align-self: flex-start;
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex; align-items: center; justify-content: center;
+            transition: transform 0.3s var(--ease-spring);
+        }
+
+        .feature-card:hover .feature-arrow {
+            transform: translateX(4px);
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* --- SEARCH INPUT --- */
+        .search-container {
+            position: relative;
+            max-width: 400px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .search-input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 16px 20px 16px 48px;
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s var(--ease-out);
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .search-input:focus {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1), inset 0 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.5);
+            pointer-events: none;
+        }
+
+        /* --- PROGRESS BAR --- */
+        .progress-container {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            height: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: #fff;
+            border-radius: 10px;
+            width: 0; /* Animated in via JS */
+            box-shadow: 0 0 10px rgba(255,255,255,0.5);
+            transition: width 1.5s var(--ease-out);
+        }
+
+        /* --- TOAST NOTIFICATION --- */
+        .toast {
+            position: fixed;
+            bottom: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 16px 24px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 1000;
+            transition: bottom 0.5s var(--ease-spring);
+        }
+
+        .toast.show {
+            bottom: 40px;
+        }
+
+        .toast-icon {
+            color: #30d158;
+            font-size: 20px;
+        }
+
+        /* --- MODAL DIALOG --- */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-card {
+            width: 90%;
+            max-width: 400px;
+            padding: 32px;
+            text-align: center;
+            transform: scale(0.9) translateY(20px);
+            opacity: 0;
+            transition: all 0.5s var(--ease-spring);
+        }
+
+        .modal-overlay.open .modal-card {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+
+        .modal-title { margin-bottom: 8px; font-size: 24px; }
+        .modal-desc { color: var(--text-secondary); margin-bottom: 24px; line-height: 1.5; font-size: 14px; }
+        
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-secondary);
+            font-size: 14px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            margin-top: 60px;
+        }
+
+        /* ========================================================= 
+           4. STAGGERED LOAD ANIMATIONS
+           ========================================================= */
+        .staggered-item {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .staggered-item.loaded {
+            animation: slideUpFade 0.8s var(--ease-out) forwards;
+        }
+
+        @keyframes slideUpFade {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Delay assignments via inline layout or JS, but we do it nicely */
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+
+        /* ========================================================= 
+           5. RESPONSIVE DESIGN
+           ========================================================= */
+        @media (max-width: 900px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .features-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 48px; }
+        }
+
+        @media (max-width: 600px) {
+            .stats-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .hero h1 { font-size: 36px; }
+            .hero-buttons { flex-direction: column; width: 100%; }
+            .hero-buttons .btn { width: 100%; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- 1. Background Blobs -->
+    <div class="background-blobs">
+        <div class="blob blob-blue"></div>
+        <div class="blob blob-purple"></div>
+        <div class="blob blob-teal"></div>
+        <div class="blob blob-orange"></div>
+    </div>
+
+    <!-- 2. Sticky Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-inner">
+            <div class="nav-logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                Vision<span class="thin-title">OS</span>
+            </div>
+            <div class="nav-links">
+                <a href="#">Overview</a>
+                <a href="#">Design</a>
+                <a href="#">Tech Specs</a>
+                <a href="#">Pricing</a>
+            </div>
+            <button class="btn btn-glass pill" onclick="showModal()">
+                <span>Sign In</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- 3. Main Content -->
+    <main class="container">
+        <!-- Hero -->
+        <section class="hero glass-panel staggered-item delay-1">
+            <div class="pill btn-glass" style="margin-bottom: 16px; font-weight: 500;">
+                <span style="color: #30d158;">●</span> v2.0 Now Available
+            </div>
+            <h1>The future is transparent.</h1>
+            <p>Experience the next generation of spatial computing interfaces with liquid glass aesthetics. Pure CSS, infinite possibilities.</p>
+            
+            <div class="search-container" style="margin-top: 24px; margin-bottom: 24px;">
+                <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" class="search-input" placeholder="Search experiences...">
+            </div>
+
+            <div class="hero-buttons">
+                <button class="btn btn-primary ripple-btn" onclick="showToast()">
+                    Explore Demo
+                </button>
+                <button class="btn btn-glass ripple-btn">
+                    Read Guidelines
+                </button>
+            </div>
+        </section>
+
+        <!-- Stats -->
+        <section class="stats-grid">
+            <div class="glass-panel glass-card-hoverable stat-card staggered-item delay-2">
+                <div class="stat-value">60fps</div>
+                <div class="stat-label">Silky smooth animations</div>
+                <div class="progress-container" style="margin-top: auto;">
+                    <div class="progress-bar" style="width: 0;" data-target="95%"></div>
+                </div>
+            </div>
+            <div class="glass-panel glass-card-hoverable stat-card staggered-item delay-2">
+                <div class="stat-value">0kb</div>
+                <div class="stat-label">External CSS frameworks</div>
+                <div class="progress-container" style="margin-top: auto;">
+                    <div class="progress-bar" style="width: 0;" data-target="100%"></div>
+                </div>
+            </div>
+            <div class="glass-panel glass-card-hoverable stat-card staggered-item delay-2">
+                <div class="stat-value">3D</div>
+                <div class="stat-label">Specular reflection engine</div>
+                <div class="progress-container" style="margin-top: auto;">
+                    <div class="progress-bar" style="width: 0;" data-target="80%"></div>
+                </div>
+            </div>
+            <div class="glass-panel glass-card-hoverable stat-card staggered-item delay-2">
+                <div class="stat-value">100%</div>
+                <div class="stat-label">Apple visionOS matched</div>
+                <div class="progress-container" style="margin-top: auto;">
+                    <div class="progress-bar" style="width: 0;" data-target="100%"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section class="features-grid">
+            <a href="#" class="glass-panel glass-card-hoverable feature-card staggered-item delay-3">
+                <div class="feature-icon">✨</div>
+                <h3>Refraction Filters</h3>
+                <p>Simulates light bending through physical glass using multi-layered backdrop filters and custom SVG lighting effects.</p>
+                <div class="feature-arrow">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </div>
+            </a>
+            
+            <a href="#" class="glass-panel glass-card-hoverable feature-card staggered-item delay-3">
+                <div class="feature-icon">🌊</div>
+                <h3>Liquid Fluidity</h3>
+                <p>Advanced cubic-bezier easing arrays create organic, spring-like interactivity mimicking physical world mass.</p>
+                <div class="feature-arrow">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </div>
+            </a>
+
+            <a href="#" class="glass-panel glass-card-hoverable feature-card staggered-item delay-3">
+                <div class="feature-icon">📱</div>
+                <h3>Depth Semantics</h3>
+                <p>True z-axis stratification with dynamic drop shadows that accurately react to the background chromaticity.</p>
+                <div class="feature-arrow">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </div>
+            </a>
+        </section>
+
+        <!-- Quick Actions Pill Section -->
+        <section class="glass-panel staggered-item delay-4" style="padding: 32px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;">
+            <div>
+                <h3>Quick Settings</h3>
+                <p style="color: var(--text-secondary); font-size: 14px; margin-top: 4px;">Toggle system preferences instantly</p>
+            </div>
+            <div class="pill-container">
+                <button class="btn btn-glass pill ripple-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                    Display
+                </button>
+                <button class="btn btn-glass pill ripple-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/></svg>
+                    Immersion
+                </button>
+                <button class="btn btn-glass pill ripple-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 1 0 0-20z"/><path d="M12 8v4l3 3"/></svg>
+                    Focus
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Designed with liquid perfection. Inspired by Apple.</p>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="glass-panel toast" id="toast">
+        <svg class="toast-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        <div>
+            <div style="font-weight: 600; font-size: 15px;">Environment Loaded</div>
+            <div style="font-size: 13px; color: var(--text-secondary);">Welcome to spatial computing.</div>
+        </div>
+    </div>
+
+    <!-- Modal Dialog -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+        <div class="glass-panel modal-card">
+            <h2 class="modal-title">Authentication Required</h2>
+            <p class="modal-desc">Please interlock your retina or proceed with Apple ID to enter the spatial realm.</p>
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+                <button class="btn btn-primary ripple-btn" style="width: 100%;">Continue with Optic ID</button>
+                <button class="btn btn-glass ripple-btn" style="width: 100%;" onclick="closeModal(event, true)">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Interactive Logic -->
+    <script>
+        // 1. Navbar Scroll Blur Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // 2. Ripple Button Effect (Pure JS + CSS Custom Implementation)
+        const buttons = document.querySelectorAll('.ripple-btn');
+        buttons.forEach(btn => {
+            btn.addEventListener('mousedown', function(e) {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const ripple = document.createElement('span');
+                ripple.classList.add('ripple');
+                
+                // Keep ripple perfectly circular and large enough
+                const size = Math.max(rect.width, rect.height) * 2;
+                ripple.style.width = ripple.style.height = `${size}px`;
+                ripple.style.left = `${x - size/2}px`;
+                ripple.style.top = `${y - size/2}px`;
+
+                btn.appendChild(ripple);
+
+                // Cleanup ripple after animation
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // 3. Staggered Entrance Animation via Intersection Observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('loaded');
+                    
+                    // Also trigger progress bars if inside this element
+                    const progressBars = entry.target.querySelectorAll('.progress-bar');
+                    progressBars.forEach(bar => {
+                        setTimeout(() => {
+                            bar.style.width = bar.getAttribute('data-target');
+                        }, 500); // Wait for card to slide up before filling
+                    });
+                    
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.staggered-item').forEach(el => {
+            observer.observe(el);
+        });
+
+        // 4. Toast Logic
+        let toastTimeout;
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Show toast after a slight delay on initial load
+        window.addEventListener('load', () => {
+             setTimeout(showToast, 1200);
+        });
+
+        // 5. Modal Logic
+        const modalOverlay = document.getElementById('modalOverlay');
+        function showModal() {
+            modalOverlay.classList.add('open');
+        }
+
+        function closeModal(event, force = false) {
+            // Close if clicking outside the card or if forced via cancel button
+            if (force || event.target === modalOverlay) {
+                modalOverlay.classList.remove('open');
+            }
+        }
+    </script>
+</body>
+</html>

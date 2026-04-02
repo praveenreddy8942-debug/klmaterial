@@ -1,0 +1,7 @@
+{
+  // Recommend GitHub Copilot extensions for this workspace
+  "recommendations": [
+    "GitHub.copilot",
+    "GitHub.copilot-chat"
+  ]
+}

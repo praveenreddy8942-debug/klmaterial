@@ -1,0 +1,12 @@
+# ⚠️ This file has NO EFFECT on GitHub Pages.
+# GitHub Pages does not process _headers files (that's a Netlify/Cloudflare Pages feature).
+# CSP is now enforced via <meta http-equiv="Content-Security-Policy"> in each HTML page.
+# This file is kept for reference only — if you migrate to Netlify or Cloudflare Pages
+# these headers will automatically take effect.
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' https: data:; connect-src 'self' https://api.github.com https://data.jsdelivr.com https://raw.githubusercontent.com https://media.githubusercontent.com https://*.supabase.co https://www.google-analytics.com; frame-ancestors 'none'

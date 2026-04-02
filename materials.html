@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Browse and download free CSE study materials for KL University — notes, PDFs, and resources organized by subject, year and semester.">
+<title>CSE Study Materials — KL Material</title>
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Materials Page Specific Styles */
+.stats-pills { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 8px; }
+.pill { padding: 6px 16px; border-radius: 999px; font-size: 14px; font-weight: 500; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); }
+.filter-bar { padding: 24px; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr auto; gap: 16px; margin-bottom: 40px; border-radius: 24px; align-items: center; }
+@media(max-width: 900px) { .filter-bar { grid-template-columns: 1fr 1fr; } }
+@media(max-width: 600px) { .filter-bar { grid-template-columns: 1fr; } .filter-bar #searchSubject { grid-column: 1; } }
+.cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+.sub-card { padding: 32px; display: flex; flex-direction: column; gap: 16px; align-items: flex-start; }
+.sub-card .pill { background: rgba(255,255,255,0.15); color: white; margin-bottom: 8px; }
+.sub-card h3 { font-size: 1.4rem; font-weight: 600; }
+.sub-card p { color: var(--text-secondary); flex-grow: 1; font-size: 0.95rem; line-height: 1.5; }
+.sub-card::after { content: ''; position: absolute; top: 0; left: -150%; width: 50%; height: 100%; background: linear-gradient(to right, transparent, rgba(255,255,255,.2), transparent); transform: skewX(-25deg); z-index: 1; pointer-events: none; transition: left .5s ease; }
+.sub-card:hover::after { left: 200%; }
+</style>
+    <link rel="stylesheet" href="shared.css">
+    <link rel="stylesheet" href="kl-liquid-glass.css">
+    <link rel="stylesheet" href="glass-components.css">
+</head>
+<body>
+<div class="bg-layer">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="blob blob-4"></div>
+</div>
+
+<div class="main-wrapper">
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">KL Material</a>
+            <div class="nav-links" id="nLinks">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="materials.html" class="nav-link active">Materials</a>
+                <a href="roadmap.html" class="nav-link">Roadmap</a>
+                <a href="cgpa.html" class="nav-link">CGPA Calc</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+            <button  class="mobile-btn" id="mobBtn" hamburger>
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </nav>
+
+    <header class="page-header stagger" style="animation-delay:0.1s">
+        <h1 class="page-title">CSE Study Materials</h1>
+        <p class="page-subtitle">Access comprehensive study resources for your engineering journey</p>
+        <div class="stats-pills">
+            <div class="pill">100+ Materials</div>
+            <div class="pill">9 Subjects</div>
+            <div class="pill">Free Access</div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="glass filter-bar stagger" style="animation-delay:0.2s">
+            <input type="text" id="searchSubject" class="glass-input" placeholder="Search subjects...">
+            <select id="yearFilter" class="glass-input"><option value="all">All Years</option><option value="1">1st Year</option><option value="2">2nd Year</option><option value="3">3rd Year</option><option value="4">4th Year</option></select>
+            <select id="semFilter" class="glass-input"><option value="all">All Semesters</option><option value="odd">Odd Sem</option><option value="even">Even Sem</option></select>
+            <select id="typeFilter" class="glass-input"><option value="all">All Subjects</option><option value="core">Core</option><option value="elective">Elective</option></select>
+            <button id="resetFilters" class="btn btn-primary">Reset</button>
+        </div>
+
+        <div class="cards-grid">
+            <div class="glass glass-card sub-card stagger" data-year="1" data-sem="odd" data-type="core" style="animation-delay:0.3s">
+                <span class="pill">BEEC</span>
+                <h3>Basic Electrical & Electronics</h3>
+                <p>Circuits, electronics fundamentals</p>
+                <a href="subject.html?sub=BEEC" class="btn btn-glass" style="width:100%;text-align:center;margin-top:8px;text-decoration:none">View Materials &rarr;</a>
+            </div>
+            <div class="glass glass-card sub-card stagger" data-year="1" data-sem="odd" data-type="core" style="animation-delay:0.35s">
+                <span class="pill">DM</span>
+                <h3>Discrete Mathematics</h3>
+                <p>Logic, sets, graph theory</p>
+                <a href="subject.html?sub=DM" class="btn btn-glass" style="width:100%;text-align:center;margin-top:8px;text-decoration:none">View Materials &rarr;</a>
+            </div>
+            <div class="glass glass-card sub-card stagger" data-year="1" data-sem="odd" data-type="core" style="animation-delay:0.4s">
+                <span class="pill">DSD</span>
+                <h3>Digital System Design</h3>
+                <p>Logic gates, flip-flops, circuits</p>
+                <a href="subject.html?sub=DSD" class="btn btn-glass" style="width:100%;text-align:center;margin-top:8px;text-decoration:none">View Materials &rarr;</a>
+            </div>
+            <div class="glass glass-card sub-card stagger" data-year="1" data-sem="odd" data-type="core" style="animation-delay:0.45s">
+                <span class="pill">PSC</span>
+                <h3>Problem Solving with C</h3>
+                <p>C programming fundamentals</p>
+                <a href="subject.html?sub=PSC" class="btn btn-glass" style="width:100%;text-align:center;margin-top:8px;text-decoration:none">View Materials &rarr;</a>
+            </div>
+            <div class="glass glass-card sub-card stagger" data-year="1" data-sem="even" data-type="core" style="animation-delay:0.5s">
+                <span class="pill">PP</span>
+                <h3>Python Programming</h3>
+                <p>Python basics to advanced</p>
+                <a href="subject.html?sub=PP" class="btn btn-glass" style="width:100%;text-align:center;margin-top:8px;text-decoration:none">View Materials &rarr;</a>
+            </div>
+            <div class="glass glass-card sub-card stagger" data-year="1" data-sem="even" data-type="core" style="animation-delay:0.55s">
+                <span class="pill">LACE</span>
+                <h3>Linear Algebra & Calculus</h3>
+                <p>Matrices, derivatives, integrals</p>
+                <a href="subject.html?sub=LACE" class="btn btn-glass" style="width:100%;text-align:center;margin-top:8px;text-decoration:none">View Materials &rarr;</a>
+            </div>
+            <div class="glass glass-card sub-card stagger" data-year="1" data-sem="even" data-type="core" style="animation-delay:0.6s">
+                <span class="pill">DS</span>
+                <h3>Data Structures</h3>
+                <p>Arrays, trees, graphs, algorithms</p>
+                <a href="subject.html?sub=DS" class="btn btn-glass" style="width:100%;text-align:center;margin-top:8px;text-decoration:none">View Materials &rarr;</a>
+            </div>
+            <div class="glass glass-card sub-card stagger" data-year="1" data-sem="even" data-type="core" style="animation-delay:0.65s">
+                <span class="pill">FIS</span>
+                <h3>Foundations of Information Security</h3>
+                <p>Cryptography, security basics</p>
+                <a href="subject.html?sub=FIS" class="btn btn-glass" style="width:100%;text-align:center;margin-top:8px;text-decoration:none">View Materials &rarr;</a>
+            </div>
+            <div class="glass glass-card sub-card stagger" data-year="1" data-sem="even" data-type="core" style="animation-delay:0.7s">
+                <span class="pill">COA</span>
+                <h3>Computer Organization & Architecture</h3>
+                <p>CPU, memory, instruction sets</p>
+                <a href="subject.html?sub=COA" class="btn btn-glass" style="width:100%;text-align:center;margin-top:8px;text-decoration:none">View Materials &rarr;</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="glass footer stagger" style="animation-delay:0.8s">
+        <div style="font-weight:600;font-size:18px">KL Material</div>
+        <p style="color:var(--text-secondary);margin-top:8px">always free, always accessible</p>
+        <div class="footer-links">
+            <a href="materials.html">Materials</a><a href="roadmap.html">Roadmap</a><a href="cgpa.html">CGPA Calc</a><a href="about.html">About</a><a href="contact.html">Contact</a><a href="#">Privacy</a>
+        </div>
+        <div style="color:var(--text-muted);font-size:13px">&copy; 2026 Praveen Reddy &middot; Made with ❤️ for KL University students</div>
+    </footer>
+
+    <button class="glass scroll-top" id="sTop" onclick="window.scrollTo(0,0)">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"></polyline></svg>
+    </button>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const searchSub = document.getElementById("searchSubject");
+    const yearF = document.getElementById("yearFilter");
+    const semF = document.getElementById("semFilter");
+    const typeF = document.getElementById("typeFilter");
+    const resetBtn = document.getElementById("resetFilters");
+    
+    const cards = document.querySelectorAll(".sub-card");
+
+    function formatTextForSearch(element) {
+        return (element.textContent || "").toLowerCase().replace(/\s+/g, ' ').trim();
+    }
+
+    // pre-compile search text
+    cards.forEach(card => {
+        card.dataset.fulltext = formatTextForSearch(card);
+    });
+
+    function filterCards() {
+        const query = (searchSub.value || "").toLowerCase().trim();
+        const year = yearF.value;
+        const sem = semF.value;
+        const type = typeF.value;
+
+        let visibleCount = 0;
+
+        cards.forEach(card => {
+            const cardYear = card.getAttribute("data-year");
+            const cardSem = card.getAttribute("data-sem");
+            const cardType = card.getAttribute("data-type");
+            const searchableText = card.dataset.fulltext;
+
+            const matchQuery = query === "" || searchableText.includes(query);
+            const matchYear = year === "all" || year === cardYear;
+            const matchSem = sem === "all" || sem === cardSem;
+            const matchType = type === "all" || type === cardType;
+
+            if (matchQuery && matchYear && matchSem && matchType) {
+                card.style.display = "";
+                visibleCount++;
+            } else {
+                card.style.display = "none";
+            }
+        });
+
+        // Toggle No Results
+        let noResBox = document.getElementById("no-results-box");
+        if (visibleCount === 0) {
+            if (!noResBox) {
+                noResBox = document.createElement("div");
+                noResBox.id = "no-results-box";
+                noResBox.className = "glass glass-card";
+                noResBox.style.padding = "40px";
+                noResBox.style.gridColumn = "1 / -1";
+                noResBox.style.textAlign = "center";
+                noResBox.style.animation = "fadeUp 0.5s var(--ease-out) forwards";
+                noResBox.innerHTML = "<h3 style='margin-bottom: 8px;'>No Subjects Found</h3><p style='color: var(--text-secondary);'>Try adjusting your filters or search query.</p>";
+                document.querySelector(".cards-grid").appendChild(noResBox);
+            }
+            noResBox.style.display = "block";
+        } else if (noResBox) {
+            noResBox.style.display = "none";
+        }
+    }
+
+    if (searchSub) {
+        searchSub.addEventListener("input", filterCards);
+        yearF.addEventListener("change", filterCards);
+        semF.addEventListener("change", filterCards);
+        typeF.addEventListener("change", filterCards);
+        
+        resetBtn.addEventListener("click", () => {
+            searchSub.value = "";
+            yearF.value = "all";
+            semF.value = "all";
+            typeF.value = "all";
+            filterCards();
+        });
+
+        // Read URL params: ?search= and ?sub= from homepage hero search / quick pills
+        const urlParams = new URLSearchParams(window.location.search);
+        const searchParam = urlParams.get('search');
+        const subParam = urlParams.get('sub');
+
+        if (searchParam) {
+            searchSub.value = searchParam;
+            filterCards();
+        } else if (subParam) {
+            // Highlight the card matching the sub code
+            searchSub.value = subParam;
+            filterCards();
+            // Scroll to first visible card
+            setTimeout(() => {
+                const firstVisible = document.querySelector('.sub-card[style=""], .sub-card:not([style*="none"])');
+                if (firstVisible) firstVisible.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 200);
+        }
+    }
+});
+</script>
+
+<script src="ui.js"></script>
+<script src="advanced-features.js"></script>
+<script src="chatbot.js"></script>
+</body>
+</html>

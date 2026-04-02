@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="4-Year B.Tech CSE career roadmap for KL University students — learn what to focus on each year to land internships and placements.">
+<title>4-Year B.Tech Roadmap — KL Material</title>
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Roadmap Page Specific Styles */
+.quote-card { max-width: 800px; margin: 0 auto 60px; padding: 24px; text-align: center; font-style: italic; font-size: 1.1rem; color: var(--text-secondary); }
+.timeline-wrapper { position: relative; max-width: 800px; margin: 0 auto; padding-left: 40px; }
+.timeline-line { position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: linear-gradient(to bottom, #2060ff, #8020ff, #00e5a0); border-radius: 4px; box-shadow: 0 0 15px rgba(0,229,160,0.5); }
+.timeline-card { padding: 32px; margin-bottom: 40px; position: relative; }
+.timeline-card::before { content: ''; position: absolute; left: -48px; top: 40px; width: 20px; height: 20px; border-radius: 50%; background: #fff; box-shadow: 0 0 10px rgba(255,255,255,0.8); z-index: 10; }
+.timeline-card h2 { font-size: 2rem; margin-bottom: 8px; font-weight: 600; }
+.timeline-goal { color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--glass-border); }
+.timeline-card ul { margin-left: 20px; list-style: disc; display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+.focus-tag { display: inline-block; padding: 6px 16px; background: rgba(255,255,255,0.1); border-radius: 999px; font-weight: 500; font-size: 14px; color: #00e5a0; border: 1px solid rgba(0,229,160,0.3); }
+.resources-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; max-width: 800px; margin: 60px auto; }
+.resource-card { padding: 24px; display: flex; flex-direction: column; gap: 12px; }
+.repeat-box { max-width: 800px; margin: 0 auto; padding: 32px; text-align: center; border: 1px solid rgba(128,32,255,0.5); box-shadow: 0 8px 32px rgba(128,32,255,0.2), inset 0 0 20px rgba(128,32,255,0.1); }
+@media(max-width: 600px) { .timeline-wrapper { padding-left: 20px; } .timeline-card::before { left: -28px; width: 16px; height: 16px; } .resources-grid { grid-template-columns: 1fr; } }
+</style>
+    <link rel="stylesheet" href="shared.css">
+    <link rel="stylesheet" href="kl-liquid-glass.css">
+    <link rel="stylesheet" href="glass-components.css">
+</head>
+<body>
+<div class="bg-layer">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="blob blob-4"></div>
+</div>
+<div class="main-wrapper">
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">KL Material</a>
+            <div class="nav-links" id="nLinks">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="materials.html" class="nav-link">Materials</a>
+                <a href="roadmap.html" class="nav-link active">Roadmap</a>
+                <a href="cgpa.html" class="nav-link">CGPA Calc</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+            <button  class="mobile-btn" id="mobBtn" hamburger>
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </nav>
+    <header class="page-header stagger" style="animation-delay:0.1s">
+        <h1 class="page-title">4-Year B.Tech Roadmap</h1>
+    </header>
+    <main class="container">
+        <div class="glass glass-card quote-card stagger" style="animation-delay:0.2s">
+            "Records and assignments will be forgotten. Skills stay. Focus on them."
+        </div>
+        <div class="timeline-wrapper">
+            <div class="timeline-line stagger" style="animation-delay:0.3s"></div>
+            
+            <div class="glass glass-card timeline-card stagger" style="animation-delay:0.3s">
+                <h2>Year 1 &mdash; Build Your Base</h2>
+                <div class="timeline-goal">Goal: Learn 1 programming language + basics</div>
+                <ul>
+                    <li>Learn Python / C / Java (pick one)</li>
+                    <li>Understand basics: loops, conditions, arrays</li>
+                    <li>Solve problems on HackerRank, LeetCode Easy</li>
+                    <li>Build 1&ndash;2 small projects (BMI Calculator, Calculator App)</li>
+                    <li>Explore GitHub &amp; push your code</li>
+                </ul>
+                <div class="focus-tag">Learn. Practice. Repeat.</div>
+            </div>
+            <div class="glass glass-card timeline-card stagger" style="animation-delay:0.4s">
+                <h2>Year 2 &mdash; Build Projects</h2>
+                <div class="timeline-goal">Goal: Get hands-on + prepare for internships</div>
+                <ul>
+                    <li>Pick a dev path: Web / App / ML / DSA</li>
+                    <li>Build 2&ndash;3 real projects (host on GitHub)</li>
+                    <li>Start LeetCode, solve DSA questions regularly</li>
+                    <li>Create LinkedIn, share your projects</li>
+                    <li>Join hackathons, coding groups</li>
+                </ul>
+                <div class="focus-tag">Build. Share. Connect.</div>
+            </div>
+            <div class="glass glass-card timeline-card stagger" style="animation-delay:0.5s">
+                <h2>Year 3 &mdash; Crack Internship</h2>
+                <div class="timeline-goal">Goal: Get an internship</div>
+                <ul>
+                    <li>Apply for internships (from June onwards)</li>
+                    <li>Prepare resume + LinkedIn + GitHub</li>
+                    <li>Focus on intermediate DSA + dev skills</li>
+                    <li>Give mock interviews (PrepInsta / InterviewBit)</li>
+                    <li>Apply on LinkedIn, Internshala, AngelList</li>
+                </ul>
+                <div class="focus-tag">Apply. Interview. Intern.</div>
+            </div>
+            <div class="glass glass-card timeline-card stagger" style="animation-delay:0.6s">
+                <h2>Year 4 &mdash; Get Placed</h2>
+                <div class="timeline-goal">Goal: Land a job with confidence</div>
+                <ul>
+                    <li>Revise DSA + all your projects</li>
+                    <li>Practice past interview questions</li>
+                    <li>Apply for jobs (on-campus + off-campus)</li>
+                    <li>Use internship experience in interviews</li>
+                    <li>Keep building till you get the offer</li>
+                </ul>
+                <div class="focus-tag">Revise. Apply. Win.</div>
+            </div>
+        </div>
+        <div class="resources-grid stagger" style="animation-delay:0.7s">
+            <div class="glass glass-card resource-card">
+                <h3>Roadmap.sh</h3>
+                <p style="color:var(--text-secondary)">Developer career roadmaps</p>
+                <a href="https://roadmap.sh" target="_blank" rel="noopener" style="color:#00e5a0; margin-top:auto">Visit Site &rarr;</a>
+            </div>
+            <div class="glass glass-card resource-card">
+                <h3>LeetCode</h3>
+                <p style="color:var(--text-secondary)">Practice DSA & coding interviews</p>
+                <a href="https://leetcode.com" target="_blank" rel="noopener" style="color:#ff9f0a; margin-top:auto">Visit Site &rarr;</a>
+            </div>
+            <div class="glass glass-card resource-card">
+                <h3>GitHub Student Pack</h3>
+                <p style="color:var(--text-secondary)">Free dev tools with student email</p>
+                <a href="https://education.github.com/pack" target="_blank" rel="noopener" style="color:#8020ff; margin-top:auto">Get Pack &rarr;</a>
+            </div>
+            <div class="glass glass-card resource-card">
+                <h3>LinkedIn</h3>
+                <p style="color:var(--text-secondary)">Build your professional network</p>
+                <a href="https://linkedin.com" target="_blank" rel="noopener" style="color:#2060ff; margin-top:auto">Visit Site &rarr;</a>
+            </div>
+        </div>
+        <div class="glass glass-card repeat-box stagger" style="animation-delay:0.8s">
+            <h2 style="margin-bottom:16px">Repeat Every Year</h2>
+            <ul style="list-style:none; display:flex; flex-direction:column; gap:8px; color:var(--text-secondary)">
+                <li>Remember your goal every semester</li>
+                <li>Stay active on LinkedIn</li>
+                <li>Keep learning and building</li>
+            </ul>
+        </div>
+    </main>
+    <footer class="glass footer stagger" style="animation-delay:0.9s">
+        <div style="font-weight:600;font-size:18px">KL Material</div>
+        <p style="color:var(--text-secondary);margin-top:8px">always free, always accessible</p>
+        <div class="footer-links">
+            <a href="materials.html">Materials</a><a href="roadmap.html">Roadmap</a><a href="cgpa.html">CGPA Calc</a><a href="about.html">About</a><a href="contact.html">Contact</a><a href="#">Privacy</a>
+        </div>
+        <div style="color:var(--text-muted);font-size:13px">&copy; 2026 Praveen Reddy &middot; Made with ❤️ for KL University students</div>
+    </footer>
+    <button class="glass scroll-top" id="sTop" onclick="window.scrollTo(0,0)">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"></polyline></svg>
+    </button>
+</div>
+<script>
+
+</script>
+
+<script src="ui.js"></script>
+<script src="advanced-features.js"></script>
+<script src="chatbot.js"></script>
+</body>
+</html>
