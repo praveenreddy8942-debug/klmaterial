@@ -205,7 +205,7 @@
         <input class="ec-input" id="ec-new-name" placeholder="Exam name (e.g. DSA Mid-1)">
         <input class="ec-input" type="date" id="ec-new-date">
         <button id="ec-save-btn">Save Exam</button>
-        <button id="ec-delete-btn" id="ec-del-btn">Delete selected</button>
+        <button id="ec-delete-btn">Delete selected</button>
       </div>
     </div>
   `;

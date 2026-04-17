@@ -265,7 +265,7 @@
       const msg = state.mode === 'study'
         ? `⏰ Study session done! Take a ${state.session % 4 === 0 ? 'long ' : ''}break.`
         : '📚 Break over — back to studying!';
-      new Notification('KL Material Study Timer', { body: msg, icon: '/klmaterial/icon.svg' });
+      new Notification('KL Material Study Timer', { body: msg, icon: '/icon.svg' });
     }
     // Auto-switch mode
     if (state.mode === 'study') {
