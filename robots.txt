@@ -7,7 +7,7 @@ Disallow: /sw.js
 Crawl-delay: 1
 
 # Sitemaps
-Sitemap: https://klstudyhub.github.io/klmaterial/sitemap.xml
+Sitemap: https://klmaterials.netlify.app/sitemap.xml
 
 # Allow all major search engines
 User-agent: Googlebot

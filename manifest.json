@@ -2,16 +2,16 @@
   "name": "KL Material - Study Hub",
   "short_name": "KL Material",
   "description": "Your complete study hub for CSE materials, roadmaps, and resources",
-  "id": "/klmaterial/",
-  "start_url": "/klmaterial/",
-  "scope": "/klmaterial/",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#0a0e27",
   "theme_color": "#00d4ff",
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "/klmaterial/icon.svg",
+      "src": "/icon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any"
@@ -22,12 +22,12 @@
   "shortcuts": [
     {
       "name": "Materials",
-      "url": "/klmaterial/materials.html",
+      "url": "/materials.html",
       "description": "Browse study materials"
     },
     {
       "name": "Roadmap",
-      "url": "/klmaterial/roadmap.html",
+      "url": "/roadmap.html",
       "description": "View career roadmap"
     }
   ]

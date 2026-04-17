@@ -2,7 +2,7 @@
 
 > **Free CSE study materials, career roadmaps & smart study assistant for B.Tech students at KL University.**
 
-🌐 **Live Site:** [klstudyhub.github.io/klmaterial](https://klstudyhub.github.io/klmaterial/)
+🌐 **Live Site:** [klmaterials.netlify.app](https://klmaterials.netlify.app/)
 
 ---
 

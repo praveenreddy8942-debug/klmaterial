@@ -2,43 +2,43 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://klstudyhub.github.io/klmaterial/</loc>
+    <loc>https://klmaterials.netlify.app/</loc>
     <lastmod>2026-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://klstudyhub.github.io/klmaterial/materials.html</loc>
+    <loc>https://klmaterials.netlify.app/materials.html</loc>
     <lastmod>2026-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://klstudyhub.github.io/klmaterial/roadmap.html</loc>
+    <loc>https://klmaterials.netlify.app/roadmap.html</loc>
     <lastmod>2026-03-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://klstudyhub.github.io/klmaterial/about.html</loc>
+    <loc>https://klmaterials.netlify.app/about.html</loc>
     <lastmod>2026-03-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://klstudyhub.github.io/klmaterial/contact.html</loc>
+    <loc>https://klmaterials.netlify.app/contact.html</loc>
     <lastmod>2026-03-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://klstudyhub.github.io/klmaterial/privacy.html</loc>
+    <loc>https://klmaterials.netlify.app/privacy.html</loc>
     <lastmod>2026-03-26</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://klstudyhub.github.io/klmaterial/cgpa.html</loc>
+    <loc>https://klmaterials.netlify.app/cgpa.html</loc>
     <lastmod>2026-03-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
